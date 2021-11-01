@@ -1,0 +1,642 @@
+[10:10:41]  <stdin> :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/results.6
+[11:08:39]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:08:39]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:08:39]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[11:08:39]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[11:09:58]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:09:58]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:09:58]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:09:58]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:09:58]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:09:58]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:09:58]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:09:58]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:20:33]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:20:33]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:20:33]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:20:33]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:20:34]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:20:34]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:20:34]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:20:34]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:22:17]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:22:17]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:22:17]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:22:17]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:22:17]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:22:17]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:22:17]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:22:17]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:25:48]  quality_check :: ERROR : Please provide a valid flexbar config file
+[11:25:48]  quality_check :: ERROR : Please provide a valid flexbar config file
+[11:27:36]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:27:36]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:27:36]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:27:36]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:27:36]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:27:36]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:27:36]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:27:36]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:27:39]  quality_check :: ERROR : Please provide a valid flexbar config file
+[11:27:39]  quality_check :: ERROR : Please provide a valid flexbar config file
+[11:29:33]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:29:33]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:29:33]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:29:33]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:29:33]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:29:33]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:29:33]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:29:33]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:15]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:30:15]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:30:15]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:30:15]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:30:15]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:15]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:15]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:15]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:17]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:30:17]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:30:59]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:30:59]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:30:59]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:30:59]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:30:59]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:59]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:59]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:30:59]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:31:01]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:31:01]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:31:01]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[11:31:01]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[11:31:31]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:31:31]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:31:31]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:31:31]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:31:31]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:31:31]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:31:31]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:31:31]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:31:34]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:31:34]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:31:34]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.1
+[11:31:34]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.1
+[11:31:34]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:31:34]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:33:02]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:33:02]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:33:02]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:33:02]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:33:02]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:33:02]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:33:02]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:33:02]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:33:02]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:33:02]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:33:02]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.2
+[11:33:02]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.2
+[11:33:02]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:33:02]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:33:02]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:33:03]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:34:21]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:34:21]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:34:21]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:34:21]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:34:21]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:34:21]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:34:21]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:34:21]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:34:21]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:34:21]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:34:21]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.3
+[11:34:21]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.3
+[11:34:21]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:34:21]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:34:21]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:34:22]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:38:21]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:38:21]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:38:21]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:38:21]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:38:21]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:38:21]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:38:21]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:38:21]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:38:22]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:38:22]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:38:22]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.4
+[11:38:22]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.4
+[11:38:22]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:38:22]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:38:22]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[11:38:22]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[11:38:23]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[11:38:23]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[11:38:23]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[11:38:23]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[11:38:24]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[11:38:24]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[11:38:24]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[11:38:24]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[11:38:25]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[11:38:25]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[11:38:25]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[11:38:25]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[11:38:25]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[11:38:25]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[11:38:26]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[11:38:26]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[11:38:26]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[11:38:26]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[11:38:26]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[11:38:26]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[11:38:27]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[11:38:28]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[11:38:28]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[11:38:28]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[11:38:28]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[11:38:29]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
+[11:38:29]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
+[11:39:46]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:39:46]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:39:46]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:39:46]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:39:46]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:39:46]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:39:46]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:39:46]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:39:46]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:39:46]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:39:46]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.5
+[11:39:46]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.5
+[11:39:46]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:39:46]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:39:46]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[11:39:46]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[11:39:47]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[11:39:47]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[11:39:47]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[11:39:47]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[11:39:47]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[11:39:47]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[11:39:48]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[11:39:48]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[11:39:48]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[11:39:48]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[11:39:49]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[11:39:49]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[11:39:49]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[11:39:49]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[11:39:49]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[11:39:49]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[11:39:50]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[11:39:51]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[11:39:51]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[11:39:51]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[11:39:51]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[11:39:51]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[11:39:51]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[11:39:52]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[11:39:52]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[11:39:52]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
+[11:39:52]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
+[11:43:13]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:43:13]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:43:13]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:43:13]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:43:13]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:43:13]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:43:13]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:43:13]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:43:29]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:43:29]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:43:29]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.6
+[11:43:29]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.6
+[11:43:29]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:43:29]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:43:29]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:43:30]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:44:17]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:44:17]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:44:17]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:44:17]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:44:17]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:44:17]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:44:17]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:44:17]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:44:17]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:44:17]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:44:17]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.7
+[11:44:17]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.7
+[11:44:17]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:44:17]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:44:17]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:44:18]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:44:18]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:44:18]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:44:18]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:45:14]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/results.7
+[11:46:39]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:46:39]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:46:39]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:46:39]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:46:39]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:46:39]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:46:39]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:46:39]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:46:39]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:46:39]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:46:39]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[11:46:39]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[11:46:39]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:46:39]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:46:39]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:46:40]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:46:40]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/results
+[11:46:40]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/results
+[11:47:20]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:47:20]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:47:20]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:47:20]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:47:20]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:20]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:20]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:20]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:38]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:47:38]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:47:38]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:47:38]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:47:38]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:38]  pyseqrna_utils :: INFO : Combination created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:38]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:38]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from ./pyseqrna/example/data/input_Sample_PE.txt
+[11:47:50]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:47:50]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:47:50]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[11:47:50]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[11:47:50]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:47:50]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:47:50]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 2
+[11:49:10]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:49:10]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:49:10]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:49:10]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:49:39]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:49:39]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:49:39]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:49:39]  pyseqrna_utils :: INFO : Input file ./pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:50:21]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:50:21]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[11:50:21]  pyseqrna_utils :: INFO : Input file pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:50:21]  pyseqrna_utils :: INFO : Input file pyseqrna/example/data/input_Sample_PE.txt read succesfully
+[11:51:17]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:51:17]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:51:17]  pyseqrna_utils :: INFO : Input file example/data/input_Sample_PE.txt read succesfully
+[11:51:17]  pyseqrna_utils :: INFO : Input file example/data/input_Sample_PE.txt read succesfully
+[11:51:17]  pyseqrna_utils :: INFO : Combination created succesfully from example/data/input_Sample_PE.txt
+[11:51:17]  pyseqrna_utils :: INFO : Combination created succesfully from example/data/input_Sample_PE.txt
+[11:51:17]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from example/data/input_Sample_PE.txt
+[11:51:17]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from example/data/input_Sample_PE.txt
+[11:51:27]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[11:51:27]  pyseqrna_utils :: INFO : Config generated succesfully from ./pyseqrna/params/fastqc.ini
+[12:26:47]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[12:26:47]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[12:26:47]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:26:47]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:27:32]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:27:32]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:27:32]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:27:32]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:27:32]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:27:32]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:27:32]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:27:32]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:27:33]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/fastqc.ini
+[12:27:33]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/fastqc.ini
+[12:27:33]  quality_check :: INFO : Using default config file fastqc.ini
+[12:27:33]  quality_check :: INFO : Using default config file fastqc.ini
+[12:27:33]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[12:27:33]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results
+[12:27:33]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[12:27:33]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[12:27:45]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[12:27:45]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[12:27:52]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[12:27:52]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[12:27:59]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[12:27:59]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[12:28:07]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[12:28:07]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[12:28:13]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[12:28:13]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[12:28:19]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[12:28:19]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[12:28:27]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[12:28:27]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[12:28:35]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[12:28:35]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[12:28:42]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[12:28:42]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[12:28:48]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[12:28:48]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[12:28:57]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[12:28:57]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[12:29:06]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[12:29:06]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[12:29:17]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[12:29:17]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[12:29:29]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[12:29:29]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[12:29:37]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[12:29:37]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[12:29:44]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[12:29:44]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[12:29:51]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[12:29:51]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[12:29:57]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
+[12:29:57]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
+[12:38:36]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:38:36]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:38:36]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:38:36]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:38:36]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:38:36]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:38:36]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:38:36]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:38:36]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/fastqc.ini
+[12:38:36]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/fastqc.ini
+[12:38:36]  quality_check :: INFO : Using default config file fastqc.ini
+[12:38:36]  quality_check :: INFO : Using default config file fastqc.ini
+[12:38:36]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.1
+[12:38:36]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.1
+[12:38:36]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[12:38:36]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[12:40:15]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:40:15]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:40:15]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:40:15]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:40:15]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:40:15]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:40:15]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:40:15]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:40:15]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/fastqc.ini
+[12:40:15]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/fastqc.ini
+[12:40:15]  quality_check :: INFO : Using default config file fastqc.ini
+[12:40:15]  quality_check :: INFO : Using default config file fastqc.ini
+[12:40:15]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.2
+[12:40:15]  pyseqrna_utils :: INFO : pySeqRNA results will be present in /home/nav/Documents/Projects/pyseqrna/fastqc_results.2
+[12:40:15]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[12:40:15]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[12:40:22]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[12:40:22]  quality_check :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
+[12:40:29]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[12:40:29]  quality_check :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
+[12:40:37]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[12:40:37]  quality_check :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
+[12:40:45]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[12:40:45]  quality_check :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
+[12:40:54]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[12:40:54]  quality_check :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
+[12:41:01]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[12:41:01]  quality_check :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
+[12:41:12]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[12:41:12]  quality_check :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
+[12:41:18]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[12:41:18]  quality_check :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
+[12:41:25]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[12:41:25]  quality_check :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
+[12:41:31]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[12:41:31]  quality_check :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
+[12:41:38]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[12:41:38]  quality_check :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
+[12:41:46]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[12:41:46]  quality_check :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
+[12:41:56]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[12:41:56]  quality_check :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
+[12:42:04]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[12:42:04]  quality_check :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
+[12:42:10]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[12:42:10]  quality_check :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
+[12:42:21]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[12:42:21]  quality_check :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
+[12:42:26]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[12:42:26]  quality_check :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
+[12:42:34]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
+[12:42:34]  quality_check :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
