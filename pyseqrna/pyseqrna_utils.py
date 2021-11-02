@@ -15,12 +15,46 @@ import sys
 import math
 import fnmatch
 import psutil
+import logging
 import subprocess
 import configparser
 import pandas as pd
-from pyseqrna import PyseqrnaLogger
 
-pl = PyseqrnaLogger(mode='a')
+
+def PyseqrnaLogger(mode, log):
+
+    """[intialize logger in the pySeqRNA modules]
+
+    Args:
+        logger (str): [logger name for the module]
+        logFile (str): [file name for logging]
+    """
+    logger = logging.getLogger(log)
+    logger.propagate=False
+
+    # set format for logging
+    logFormatter =logging.Formatter('[%(asctime)s]  %(module)s :: %(levelname)s : %(message)s',datefmt='%H:%M:%S')
+    # logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    # write log in a user provided log file
+    
+    fileHandler = logging.FileHandler("{}".format('pyseqrna.log'), mode= mode)
+
+    fileHandler.setFormatter(logFormatter)
+
+    logger.addHandler(fileHandler)
+
+    consoleHandler = logging.StreamHandler()
+
+    consoleHandler.setFormatter(logging.Formatter('[%(asctime)s]  %(module)s :: %(levelname)s : %(message)s',datefmt='%H:%M:%S'))
+
+    consoleHandler.setLevel(logging.DEBUG)
+
+    logger.addHandler(consoleHandler)
+
+    return logger
+
+log = PyseqrnaLogger(mode='a', log='pu')
 
 def read_input_file(infile, inpath, paired = False):
 
@@ -43,7 +77,7 @@ def read_input_file(infile, inpath, paired = False):
     try:
         with open(infile) as file:
 
-            pl.info("Reading input samples File ")
+            log.info("Reading input samples File ")
 
             for line in file:
 
@@ -64,13 +98,13 @@ def read_input_file(infile, inpath, paired = False):
                         factors.append(lines[2])
     except Exception:
 
-        pl.error("Please provide a valid input file")
+        log.error("Please provide a valid input file")
 
         sys.exit()
 
     finally:
 
-        pl.info("Input file %s read succesfully", infile)
+        log.info("Input file %s read succesfully", infile)
 
     try:
 
@@ -85,11 +119,11 @@ def read_input_file(infile, inpath, paired = False):
                         combinations.append(i+"-"+j)
     except Exception:
 
-        pl.error("Please provide a valid input file")
+        log.error("Please provide a valid input file")
     
     finally:
 
-        pl.info("Combination created succesfully from %s", infile)
+        log.info("Combination created succesfully from %s", infile)
 
         samplename = []
         sample = []
@@ -107,11 +141,11 @@ def read_input_file(infile, inpath, paired = False):
 
     except Exception:
 
-        pl.error("Please provide a valid input file")
+        log.error("Please provide a valid input file")
     
     finally:
 
-        pl.info("targets dataframe fro differenatial created succesfully from %s", infile)
+        log.info("targets dataframe fro differenatial created succesfully from %s", infile)
 
     return {'samples': samples, "combinations": combinations, "targets": targets}
 
@@ -160,15 +194,15 @@ def parse_config_file(infile):
 
     except Exception:
 
-        pl.error("Please provide a valid config file")
+        log.error("Please provide a valid config file")
     
     finally:
 
-        pl.info("Config generated succesfully from %s", infile)
+        log.info("Config generated succesfully from %s", infile)
 
     return sections_dict
 
-def clusterRun(job_name='pyseqRNA', command='command', time=4, mem=10, cpu=8, tasks=1, dep=''):
+def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", command='command', time=4, mem=10, cpu=8, tasks=1, dep=''):
     """
     This function is for submitting job on cluster with SLURM job Scheduling
 
@@ -190,7 +224,7 @@ def clusterRun(job_name='pyseqRNA', command='command', time=4, mem=10, cpu=8, ta
             dep = '--dependency=afterok:{} --kill-on-invalid-dep=yes '.format(dep)
 
         sbatch_command = "sbatch -J {} -o {}.out -e {}.err -t {}:00:00  --mem={}000 --cpus-per-task={} --ntasks={} --wrap='{}' {}".format(
-            job_name, job_name, job_name, time, mem, cpu, tasks,  command, dep)
+            job_name, sout, serror, time, mem, cpu, tasks,  command, dep)
 
         sbatch_response = subprocess.getoutput(sbatch_command)
 
@@ -198,7 +232,7 @@ def clusterRun(job_name='pyseqRNA', command='command', time=4, mem=10, cpu=8, ta
 
     except Exception:
 
-        pl.error("Job submission failed")
+        log.error("Job submission failed")
 
     return job_id
 
@@ -245,7 +279,7 @@ def replace_cpu(args, args2):
 
     if int(num) > count:
         num = count
-        pl.warning("number of threads changed to available %s",count)
+        log.warning("number of threads changed to available %s",count)
         
     mat2 = ' '.join([opt,str(num)])
     data = []
@@ -268,7 +302,7 @@ def change_attribute(args):
 
     if attr =='ID' :
         attr = 'gene_id'
-        pl.warning("GTF file provide changing attribute to gene_id")
+        log.warning("GTF file provide changing attribute to gene_id")
         
     mat2 = ' '.join([opt,attr])
     data = []
@@ -347,12 +381,12 @@ def make_directory(dir):
 
         os.mkdir(outdir)
 
-        pl.info(f"pySeqRNA results will be present in {outdir}")
+        log.info(f"pySeqRNA results will be present in {outdir}")
         
     else:
         outdir = outputdir
         os.mkdir(outdir)
-        pl.info(f"pySeqRNA results will be present in {outdir}")
+        log.info(f"pySeqRNA results will be present in {outdir}")
     
 
     return outdir
