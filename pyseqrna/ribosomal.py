@@ -33,7 +33,7 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
     """
 
     output = "sortMeRNA_results"
-    
+
     if os.path.exists(outDir):
 
             output1 = os.path.join(outDir, output)
@@ -46,14 +46,13 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
 
     try:
 
-        refDB = glob.glob("./pyseqrna/example/data/sortmerna_db/rRNA_databases/*.fasta")
+        refDB = glob.glob("pyseqrna/example/data/sortmerna_db/rRNA_databases/*.fasta")
 
         sortmernaREF =""
 
         for ref in refDB:
-
             sortmernaREF += ' '.join(["--ref",ref," "])
-
+               
     except Exception:
 
         log.error("Please provide valid fasta files for reference")
@@ -69,7 +68,7 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
 
         workdir = os.path.join(output,"workdir_"+sample[0])
 
-        pu.makeDirectory(workdir)
+        pu.make_directory(workdir)
 
         if pairedEND:
            
@@ -80,9 +79,9 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
             
             outsortmeRNA[key] = [filterd_out+"_fwd.fastq" ,filterd_out+"_rev.fastq"]
             
-            workdir = os.path.join(output,"workdir_"+sample[0])
+            # workdir = os.path.join(output,"workdir_"+sample[0])
 
-            pu.makeDirectory(workdir)
+            # pu.make_directory(workdir)
 
         else:
 
@@ -99,12 +98,13 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
         
             if pairedEND:
 
-                sortmernaCmd = f"{execPATH} {sortmernaREF} --reads {sample[0]} --reads {sample[1]} --aligned {aligned_out} --other {filterd_out} --workdir {workdir} --fastx true --out2 true -threads {cpu} -v"
+                sortmernaCmd = f"{execPATH} {sortmernaREF} --reads {sample[2]} --reads {sample[3]} --aligned {aligned_out} --other {filterd_out}  --fastx true --out2 true -threads {cpu} -v"
 
             else:
 
-                sortmernaCmd = f"{execPATH} {sortmernaREF} --reads {sample} --aligned {aligned_out} --other {filterd_out} --workdir {workdir} --fastx true -threads {cpu} -v"
+                sortmernaCmd = f"{execPATH} {sortmernaREF} --reads {sample[2]} --aligned {aligned_out} --other {filterd_out}  --fastx true -threads {cpu} -v"
         
+            print(sortmernaCmd)
             if slurm:
 
                 try:
@@ -128,5 +128,5 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
                     log.error("Job sumission failed")
         
 
-    return outsortmeRNA, job_id
+    return outsortmeRNA
 

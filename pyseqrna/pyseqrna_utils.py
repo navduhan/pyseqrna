@@ -381,12 +381,12 @@ def make_directory(dir):
 
         os.mkdir(outdir)
 
-        log.info(f"pySeqRNA results will be present in {outdir}")
+        log.info(f"Succesfully created directory {outdir}")
         
     else:
         outdir = outputdir
         os.mkdir(outdir)
-        log.info(f"pySeqRNA results will be present in {outdir}")
+        log.info(f"Succesfully created directory {outdir}")
     
 
     return outdir
