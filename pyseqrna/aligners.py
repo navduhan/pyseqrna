@@ -82,7 +82,7 @@ class STAR_Aligner:
 
         if not self.slurm:
             
-            config = utils.replaceCPU(self.config['index'], const)
+            config = pu.replace_cpu(self.config['index'], const)
 
         else:
 
@@ -90,21 +90,27 @@ class STAR_Aligner:
 
         directory = str(config[0]).split(" ")[1]
 
-        output =  os.path.join(self.outDir,directory)
+        if os.path.exists(self.outDir):
 
-        utils.makeDirectory(output)
+            output1 =  os.path.join(self.outDir,directory)
+
+            output = pu.make_directory(output1)
+
+        else:
+            
+            output = pu.make_directory(directory)
     
         try:
 
             os.system(' '.join(["cp", self.genome, output]))
 
-            pLog.info(f"{utils.getFile(self.genome)} copied successfully in {directory}")
+            log.info(f"{pu.get_basename(self.genome)} copied successfully in {directory}")
 
         except Exception:
 
-            pLog.error("please provide a valid genome fasta file ")
+            log.error("please provide a valid genome fasta file ")
 
-        GenomeFasta = os.path.join(output, utils.getFile(self.genome))
+        GenomeFasta = os.path.join(output, pu.get_basename(self.genome))
 
         arg = ' '.join(config[1:]) 
 
@@ -114,7 +120,7 @@ class STAR_Aligner:
 
         except Exception:
 
-            pLog.error("STAR aligner not found in path")
+            log.error("STAR aligner not found in path")
 
         if gff != None:
 
@@ -128,23 +134,25 @@ class STAR_Aligner:
 
             try:
             
-                job_id = utils.clusterRun('star_index', star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
+                job_id = pu.clusterRun(job_name='star_index', sout=os.path.join(output, "star_index.out"), serror=os.path.join(output, "star_index.err"), command= star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
 
-                pLog.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
+                log.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
 
             except Exception:
 
-                pLog.error("Slurm job sumission failed")
+                log.error("Slurm job sumission failed")
         else:
 
             try:
-                job_id = subprocess.call(star_command, shell=True,stdout=subprocess.DEVNULL,stderr=subprocess.STDOUT)
+                with open(os.path.join(output, "star_index.out"), 'w+') as fout:
+                    with open(os.path.join(output, "star_index.err"), 'w+') as ferr:
+                        job_id = subprocess.call(star_command, shell=True,stdout=fout,stderr=ferr)
 
-                pLog.info("Job successfully completed for {} for indexing".format(GenomeFasta))
+                log.info("Job successfully completed for {} for indexing".format(GenomeFasta))
 
             except Exception:
                 
-                pLog.error("Job sumission failed")
+                log.error("Job sumission failed")
     
         return job_id
 
@@ -194,7 +202,7 @@ class STAR_Aligner:
 
         if not self.slurm:
             
-            config = utils.replaceCPU(self.config['alignment'], const)
+            config = pu.replace_cpu(self.config['alignment'], const)
 
         else:
 
@@ -204,9 +212,15 @@ class STAR_Aligner:
 
         genomeIndex=os.path.join(self.outDir,directory)
 
-        output = os.path.join(self.outDir, "star_results" )
+        output1 = os.path.join(self.outDir, "star_results" )
 
-        utils.makeDirectory(output)
+        if os.path.exists(self.outDir):
+
+            output = pu.make_directory(output1)
+
+        else:
+            parent, base = os.path.split(output1)
+            output = pu.make_directory(base)
 
         arg = ' '.join(config[1:])
 
@@ -224,7 +238,7 @@ class STAR_Aligner:
 
                     outstarLog[key] = [sample[0],sample[1],outPrefix + "Aligned.out.bam"]
 
-                    inputPair = f'{utils.getFile(sample[2])} and {utils.getFile(sample[3])}'
+                    inputPair = f'{pu.get_basename(sample[2])} and {pu.get_basename(sample[3])}'
 
                 else:
 
@@ -232,11 +246,11 @@ class STAR_Aligner:
 
                     outstarLog[key] = [sample[0],sample[1],outPrefix + "Aligned.out.bam"]
 
-                    inputPair = f'{utils.getFile(sample[2])}'
+                    inputPair = f'{pu.get_basename(sample[2])}'
 
             except Exception:
 
-                    pLog.error(f'Please provide a valid dictionary with samples')
+                    log.error(f'Please provide a valid dictionary with samples')
 
             try:
 
@@ -244,7 +258,7 @@ class STAR_Aligner:
 
             except Exception:
 
-                pLog.error("STAR aligner not found in path")
+                log.error("STAR aligner not found in path")
             
             if pairedEND:
 
@@ -253,19 +267,19 @@ class STAR_Aligner:
             else:
 
                 star_command =f"{execPATH}  --genomeDir {genomeIndex} {arg} --outFileNamePrefix {outPrefix}  --readFilesIn {sample[2]}"
-            print(star_command)
+            
             if self.slurm:
                 
                 try:
-                        job = utils.clusterRun('star_align', star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
+                        job = pu.clusterRun('star_align', star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
 
                         job_id.append(job)
 
-                        pLog.info("Job successfully submited for {} with {} for alignment".format(inputPair, job))
+                        log.info("Job successfully submited for {} with {} for alignment".format(inputPair, job))
 
                 except Exception:
 
-                        pLog.error("Slurm job sumission failed")
+                        log.error("Slurm job sumission failed")
 
             else:
 
@@ -274,11 +288,11 @@ class STAR_Aligner:
 
                     job_id.append(job)
 
-                    pLog.info("Job successfully completed for {} for alignment".format(inputPair))
+                    log.info("Job successfully completed for {} for alignment".format(inputPair))
 
                 except Exception:
                     
-                    pLog.exception("Job sumission failed")
+                    log.exception("Job sumission failed")
 
         return outstarLog, job_id
 

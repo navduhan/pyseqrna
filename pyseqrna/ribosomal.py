@@ -108,7 +108,7 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
             if slurm:
 
                 try:
-                        job_id = pu.clusterRun('sortmeRNA', sortmernaCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
+                        job_id = pu.clusterRun(job_name='sortmeRNA',sout=os.path.join(output, "sortmeRNA.out"), serror=os.path.join(output, "sortmeRNA.err"), command= sortmernaCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
 
                         log.info("Job successfully submited for {} with {}".format(sample[0], job_id))
 
@@ -119,9 +119,11 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
             else:
 
                 try:
-                    job_id = subprocess.call(sortmernaCmd, shell=True)
+                     with open(os.path.join(output, "sortmeRNA.out"), 'w+') as fout:
+                        with open(os.path.join(output, "sortmeRNA.err"), 'w+') as ferr:
+                            job_id = subprocess.call(sortmernaCmd, shell=True, stdout=fout,stderr=ferr)
 
-                    log.info("Job successfully submited for {} ".format(sample[0]))
+                            log.info("Job successfully submited for {} ".format(sample[0]))
 
                 except Exception:
                     
