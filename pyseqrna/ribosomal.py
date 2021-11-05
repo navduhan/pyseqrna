@@ -104,7 +104,7 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
 
                 sortmernaCmd = f"{execPATH} {sortmernaREF} --reads {sample[2]} --aligned {aligned_out} --other {filterd_out}  --fastx true -threads {cpu} -v"
         
-            print(sortmernaCmd)
+            # print(sortmernaCmd)
             if slurm:
 
                 try:

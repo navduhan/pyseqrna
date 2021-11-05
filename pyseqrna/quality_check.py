@@ -18,7 +18,7 @@ from pyseqrna import pyseqrna_utils as pu
 
 log = PyseqrnaLogger(mode='a', log='qc')
 
-def fastqcRun(samlogeDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=1, paired =False, out ='fastqc_results', outDir="pySeqRNA_results", dep=''):
+def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=1, paired =False, out ='fastqc_results', outDir="pySeqRNA_results", dep=''):
     """[summary] This function perform fastqc quality using FastQC
             
             http://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
@@ -66,7 +66,7 @@ def fastqcRun(samlogeDict=None, configFile=None,slurm=False, mem=10, cpu=8, task
 
     if not slurm:
 
-        fastqc_config = pu.relogace_cpu(fastqc_config, const)
+        fastqc_config = pu.replace_cpu(fastqc_config, const)
 
     args = ' '.join(fastqc_config[0:])
 
@@ -74,7 +74,7 @@ def fastqcRun(samlogeDict=None, configFile=None,slurm=False, mem=10, cpu=8, task
 
     fastqcOut = {}
 
-    for key, value in samlogeDict.items():  # Iterate thorough total number of samloges
+    for key, value in sampleDict.items():  # Iterate thorough total number of samloges
 
         if paired:
             try:
@@ -87,6 +87,7 @@ def fastqcRun(samlogeDict=None, configFile=None,slurm=False, mem=10, cpu=8, task
                     "logease provide a paired END samloge file or input Path is wrong")
 
             inputPair = pu.get_basename(input1)+" and " + pu.get_basename(input2)
+            
             if pu.get_file_extension(value[2]) == "gz":
                 r1 = pu.get_basename(value[2])+".zip"
                 r2 = pu.get_basename(value[3])+".zip"
@@ -147,19 +148,16 @@ def fastqcRun(samlogeDict=None, configFile=None,slurm=False, mem=10, cpu=8, task
                     # print(fastqcCmd)
                     with open(os.path.join(out,"fastqc.out"), 'w+') as fout:
                         with open(os.path.join(out,"fastqc.err"), 'w+') as ferr:
-                            job = subprocess.call(
-                                fastqcCmd, shell=True, stdout=fout, stderr=ferr)
+                            job = subprocess.call(fastqcCmd, shell=True, stdout=fout, stderr=ferr)
 
                             job_id.append(" ")    
 
+                            log.info("Job successfully completed for {} with status {}".format(inputPair, job))
+
                 except Exception:
 
-                    log.info("Job submition failed for {} error present in fastqc.err  ".format(
-                        pu.get_basename(out)))
-                finally:
-
-                    log.info(
-                        "Job successfully comlogeted for {} with status {}".format(inputPair, job))
+                    log.info("Job submition failed for {} error present in fastqc.err  ".format(pu.get_basename(out)))
+                
 
     return job_id, fastqcOut
 

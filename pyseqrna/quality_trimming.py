@@ -61,8 +61,8 @@ def flexbarRun(sampleDict,  configFile=None, slurm=False, mem=10, cpu=8, task=1,
 
     flexbar_config = config[list(config.keys())[0]]
 
-    output = os.path.join(outDir, pu.get_basename(
-        str(flexbar_config[0]).split(" ")[1]))
+    output =  pu.get_basename(
+        str(flexbar_config[0]).split(" ")[1])
 
     if os.path.exists(outDir):
 
