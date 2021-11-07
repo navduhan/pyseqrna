@@ -187,14 +187,14 @@ def enrichGO(df, file):
             pvalues.append(pvalue)
 
             enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], KOdescription[k][2],
-                                    f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, gID])
+                                    f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, len(gene_ids), gID])
 
     fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
 
     a = [i for i in fdr if i <= 0.05]
 
     end = pd.DataFrame(enrichment_result)
-    end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Genes' ]
+    end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
     end.insert(7, 'FDR', fdr)
 
     return end
