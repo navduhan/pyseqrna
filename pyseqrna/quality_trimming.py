@@ -219,7 +219,7 @@ def trimmomaticRun(sampleDict=None, configFile=None, slurm=False, mem=10, cpu=8,
 
     trimmomatic_config = config[list(config.keys())[0]]
 
-    output = os.path.join(outDir, pu.getFile(str(trimmomatic_config[0])))
+    output = pu.get_basename(str(trimmomatic_config[0]))
 
     if os.path.exists(outDir):
 
@@ -373,8 +373,7 @@ def trim_galoreRun(sampleDict=None,  configFile=None, slurm=False, mem=10, cpu=8
 
     trim_galore_config = config[list(config.keys())[0]]
 
-    output = os.path.join(outDir, pu.getFile(
-        str(trim_galore_config[0].split(" ")[1])))
+    output =  pu.get_basename(str(trim_galore_config[0].split(" ")[1]))
 
     if os.path.exists(outDir):
 

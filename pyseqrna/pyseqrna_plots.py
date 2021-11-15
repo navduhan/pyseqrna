@@ -165,7 +165,7 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), type='co
         
     fig, ax = plt.subplots(figsize=figdim)
 
-    sns.heatmap(fin, cmap="seismic",ax=ax)
+    sns.heatmap(fin, cmap="seismic",ax=ax, cbar=False)
 
     fig.tight_layout()
 

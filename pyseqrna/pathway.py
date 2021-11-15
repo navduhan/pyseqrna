@@ -1,17 +1,13 @@
-import pandas as pd
-
 import io
 from urllib.request import urlopen
-
-
 from statsmodels.stats.multitest import multipletests
 import scipy.stats as stats
 import numpy as np
-import requests
 import pandas as pd
-from io import StringIO
-from xml.etree import ElementTree
-from future.utils import native_str
+from pyseqrna.pyseqrna_utils import PyseqrnaLogger
+
+log = PyseqrnaLogger(mode='a', log="pathway")
+
 
 def _q(op, arg1, arg2=None, arg3=None):
     URL = "http://rest.kegg.jp/%s"
@@ -30,53 +26,53 @@ def _q(op, arg1, arg2=None, arg3=None):
     handle.url = resp.url
     return handle
 
-
-resp= _q("list","pathway","ath")
-
-data =[]
-for r in resp:
-    a, b=r.split("\t")
-    data.append([a.split(":")[1],b.rstrip()])
+def get_pathways(species):
+    log.info("Reading pathways from KEGG")
+    resp= _q("list","pathway",species)
     
-    
-genes = []
-pathway={}
-parse=None
-nad=None
-for d in data:
-    resp=_q("get",d[0])
-    # resp=_q("get",'dosa04626')
+    data =[]
+    for r in resp:
+        a, b=r.split("\t")
+        data.append([a.split(":")[1],b.rstrip()])
+          
+    genes = []
+    pathway={}
+    parse=None
+    nad=None
+    for d in data:
+        resp=_q("get",d[0])
+        # resp=_q("get",'dosa04626')
 
-    for line in resp:
-        line = line.strip()
-        print(line)
-
-
-        if not line.startswith("/"):
-            if not line.startswith(" "):
-                first_word = line.split(" ")[0]
-                if first_word.isupper() and first_word.isalpha():
-                    parse = first_word    
-                if parse == "NAME":
-                    nad = line.replace(parse,"").strip()
-                    desc = nad.split(" - ")[0]       
-                if parse== "GENE":
-                    gened = line.replace(parse,"").strip().split(" ")[0]
-                    genes.append(gened)
-               
-    pathway[d[0]]= [d[0],desc,genes,len(genes) ]
+        for line in resp:
+            line = line.strip()
+            print(line)
 
 
+            if not line.startswith("/"):
+                if not line.startswith(" "):
+                    first_word = line.split(" ")[0]
+                    if first_word.isupper() and first_word.isalpha():
+                        parse = first_word    
+                    if parse == "NAME":
+                        nad = line.replace(parse,"").strip()
+                        desc = nad.split(" - ")[0]       
+                    if parse== "GENE":
+                        gened = line.replace(parse,"").strip().split(" ")[0]
+                        genes.append(gened)
+                
+        pathway[d[0]]= [d[0],desc,genes,len(genes) ]
+
+    df = pd.DataFrame(pathway).T
+    df.columns= ['ID', 'Term', 'Gene', 'Gene_length']
+
+    return df
 
 
+def enrichKEGG(file, species):
 
-df = pd.DataFrame(pathway).T
-df.columns= ['ID', 'Term', 'Gene', 'Gene_length']
-
-
-def enrichKEGG(df, file):
+    df= get_pathways(species)
+    log.info(f"Performing KEGG enrichment analysis on {file}")
     background_count = df['Gene_length'].sum()
-
 
     df_goList = df[['ID', 'Gene']].values.tolist()
 
@@ -115,7 +111,7 @@ def enrichKEGG(df, file):
         # GO terms
     bg_gene_count = background_count
 
-    read_id_file = open("pySeqRNA_results.1/diff_genes/M1-V6.txt", 'r')
+    read_id_file = open(file, 'r')
     for gene_id in read_id_file:
         gene_id = gene_id.strip().upper()
     # remove the duplicate ids and keep unique
@@ -171,4 +167,6 @@ def enrichKEGG(df, file):
     end.insert(5, 'FDR', fdr)
 
     return end
+
+  
 

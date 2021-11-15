@@ -1,58 +1,73 @@
-[11:11:40]  3148109007 :: INFO : Analysis started
-[11:11:40]  pyseqrna_utils :: INFO : Reading input samples File 
-[11:11:40]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
-[11:11:40]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
-[11:11:40]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
-[11:11:40]  pyseqrna_utils :: INFO : Succesfully created directory /home/nav/Documents/Projects/pyseqrna/pySeqRNA_results.1
-[11:11:40]  quality_trimming :: INFO : Using default config file flexbar.ini
-[11:11:40]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/flexbar.ini
-[11:11:40]  pyseqrna_utils :: INFO : Succesfully created directory /home/nav/Documents/Projects/pyseqrna/pySeqRNA_results/flexbar_results.2
-[11:11:40]  pyseqrna_utils :: WARNING : number of threads changed to available 3
-[11:11:45]  quality_trimming :: INFO : Job successfully completed for SRR446027_1.fastq.gz and SRR446027_2.fastq.gz with status 0
-[11:11:52]  quality_trimming :: INFO : Job successfully completed for SRR446028_1.fastq.gz and SRR446028_2.fastq.gz with status 0
-[11:11:57]  quality_trimming :: INFO : Job successfully completed for SRR446029_1.fastq.gz and SRR446029_2.fastq.gz with status 0
-[11:12:04]  quality_trimming :: INFO : Job successfully completed for SRR446030_1.fastq.gz and SRR446030_2.fastq.gz with status 0
-[11:12:10]  quality_trimming :: INFO : Job successfully completed for SRR446031_1.fastq.gz and SRR446031_2.fastq.gz with status 0
-[11:12:18]  quality_trimming :: INFO : Job successfully completed for SRR446032_1.fastq.gz and SRR446032_2.fastq.gz with status 0
-[11:12:27]  quality_trimming :: INFO : Job successfully completed for SRR446033_1.fastq.gz and SRR446033_2.fastq.gz with status 0
-[11:12:35]  quality_trimming :: INFO : Job successfully completed for SRR446034_1.fastq.gz and SRR446034_2.fastq.gz with status 0
-[11:12:44]  quality_trimming :: INFO : Job successfully completed for SRR446035_1.fastq.gz and SRR446035_2.fastq.gz with status 0
-[11:12:53]  quality_trimming :: INFO : Job successfully completed for SRR446036_1.fastq.gz and SRR446036_2.fastq.gz with status 0
-[11:12:58]  quality_trimming :: INFO : Job successfully completed for SRR446037_1.fastq.gz and SRR446037_2.fastq.gz with status 0
-[11:13:04]  quality_trimming :: INFO : Job successfully completed for SRR446038_1.fastq.gz and SRR446038_2.fastq.gz with status 0
-[11:13:11]  quality_trimming :: INFO : Job successfully completed for SRR446039_1.fastq.gz and SRR446039_2.fastq.gz with status 0
-[11:13:19]  quality_trimming :: INFO : Job successfully completed for SRR446040_1.fastq.gz and SRR446040_2.fastq.gz with status 0
-[11:13:25]  quality_trimming :: INFO : Job successfully completed for SRR446041_1.fastq.gz and SRR446041_2.fastq.gz with status 0
-[11:13:34]  quality_trimming :: INFO : Job successfully completed for SRR446042_1.fastq.gz and SRR446042_2.fastq.gz with status 0
-[11:13:40]  quality_trimming :: INFO : Job successfully completed for SRR446043_1.fastq.gz and SRR446043_2.fastq.gz with status 0
-[11:13:46]  quality_trimming :: INFO : Job successfully completed for SRR446044_1.fastq.gz and SRR446044_2.fastq.gz with status 0
-[11:13:46]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/STAR.ini
-[11:13:46]  aligners :: INFO : Using default config file STAR.ini
-[11:13:46]  pyseqrna_utils :: WARNING : number of threads changed to available 3
-[11:13:46]  pyseqrna_utils :: INFO : Succesfully created directory /home/nav/Documents/Projects/pyseqrna/pySeqRNA_results/star_index.2
-[11:13:46]  aligners :: INFO : tair10.fasta copied successfully in star_index
-[11:14:09]  aligners :: INFO : Job successfully completed for /home/nav/Documents/Projects/pyseqrna/pySeqRNA_results/star_index.2/tair10.fasta for indexing
-[11:14:11]  pyseqrna_utils :: WARNING : number of threads changed to available 3
-[11:14:11]  pyseqrna_utils :: INFO : Succesfully created directory /home/nav/Documents/Projects/pyseqrna/pySeqRNA_results/star_results.2
-[11:14:48]  aligners :: INFO : Job successfully completed for M1A_1.fastq.gz and M1A_2.fastq.gz for alignment
-[11:15:16]  aligners :: INFO : Job successfully completed for M1B_1.fastq.gz and M1B_2.fastq.gz for alignment
-[11:15:26]  aligners :: INFO : Job successfully completed for A1A_1.fastq.gz and A1A_2.fastq.gz for alignment
-[11:15:53]  aligners :: INFO : Job successfully completed for A1B_1.fastq.gz and A1B_2.fastq.gz for alignment
-[11:16:14]  aligners :: INFO : Job successfully completed for V1A_1.fastq.gz and V1A_2.fastq.gz for alignment
-[11:16:26]  aligners :: INFO : Job successfully completed for V1B_1.fastq.gz and V1B_2.fastq.gz for alignment
-[11:16:35]  aligners :: INFO : Job successfully completed for M6A_1.fastq.gz and M6A_2.fastq.gz for alignment
-[11:16:49]  aligners :: INFO : Job successfully completed for M6B_1.fastq.gz and M6B_2.fastq.gz for alignment
-[11:16:59]  aligners :: INFO : Job successfully completed for A6A_1.fastq.gz and A6A_2.fastq.gz for alignment
-[11:17:10]  aligners :: INFO : Job successfully completed for A6B_1.fastq.gz and A6B_2.fastq.gz for alignment
-[11:17:21]  aligners :: INFO : Job successfully completed for V6A_1.fastq.gz and V6A_2.fastq.gz for alignment
-[11:17:35]  aligners :: INFO : Job successfully completed for V6B_1.fastq.gz and V6B_2.fastq.gz for alignment
-[11:17:52]  aligners :: INFO : Job successfully completed for M12A_1.fastq.gz and M12A_2.fastq.gz for alignment
-[11:18:11]  aligners :: INFO : Job successfully completed for M12B_1.fastq.gz and M12B_2.fastq.gz for alignment
-[11:18:21]  aligners :: INFO : Job successfully completed for A12A_1.fastq.gz and A12A_2.fastq.gz for alignment
-[11:18:38]  aligners :: INFO : Job successfully completed for A12B_1.fastq.gz and A12B_2.fastq.gz for alignment
-[11:18:54]  aligners :: INFO : Job successfully completed for V12A_1.fastq.gz and V12A_2.fastq.gz for alignment
-[11:19:09]  aligners :: INFO : Job successfully completed for V12B_1.fastq.gz and V12B_2.fastq.gz for alignment
-[11:20:10]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/Documents/Projects/pyseqrna/pyseqrna/param/featureCount.ini
-[11:20:10]  quants :: INFO : Using default config file featureCount.ini
-[11:20:15]  quants :: INFO : Job successfully completed for feature count
-[11:31:35]  pyseqrna_utils :: INFO : Succesfully created directory /home/nav/Documents/Projects/pyseqrna/pySeqRNA_results/diff_genes
+[10:35:24]  3148109007 :: INFO : Analysis started
+[10:35:27]  pyseqrna_utils :: INFO : Reading input samples File 
+[10:35:27]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[10:35:27]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[10:35:27]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[10:35:30]  pyseqrna_utils :: INFO : Succesfully created directory /Users/naveen/Documents/Projects/pyseqrna/pySeqRNA_results
+[10:35:34]  pyseqrna_utils :: INFO : Config generated succesfully from /Users/naveen/Documents/Projects/pyseqrna/pyseqrna/param/trim_galore.ini
+[10:35:34]  quality_trimming :: INFO : Using default config file trim_galore.ini
+[10:35:34]  pyseqrna_utils :: INFO : Succesfully created directory /Users/naveen/Documents/Projects/pyseqrna/pySeqRNA_results/trim_galore_results
+[10:35:37]  quality_trimming :: INFO : Job successfully completed for Control.1h.A_1.fastq.gz and Control.1h.A_2.fastq.gz 
+[10:35:41]  quality_trimming :: INFO : Job successfully completed for Control.1h.B_1.fastq.gz and Control.1h.B_2.fastq.gz 
+[10:35:44]  quality_trimming :: INFO : Job successfully completed for Heat.1h.A_1.fastq.gz and Heat.1h.A_2.fastq.gz 
+[10:35:48]  quality_trimming :: INFO : Job successfully completed for Heat.1h.B_1.fastq.gz and Heat.1h.B_2.fastq.gz 
+[10:35:53]  quality_trimming :: INFO : Job successfully completed for Drought.1h.A_1.fastq.gz and Drought.1h.A_2.fastq.gz 
+[10:35:57]  quality_trimming :: INFO : Job successfully completed for Drought.1h.B_1.fastq.gz and Drought.1h.B_2.fastq.gz 
+[10:36:00]  quality_trimming :: INFO : Job successfully completed for Control.6h.A_1.fastq.gz and Control.6h.A_2.fastq.gz 
+[10:36:04]  quality_trimming :: INFO : Job successfully completed for Control.6h.B_1.fastq.gz and Control.6h.B_2.fastq.gz 
+[10:36:07]  quality_trimming :: INFO : Job successfully completed for Heat.6h.A_1.fastq.gz and Heat.6h.A_2.fastq.gz 
+[10:36:11]  quality_trimming :: INFO : Job successfully completed for Heat.6h.B_1.fastq.gz and Heat.6h.B_2.fastq.gz 
+[10:36:14]  quality_trimming :: INFO : Job successfully completed for Drought.6h.A_1.fastq.gz and Drought.6h.A_2.fastq.gz 
+[10:36:18]  quality_trimming :: INFO : Job successfully completed for Drought.6h.B_1.fastq.gz and Drought.6h.B_2.fastq.gz 
+[10:38:49]  pyseqrna_utils :: INFO : Config generated succesfully from /Users/naveen/Documents/Projects/pyseqrna/pyseqrna/param/STAR.ini
+[10:38:49]  aligners :: INFO : Using default config file STAR.ini
+[10:38:51]  pyseqrna_utils :: WARNING : number of threads changed to available 6
+[10:38:51]  pyseqrna_utils :: INFO : Succesfully created directory /Users/naveen/Documents/Projects/pyseqrna/pySeqRNA_results/star_index
+[10:38:51]  aligners :: INFO : arabidopsis10.fasta copied successfully in star_index
+[10:38:56]  aligners :: INFO : Job successfully completed for /Users/naveen/Documents/Projects/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta for indexing
+[10:39:10]  pyseqrna_utils :: WARNING : number of threads changed to available 6
+[10:39:10]  pyseqrna_utils :: INFO : Succesfully created directory /Users/naveen/Documents/Projects/pyseqrna/pySeqRNA_results/star_results
+[10:39:17]  aligners :: INFO : Job successfully completed for C1A_val_1.fq.gz and C1A_val_2.fq.gz for alignment
+[10:39:30]  aligners :: INFO : Job successfully completed for C1B_val_1.fq.gz and C1B_val_2.fq.gz for alignment
+[10:39:35]  aligners :: INFO : Job successfully completed for H1A_val_1.fq.gz and H1A_val_2.fq.gz for alignment
+[10:39:47]  aligners :: INFO : Job successfully completed for H1B_val_1.fq.gz and H1B_val_2.fq.gz for alignment
+[10:39:53]  aligners :: INFO : Job successfully completed for D1A_val_1.fq.gz and D1A_val_2.fq.gz for alignment
+[10:39:59]  aligners :: INFO : Job successfully completed for D1B_val_1.fq.gz and D1B_val_2.fq.gz for alignment
+[10:40:04]  aligners :: INFO : Job successfully completed for C6A_val_1.fq.gz and C6A_val_2.fq.gz for alignment
+[10:40:11]  aligners :: INFO : Job successfully completed for C6B_val_1.fq.gz and C6B_val_2.fq.gz for alignment
+[10:40:16]  aligners :: INFO : Job successfully completed for H6A_val_1.fq.gz and H6A_val_2.fq.gz for alignment
+[10:40:22]  aligners :: INFO : Job successfully completed for H6B_val_1.fq.gz and H6B_val_2.fq.gz for alignment
+[10:40:28]  aligners :: INFO : Job successfully completed for D6A_val_1.fq.gz and D6A_val_2.fq.gz for alignment
+[10:40:34]  aligners :: INFO : Job successfully completed for D6B_val_1.fq.gz and D6B_val_2.fq.gz for alignment
+[13:46:13]  pyseqrna_utils :: INFO : Config generated succesfully from /Users/naveen/Documents/Projects/pyseqrna/pyseqrna/param/featureCount.ini
+[13:46:13]  quants :: INFO : Using default config file featureCount.ini
+[13:46:13]  quants :: ERROR : Job sumission failed
+Traceback (most recent call last):
+  File "/Users/naveen/Documents/Projects/pyseqrna/pyseqrna/quants.py", line 99, in featureCount
+    with open(os.path.join(outDir, "featureCount.out"), 'w+') as fout:
+FileNotFoundError: [Errno 2] No such file or directory: 'pySeqRNA_results.1/featureCount.out'
+[13:46:22]  pyseqrna_utils :: INFO : Config generated succesfully from /Users/naveen/Documents/Projects/pyseqrna/pyseqrna/param/featureCount.ini
+[13:46:22]  quants :: INFO : Using default config file featureCount.ini
+[13:46:22]  quants :: INFO : Job successfully completed for feature count
+[13:47:06]  pyseqrna_utils :: INFO : Config generated succesfully from /Users/naveen/Documents/Projects/pyseqrna/pyseqrna/param/featureCount.ini
+[13:47:06]  quants :: INFO : Using default config file featureCount.ini
+[13:47:09]  quants :: INFO : Job successfully completed for feature count
+[13:58:23]  pyseqrna_utils :: INFO : Succesfully created directory /Users/naveen/Documents/Projects/pyseqrna/pySeqRNA_results/diff_genes
+[12:15:34]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:15:34]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:15:34]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:15:34]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:16:25]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:16:25]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:16:25]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:16:25]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:17:27]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:17:27]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:17:27]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:17:27]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:18:22]  pyseqrna_utils :: INFO : Reading input samples File 
+[12:18:22]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[12:18:22]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:18:22]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[12:40:48]  pathway :: INFO : Reading pathways from KEGG
+[12:41:41]  pathway :: INFO : Performing KEGG enrichment analysis on pySeqRNA_results/diff_genes/C1-D6.txt

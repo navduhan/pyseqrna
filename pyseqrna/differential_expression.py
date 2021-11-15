@@ -347,49 +347,37 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         Ups[c] = upDF
         Downs[c] = downDF
 
-    summary =summary.append(pd.DataFrame({"Comparisons": CompareList, "Total_DEGs": Total, "UP_DEGs": Up, "Down_DEGs": Down}))
+    summary =summary.append(pd.DataFrame({"Comparisons": CompareList, "Total_DEGs": Total, "Up_DEGs": Up, "Down_DEGs": Down}))
 
     if plot == True:
 
         category_names= ['UP', 'Down']
         labels= summary['Comparisons'].values.tolist()
-        data = np.array(summary[['UP_DEGs', 'Down_DEGs']].values.tolist())
-        data_cum = data.cumsum(axis=1)
-        category_colors = plt.get_cmap('RdBu_r')(
-                np.linspace(0.15, 0.85, data.shape[1]))
+        updata= summary['Up_DEGs'].values.tolist()
+        downdata = summary['Down_DEGs'].values.tolist()
+        my_range=list(range(1,len(summary.index)+1))
+        fig, ax = plt.subplots()
+        plt.barh(labels,updata, color='mediumseagreen')
+        plt.barh(labels,downdata, left=updata, color='salmon')
 
-        fig, ax = plt.subplots(figsize=figsize)
-        fig = plt.gcf()
-        fig.set_size_inches(18.5, 10.5)
-        ax.invert_yaxis()
-        # ax.xaxis.set_visible(False)
-        ax.set_xlim(0, np.sum(data, axis=1).max())
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.xlabel("Number of Genes", fontsize=14)
+        plt.ylabel("Comparisons", fontsize=14)
+        plt.legend(['Up-regulated', 'Down-regulated'], bbox_to_anchor=(1.3, 1.5), loc='center', fontsize=12)
 
-        for i, (colname, color) in enumerate(zip(category_names, category_colors)):
-            widths = data[:, i]
-            
-            starts = data_cum[:, i] - widths
-      
-            ax.barh(labels, widths, left=starts, height=0.8,
-                    label=colname, color=color)
-            xcenters = starts + widths / 2
-            if 0 in xcenters:
-                pass
-            else:
-                r, g, b, _ = color
-                text_color = 'white' if r * g * b < 0.5 else 'darkgrey'
-                for y, (x, c) in enumerate(zip(xcenters, widths)):
-                    ax.text(x, y, str(int(c)), ha='center', va='center',
-                            color=text_color)
-        ax.legend( bbox_to_anchor=([1.2,0.6,0,0 ]),
-                    loc='center right', fontsize='small', frameon=False)
+
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_bounds((0, len(my_range)))
+        # add some space between the axis and the plot
+        ax.spines['left'].set_position(('outward', 8))
+        ax.spines['bottom'].set_position(('outward', 5))
+        plt.savefig('deg.png', dpi=300, bbox_inches='tight')
         if replicate:
-            ax.set_title(f'Filter DEGs (Fold:{FOLD} and FDR:{FDR})', loc='center')
+            plt.title(f'Filter DEGs (Fold:{FOLD} and FDR:{FDR})', loc='center')
         else:
-            ax.set_title(f'Filter DEGs (Fold:{FOLD} )', loc='center')
-        for spine in ax.spines:
-            ax.spines[spine].set_visible(False)
-        ax.margins(0.01)
-        fig.tight_layout()
+            plt.title(f'Filter DEGs (Fold:{FOLD} )', loc='center')
         
-    return {'summary': summary, "filtered": DEGs,"filteredup":Ups, "filtereddown":Downs, "plot": fig}
+        
+    return {'summary': summary, "filtered": DEGs,"filteredup":Ups, "filtereddown":Downs, "plot": plt}
