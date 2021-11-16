@@ -2,3 +2,5 @@ prna
 pyseqrna/__pycache__
 pyseqrna/example
 pySeqRNA_results*
+
+.DS_Store

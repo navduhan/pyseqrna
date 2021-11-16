@@ -6,7 +6,9 @@ import pandas as pd
 from io import StringIO
 from xml.etree import ElementTree
 from future.utils import native_str
+from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 
+log = PyseqrnaLogger(mode='a', log="go")
 
 def get_request(url,  **params):
 
@@ -43,15 +45,21 @@ def query(species):
     response = get_request(
         "https://plants.ensembl.org/biomart/martservice", query=ElementTree.tostring(root))
     result = pd.read_csv(StringIO(response.text), sep='\t')
-
+    result.columns = ['Gene', 'Transcript', 'GO_ID',
+                  'GO_term', 'GO_ontology', 'GO_def']
+    
     return result
 
 
-def preprocessBioMart(data, species='ath', sNAME='Arabidopsis thaliana'):
+def preprocessBioMart(data):
     df = data
-    df.columns = ['Gene', 'Transcript', 'GO_ID',
-                  'GO_term', 'GO_ontology', 'GO_def']
+    
     df2 = df[df['GO_ID'].notna()]
+    gg = list(df2['Gene'])
+    x = np.array(gg)
+
+    bg_count = len(np.unique(x))
+
     lines = df2.values.tolist()
     GeneID = {}
 
@@ -70,7 +78,7 @@ def preprocessBioMart(data, species='ath', sNAME='Arabidopsis thaliana'):
 
         if line[2] not in GO_rest:
 
-            GO_rest[line[2]] = [species, sNAME,
+            GO_rest[line[2]] = [
                                 line[2], line[3], line[4], line[5]]
 
     ds = [GO_rest, GeneID]
@@ -79,31 +87,36 @@ def preprocessBioMart(data, species='ath', sNAME='Arabidopsis thaliana'):
         d[k] = list(d[k] for d in ds)
 
     dd = []
-    import numpy as np
+    
     for k, v in d.items():
         v[1] = [i for i in v[1] if str(i) != 'NaN']
 
-        if v[0][4] == 'cellular_component':
-            v[0][4] = 'CC'
-        if v[0][4] == 'molecular_function':
-            v[0][4] = 'MF'
-        if v[0][4] == 'biological_process':
-            v[0][4] = 'BP'
+        if v[0][2] == 'cellular_component':
+            v[0][2] = 'CC'
+        if v[0][2] == 'molecular_function':
+            v[0][2] = 'MF'
+        if v[0][2] == 'biological_process':
+            v[0][2] = 'BP'
 
         dd.append([v[0][0], v[0][1], v[0][2], v[0][3],
-                   v[0][4], v[0][5], v[1], len(v[1])])
+                    v[1], len(v[1])])
 
     finalDF = pd.DataFrame(dd, columns=[
-                           'Species', 'SpeciesName', 'ID', 'Term', 'Ontology', 'Function', 'Gene', 'Gene_length'])
+                           'ID', 'Term', 'Ontology', 'Function', 'Gene', 'Gene_length'])
 
-    return finalDF
-
-
+    return finalDF, bg_count
 
 
-def enrichGO(df, file):
-    background_count = df['Gene_length'].sum()
 
+
+def enrichGO(species, file):
+
+    log.info("Fetching Gene Ontology from Biomart")
+
+    gdata = query('athaliana')
+
+    df, background_count = preprocessBioMart(gdata)
+    log.info(f"Performing GO enrichment analysis on {file}")  
 
     df_goList = df[['ID', 'Gene']].values.tolist()
 
@@ -142,7 +155,7 @@ def enrichGO(df, file):
         # GO terms
     bg_gene_count = background_count
 
-    read_id_file = open(file, 'r')
+    read_id_file = open("pySeqRNA_results/diff_genes/C1-D6.txt", 'r')
     for gene_id in read_id_file:
         gene_id = gene_id.strip().upper()
     # remove the duplicate ids and keep unique
