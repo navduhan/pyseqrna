@@ -1,5 +1,5 @@
-[11:50:44]  3148109007 :: INFO : Analysis started
-[11:50:47]  pyseqrna_utils :: INFO : Reading input samples File 
-[11:50:47]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
-[11:50:47]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
-[11:50:47]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[17:22:56]  <ipython-input-3-bf476bf393c3> :: INFO : Analysis started
+[17:22:57]  pyseqrna_utils :: INFO : Reading input samples File 
+[17:22:58]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[17:22:58]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[17:22:58]  pyseqrna_utils :: INFO : targets dataframe fro differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt

@@ -1,0 +1,125 @@
+STAR version=2.7.8a
+STAR compilation time,server,dir=Sat Feb 20 13:34:37 EST 2021 vega:/home/dobin/data/STAR/STARcode/STAR.master/source
+##### Command Line:
+/home/naveen/.conda/envs/pySeqRNA/bin/STAR --genomeDir /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index --runThreadN 50 --runMode genomeGenerate --genomeFastaFiles /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta
+##### Initial USER parameters from Command Line:
+###### All USER parameters from Command Line:
+genomeDir                     /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index     ~RE-DEFINED
+runThreadN                    50     ~RE-DEFINED
+runMode                       genomeGenerate        ~RE-DEFINED
+genomeFastaFiles              /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta        ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runMode                           genomeGenerate   
+runThreadN                        50
+genomeDir                         /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index
+genomeFastaFiles                  /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta   
+
+-------------------------------
+##### Final effective command line:
+/home/naveen/.conda/envs/pySeqRNA/bin/STAR   --runMode genomeGenerate      --runThreadN 50   --genomeDir /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index   --genomeFastaFiles /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta   
+----------------------------------------
+
+Number of fastq files for each mate = 1
+ParametersSolo: --soloCellFilterType CellRanger2.2 filtering parameters:  3000 0.99 10
+Finished loading and checking parameters
+--genomeDir directory exists and will be overwritten: /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/
+!!!!! WARNING: Could not move Log.out file from ./Log.out into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Log.out. Will keep ./Log.out
+
+Nov 17 12:42:40 ... starting to generate Genome files
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta : chr # 0  "Chr1" chrStart: 0
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta : chr # 1  "Chr2" chrStart: 262144
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta : chr # 2  "Chr3" chrStart: 524288
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta : chr # 3  "Chr4" chrStart: 786432
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta : chr # 4  "Chr5" chrStart: 1048576
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta : chr # 5  "ChrC" chrStart: 1310720
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/arabidopsis10.fasta : chr # 6  "ChrM" chrStart: 1572864
+Chromosome sequence lengths: 
+Chr1	100000
+Chr2	100000
+Chr3	100000
+Chr4	100000
+Chr5	100000
+ChrC	100000
+ChrM	100000
+Genome sequence total length = 700000
+Genome size with padding = 1835008
+!!!!! WARNING: --genomeSAindexNbases 14 is too large for the genome size=700000, which may cause seg-fault at the mapping step. Re-run genome generation with recommended --genomeSAindexNbases 8
+Estimated genome size with padding and SJs: total=genome+SJ=202835008 = 1835008 + 201000000
+GstrandBit=32
+Number of SA indices: 1395550
+Nov 17 12:42:40 ... starting to sort Suffix Array. This may take a long time...
+Number of chunks: 56;   chunks size limit: 227840 bytes
+Nov 17 12:42:40 ... sorting Suffix Array chunks and saving them to disk...
+Writing 179488 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_41 ; empty space on disk = 137101458800640 bytes ... done
+Writing 165688 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_8 ; empty space on disk = 137101458800640 bytes ... done
+Writing 123264 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_16 ; empty space on disk = 137101458800640 bytes ... done
+Writing 185984 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_9 ; empty space on disk = 137101458800640 bytes ... done
+Writing 225440 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_3 ; empty space on disk = 137101458800640 bytes ... done
+Writing 157496 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_37 ; empty space on disk = 137101458800640 bytes ...Writing 213064 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_12 ; empty space on disk = 137101458800640 bytes ... done
+ done
+Writing 160976 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_1 ; empty space on disk = 137101458800640 bytes ... done
+Writing 199648 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_42 ; empty space on disk = 137101458800640 bytes ... done
+Writing 196824 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_29 ; empty space on disk = 137101458800640 bytes ... done
+Writing 170296 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_0 ; empty space on disk = 137101458800640 bytes ... done
+Writing 163448 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_48 ; empty space on disk = 137101458800640 bytes ... done
+Writing 152040 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_40 ; empty space on disk = 137101458800640 bytes ... done
+Writing 205872 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_30 ; empty space on disk = 137101458800640 bytes ... done
+Writing 223080 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_47 ; empty space on disk = 137101458800640 bytes ... done
+Writing 214320 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_46 ; empty space on disk = 137101458800640 bytes ... done
+Writing 185984 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_6 ; empty space on disk = 137101458800640 bytes ... done
+Writing 220776 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_5 ; empty space on disk = 137101458800640 bytes ... done
+Writing 218864 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_44 ; empty space on disk = 137101458800640 bytes ... done
+Writing 192856 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_4 ; empty space on disk = 137101458800640 bytes ...Writing 217920 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_19 ; empty space on disk = 137101458800640 bytes ... done
+ done
+Writing 219656 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_31 ; empty space on disk = 137101458800640 bytes ... done
+Writing 216648 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_35 ; empty space on disk = 137101458800640 bytes ...Writing 213248 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_11 ; empty space on disk = 137101458800640 bytes ... done
+ done
+Writing 223544 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_2 ; empty space on disk = 137101458800640 bytes ... done
+Writing 203112 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_15 ; empty space on disk = 137101458800640 bytes ... done
+Writing 215904 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_7 ; empty space on disk = 137101458800640 bytes ... done
+Writing 203464 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_14 ; empty space on disk = 137101458800640 bytes ... done
+Writing 199112 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_45 ; empty space on disk = 137101458800640 bytes ... done
+Writing 218728 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_24 ; empty space on disk = 137101458800640 bytes ...Writing 213584 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_22 ; empty space on disk = 137101458800640 bytes ... done
+ done
+Writing 196648 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_10 ; empty space on disk = 137101458800640 bytes ... done
+Writing 206768 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_13 ; empty space on disk = 137101458800640 bytes ... done
+Writing 226936 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_25 ; empty space on disk = 137101458800640 bytes ... done
+Writing 190040 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_34 ; empty space on disk = 137101458800640 bytes ... done
+Writing 161728 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_53 ; empty space on disk = 137101458800640 bytes ... done
+Writing 210440 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_43 ; empty space on disk = 137101458800640 bytes ... done
+Writing 222424 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_18 ; empty space on disk = 137101458800640 bytes ... done
+Writing 177592 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_38 ; empty space on disk = 137101458800640 bytes ... done
+Writing 189896 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_49 ; empty space on disk = 137101458800640 bytes ... done
+Writing 217312 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_26 ; empty space on disk = 137101458800640 bytes ... done
+Writing 226088 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_21 ; empty space on disk = 137101458800640 bytes ... done
+Writing 226104 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_32 ; empty space on disk = 137101458800640 bytes ... done
+Writing 219992 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_27 ; empty space on disk = 137101458800640 bytes ... done
+Writing 193472 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_36 ; empty space on disk = 137101458800640 bytes ... done
+Writing 213408 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_39 ; empty space on disk = 137101458800640 bytes ... done
+Writing 227128 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_20 ; empty space on disk = 137101458800640 bytes ... done
+Writing 207776 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_28 ; empty space on disk = 137101458800640 bytes ... done
+Writing 195336 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_17 ; empty space on disk = 137101458800640 bytes ... done
+Writing 179192 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_54 ; empty space on disk = 137101458800640 bytes ... done
+Writing 221568 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_23 ; empty space on disk = 137101458800640 bytes ... done
+Writing 221432 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_33 ; empty space on disk = 137101458800640 bytes ... done
+Writing 171552 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_52 ; empty space on disk = 137101458800640 bytes ... done
+Writing 170376 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_55 ; empty space on disk = 137101458800640 bytes ... done
+Writing 184832 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_51 ; empty space on disk = 137101458800640 bytes ... done
+Writing 206032 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA_50 ; empty space on disk = 137101458800640 bytes ... done
+Nov 17 12:42:40 ... loading chunks from disk, packing SA...
+Nov 17 12:42:40 ... finished generating suffix array
+Nov 17 12:42:40 ... generating Suffix Array index
+Nov 17 12:42:49 ... completed Suffix Array index
+Nov 17 12:42:49 ... writing Genome to disk ...
+Writing 1835008 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//Genome ; empty space on disk = 137101458800640 bytes ... done
+SA size in bytes: 5756647
+Nov 17 12:42:49 ... writing Suffix Array to disk ...
+Writing 5756647 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SA ; empty space on disk = 137101458800640 bytes ... done
+Nov 17 12:42:49 ... writing SAindex to disk
+Writing 8 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SAindex ; empty space on disk = 137101458800640 bytes ... done
+Writing 120 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SAindex ; empty space on disk = 137101458800640 bytes ... done
+Writing 1565873491 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index//SAindex ; empty space on disk = 137101458800640 bytes ... done
+Nov 17 12:42:50 ..... finished successfully
+DONE: Genome generation, EXITING
