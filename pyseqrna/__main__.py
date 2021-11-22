@@ -55,19 +55,16 @@ def main():
     if options.fastqc:
         
         jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=outdir, slurm=options.slurm, paired=options.paired)
-    
-    else:
-        pass
 
-    if options.slurm:
-        for job in jobid:
-            wait(lambda: pu.check_status(job), waiting_for="quality to finish")
-            log.info(f"Quality check completed for job {job}")
+        if options.slurm:
+            for job in jobid:
+                wait(lambda: pu.check_status(job), waiting_for="quality to finish")
+                log.info(f"Quality check completed for job {job}")
 
-        log.info("Read quality check completed succesfully")
-    else:
-    
-        log.info("Read quality check completed succesfully")
+            log.info("Read quality check completed succesfully")
+        else:
+        
+            log.info("Read quality check completed succesfully")
 
     # Trimming
 
@@ -75,15 +72,15 @@ def main():
 
     if options.trimming == 'flexbar':
 
-        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,pairedEND=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=options.outdir)
+        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,pairedEND=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=outdir)
     
     elif options.trimming == 'trimmomatic':
 
-        outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=options.outdir,paired=options.paired)
+        outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=outdir,paired=options.paired)
         
     elif options.trimming == 'trim_galore':
 
-        outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=options.outdir,paired=options.paired)
+        outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=outdir,paired=options.paired)
         
     if options.slurm:
         for job in jobidt:
@@ -101,15 +98,15 @@ def main():
         
         jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=outdir, slurm=options.slurm, paired=options.paired)
 
-    if options.slurm:
-        for job in jobid:
-            wait(lambda: pu.check_status(job), waiting_for="quality to finish")
-            log.info(f"Quality check for trimmed read completed for job {job}")
- 
-        log.info("Read quality check for trimmed reads completed succesfully")
-    else:
+        if options.slurm:
+            for job in jobid:
+                wait(lambda: pu.check_status(job), waiting_for="quality to finish")
+                log.info(f"Quality check for trimmed read completed for job {job}")
     
-        log.info("Read quality check for trimmed reads completed succesfully")
+            log.info("Read quality check for trimmed reads completed succesfully")
+        else:
+        
+            log.info("Read quality check for trimmed reads completed succesfully")
 
     
     # Removal of ribosomal RNA
@@ -120,14 +117,14 @@ def main():
         
         outtrim, jobs = ribo.sortmernaRun(outtrim,outdir, options.paired,cpu=options.threads, slurm=options.slurm)
 
-    if options.slurm:
+        if options.slurm:
 
-        wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
+            wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
 
-        log.info("Ribsomal RNA removal completed succesfully")
-    else:
-    
-        log.info("Ribsomal RNA removal completed succesfully")
+            log.info("Ribsomal RNA removal completed succesfully")
+        else:
+        
+            log.info("Ribsomal RNA removal completed succesfully")
 
     # Alignment Section
     

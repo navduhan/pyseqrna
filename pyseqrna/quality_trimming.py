@@ -431,7 +431,7 @@ def trim_galoreRun(sampleDict=None,  configFile=None, slurm=False, mem=10, cpu=8
 
             out = value[0]
 
-            inputPair = pu.get_basename(input1)
+            inputPair = pu.get_basename(value[2])
 
         
 

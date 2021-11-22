@@ -1,0 +1,437 @@
+STAR version=STAR_2.6.1d
+STAR compilation time,server,dir=Fri Nov 16 17:02:31 EST 2018 florence.cshl.edu:/sonas-hs/gingeras/nlsas_norepl/user/dobin/STAR/STAR.master/source
+##### DEFAULT parameters:
+versionSTAR                       20201
+versionGenome                     20101   20200   
+parametersFiles                   -   
+sysShell                          -
+runMode                           alignReads
+runThreadN                        1
+runDirPerm                        User_RWX
+runRNGseed                        777
+genomeDir                         ./GenomeDir/
+genomeLoad                        NoSharedMemory
+genomeFastaFiles                  -   
+genomeChainFiles                  -   
+genomeSAindexNbases               14
+genomeChrBinNbits                 18
+genomeSAsparseD                   1
+genomeSuffixLengthMax             18446744073709551615
+genomeFileSizes                   0   
+genomeConsensusFile               -
+readFilesType                     Fastx   
+readFilesIn                       Read1   Read2   
+readFilesPrefix                   -
+readFilesCommand                  -   
+readMatesLengthsIn                NotEqual
+readMapNumber                     18446744073709551615
+readNameSeparator                 /   
+inputBAMfile                      -
+bamRemoveDuplicatesType           -
+bamRemoveDuplicatesMate2basesN    0
+limitGenomeGenerateRAM            31000000000
+limitIObufferSize                 150000000
+limitOutSAMoneReadBytes           100000
+limitOutSJcollapsed               1000000
+limitOutSJoneRead                 1000
+limitBAMsortRAM                   0
+limitSjdbInsertNsj                1000000
+outFileNamePrefix                 ./
+outTmpDir                         -
+outTmpKeep                        None
+outStd                            Log
+outReadsUnmapped                  None
+outQSconversionAdd                0
+outMultimapperOrder               Old_2.4
+outSAMtype                        SAM   
+outSAMmode                        Full
+outSAMstrandField                 None
+outSAMattributes                  Standard   
+outSAMunmapped                    None   
+outSAMorder                       Paired
+outSAMprimaryFlag                 OneBestScore
+outSAMreadID                      Standard
+outSAMmapqUnique                  255
+outSAMflagOR                      0
+outSAMflagAND                     65535
+outSAMattrRGline                  -   
+outSAMheaderHD                    -   
+outSAMheaderPG                    -   
+outSAMheaderCommentFile           -
+outBAMcompression                 1
+outBAMsortingThreadN              0
+outBAMsortingBinsN                50
+outSAMfilter                      None   
+outSAMmultNmax                    18446744073709551615
+outSAMattrIHstart                 1
+outSAMtlen                        1
+outSJfilterReads                  All
+outSJfilterCountUniqueMin         3   1   1   1   
+outSJfilterCountTotalMin          3   1   1   1   
+outSJfilterOverhangMin            30   12   12   12   
+outSJfilterDistToOtherSJmin       10   0   5   10   
+outSJfilterIntronMaxVsReadN       50000   100000   200000   
+outWigType                        None   
+outWigStrand                      Stranded   
+outWigReferencesPrefix            -
+outWigNorm                        RPM   
+outFilterType                     Normal
+outFilterMultimapNmax             10
+outFilterMultimapScoreRange       1
+outFilterScoreMin                 0
+outFilterScoreMinOverLread        0.66
+outFilterMatchNmin                0
+outFilterMatchNminOverLread       0.66
+outFilterMismatchNmax             10
+outFilterMismatchNoverLmax        0.3
+outFilterMismatchNoverReadLmax    1
+outFilterIntronMotifs             None
+outFilterIntronStrands            RemoveInconsistentStrands
+clip5pNbases                      0   
+clip3pNbases                      0   
+clip3pAfterAdapterNbases          0   
+clip3pAdapterSeq                  -   
+clip3pAdapterMMp                  0.1   
+winBinNbits                       16
+winAnchorDistNbins                9
+winFlankNbins                     4
+winAnchorMultimapNmax             50
+winReadCoverageRelativeMin        0.5
+winReadCoverageBasesMin           0
+scoreGap                          0
+scoreGapNoncan                    -8
+scoreGapGCAG                      -4
+scoreGapATAC                      -8
+scoreStitchSJshift                1
+scoreGenomicLengthLog2scale       -0.25
+scoreDelBase                      -2
+scoreDelOpen                      -2
+scoreInsOpen                      -2
+scoreInsBase                      -2
+seedSearchLmax                    0
+seedSearchStartLmax               50
+seedSearchStartLmaxOverLread      1
+seedPerReadNmax                   1000
+seedPerWindowNmax                 50
+seedNoneLociPerWindow             10
+seedMultimapNmax                  10000
+seedSplitMin                      12
+alignIntronMin                    21
+alignIntronMax                    0
+alignMatesGapMax                  0
+alignTranscriptsPerReadNmax       10000
+alignSJoverhangMin                5
+alignSJDBoverhangMin              3
+alignSJstitchMismatchNmax         0   -1   0   0   
+alignSplicedMateMapLmin           0
+alignSplicedMateMapLminOverLmate    0.66
+alignWindowsPerReadNmax           10000
+alignTranscriptsPerWindowNmax     100
+alignEndsType                     Local
+alignSoftClipAtReferenceEnds      Yes
+alignEndsProtrude                 0   ConcordantPair   
+alignInsertionFlush               None
+peOverlapNbasesMin                0
+peOverlapMMp                      0.01
+chimSegmentMin                    0
+chimScoreMin                      0
+chimScoreDropMax                  20
+chimScoreSeparation               10
+chimScoreJunctionNonGTAG          -1
+chimMainSegmentMultNmax           10
+chimJunctionOverhangMin           20
+chimOutType                       Junctions   
+chimFilter                        banGenomicN   
+chimSegmentReadGapMax             0
+chimMultimapNmax                  0
+chimMultimapScoreRange            1
+chimNonchimScoreDropMin           20
+chimOutJunctionFormat             0   
+sjdbFileChrStartEnd               -   
+sjdbGTFfile                       -
+sjdbGTFchrPrefix                  -
+sjdbGTFfeatureExon                exon
+sjdbGTFtagExonParentTranscript    transcript_id
+sjdbGTFtagExonParentGene          gene_id
+sjdbOverhang                      100
+sjdbScore                         2
+sjdbInsertSave                    Basic
+varVCFfile                        -
+waspOutputMode                    None
+quantMode                         -   
+quantTranscriptomeBAMcompression    1
+quantTranscriptomeBan             IndelSoftclipSingleend
+twopass1readsN                    18446744073709551615
+twopassMode                       None
+##### Command Line:
+/home/naveen/SOFTWARE/miniconda3/envs/pySeqRNA/bin/STAR --genomeDir /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index --runThreadN 50 --runMode genomeGenerate --genomeFastaFiles /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa
+##### Initial USER parameters from Command Line:
+###### All USER parameters from Command Line:
+genomeDir                     /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index     ~RE-DEFINED
+runThreadN                    50     ~RE-DEFINED
+runMode                       genomeGenerate     ~RE-DEFINED
+genomeFastaFiles              /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa        ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runMode                           genomeGenerate
+runThreadN                        50
+genomeDir                         /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index
+genomeFastaFiles                  /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa   
+
+-------------------------------
+##### Final effective command line:
+/home/naveen/SOFTWARE/miniconda3/envs/pySeqRNA/bin/STAR   --runMode genomeGenerate   --runThreadN 50   --genomeDir /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index   --genomeFastaFiles /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa   
+
+##### Final parameters after user input--------------------------------:
+versionSTAR                       20201
+versionGenome                     20101   20200   
+parametersFiles                   -   
+sysShell                          -
+runMode                           genomeGenerate
+runThreadN                        50
+runDirPerm                        User_RWX
+runRNGseed                        777
+genomeDir                         /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index
+genomeLoad                        NoSharedMemory
+genomeFastaFiles                  /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa   
+genomeChainFiles                  -   
+genomeSAindexNbases               14
+genomeChrBinNbits                 18
+genomeSAsparseD                   1
+genomeSuffixLengthMax             18446744073709551615
+genomeFileSizes                   0   
+genomeConsensusFile               -
+readFilesType                     Fastx   
+readFilesIn                       Read1   Read2   
+readFilesPrefix                   -
+readFilesCommand                  -   
+readMatesLengthsIn                NotEqual
+readMapNumber                     18446744073709551615
+readNameSeparator                 /   
+inputBAMfile                      -
+bamRemoveDuplicatesType           -
+bamRemoveDuplicatesMate2basesN    0
+limitGenomeGenerateRAM            31000000000
+limitIObufferSize                 150000000
+limitOutSAMoneReadBytes           100000
+limitOutSJcollapsed               1000000
+limitOutSJoneRead                 1000
+limitBAMsortRAM                   0
+limitSjdbInsertNsj                1000000
+outFileNamePrefix                 ./
+outTmpDir                         -
+outTmpKeep                        None
+outStd                            Log
+outReadsUnmapped                  None
+outQSconversionAdd                0
+outMultimapperOrder               Old_2.4
+outSAMtype                        SAM   
+outSAMmode                        Full
+outSAMstrandField                 None
+outSAMattributes                  Standard   
+outSAMunmapped                    None   
+outSAMorder                       Paired
+outSAMprimaryFlag                 OneBestScore
+outSAMreadID                      Standard
+outSAMmapqUnique                  255
+outSAMflagOR                      0
+outSAMflagAND                     65535
+outSAMattrRGline                  -   
+outSAMheaderHD                    -   
+outSAMheaderPG                    -   
+outSAMheaderCommentFile           -
+outBAMcompression                 1
+outBAMsortingThreadN              0
+outBAMsortingBinsN                50
+outSAMfilter                      None   
+outSAMmultNmax                    18446744073709551615
+outSAMattrIHstart                 1
+outSAMtlen                        1
+outSJfilterReads                  All
+outSJfilterCountUniqueMin         3   1   1   1   
+outSJfilterCountTotalMin          3   1   1   1   
+outSJfilterOverhangMin            30   12   12   12   
+outSJfilterDistToOtherSJmin       10   0   5   10   
+outSJfilterIntronMaxVsReadN       50000   100000   200000   
+outWigType                        None   
+outWigStrand                      Stranded   
+outWigReferencesPrefix            -
+outWigNorm                        RPM   
+outFilterType                     Normal
+outFilterMultimapNmax             10
+outFilterMultimapScoreRange       1
+outFilterScoreMin                 0
+outFilterScoreMinOverLread        0.66
+outFilterMatchNmin                0
+outFilterMatchNminOverLread       0.66
+outFilterMismatchNmax             10
+outFilterMismatchNoverLmax        0.3
+outFilterMismatchNoverReadLmax    1
+outFilterIntronMotifs             None
+outFilterIntronStrands            RemoveInconsistentStrands
+clip5pNbases                      0   
+clip3pNbases                      0   
+clip3pAfterAdapterNbases          0   
+clip3pAdapterSeq                  -   
+clip3pAdapterMMp                  0.1   
+winBinNbits                       16
+winAnchorDistNbins                9
+winFlankNbins                     4
+winAnchorMultimapNmax             50
+winReadCoverageRelativeMin        0.5
+winReadCoverageBasesMin           0
+scoreGap                          0
+scoreGapNoncan                    -8
+scoreGapGCAG                      -4
+scoreGapATAC                      -8
+scoreStitchSJshift                1
+scoreGenomicLengthLog2scale       -0.25
+scoreDelBase                      -2
+scoreDelOpen                      -2
+scoreInsOpen                      -2
+scoreInsBase                      -2
+seedSearchLmax                    0
+seedSearchStartLmax               50
+seedSearchStartLmaxOverLread      1
+seedPerReadNmax                   1000
+seedPerWindowNmax                 50
+seedNoneLociPerWindow             10
+seedMultimapNmax                  10000
+seedSplitMin                      12
+alignIntronMin                    21
+alignIntronMax                    0
+alignMatesGapMax                  0
+alignTranscriptsPerReadNmax       10000
+alignSJoverhangMin                5
+alignSJDBoverhangMin              3
+alignSJstitchMismatchNmax         0   -1   0   0   
+alignSplicedMateMapLmin           0
+alignSplicedMateMapLminOverLmate    0.66
+alignWindowsPerReadNmax           10000
+alignTranscriptsPerWindowNmax     100
+alignEndsType                     Local
+alignSoftClipAtReferenceEnds      Yes
+alignEndsProtrude                 0   ConcordantPair   
+alignInsertionFlush               None
+peOverlapNbasesMin                0
+peOverlapMMp                      0.01
+chimSegmentMin                    0
+chimScoreMin                      0
+chimScoreDropMax                  20
+chimScoreSeparation               10
+chimScoreJunctionNonGTAG          -1
+chimMainSegmentMultNmax           10
+chimJunctionOverhangMin           20
+chimOutType                       Junctions   
+chimFilter                        banGenomicN   
+chimSegmentReadGapMax             0
+chimMultimapNmax                  0
+chimMultimapScoreRange            1
+chimNonchimScoreDropMin           20
+chimOutJunctionFormat             0   
+sjdbFileChrStartEnd               -   
+sjdbGTFfile                       -
+sjdbGTFchrPrefix                  -
+sjdbGTFfeatureExon                exon
+sjdbGTFtagExonParentTranscript    transcript_id
+sjdbGTFtagExonParentGene          gene_id
+sjdbOverhang                      100
+sjdbScore                         2
+sjdbInsertSave                    Basic
+varVCFfile                        -
+waspOutputMode                    None
+quantMode                         -   
+quantTranscriptomeBAMcompression    1
+quantTranscriptomeBan             IndelSoftclipSingleend
+twopass1readsN                    18446744073709551615
+twopassMode                       None
+----------------------------------------
+
+Finished loading and checking parameters
+Nov 21 21:45:58 ... starting to generate Genome files
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa : chr # 0  "1" chrStart: 0
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa : chr # 1  "2" chrStart: 30670848
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa : chr # 2  "3" chrStart: 50593792
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa : chr # 3  "4" chrStart: 74186752
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa : chr # 4  "5" chrStart: 92798976
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa : chr # 5  "Mt" chrStart: 119799808
+/home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa : chr # 6  "Pt" chrStart: 120324096
+Estimated genome size=321586240   120586240   201000000
+GstrandBit=32
+Number of SA indices: 238963086
+Nov 21 21:46:02 ... starting to sort Suffix Array. This may take a long time...
+Number of chunks: 57;   chunks size limit: 39014376 bytes
+Nov 21 21:46:04 ... sorting Suffix Array chunks and saving them to disk...
+Writing 23205912 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_3 ; empty space on disk = 136608772784128 bytes ... done
+Writing 20927976 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_17 ; empty space on disk = 136608772784128 bytes ... done
+Writing 21792496 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_18 ; empty space on disk = 136608772784128 bytes ... done
+Writing 29873520 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_1 ; empty space on disk = 136608772784128 bytes ... done
+Writing 28315328 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_49 ; empty space on disk = 136608772784128 bytes ... done
+Writing 26774696 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_46 ; empty space on disk = 136608772784128 bytes ... done
+Writing 25138064 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_40 ; empty space on disk = 136608772784128 bytes ... done
+Writing 29303840 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_6 ; empty space on disk = 136608772784128 bytes ... done
+Writing 29486232 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_9 ; empty space on disk = 136608772784128 bytes ... done
+Writing 32460408 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_0 ; empty space on disk = 136608772784128 bytes ... done
+Writing 31651504 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_4 ; empty space on disk = 136608772784128 bytes ... done
+Writing 32551456 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_10 ; empty space on disk = 136608772784128 bytes ... done
+Writing 31884312 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_44 ; empty space on disk = 136608772784128 bytes ... done
+Writing 29786920 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_37 ; empty space on disk = 136608408403968 bytes ... done
+Writing 33976672 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_48 ; empty space on disk = 136608408403968 bytes ... done
+Writing 36363288 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_2 ; empty space on disk = 136608408403968 bytes ...Writing 32264144 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_47 ; empty space on disk = 136608408403968 bytes ... done
+ done
+Writing 35397000 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_45 ; empty space on disk = 136608408403968 bytes ... done
+Writing 33269976 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_8 ; empty space on disk = 136608408403968 bytes ... done
+Writing 32978440 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_41 ; empty space on disk = 136608408403968 bytes ... done
+Writing 37210784 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_7 ; empty space on disk = 136608408403968 bytes ... done
+Writing 32083392 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_11 ; empty space on disk = 136608408403968 bytes ...Writing 34470288 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_15 ; empty space on disk = 136608408403968 bytes ... done
+ done
+Writing 34245376 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_43 ; empty space on disk = 136608408403968 bytes ... done
+Writing 32778840 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_23 ; empty space on disk = 136608408403968 bytes ...Writing 34211552 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_13 ; empty space on disk = 136608408403968 bytes ... done
+ done
+Writing 34370728 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_38 ; empty space on disk = 136608408403968 bytes ... done
+Writing 38090472 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_5 ; empty space on disk = 136608408403968 bytes ... done
+Writing 34593176 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_36 ; empty space on disk = 136608408403968 bytes ... done
+Writing 38248032 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_14 ; empty space on disk = 136608408403968 bytes ... done
+Writing 36799576 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_42 ; empty space on disk = 136608408403968 bytes ... done
+Writing 38179240 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_12 ; empty space on disk = 136608408403968 bytes ... done
+Writing 37831264 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_16 ; empty space on disk = 136608408403968 bytes ...Writing 36953928 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_21 ; empty space on disk = 136608408403968 bytes ...Writing 36698920 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_27 ; empty space on disk = 136608408403968 bytes ... done
+ done
+ done
+Writing 34943760 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_30 ; empty space on disk = 136608408403968 bytes ...Writing 34436744 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_19 ; empty space on disk = 136608408403968 bytes ...Writing 35865560 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_32 ; empty space on disk = 136608408403968 bytes ... done
+Writing 38005256 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_25 ; empty space on disk = 136608408403968 bytes ... done
+ done
+Writing 38007312 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_33 ; empty space on disk = 136608408403968 bytes ... done
+ done
+Writing 36262264 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_22 ; empty space on disk = 136608408403968 bytes ... done
+Writing 35587800 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_35 ; empty space on disk = 136608408403968 bytes ...Writing 38544968 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_34 ; empty space on disk = 136608408403968 bytes ...Writing 36569016 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_31 ; empty space on disk = 136608408403968 bytes ... done
+ done
+ done
+Writing 37206616 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_26 ; empty space on disk = 136608408403968 bytes ... done
+Writing 38116400 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_39 ; empty space on disk = 136608408403968 bytes ...Writing 38758856 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_20 ; empty space on disk = 136608408403968 bytes ... done
+Writing 38908256 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_24 ; empty space on disk = 136608408403968 bytes ... done
+ done
+Writing 36939040 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_28 ; empty space on disk = 136608408403968 bytes ... done
+Writing 38434192 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_29 ; empty space on disk = 136608408403968 bytes ... done
+Writing 17657440 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_55 ; empty space on disk = 136608408403968 bytes ... done
+Writing 32524840 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_50 ; empty space on disk = 136608408403968 bytes ... done
+Writing 31132056 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_53 ; empty space on disk = 136608408403968 bytes ... done
+Writing 34006344 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_54 ; empty space on disk = 136606992302080 bytes ... done
+Writing 32463224 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_56 ; empty space on disk = 136606992302080 bytes ... done
+Writing 37562128 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_51 ; empty space on disk = 136606992302080 bytes ... done
+Writing 35604864 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA_52 ; empty space on disk = 136606992302080 bytes ... done
+Nov 21 21:46:58 ... loading chunks from disk, packing SA...
+Nov 21 21:47:02 ... finished generating suffix array
+Nov 21 21:47:02 ... generating Suffix Array index
+Nov 21 21:47:50 ... completed Suffix Array index
+Nov 21 21:47:50 ... writing Genome to disk ...
+Writing 120586240 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Genome ; empty space on disk = 136608057131008 bytes ... done
+SA size in bytes: 985722733
+Nov 21 21:47:50 ... writing Suffix Array to disk ...
+Writing 985722733 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SA ; empty space on disk = 136608057131008 bytes ... done
+Nov 21 21:47:51 ... writing SAindex to disk
+Writing 8 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SAindex ; empty space on disk = 136608057131008 bytes ... done
+Writing 120 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SAindex ; empty space on disk = 136608057131008 bytes ... done
+Writing 1565873491 bytes into /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/SAindex ; empty space on disk = 136608057131008 bytes ... done
+Nov 21 21:47:52 ..... finished successfully
+DONE: Genome generation, EXITING
