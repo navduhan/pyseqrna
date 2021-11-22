@@ -145,7 +145,7 @@ def read_input_file(infile, inpath, paired = False):
     
     finally:
 
-        log.info("targets dataframe fro differenatial created succesfully from %s", infile)
+        log.info("targets dataframe for differenatial created succesfully from %s", infile)
 
     return {'samples': samples, "combinations": combinations, "targets": targets}
 

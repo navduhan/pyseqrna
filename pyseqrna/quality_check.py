@@ -126,12 +126,13 @@ def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=
             else:
 
                 fastqcCmd = f"{execPATH} -o {output} {args} {inputFile}"
+            
 
             if slurm == True:  # check if slurm job scheduling is enabled or not
 
                 try:
                     job = pu.clusterRun(job_name=
-                        'fastqc', sout= os.path.join(out,"fastqc.out"), serror= os.path.join(out,"fastqc.err"), command=fastqcCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
+                        'fastqc', sout= os.path.join(output,"fastqc.out"), serror= os.path.join(output,"fastqc.err"), command=fastqcCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
 
                     job_id.append(job)
 
@@ -145,9 +146,9 @@ def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=
             else:
 
                 try:
-                    # print(fastqcCmd)
-                    with open(os.path.join(out,"fastqc.out"), 'w+') as fout:
-                        with open(os.path.join(out,"fastqc.err"), 'w+') as ferr:
+                
+                    with open(os.path.join(output,"fastqc.out"), 'w+') as fout:
+                        with open(os.path.join(output,"fastqc.err"), 'w+') as ferr:
                             job = subprocess.call(fastqcCmd, shell=True, stdout=fout, stderr=ferr)
 
                             job_id.append(" ")    
