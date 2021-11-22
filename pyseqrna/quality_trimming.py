@@ -459,7 +459,7 @@ def trim_galoreRun(sampleDict=None,  configFile=None, slurm=False, mem=10, cpu=8
                         output, "trim_galore.err"), command=trim_galoreCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
                     job_id.append(job)
                     log.info("Job successfully submited for {} with {}".format(
-                        inputPair, job_id))
+                        inputPair, job))
 
                 except Exception:
 

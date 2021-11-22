@@ -1,1 +1,21 @@
-[18:04:52]  __main__ :: INFO : Analysis started at Sun Nov 21 18:04:52 2021
+[19:57:06]  <ipython-input-2-bf476bf393c3> :: INFO : Analysis started
+[19:57:12]  pyseqrna_utils :: INFO : Reading input samples File 
+[19:57:12]  pyseqrna_utils :: INFO : Input file pyseqrna/example/input_Sample_PE.txt read succesfully
+[19:57:12]  pyseqrna_utils :: INFO : Combination created succesfully from pyseqrna/example/input_Sample_PE.txt
+[19:57:12]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from pyseqrna/example/input_Sample_PE.txt
+[19:57:42]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results.5
+[19:57:48]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/trim_galore.ini
+[19:57:48]  quality_trimming :: INFO : Using default config file trim_galore.ini
+[19:57:48]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/trim_galore_results.2
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Control.1h.A_1.fastq.gz and Control.1h.A_2.fastq.gz with ['36009']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Control.1h.B_1.fastq.gz and Control.1h.B_2.fastq.gz with ['36009', '36010']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Heat.1h.A_1.fastq.gz and Heat.1h.A_2.fastq.gz with ['36009', '36010', '36011']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Heat.1h.B_1.fastq.gz and Heat.1h.B_2.fastq.gz with ['36009', '36010', '36011', '36012']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Drought.1h.A_1.fastq.gz and Drought.1h.A_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Drought.1h.B_1.fastq.gz and Drought.1h.B_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013', '36014']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Control.6h.A_1.fastq.gz and Control.6h.A_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013', '36014', '36015']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Control.6h.B_1.fastq.gz and Control.6h.B_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013', '36014', '36015', '36016']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Heat.6h.A_1.fastq.gz and Heat.6h.A_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013', '36014', '36015', '36016', '36017']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Heat.6h.B_1.fastq.gz and Heat.6h.B_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013', '36014', '36015', '36016', '36017', '36018']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Drought.6h.A_1.fastq.gz and Drought.6h.A_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013', '36014', '36015', '36016', '36017', '36018', '36019']
+[19:57:48]  quality_trimming :: INFO : Job successfully submited for Drought.6h.B_1.fastq.gz and Drought.6h.B_2.fastq.gz with ['36009', '36010', '36011', '36012', '36013', '36014', '36015', '36016', '36017', '36018', '36019', '36020']
