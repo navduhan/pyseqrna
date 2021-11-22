@@ -55,6 +55,9 @@ def main():
     if options.fastqc:
         
         jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=outdir, slurm=options.slurm, paired=options.paired)
+    
+    else:
+        pass
 
     if options.slurm:
         for job in jobid:
