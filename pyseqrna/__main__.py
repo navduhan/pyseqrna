@@ -197,7 +197,7 @@ def main():
     log.info("Calculating alignment statistics")
     
     try:
-        align_stat = ps.align_stats.align_stats(samples,outtrim, outalign,pairedEND=options.paired)
+        align_stat = ps.align_stats(samples,outtrim, outalign,pairedEND=options.paired)
 
         align_stat.to_excel(outdir+"/alignment_statistics.xlsx", index=False)
 
@@ -212,21 +212,14 @@ def main():
 
     if options.quantification == 'featureCounts':
 
-        fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign,slurm=options.slurm, mem= options.memory, cpu=options.threads, outDir=outdir)
-
-        if options.slurm:
-
-            wait(lambda: pu.check_status(fjob), waiting_for="quantification to finish")
+        fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=outdir)
 
         log.info("feature counts completed and written in %s/Counts.txt",outdir)
     
     elif options.quantification == 'Htseq':
 
-        fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign,slurm=options.slurm, mem= options.memory, cpu=options.threads, outDir=outdir)
+        fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign, outDir=outdir)
 
-        if options.slurm:
-
-            wait(lambda: pu.check_status(fjob), waiting_for="quantification to finish")
 
         log.info("feature counts completed and written in %s/Counts.txt",outdir)
     

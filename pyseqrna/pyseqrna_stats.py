@@ -12,11 +12,12 @@ import pandas as pd
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 from pyseqrna import pyseqrna_utils as pu
 import matplotlib as plt
+import multiprocessing
 
 log = PyseqrnaLogger(mode='a', log="stats")
 
 
-def getNreads(file):
+def getNreads(file, rdict, sp):
     """
         Get total number of reads in fastq file
     Args:
@@ -26,23 +27,25 @@ def getNreads(file):
         [type]: total number of reads
     """
     result = len(pyfastx.Fastq(file))
+    
+    rdict[sp] = int(result)
     # result = subprocess.check_output(f"gzcat {file} | echo $((`wc -l`/4))", shell=True).decode('utf-8').rstrip()
     # logger.info(f"{result} input reads in {file}")
     
-    return int(result)
+    return rdict
 
-def getAligned_reads(file):
+def getAligned_reads(file, rdict, sp):
 
     aligned=0
 
     for read in pysam.AlignmentFile(file,'rb'):
         if read.is_unmapped == False and read.is_secondary==False:
             aligned += 1
+    rdict[sp] = int(aligned)
+    return rdict
 
-    return aligned
 
-
-def getUniquely_mapped(file):
+def getUniquely_mapped(file, rdict, sp):
 
     uniq_mapped = 0
     for read in pysam.AlignmentFile(file,'rb'):
@@ -52,10 +55,11 @@ def getUniquely_mapped(file):
                 uniq_mapped += 1
         except:
             pass
+    rdict[sp] = int(uniq_mapped)
+    return rdict
+    
 
-    return uniq_mapped
-
-def getMulti_mapped(file):
+def getMulti_mapped(file,rdict, sp):
 
     multi_mapped = 0 
 
@@ -65,62 +69,101 @@ def getMulti_mapped(file):
                 multi_mapped += 1
         except:
             pass
-
-    return multi_mapped
+    rdict[sp] = int(multi_mapped)
+    return rdict
+    
 
 
 def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, pairedEND=False):
-
-    Ireads = {}
-    Nreads = {}
-    Rreads = {}
-    Areads = {}
-    Ureads = {}
-    Mreads = {}
+    manager = multiprocessing.Manager()
+    Ireads = manager.dict()
+    Nreads = manager.dict()
+    Rreads = manager.dict()
+    Areads = manager.dict()
+    Ureads = manager.dict()
+    Mreads = manager.dict()
+    processes = []
     
     for sp in sampleDict:
         try:
+            p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp))
+        
+            processes.append(p)
+            p.start()
+            
+            for process in processes:
+                process.join()
+       
             if pairedEND:
-                Ireads[sp] = getNreads(sampleDict[sp][2])*2
-            else:
-                Ireads[sp] = getNreads(sampleDict[sp][2])
+                Ireads.update((x, y*2) for x, y in Ireads.items())
+            
         except Exception:
             log.error(f"Not able to count Input read number in {sp}")
-    # for rr in ribodict:
-    #     try:
-    #         if pairedEND:
-    #             Rreads[sp] = getNreads(sampleDict[rr][2])*2
-    #         else:
-    #             Rreads[sp] = getNreads(sampleDict[rr][2])
-    #     except Exception:
-    #         log.error(f"Not able to count Input read number in {rr}")
+   
     
     for tf in trimDict:
         try:
+            p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf))
+        
+            processes.append(p)
+            p.start()
+            
+            for process in processes:
+                process.join()
+       
             if pairedEND:
-
-                Nreads[tf] = getNreads(trimDict[tf][2])*2
-            else:
-                Nreads[tf] = getNreads(trimDict[tf][2])
+                Nreads.update((x, y*2) for x, y in Nreads.items())
         except Exception:
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-
-        pysam.sort(bamDict[bf][2], "-o", bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
+        p=multiprocessing.Process(target= pysam.sort, args=(bamDict[bf][2], "-o", bamDict[bf][2].split(".bam")[0] + "_sorted.bam"))
         
-        pysam.index(bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
+        processes.append(p)
+        p.start()
+            
+        for process in processes:
+            process.join()
+        # pysam.sort(bamDict[bf][2], "-o", bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
         
+        p=multiprocessing.Process(target= pysam.index, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam"))
+        
+        processes.append(p)
+        p.start()
+            
+        for process in processes:
+            process.join()
+        # pysam.index(bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
         try:
-            Areads[bf]= getAligned_reads(bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
+            p=multiprocessing.Process(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf))
+        
+            processes.append(p)
+            p.start()
+            
+            for process in processes:
+                process.join()
+       
         except Exception:
             log.error(f"Not able to count Aligned read number in {bf}")
         try:
-            Ureads[bf] = getUniquely_mapped(bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
+            p=multiprocessing.Process(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf))
+        
+            processes.append(p)
+            p.start()
+            
+            for process in processes:
+                process.join()
+                
         except Exception:
             log.error(f"Not able to count Uniquely mapped read number in {bf}")
         try:
-            Mreads[bf] = getMulti_mapped(bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
+            p=multiprocessing.Process(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf))
+        
+            processes.append(p)
+            p.start()
+            
+            for process in processes:
+                process.join()           
         except Exception:
             log.error(f"Not able to count Multi mapped read number in {bf}")
     try:

@@ -1,79 +1,19 @@
-[20:52:38]  <ipython-input-7-bf476bf393c3> :: INFO : Analysis started
-[20:52:38]  <ipython-input-7-bf476bf393c3> :: INFO : Analysis started
-[20:52:41]  pyseqrna_utils :: INFO : Reading input samples File 
-[20:52:41]  pyseqrna_utils :: INFO : Input file /home/naveen/Downloads/pyseqrna_test/input_sample.txt read succesfully
-[20:52:41]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Downloads/pyseqrna_test/input_sample.txt
-[20:52:41]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Downloads/pyseqrna_test/input_sample.txt
-[20:52:46]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results
-[20:53:18]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/fastqc.ini
-[20:53:18]  quality_check :: INFO : Using default config file fastqc.ini
-[20:53:18]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/fastqc_results
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832244_1.fastq.gz and SRR16832244_2.fastq.gz with 36113
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832245_1.fastq.gz and SRR16832245_2.fastq.gz with 36114
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832246_1.fastq.gz and SRR16832246_2.fastq.gz with 36115
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832247_1.fastq.gz and SRR16832247_2.fastq.gz with 36116
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832248_1.fastq.gz and SRR16832248_2.fastq.gz with 36117
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832249_1.fastq.gz and SRR16832249_2.fastq.gz with 36118
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832250_1.fastq.gz and SRR16832250_2.fastq.gz with 36119
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832251_1.fastq.gz and SRR16832251_2.fastq.gz with 36120
-[20:53:18]  quality_check :: INFO : Job submitted on slurm successfully for SRR16832252_1.fastq.gz and SRR16832252_2.fastq.gz with 36121
-[21:22:37]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/trim_galore.ini
-[21:22:37]  quality_trimming :: INFO : Using default config file trim_galore.ini
-[21:22:37]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/trim_galore_results
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832244_1.fastq.gz and SRR16832244_2.fastq.gz with 36122
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832245_1.fastq.gz and SRR16832245_2.fastq.gz with 36123
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832246_1.fastq.gz and SRR16832246_2.fastq.gz with 36124
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832247_1.fastq.gz and SRR16832247_2.fastq.gz with 36125
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832248_1.fastq.gz and SRR16832248_2.fastq.gz with 36126
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832249_1.fastq.gz and SRR16832249_2.fastq.gz with 36127
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832250_1.fastq.gz and SRR16832250_2.fastq.gz with 36128
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832251_1.fastq.gz and SRR16832251_2.fastq.gz with 36129
-[21:22:37]  quality_trimming :: INFO : Job successfully submited for SRR16832252_1.fastq.gz and SRR16832252_2.fastq.gz with 36130
-[21:24:11]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/trim_galore.ini
-[21:24:11]  quality_trimming :: INFO : Using default config file trim_galore.ini
-[21:24:11]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/trim_galore_results
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832244_1.fastq.gz and SRR16832244_2.fastq.gz with 36131
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832245_1.fastq.gz and SRR16832245_2.fastq.gz with 36132
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832246_1.fastq.gz and SRR16832246_2.fastq.gz with 36133
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832247_1.fastq.gz and SRR16832247_2.fastq.gz with 36134
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832248_1.fastq.gz and SRR16832248_2.fastq.gz with 36135
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832249_1.fastq.gz and SRR16832249_2.fastq.gz with 36136
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832250_1.fastq.gz and SRR16832250_2.fastq.gz with 36137
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832251_1.fastq.gz and SRR16832251_2.fastq.gz with 36138
-[21:24:11]  quality_trimming :: INFO : Job successfully submited for SRR16832252_1.fastq.gz and SRR16832252_2.fastq.gz with 36139
-[21:44:07]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/STAR.ini
-[21:44:07]  aligners :: INFO : Using default config file STAR.ini
-[21:44:37]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/STAR.ini
-[21:44:37]  aligners :: INFO : Using default config file STAR.ini
-[21:44:41]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index
-[21:44:41]  aligners :: INFO : Arabidopsis_thaliana.TAIR10.dna.toplevel.fa copied successfully in star_index
-[21:44:41]  aligners :: INFO : Job successfully submited for /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa with 36141 for indexing
-[21:50:31]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_results
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832244_1.fastq.gz and SRR16832244_2.fastq.gz with 36142 for alignment
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832245_1.fastq.gz and SRR16832245_2.fastq.gz with 36143 for alignment
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832246_1.fastq.gz and SRR16832246_2.fastq.gz with 36144 for alignment
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832247_1.fastq.gz and SRR16832247_2.fastq.gz with 36145 for alignment
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832248_1.fastq.gz and SRR16832248_2.fastq.gz with 36146 for alignment
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832249_1.fastq.gz and SRR16832249_2.fastq.gz with 36147 for alignment
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832250_1.fastq.gz and SRR16832250_2.fastq.gz with 36148 for alignment
-[21:50:31]  aligners :: INFO : Job successfully submited for SRR16832251_1.fastq.gz and SRR16832251_2.fastq.gz with 36149 for alignment
-[21:50:32]  aligners :: INFO : Job successfully submited for SRR16832252_1.fastq.gz and SRR16832252_2.fastq.gz with 36150 for alignment
-[21:52:23]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pySeqRNA_results/star_results
-[21:52:23]  aligners :: INFO : Job successfully submited for WT1_val_1.fq.gz and WT1_val_2.fq.gz with 36151 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for WT2_val_1.fq.gz and WT2_val_2.fq.gz with 36152 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for WT3_val_1.fq.gz and WT3_val_2.fq.gz with 36153 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for PF1_val_1.fq.gz and PF1_val_2.fq.gz with 36154 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for PF2_val_1.fq.gz and PF2_val_2.fq.gz with 36155 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for PF3_val_1.fq.gz and PF3_val_2.fq.gz with 36156 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for F1_val_1.fq.gz and F1_val_2.fq.gz with 36157 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for F2_val_1.fq.gz and F2_val_2.fq.gz with 36158 for alignment
-[21:52:24]  aligners :: INFO : Job successfully submited for F3_val_1.fq.gz and F3_val_2.fq.gz with 36159 for alignment
-[00:32:48]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/featureCount.ini
-[00:32:48]  quantification :: INFO : Using default config file featureCount.ini
-[00:32:48]  quantification :: INFO : Job successfully submited  for feature count with jobid 36163 
-[00:35:18]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/featureCount.ini
-[00:35:18]  quantification :: INFO : Using default config file featureCount.ini
-[00:35:18]  quantification :: INFO : Job successfully submited  for feature count with jobid 36164 
-[00:37:49]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/featureCount.ini
-[00:37:49]  quantification :: INFO : Using default config file featureCount.ini
-[00:39:58]  quantification :: INFO : Job successfully completed for feature count
+[18:22:11]  __main__ :: INFO : Analysis started at Mon Nov 22 18:22:11 2021
+[18:22:11]  __main__ :: INFO : Starting with read quality check
+[18:22:11]  __main__ :: INFO : Read trimming started with trim_galore
+_utils :: INFO : Reading input samples File 
+[18:22:11]  pyseqrna_utils :: INFO : Input file /home/naveen/Downloads/pyseqrna_test/input_sample.txt read succesfully
+[18:22:11]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Downloads/pyseqrna_test/input_sample.txt
+[18:22:11]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Downloads/pyseqrna_test/input_sample.txt
+[18:22:11]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/trim_galore.ini
+[18:22:11]  quality_trimming :: INFO : Using default config file trim_galore.ini
+[18:22:11]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Downloads/pyseqrna_test/p_results/trim_galore_results
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832244_1.fastq.gz with 36184
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832245_1.fastq.gz with 36185
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832246_1.fastq.gz with 36186
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832247_1.fastq.gz with 36187
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832248_1.fastq.gz with 36188
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832249_1.fastq.gz with 36189
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832250_1.fastq.gz with 36190
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832251_1.fastq.gz with 36191
+[18:22:11]  quality_trimming :: INFO : Job successfully submited for SRR16832252_1.fastq.gz with 36192
