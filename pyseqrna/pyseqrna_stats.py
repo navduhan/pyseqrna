@@ -75,6 +75,7 @@ def getMulti_mapped(file,rdict, sp):
 
 
 def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, pairedEND=False):
+        
     manager = multiprocessing.Manager()
     Ireads = manager.dict()
     Nreads = manager.dict()
@@ -125,8 +126,10 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
         for process in processes:
             process.join()
         # pysam.sort(bamDict[bf][2], "-o", bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
-        
-        p=multiprocessing.Process(target= pysam.index, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam"))
+    for bf in bamDict:   
+        file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
+        print(file)
+        p=multiprocessing.Process(target= pysam.index, args=(file))
         
         processes.append(p)
         p.start()
@@ -134,6 +137,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
         for process in processes:
             process.join()
         # pysam.index(bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
+    for bf in bamDict:
         try:
             p=multiprocessing.Process(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf))
         

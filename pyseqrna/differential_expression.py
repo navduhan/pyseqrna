@@ -373,7 +373,7 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         # add some space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
-        plt.savefig('deg.png', dpi=300, bbox_inches='tight')
+        # plt.savefig('deg.png', dpi=300, bbox_inches='tight')
         if replicate:
             plt.title(f'Filter DEGs (Fold:{FOLD} and FDR:{FDR})', loc='center')
         else:

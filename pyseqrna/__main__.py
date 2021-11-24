@@ -18,7 +18,9 @@ from pyseqrna import differential_expression as de
 from pyseqrna import pyseqrna_plots as pp
 from pyseqrna import ribosomal as ribo
 from pyseqrna import multimapped_groups as mmg
+from pyseqrna import gene_ontology as go
 import pandas as pd
+import numpy as np
 import dill
 import time
 import os, sys
@@ -72,7 +74,7 @@ def main():
 
     if options.trimming == 'flexbar':
 
-        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,pairedEND=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=outdir)
+        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=outdir)
     
     elif options.trimming == 'trimmomatic':
 
@@ -228,12 +230,97 @@ def main():
     if options.mmgg:
         log.info("Counting multimapped read grouops")
        
-        mmg_count = mmg.countMMG(samples,outalign,options.feature_file+".bed")
+        mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file+".bed")
         mmg_count.to_excel(os.path.join(outdir,"mmg_count.xlsx", index=False))
         log.info("counting of multimapped read group finished")
 
+    log.info("Differential Expression started with %s",options.detool)
 
+    targets = input_data['targets']
+    if options.detool == 'DESeq2':
+
+        count=pd.read_csv(os.path.join(outdir,"Counts_final.txt"), sep="\t")
+        result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
+        result.to_excel(os.path.join(outdir,"Raw_DEGs_all.xlsx"), index=False)
+        
+    elif options.detool == 'edgeR':
+
+        count=pd.read_csv(os.path.join(outdir,"Counts_final.txt"), sep="\t")
+        result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
+        result.to_excel(os.path.join(outdir,"Raw_DEGs_all.xlsx"), index=False)
+        
+    log.info("Differential expression analysis completed")
+    log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
+    filtered_DEG= de.degFilter(degDF=result, CompareList=combination,FDR=options.fdr, FOLD=options.fold)
+    log.info("filtering DEGs completed ")
+    log.info("writting filter DEGs combination wise to excel sheets")
+    wd= pd.ExcelWriter(os.path.join(outdir,"filtered_DEGs.xlsx"))
+    for key, value in filtered_DEG['filtered'].items():
+        value.to_excel(wd,sheet_name=key)
+        wd.save()
+    wd.close()
+    log.info("ploting DEG count figure")
+    filtered_DEG['plot'].savefig(os.path.join(outdir,"DEG_figure.png"),dpi=300, bbox_inches='tight')
+    # filtered_DEG['plot'].close()
+    log.info("Writting DEGs summary to excel file")
+    filtered_DEG['summary'].to_excel(os.path.join(outdir,"DEG_count_summary.xlsx"))
+    log.info("Creating heatmap of top 50 DEGs")
+    heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
+
+    heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
+
+    pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination)
+
+    if options.geneontology:
+        outgo = os.path.join(outdir,"Gene_Ontology")
+        pu.make_directory(outgo)
+        gdata = go.query(options.gospecies)
+        for c in combination:
+            file = f"{outdir}/genes/{c}.txt"
+            ontology_results = go.enrichGO(gdata, file)
+            ontology_results.to_csv(os.path.join(outgo, f"{c}_gene_ontology.txt"), sep="\t", index=False)
     
+    if options.keggpathway:
+        outkegg = os.path.join(outdir,"KEGG_pathway")
+        pu.make_directory(outkegg)
+        for c in combination:
+            file = f"{outdir}/genes/{c}.txt"
+            kegg_results = go.enrichGO(options.keggspecies, file)
+            kegg_results.to_csv(os.path.join(outkegg, f"{c}_gene_ontology.txt"), sep="\t", index=False)
+    if options.volcanoplot:
+        outvolcano = os.path.join(outdir,"Volcano_Plots")
+        pu.make_directory(outvolcano)
+    for c in combination:
+        x,y =pp.plotVolcano(result,c,1)
+        x.savefig(outvolcano+"/"+c+"_volcano.png")
+        
+    if options.maplot:
+        outma = os.path.join(outdir,"MA_Plots")
+        pu.make_directory(outma)
+    for m in combination:
+        x,y =pp.plotMA(result,count,m,1)
+        x.savefig(outma+"/"+c+"_MA.png")
+    
+    if options.vennplot:
+        degfile = pd.read_excel(os.path.join(outdir,"iltered_DEGs.xlsx"))
+        if options.venncombination:
+            k = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=outdir)
+            x.savefig(outdir+ "/_Venn.png")
+        else:
+            vnum = len(combination)/4
+            vlist = np.array_split(combination, vnum)
+        
+        
+            for i in range(0, len(vlist)):
+                k = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=outdir)
+                x.savefig(outdir+"/Venn_"+i+".png")
+        
+    endTime=time.ctime()
+    log.info("Analysis Complted at %s", endTime)
+    diff_time = endTime -startTime
+    log.info("Analysis took %s time", diff_time)
+    log.info("Beer Time!")
+        
         
 if __name__ == '__main__':
     main()

@@ -116,7 +116,7 @@ def flexbarRun(sampleDict,  configFile=None, slurm=False, mem=10, cpu=8, task=1,
             outflex[key] = [value[0], value[1],
                             os.path.join(output, value[0]+".fastq.gz")]
 
-            inputPair = pu.getFile(value[2])
+            inputPair = pu.get_basename(value[2])
 
             out = os.path.join(output, value[0])
 

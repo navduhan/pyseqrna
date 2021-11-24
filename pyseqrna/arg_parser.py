@@ -64,16 +64,16 @@ internal.add_argument('--normalization-type', dest='normalizationtype', default=
 internal.add_argument('--heatmap', dest='heatmap',action='store', default=True, 
     help="Create heatmap\n[default:True]")
 
-internal.add_argument('--heatmap-type', dest='heatmaptype', default='logFold-based', choices=['Count-based', 'logFold-based'],
+internal.add_argument('--heatmap-type', dest='heatmaptype', default='degs', choices=['counts', 'degs'],
     help="""Create heatmap based on selected choice \n[default: logFold-based]""" )
 
-internal.add_argument('--ma-plot', dest='maplot',action='store', default=True, 
+internal.add_argument('--ma-plot', dest='maplot',action='store_true', default=True, 
     help="Create MA plot\n[default:True]")
 
-internal.add_argument('--volcano-plot', dest='volcanoplot',action='store', default=True, 
+internal.add_argument('--volcano-plot', dest='volcanoplot',action='store_true', default=True, 
     help="Create Volcano plot\n[default:True]")
 
-internal.add_argument('--venn-plot',  dest='venplot', default=False, action='store_true', 
+internal.add_argument('--venn-plot',  dest='vennplot', default=False, action='store_true', 
     help="Enables venplot of differentially expressed genes.\n[default: False] ")
 
 internal.add_argument('--venn-combinations',  dest='venncombination', type=str, nargs='+', default='random',
@@ -92,7 +92,7 @@ annotation.add_argument('--go-species',required='--gene-ontology' in sys.argv,  
 annotation.add_argument('--kegg-pathway', action="store_true", default=False, dest="keggpathway",
     help="""Enables kegg pathway functional enrichment using KEGG""")
 
-annotation.add_argument('--kegg-species',required='--gene-ontology' in sys.argv,  default=None, dest="keggspecies",
+annotation.add_argument('--kegg-species',required='--kegg-pathway' in sys.argv,  default=None, dest="keggspecies",
     help="""Species name for kegg pathway functional enrichment using KEGG""")
 
 tools = parser.add_argument_group("External tool arguments")

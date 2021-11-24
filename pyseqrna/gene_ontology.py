@@ -109,11 +109,10 @@ def preprocessBioMart(data):
 
 
 
-def enrichGO(species, file):
+def enrichGO(gdata, file):
 
     log.info("Fetching Gene Ontology from Biomart")
-
-    gdata = query('athaliana')
+    
 
     df, background_count = preprocessBioMart(gdata)
     log.info(f"Performing GO enrichment analysis on {file}")  
@@ -155,7 +154,7 @@ def enrichGO(species, file):
         # GO terms
     bg_gene_count = background_count
 
-    read_id_file = open("pySeqRNA_results/diff_genes/C1-D6.txt", 'r')
+    read_id_file = open(file, 'r')
     for gene_id in read_id_file:
         gene_id = gene_id.strip().upper()
     # remove the duplicate ids and keep unique
@@ -172,43 +171,45 @@ def enrichGO(species, file):
                 get_user_id_count_for_GO[k1] += 1
                 anot_count += 1
 
+    try:
+        pvalues = []
+        enrichment_result = []
+        # get total mapped genes from user list
+        mapped_query_ids = sum(get_user_id_count_for_GO.values())
 
-    pvalues = []
-    enrichment_result = []
-    # get total mapped genes from user list
-    mapped_query_ids = sum(get_user_id_count_for_GO.values())
+        for k in get_user_id_count_for_GO:
+            gene_in_category = get_user_id_count_for_GO[k]
 
-    for k in get_user_id_count_for_GO:
-        gene_in_category = get_user_id_count_for_GO[k]
+            gene_not_in_category_but_in_sample = mapped_query_ids - gene_in_category
+            gene_not_in_catgory_but_in_genome = gene_GO_count[k] - gene_in_category
+            bg_gene_GO_ids = gene_GO_count[k]
+            bg_in_genome = bg_gene_count - mapped_query_ids - (gene_in_category + gene_not_in_catgory_but_in_genome) \
+                + gene_in_category
+            gene_ids = get_gene_ids_from_user[k]
+            gID = ""
 
-        gene_not_in_category_but_in_sample = mapped_query_ids - gene_in_category
-        gene_not_in_catgory_but_in_genome = gene_GO_count[k] - gene_in_category
-        bg_gene_GO_ids = gene_GO_count[k]
-        bg_in_genome = bg_gene_count - mapped_query_ids - (gene_in_category + gene_not_in_catgory_but_in_genome) \
-            + gene_in_category
-        gene_ids = get_gene_ids_from_user[k]
-        gID = ""
+            for g in gene_ids:
+                gID += g+"/"
 
-        for g in gene_ids:
-            gID += g+"/"
+            gID = gID.rsplit("/", 1)[0]
+            pvalue = stats.hypergeom.sf(
+                gene_in_category - 1, bg_gene_count, gene_GO_count[k], mapped_query_ids)
 
-        gID = gID.rsplit("/", 1)[0]
-        pvalue = stats.hypergeom.sf(
-            gene_in_category - 1, bg_gene_count, gene_GO_count[k], mapped_query_ids)
+            if gene_in_category > 0:
+                pvalues.append(pvalue)
 
-        if gene_in_category > 0:
-            pvalues.append(pvalue)
+                enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], KOdescription[k][2],
+                                        f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, len(gene_ids), gID])
 
-            enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], KOdescription[k][2],
-                                    f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, len(gene_ids), gID])
+        fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
 
-    fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
+        a = [i for i in fdr if i <= 0.05]
 
-    a = [i for i in fdr if i <= 0.05]
-
-    end = pd.DataFrame(enrichment_result)
-    end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
-    end.insert(7, 'FDR', fdr)
+        end = pd.DataFrame(enrichment_result)
+        end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
+        end.insert(7, 'FDR', fdr)
+    except Exception:
+        log.warning("No go enrichment found")
 
     return end
 

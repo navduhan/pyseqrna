@@ -145,7 +145,7 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), type='co
 
     # Need to add argument for all deg hetamp.
     degDF = degDF.set_index('Gene')
-    if type=='deg':
+    if type.lower() =='degs':
         com2=[]
         labelsd = []
         for i in combinations:
@@ -157,12 +157,12 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), type='co
         final=pd.concat([topGene,botGene])
         fin = final[com2]
         fin.columns= labelsd
-    elif type =='counts':
+    elif type.lower() =='counts':
         fin=degDF.nlargest(int(num), degDF.columns)
         
     fig, ax = plt.subplots(figsize=figdim)
 
-    sns.heatmap(fin, cmap="seismic",ax=ax, cbar=False)
+    sns.heatmap(fin, cmap="seismic",ax=ax)
 
     fig.tight_layout()
 
@@ -313,7 +313,6 @@ def plotVenn(DEGFile=None, FOLD=2,comparisons=None, degLabel="total", outDir=Non
     else:
         print("Please provide combination between 2-4")
 
-    fig.savefig(outDir+"/Venn.png")
-    plt.close(fig)
+    
 
-    return
+    return fig
