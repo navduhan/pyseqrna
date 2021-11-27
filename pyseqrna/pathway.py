@@ -10,59 +10,74 @@ from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 log = PyseqrnaLogger(mode='a', log="pathway")
 
 
-def kegg_list(species):
-    URL = "http://rest.kegg.jp/list/pathway/%s"
-    resp = urlopen(URL % (species))
+def _q(op, arg1, arg2=None, arg3=None):
+    URL = "http://rest.kegg.jp/%s"
+    if arg2 and arg3:
+        args = "%s/%s/%s/%s" % (op, arg1, arg2, arg3)
+    elif arg2:
+        args = "%s/%s/%s" % (op, arg1, arg2)
+    else:
+        args = "%s/%s" % (op, arg1)
+    resp = urlopen(URL % (args))
+
+    if "image" == arg2:
+        return resp
+
     handle = io.TextIOWrapper(resp, encoding="UTF-8")
     handle.url = resp.url
-    result = pd.read_csv(StringIO(handle.read()), sep='\t', names=['Pathway', 'Description'])
-    path = [i.split(':', 1)[1] for i in list(result['Pathway'])]
-    desc = [i.split(' - ', 1)[0] for i in list(result['Description'])]
-    final = list(zip(path,desc))
-    kegg_description = {}
+    return handle
 
-    for f in final:
-        kegg_description[f[0]]=f[1]
-    
-    return kegg_description
+def kegg_list(sp):
+    resp= _q("list","pathway",sp)
 
-def kegg_gene(species):
-    URL = "http://rest.kegg.jp/link/%s/pathway"
-    resp = urlopen(URL % (species))
-    handle = io.TextIOWrapper(resp, encoding="UTF-8")
-    handle.url = resp.url
-    result = pd.read_csv(StringIO(handle.read()), sep='\t', names=['Pathway', 'Accession'])
-    path = [i.split(':', 1)[1] for i in list(result['Pathway'])]
-    desc = [i.split(':', 1)[1] for i in list(result['Accession'])]
-    pp = list(zip(path,desc))
+    data =[]
+    for r in resp:
+        a, b=r.split("\t")
+        data.append([a.split(":")[1],b.rstrip()])
 
-    pathway = {}
-    for p in pp:
-        if p[0] not in pathway:
-            pathway[p[0]]= [p[1]]
-        else:
-            pathway[p[0]].append(p[1])
-    
-    x = np.array(desc)
 
+
+    pathway={}
+    parse=None
+    nad=None
+    bg=[]
+    for d in data:
+        resp=_q("get",d[0])
+        # resp=_q("get",'dosa04626')
+        genes = []
+        for line in resp:
+            line = line.strip()
+            # print(line)
+
+
+            if not line.startswith("/"):
+                if not line.startswith(" "):
+                    first_word = line.split(" ")[0]
+                    if first_word.isupper() and first_word.isalpha():
+                        parse = first_word    
+                    if parse == "NAME":
+                        nad = line.replace(parse,"").strip()
+                        desc = nad.split(" - ")[0]       
+                    if parse== "GENE":
+                        gened = line.replace(parse,"").strip().split(" ")[0]
+                        genes.append(gened)
+        bg.extend(genes)
+        pathway[d[0]]= [d[0],desc,genes,len(genes) ]
+
+    df = pd.DataFrame(pathway).T
+    df.columns= ['ID', 'Term', 'Gene', 'Gene_length']
+
+    x=np.array(bg)
     bg_count = len(np.unique(x))
 
-    finalp = {}
+    return df, bg_count
 
-    for k, v in pathway.items():
-        finalp[k]=[k,v,len(v)]
+
+def enrichKEGG(file, df, background_count):
+
+   
     
-    final = pd.DataFrame.from_dict(finalp).T
-    final.columns = ['ID', 'Gene', 'Gene_length']
-
-    return final, bg_count
-
-def enrichKEGG(file, species):
-
-    log.info("Reading annotation from KEGG")
     
-    df, background_count = kegg_gene(species)
-    kegg_description = kegg_list(species)
     log.info(f"Performing KEGG enrichment analysis on {file}")  
 
     df_keggList = df[['ID', 'Gene']].values.tolist()
@@ -78,13 +93,20 @@ def enrichKEGG(file, species):
     for c in count:
         kegg_count[c[0]] = c[1]
     
+    df_List = df[['ID', 'Term']].values.tolist()
+    kegg_description = {}
+
+    for line in df_List:
+
+        kegg_description[line[0]] = line[1]
+    
 
     get_gene_ids_from_user = dict()
     gene_kegg_count = dict()
 
     get_user_id_count_for_kegg = dict()
 
-    user_provided_uniq_ids = dict()
+    user_provided_uniq_ids = []
 
     for item in kegg_dict:
 
@@ -94,24 +116,23 @@ def enrichKEGG(file, species):
 
         get_user_id_count_for_kegg[item] = 0
         # GO terms
-    bg_gene_count = background_count
+    bg_gene_count = int(background_count)
 
     read_id_file = open(file, 'r')
     for gene_id in read_id_file:
         gene_id = gene_id.strip().upper()
     # remove the duplicate ids and keep unique
-        user_provided_uniq_ids[gene_id] = 0
+        user_provided_uniq_ids.append(gene_id)
     read_id_file.close()
 
 
     anot_count = 0
     for k1 in kegg_dict:
-        for k2 in user_provided_uniq_ids:
-            if k2 in kegg_dict[k1]:
+        intersection = set(user_provided_uniq_ids). intersection(kegg_dict[k1]) 
                 # if the user input id present in df_dict_glist increment count
-                get_gene_ids_from_user[k1].append(k2)
-                get_user_id_count_for_kegg[k1] += 1
-                anot_count += 1
+        get_gene_ids_from_user[k1]=list(intersection)
+        get_user_id_count_for_kegg[k1] = len(intersection)
+        anot_count += len(intersection)
     
     pvalues = []
     enrichment_result = []

@@ -302,7 +302,7 @@ def main():
         x.savefig(outma+"/"+c+"_MA.png")
     
     if options.vennplot:
-        degfile = pd.read_excel(os.path.join(outdir,"iltered_DEGs.xlsx"))
+        degfile = pd.read_excel(os.path.join(outdir,"filtered_DEGs.xlsx"))
         if options.venncombination:
             k = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=outdir)
             x.savefig(outdir+ "/_Venn.png")

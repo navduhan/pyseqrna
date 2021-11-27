@@ -82,7 +82,7 @@ def read_input_file(infile, inpath, paired = False):
             for line in file:
 
                 if not line.startswith("#") and not line.startswith("SampleName"):
-
+                    line = line.strip()
                     lines = re.split('\s+', line.rstrip())
 
                     if paired:

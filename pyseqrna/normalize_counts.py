@@ -156,12 +156,14 @@ class Normalization():
 
             logNorm_counts = list(np.log(cpm.T+1))
 
-            fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['raw counts']*len(countDF.columns)+['CPM counts']*len(countDF.columns),
+            fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['Raw counts']*len(countDF.columns)+['CPM counts']*len(countDF.columns),
                          labels= list(countDF.columns)+list(cpmDF.columns), figsize=figsize )
 
             ax.set_xlabel('Sample Name')
 
             ax.set_ylabel('log counts')
+            
+            ax.set_xticklabels(list(countDF.columns)+list(cpmDF.columns), rotation = 90)
         
 
         return cpmDF, fig, ax
@@ -200,7 +202,7 @@ class Normalization():
 
             logNorm_counts = list(np.log(rpkm.T+1))
 
-            fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['raw counts']*len(countDF.columns)+['CPM counts']*len(countDF.columns),
+            fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['Raw counts']*len(countDF.columns)+['RPKM counts']*len(countDF.columns),
                          labels= list(countDF.columns)+list(rpkmDF.columns), figsize=figsize )
 
             ax.set_xlabel('Sample Name')
@@ -246,7 +248,7 @@ class Normalization():
 
             logNorm_counts = list(np.log(tpm.T+1))
 
-            fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['raw counts']*len(countDF.columns)+['CPM counts']*len(countDF.columns),
+            fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['Raw counts']*len(countDF.columns)+['TPM counts']*len(countDF.columns),
                          labels= list(countDF.columns)+list(tpmDF.columns), figsize=figsize )
 
             ax.set_xlabel('Sample Name')

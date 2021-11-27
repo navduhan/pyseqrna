@@ -1,3 +1,4 @@
+from __future__ import division
 from statsmodels.stats.multitest import multipletests
 import scipy.stats as stats
 import numpy as np
@@ -7,6 +8,7 @@ from io import StringIO
 from xml.etree import ElementTree
 from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
+
 
 log = PyseqrnaLogger(mode='a', log="go")
 
@@ -107,7 +109,17 @@ def preprocessBioMart(data):
     return finalDF, bg_count
 
 
-
+def fdr_calc(x):
+    """
+    Assumes a list or numpy array x which contains p-values for multiple tests
+    Copied from p.adjust function from R  
+    """
+    o = [i[0] for i in sorted(enumerate(x), key=lambda v:v[1],reverse=True)]
+    ro = [i[0] for i in sorted(enumerate(o), key=lambda v:v[1])]
+    q = sum([1.0/i for i in range(1,len(x)+1)])
+    l = [q*len(x)/i*x[j] for i,j in zip(reversed(range(1,len(x)+1)),o)]
+    l = [l[k] if l[k] < 1.0 else 1.0 for k in ro]
+    return l
 
 def enrichGO(gdata, file):
 
@@ -171,45 +183,43 @@ def enrichGO(gdata, file):
                 get_user_id_count_for_GO[k1] += 1
                 anot_count += 1
 
-    try:
-        pvalues = []
-        enrichment_result = []
-        # get total mapped genes from user list
-        mapped_query_ids = sum(get_user_id_count_for_GO.values())
 
-        for k in get_user_id_count_for_GO:
-            gene_in_category = get_user_id_count_for_GO[k]
+    pvalues = []
+    enrichment_result = []
+    # get total mapped genes from user list
+    mapped_query_ids = sum(get_user_id_count_for_GO.values())
 
-            gene_not_in_category_but_in_sample = mapped_query_ids - gene_in_category
-            gene_not_in_catgory_but_in_genome = gene_GO_count[k] - gene_in_category
-            bg_gene_GO_ids = gene_GO_count[k]
-            bg_in_genome = bg_gene_count - mapped_query_ids - (gene_in_category + gene_not_in_catgory_but_in_genome) \
-                + gene_in_category
-            gene_ids = get_gene_ids_from_user[k]
-            gID = ""
+    for k in get_user_id_count_for_GO:
+        gene_in_category = get_user_id_count_for_GO[k]
 
-            for g in gene_ids:
-                gID += g+"/"
+        gene_not_in_category_but_in_sample = mapped_query_ids - gene_in_category
+        gene_not_in_catgory_but_in_genome = gene_GO_count[k] - gene_in_category
+        bg_gene_GO_ids = gene_GO_count[k]
+        bg_in_genome = bg_gene_count - mapped_query_ids - (gene_in_category + gene_not_in_catgory_but_in_genome) \
+            + gene_in_category
+        gene_ids = get_gene_ids_from_user[k]
+        gID = ""
 
-            gID = gID.rsplit("/", 1)[0]
-            pvalue = stats.hypergeom.sf(
-                gene_in_category - 1, bg_gene_count, gene_GO_count[k], mapped_query_ids)
+        for g in gene_ids:
+            gID += g+"/"
 
-            if gene_in_category > 0:
-                pvalues.append(pvalue)
+        gID = gID.rsplit("/", 1)[0]
+        pvalue = stats.hypergeom.sf(
+            gene_in_category - 1, bg_gene_count, gene_GO_count[k], mapped_query_ids)
 
-                enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], KOdescription[k][2],
-                                        f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, len(gene_ids), gID])
+        if gene_in_category > 0:
+            pvalues.append(pvalue)
 
-        fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
+            enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], KOdescription[k][2],
+                                    f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, len(gene_ids), gID])
+    
+    fdr = list(fdr_calc(pvalues))
 
-        a = [i for i in fdr if i <= 0.05]
-
-        end = pd.DataFrame(enrichment_result)
-        end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
-        end.insert(7, 'FDR', fdr)
-    except Exception:
-        log.warning("No go enrichment found")
+    a = [i for i in fdr if i <= 0.05]
+    end = pd.DataFrame(enrichment_result)
+    end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
+    
+    end.insert(7, 'FDR', fdr)
 
     return end
 

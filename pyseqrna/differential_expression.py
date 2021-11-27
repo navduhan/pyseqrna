@@ -21,7 +21,7 @@ to_dataframe = robjects.r('function(x) data.frame(x)')
 
 numpy2ri.activate()
 
-def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene', subset=True, lib=None):
+def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene', subset=False, lib=None):
     """[summary]
 
     Args:
@@ -364,7 +364,7 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         plt.yticks(fontsize=15)
         plt.xlabel("Number of Genes", fontsize=14)
         plt.ylabel("Comparisons", fontsize=14)
-        plt.legend(['Up-regulated', 'Down-regulated'], bbox_to_anchor=(1.3, 1.5), loc='center', fontsize=12)
+        plt.legend(['Up-regulated', 'Down-regulated'], bbox_to_anchor=(0.4, 1.2),ncol = 2, loc='center', fontsize=12)
 
 
         ax.spines['top'].set_visible(False)

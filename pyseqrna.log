@@ -1,51 +1,9 @@
-[13:06:01]  __main__ :: INFO : Analysis started at Wed Nov 24 13:06:01 2021
-[13:06:01]  __main__ :: INFO : Starting with read quality check
-[13:06:01]  __main__ :: INFO : Read trimming started with trim_galore
-[13:06:02]  __main__ :: INFO : Trimming completed for job 36731
-[13:06:03]  __main__ :: INFO : Trimming completed for job 36732
-[13:06:04]  __main__ :: INFO : Trimming completed for job 36733
-[13:06:04]  __main__ :: INFO : Trimming completed for job 36734
-[13:06:04]  __main__ :: INFO : Trimming completed for job 36735
-[13:06:04]  __main__ :: INFO : Trimming completed for job 36736
-[13:06:05]  __main__ :: INFO : Trimming completed for job 36737
-[13:06:05]  __main__ :: INFO : Trimming completed for job 36738
-[13:06:05]  __main__ :: INFO : Trimming completed for job 36739
-[13:06:05]  __main__ :: INFO : Trimming completed for job 36740
-[13:06:05]  __main__ :: INFO : Trimming completed for job 36741
-[13:06:06]  __main__ :: INFO : Trimming completed for job 36742
-[13:06:07]  __main__ :: INFO : Trimming completed for job 36743
-[13:06:08]  __main__ :: INFO : Trimming completed for job 36744
-[13:06:08]  __main__ :: INFO : Trimming completed for job 36745
-[13:06:08]  __main__ :: INFO : Trimming completed for job 36746
-[13:06:08]  __main__ :: INFO : Trimming completed for job 36747
-[13:06:09]  __main__ :: INFO : Trimming completed for job 36748
-[13:06:09]  __main__ :: INFO : Trimming completed for job 36749
-[13:06:09]  __main__ :: INFO : Trimming completed for job 36750
-[13:06:09]  __main__ :: INFO : Trimming completed for job 36751
-[13:06:09]  __main__ :: INFO : Trimming completed for job 36752
-[13:06:10]  __main__ :: INFO : Trimming completed for job 36753
-[13:06:10]  __main__ :: INFO : Trimming completed for job 36754
-[13:06:10]  __main__ :: INFO : Trimming completed for job 36755
-[13:06:10]  __main__ :: INFO : Trimming completed for job 36756
-[13:06:10]  __main__ :: INFO : Read trimming completed succesfully
-[13:06:10]  __main__ :: INFO : Starting Alignment process
-[13:06:10]  __main__ :: INFO : Genome indexing started
-lity_trimming :: INFO : Job successfully submited for HL0.5 with 36743
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL0.5 with 36744
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL6 with 36745
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL6 with 36746
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL12 with 36747
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL12 with 36748
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL24 with 36749
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL24 with 36750
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL48 with 36751
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL48 with 36752
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL72 with 36753
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for HL72 with 36754
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for R14 with 36755
-[13:06:01]  quality_trimming :: INFO : Job successfully submited for R14 with 36756
-[13:06:10]  pyseqrna_utils :: INFO : Config generated succesfully from /home/naveen/Documents/Phd_work/ngs_data/pyseqrna/pyseqrna/param/STAR.ini
-[13:06:10]  aligners :: INFO : Using default config file STAR.ini
-[13:06:10]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Downloads/arabidopsis/case1_results/star_index
-[13:06:10]  aligners :: INFO : Arabidopsis_thaliana.TAIR10.dna.toplevel.fa copied successfully in star_index
-[13:06:10]  aligners :: INFO : Job successfully submited for /home/naveen/Downloads/arabidopsis/case1_results/star_index/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa with 36757 for indexing
+[11:41:20]  <ipython-input-2-09f797b7f757> :: INFO : Analysis started
+[11:41:21]  pyseqrna_utils :: INFO : Reading input samples File 
+[11:41:21]  pyseqrna_utils :: INFO : Input file /home/naveen/Downloads/arabidopsis/input_sample.txt read succesfully
+[11:41:21]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt
+[11:41:21]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt
+[10:54:23]  pyseqrna_utils :: INFO : Reading input samples File 
+[10:54:23]  pyseqrna_utils :: INFO : Input file /home/naveen/Downloads/arabidopsis/input_sample.txt read succesfully
+[10:54:23]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt
+[10:54:23]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt
