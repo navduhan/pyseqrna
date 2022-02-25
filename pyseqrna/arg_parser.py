@@ -29,7 +29,7 @@ mandatory.add_argument(
     "feature_file", type=str,
     help="Path to the GTF/GFF file ")
 
-parser.add_argument("--version", action="store_true", default=False, dest="versioninfo", help= "Show version information and exit")
+parser.add_argument("--version", action="version", version= 'pySeqRNA (version {})'.format(ver), help= "Show version information and exit")
 internal = parser.add_argument_group("Internal arguments")
 
 internal.add_argument( "--outdir",  default='pySeqRNA_results', 

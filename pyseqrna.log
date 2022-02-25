@@ -1,9 +1,0 @@
-[11:41:20]  <ipython-input-2-09f797b7f757> :: INFO : Analysis started
-[11:41:21]  pyseqrna_utils :: INFO : Reading input samples File 
-[11:41:21]  pyseqrna_utils :: INFO : Input file /home/naveen/Downloads/arabidopsis/input_sample.txt read succesfully
-[11:41:21]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt
-[11:41:21]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt
-[10:54:23]  pyseqrna_utils :: INFO : Reading input samples File 
-[10:54:23]  pyseqrna_utils :: INFO : Input file /home/naveen/Downloads/arabidopsis/input_sample.txt read succesfully
-[10:54:23]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt
-[10:54:23]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Downloads/arabidopsis/input_sample.txt

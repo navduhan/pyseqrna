@@ -14,6 +14,7 @@ setuptools.setup(
                     'pyseqrna = pyseqrna.__main__:main',
             ]
     },
+    install_requires=[line.rstrip() for line in open("requirements.txt", "rt")],
 
  classifiers=[
         "Programming Language :: Python :: 3",
@@ -28,7 +29,10 @@ setuptools.setup(
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7'
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9'
     ],
     package_data={'': ['param/*.ini']},
+    python_require='>=3.6'
 )

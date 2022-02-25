@@ -19,6 +19,7 @@ from pyseqrna import pyseqrna_plots as pp
 from pyseqrna import ribosomal as ribo
 from pyseqrna import multimapped_groups as mmg
 from pyseqrna import gene_ontology as go
+import pyseqrna.version
 import pandas as pd
 import numpy as np
 import dill
@@ -28,13 +29,17 @@ from waiting import wait
 
 log = pu.PyseqrnaLogger(mode="w", log="analysis")
 
-startTime= time.ctime()
 
-log.info("Analysis started at %s", startTime)
 
 def main():
+    
     # Get all the options from the user
-    options, unknownargs = arg_parser.parser.parse_known_args()   
+    options, unknownargs = arg_parser.parser.parse_known_args()  
+
+    
+    startTime= time.ctime()
+
+    log.info("Analysis started at %s", startTime)
     # Create directory for results
     outdir = pu.make_directory(options.outdir)
     # Read input samples from file
