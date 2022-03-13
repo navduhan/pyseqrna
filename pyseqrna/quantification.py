@@ -139,7 +139,7 @@ def htseqCount(configFile=None,bamDict=None, gff=None,mem=8,cpu=8,tasks=1, slurm
 
     else:
 
-        stream = pkg_resources.resource_stream('pySeqRNA', "param/htseq.ini")
+        stream = pkg_resources.resource_stream('pyseqrna', "param/htseq.ini")
         config = pu.parse_config_file(stream.name)
         log.info("Using default config file htseq.ini")
 

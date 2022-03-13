@@ -36,3 +36,4 @@ tzlocal==4.1
 urllib3==1.26.8
 waiting==1.4.1
 zipp==3.7.0
+wheel

@@ -6,5 +6,5 @@ pySeqRNA_results*
 
 .DS_Store
 .pyseqrna
-
+.venv
 mtry.ipynb

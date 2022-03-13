@@ -278,7 +278,7 @@ def trimmomaticRun(sampleDict=None, configFile=None, slurm=False, mem=10, cpu=8,
 
             out = os.path.join(output, value[0]+".fastq.gz")
 
-            inputPair = pu.get_basename(inputFile1)
+            inputPair = pu.get_basename(inputFile)
 
     
 
