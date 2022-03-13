@@ -30,7 +30,7 @@ def getNreads(file, rdict, sp):
     
     rdict[sp] = int(result)
     # result = subprocess.check_output(f"gzcat {file} | echo $((`wc -l`/4))", shell=True).decode('utf-8').rstrip()
-    # logger.info(f"{result} input reads in {file}")
+    log.info(f"{result} input reads in {sp}")
     
     return rdict
 
@@ -42,6 +42,7 @@ def getAligned_reads(file, rdict, sp):
         if read.is_unmapped == False and read.is_secondary==False:
             aligned += 1
     rdict[sp] = int(aligned)
+    log.info(f"{aligned} input reads aligned {sp}")
     return rdict
 
 
@@ -56,6 +57,7 @@ def getUniquely_mapped(file, rdict, sp):
         except:
             pass
     rdict[sp] = int(uniq_mapped)
+    log.info(f"{uniq_mapped} input reads uniquely mapped in {sp}")
     return rdict
     
 
@@ -70,6 +72,7 @@ def getMulti_mapped(file,rdict, sp):
         except:
             pass
     rdict[sp] = int(multi_mapped)
+    log.info(f"{multi_mapped} input reads multi mapped in {sp}")
     return rdict
     
 
@@ -118,17 +121,22 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-        p=multiprocessing.Process(target= pysam.sort, args=(bamDict[bf][2], "-o", bamDict[bf][2].split(".bam")[0] + "_sorted.bam"))
-        
-        processes.append(p)
-        p.start()
+        file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
+        if file.endswith !='_sorted.bam':
             
-        for process in processes:
-            process.join()
+            p=multiprocessing.Process(target= pysam.sort, args=(bamDict[bf][2], "-o", bamDict[bf][2].split(".bam")[0] + "_sorted.bam"))
+            
+            processes.append(p)
+            p.start()
+                
+            for process in processes:
+                process.join()
+        
+
         # pysam.sort(bamDict[bf][2], "-o", bamDict[bf][2].split(".bam")[0] + "_sorted.bam")
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
-        print(file)
+        # print(file)
         p=multiprocessing.Process(target= pysam.index, args=(file))
         
         processes.append(p)

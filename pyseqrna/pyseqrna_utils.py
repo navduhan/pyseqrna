@@ -225,7 +225,7 @@ def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", command=
 
         sbatch_command = "sbatch -J {} -o {}.out -e {}.err -t {}:00:00  --mem={}000 --cpus-per-task={} --ntasks={} --wrap='{}' {}".format(
             job_name, sout, serror, time, mem, cpu, tasks,  command, dep)
-
+        
         sbatch_response = subprocess.getoutput(sbatch_command)
 
         job_id = sbatch_response.split(' ')[-1].strip()

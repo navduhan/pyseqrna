@@ -67,10 +67,10 @@ internal.add_argument('--heatmap', dest='heatmap',action='store', default=True,
 internal.add_argument('--heatmap-type', dest='heatmaptype', default='degs', choices=['counts', 'degs'],
     help="""Create heatmap based on selected choice \n[default: logFold-based]""" )
 
-internal.add_argument('--ma-plot', dest='maplot',action='store_true', default=True, 
+internal.add_argument('--ma-plot', dest='maplot',action='store_true', default=False, 
     help="Create MA plot\n[default:True]")
 
-internal.add_argument('--volcano-plot', dest='volcanoplot',action='store_true', default=True, 
+internal.add_argument('--volcano-plot', dest='volcanoplot',action='store_true', default=False, 
     help="Create Volcano plot\n[default:True]")
 
 internal.add_argument('--venn-plot',  dest='vennplot', default=False, action='store_true', 
@@ -112,6 +112,6 @@ compute.add_argument('--slurm', dest='slurm', action='store_true', default=False
 
 compute.add_argument('--threads', dest='threads', action='store', default= "80% of available CPU", help="Number of processors/threads to use\n[default:80%% of available CPU]")
 
-compute.add_argument('--memory', dest='memory', action='store', default=None, help="Max memory to use (in GB)\n[default:None]")
+compute.add_argument('--memory', dest='memory', action='store', default=16, help="Max memory to use (in GB)\n[default:16]")
 
 
