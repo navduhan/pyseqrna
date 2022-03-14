@@ -34,5 +34,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9'
     ],
     package_data={'': ['param/*.ini']},
-    python_require='>=3.7'
+    python_requires='>=3.7'
 )
