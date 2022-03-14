@@ -1,0 +1,24 @@
+name: pyseqrna_0.0.1
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - r
+
+dependencies:
+  - r-base=4.1.2
+  - r-essentials
+  - flexbar
+  - trimmomatic
+  - trim-galore
+  - star
+  - hisat2
+  - bowtie2
+  - subread
+  - htseq
+  - samtools
+  - bamtools
+  - pip
+  - sortmerna=4.2.0
+  - bioconductor-deseq2
+  - bioconductor-edger
