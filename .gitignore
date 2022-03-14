@@ -8,3 +8,6 @@ pySeqRNA_results*
 .pyseqrna
 .venv
 mtry.ipynb
+build
+pySeqRNA.egg-info
+.Rprofile
