@@ -42,6 +42,7 @@ def main():
         
     startTime= time.ctime()
 
+
     log.info("Analysis started at %s", startTime)
     # Create directory for results
     outdir = pu.make_directory(options.outdir)
@@ -323,10 +324,8 @@ def main():
                 k = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=outdir)
                 x.savefig(outdir+"/Venn_"+i+".png")
         
-    endTime=time.ctime()
+    endTime = time.ctime()
     log.info("Analysis Complted at %s", endTime)
-    diff_time = endTime -startTime
-    log.info("Analysis took %s time", diff_time)
     log.info("Beer Time!")
         
         
