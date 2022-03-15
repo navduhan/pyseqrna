@@ -41,7 +41,9 @@ internal.add_argument("--fastqc", action="store_true", default=False, dest="fast
 
 internal.add_argument("--fastqc-trim", action="store_true", default=False, dest="fastqc2", help= "Enable quality check on trimmed reads with fastqc\n[default:False]")
 
-internal.add_argument('--ribosomal', dest='ribosomal', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
+internal.add_argument('--ribosomal',  dest='ribosomal', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
+
+internal.add_argument('--rnadb',required='--ribosomal' in sys.argv, dest='rnadb', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
 
 internal.add_argument('--multimapped-groups', dest='mmgg', action='store_true', default=False, help="Enable multimapped gene group quantification \n[default:True]")
 
