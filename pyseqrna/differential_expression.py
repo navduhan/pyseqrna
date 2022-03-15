@@ -360,10 +360,10 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         plt.barh(labels,updata, color='mediumseagreen')
         plt.barh(labels,downdata, left=updata, color='salmon')
 
-        plt.xticks(fontsize=15)
-        plt.yticks(fontsize=15)
-        plt.xlabel("Number of Genes", fontsize=14)
-        plt.ylabel("Comparisons", fontsize=14)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.xlabel("Number of Genes", fontsize=10)
+        plt.ylabel("Comparisons", fontsize=10)
         plt.legend(['Up-regulated', 'Down-regulated'], bbox_to_anchor=(0.4, 1.2),ncol = 2, loc='center', fontsize=12)
 
 

@@ -1,0 +1,1243 @@
+[15:21:26]  <ipython-input-2-09f797b7f757> :: INFO : Analysis started
+[15:21:31]  pyseqrna_utils :: INFO : Reading input samples File 
+[15:21:31]  pyseqrna_utils :: INFO : Input file /home/naveen/Documents/Phd_work/pySeqRNA/pySeqRNA/example/input_Sample.txt read succesfully
+[15:21:31]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Documents/Phd_work/pySeqRNA/pySeqRNA/example/input_Sample.txt
+[15:21:31]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Documents/Phd_work/pySeqRNA/pySeqRNA/example/input_Sample.txt
+[15:25:33]  pyseqrna_utils :: ERROR : Please provide a valid input file
+[15:25:33]  pyseqrna_utils :: INFO : Input file /home/naveen/Documents/Projetcs/barley_mali/morex_assembly/targets_pyseqrna.txt read succesfully
+[15:25:57]  pyseqrna_utils :: INFO : Reading input samples File 
+[15:25:57]  pyseqrna_utils :: INFO : Input file /home/naveen/Documents/Projects/barley_mali/morex_assembly/targets_pyseqrna.txt read succesfully
+[15:25:57]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Documents/Projects/barley_mali/morex_assembly/targets_pyseqrna.txt
+[15:25:57]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Documents/Projects/barley_mali/morex_assembly/targets_pyseqrna.txt
+[15:35:17]  pyseqrna_utils :: INFO : Reading input samples File 
+[15:35:17]  pyseqrna_utils :: INFO : Input file /home/naveen/Documents/Projects/barley_mali/morex_assembly/targets_pyseqrna.txt read succesfully
+[15:35:17]  pyseqrna_utils :: INFO : Combination created succesfully from /home/naveen/Documents/Projects/barley_mali/morex_assembly/targets_pyseqrna.txt
+[15:35:17]  pyseqrna_utils :: INFO : targets dataframe for differenatial created succesfully from /home/naveen/Documents/Projects/barley_mali/morex_assembly/targets_pyseqrna.txt
+[15:35:32]  pyseqrna_stats :: INFO : 3931466 input reads in GA1
+[15:35:33]  pyseqrna_stats :: INFO : 4470312 input reads in GA2
+[15:35:33]  pyseqrna_stats :: INFO : 3992011 input reads in GA3
+[15:35:34]  pyseqrna_stats :: INFO : 3508802 input reads in GB1
+[15:35:34]  pyseqrna_stats :: INFO : 4380051 input reads in GB2
+[15:35:34]  pyseqrna_stats :: INFO : 3183231 input reads in GB3
+[15:35:35]  pyseqrna_stats :: INFO : 3698911 input reads in GC1
+[15:35:35]  pyseqrna_stats :: INFO : 5379082 input reads in GC2
+[15:35:35]  pyseqrna_stats :: INFO : 3187384 input reads in GC3
+[15:35:36]  pyseqrna_stats :: INFO : 3850779 input reads in GD1
+[15:35:36]  pyseqrna_stats :: INFO : 4574353 input reads in GD2
+[15:35:37]  pyseqrna_stats :: INFO : 3828052 input reads in GD3
+[15:35:37]  pyseqrna_stats :: INFO : 4073016 input reads in GE1
+[15:35:37]  pyseqrna_stats :: INFO : 4892135 input reads in GE2
+[15:35:38]  pyseqrna_stats :: INFO : 4372997 input reads in GE3
+[15:35:38]  pyseqrna_stats :: INFO : 3924310 input reads in GF1
+[15:35:38]  pyseqrna_stats :: INFO : 4162178 input reads in GF2
+[15:35:39]  pyseqrna_stats :: INFO : 3960830 input reads in GF3
+[15:35:39]  pyseqrna_stats :: INFO : 4012635 input reads in GG1
+[15:35:40]  pyseqrna_stats :: INFO : 3911453 input reads in GG2
+[15:35:40]  pyseqrna_stats :: INFO : 5807773 input reads in GG3
+[15:35:40]  pyseqrna_stats :: INFO : 4468122 input reads in GH1
+[15:35:41]  pyseqrna_stats :: INFO : 4479294 input reads in GH2
+[15:35:41]  pyseqrna_stats :: INFO : 3455454 input reads in GH3
+[15:35:42]  pyseqrna_stats :: INFO : 4055875 input reads in GI1
+[15:35:42]  pyseqrna_stats :: INFO : 5871999 input reads in GI2
+[15:35:42]  pyseqrna_stats :: INFO : 3423930 input reads in GI3
+[15:35:43]  pyseqrna_stats :: INFO : 3696839 input reads in GJ1
+[15:35:43]  pyseqrna_stats :: INFO : 3545637 input reads in GJ2
+[15:35:43]  pyseqrna_stats :: INFO : 3418915 input reads in GJ3
+[15:35:44]  pyseqrna_stats :: INFO : 4383388 input reads in GK1
+[15:35:44]  pyseqrna_stats :: INFO : 4357336 input reads in GK2
+[15:35:44]  pyseqrna_stats :: INFO : 3922937 input reads in GK3
+[15:35:45]  pyseqrna_stats :: INFO : 3576426 input reads in GL1
+[15:35:45]  pyseqrna_stats :: INFO : 3419084 input reads in GL2
+[15:35:45]  pyseqrna_stats :: INFO : 3398498 input reads in GL3
+[15:35:46]  pyseqrna_stats :: INFO : 3744072 input reads in GM1
+[15:35:46]  pyseqrna_stats :: INFO : 3975733 input reads in GM2
+[15:35:46]  pyseqrna_stats :: INFO : 3101763 input reads in GM3
+[15:35:47]  pyseqrna_stats :: INFO : 4798180 input reads in GN1
+[15:35:47]  pyseqrna_stats :: INFO : 4123558 input reads in GN2
+[15:35:48]  pyseqrna_stats :: INFO : 3942219 input reads in GN3
+[15:35:48]  pyseqrna_stats :: INFO : 4097234 input reads in GO1
+[15:35:48]  pyseqrna_stats :: INFO : 4601809 input reads in GO2
+[15:35:49]  pyseqrna_stats :: INFO : 3357421 input reads in GO3
+[15:35:49]  pyseqrna_stats :: INFO : 5071449 input reads in GP1
+[15:35:50]  pyseqrna_stats :: INFO : 4861904 input reads in GP2
+[15:35:50]  pyseqrna_stats :: INFO : 3265051 input reads in GP3
+[15:35:50]  pyseqrna_stats :: INFO : 3821572 input reads in GQ1
+[15:35:51]  pyseqrna_stats :: INFO : 3811979 input reads in GQ2
+[15:35:51]  pyseqrna_stats :: INFO : 4927479 input reads in GQ3
+[15:35:51]  pyseqrna_stats :: INFO : 3527122 input reads in GR1
+[15:35:52]  pyseqrna_stats :: INFO : 4790520 input reads in GR2
+[15:35:52]  pyseqrna_stats :: INFO : 3674520 input reads in GR3
+[15:35:52]  pyseqrna_stats :: INFO : 4011688 input reads in GS1
+[15:35:53]  pyseqrna_stats :: INFO : 3881753 input reads in GS2
+[15:35:53]  pyseqrna_stats :: INFO : 3323406 input reads in GS3
+[15:35:54]  pyseqrna_stats :: INFO : 4081701 input reads in GT1
+[15:35:54]  pyseqrna_stats :: INFO : 3643166 input reads in GT2
+[15:35:54]  pyseqrna_stats :: INFO : 3868058 input reads in GT3
+[15:35:55]  pyseqrna_stats :: INFO : 4329255 input reads in GU1
+[15:35:55]  pyseqrna_stats :: INFO : 4330352 input reads in GU2
+[15:35:55]  pyseqrna_stats :: INFO : 3650575 input reads in GU3
+[15:35:56]  pyseqrna_stats :: INFO : 5246804 input reads in GV1
+[15:35:56]  pyseqrna_stats :: INFO : 4271587 input reads in GV2
+[15:35:57]  pyseqrna_stats :: INFO : 3220561 input reads in GV3
+[15:35:57]  pyseqrna_stats :: INFO : 4176063 input reads in GW1
+[15:35:57]  pyseqrna_stats :: INFO : 4452014 input reads in GW2
+[15:35:58]  pyseqrna_stats :: INFO : 3479006 input reads in GW3
+[15:35:58]  pyseqrna_stats :: INFO : 4835817 input reads in GX1
+[15:35:59]  pyseqrna_stats :: INFO : 4473538 input reads in GX2
+[15:35:59]  pyseqrna_stats :: INFO : 3424864 input reads in GX3
+[15:35:59]  pyseqrna_stats :: INFO : 5640010 input reads in OA1
+[15:36:00]  pyseqrna_stats :: INFO : 4389291 input reads in OA2
+[15:36:00]  pyseqrna_stats :: INFO : 4311970 input reads in OA3
+[15:36:00]  pyseqrna_stats :: INFO : 3424371 input reads in OB1
+[15:36:01]  pyseqrna_stats :: INFO : 4075387 input reads in OB2
+[15:36:01]  pyseqrna_stats :: INFO : 2956924 input reads in OB3
+[15:36:02]  pyseqrna_stats :: INFO : 3623629 input reads in OC1
+[15:36:02]  pyseqrna_stats :: INFO : 3715275 input reads in OC2
+[15:36:02]  pyseqrna_stats :: INFO : 4278349 input reads in OC3
+[15:36:03]  pyseqrna_stats :: INFO : 3655491 input reads in OD1
+[15:36:03]  pyseqrna_stats :: INFO : 4269599 input reads in OD2
+[15:36:04]  pyseqrna_stats :: INFO : 5058471 input reads in OD3
+[15:36:04]  pyseqrna_stats :: INFO : 2951876 input reads in OE1
+[15:36:04]  pyseqrna_stats :: INFO : 4091045 input reads in OE2
+[15:36:05]  pyseqrna_stats :: INFO : 3382691 input reads in OE3
+[15:36:05]  pyseqrna_stats :: INFO : 4489216 input reads in OF1
+[15:36:06]  pyseqrna_stats :: INFO : 4144691 input reads in OF2
+[15:36:06]  pyseqrna_stats :: INFO : 2850121 input reads in OF3
+[15:36:06]  pyseqrna_stats :: INFO : 4571643 input reads in OG1
+[15:36:07]  pyseqrna_stats :: INFO : 4122288 input reads in OG2
+[15:36:07]  pyseqrna_stats :: INFO : 3109298 input reads in OG3
+[15:36:07]  pyseqrna_stats :: INFO : 6301057 input reads in OH1
+[15:36:08]  pyseqrna_stats :: INFO : 4607711 input reads in OH2
+[15:36:08]  pyseqrna_stats :: INFO : 3329332 input reads in OH3
+[15:36:08]  pyseqrna_stats :: INFO : 4760442 input reads in OI1
+[15:36:09]  pyseqrna_stats :: INFO : 5487219 input reads in OI2
+[15:36:09]  pyseqrna_stats :: INFO : 4125883 input reads in OI3
+[15:36:10]  pyseqrna_stats :: INFO : 3773070 input reads in OJ1
+[15:36:10]  pyseqrna_stats :: INFO : 4059060 input reads in OJ2
+[15:36:10]  pyseqrna_stats :: INFO : 4303695 input reads in OJ3
+[15:36:11]  pyseqrna_stats :: INFO : 3552052 input reads in OK1
+[15:36:11]  pyseqrna_stats :: INFO : 5076311 input reads in OK2
+[15:36:12]  pyseqrna_stats :: INFO : 3508866 input reads in OK3
+[15:36:12]  pyseqrna_stats :: INFO : 4151740 input reads in OL1
+[15:36:12]  pyseqrna_stats :: INFO : 4143506 input reads in OL2
+[15:36:13]  pyseqrna_stats :: INFO : 4975208 input reads in OL3
+[15:36:13]  pyseqrna_stats :: INFO : 2818970 input reads in OM1
+[15:36:13]  pyseqrna_stats :: INFO : 3983604 input reads in OM2
+[15:36:14]  pyseqrna_stats :: INFO : 3234705 input reads in OM3
+[15:36:14]  pyseqrna_stats :: INFO : 4418409 input reads in ON1
+[15:36:14]  pyseqrna_stats :: INFO : 4616109 input reads in ON2
+[15:36:15]  pyseqrna_stats :: INFO : 3419672 input reads in ON3
+[15:36:15]  pyseqrna_stats :: INFO : 3928459 input reads in OO1
+[15:36:16]  pyseqrna_stats :: INFO : 3682762 input reads in OO2
+[15:36:16]  pyseqrna_stats :: INFO : 3986051 input reads in OO3
+[15:36:16]  pyseqrna_stats :: INFO : 5648095 input reads in OP1
+[15:36:17]  pyseqrna_stats :: INFO : 4919063 input reads in OP2
+[15:36:17]  pyseqrna_stats :: INFO : 5021536 input reads in OP3
+[15:36:17]  pyseqrna_stats :: INFO : 3914270 input reads in OQ1
+[15:36:18]  pyseqrna_stats :: INFO : 5077562 input reads in OQ2
+[15:36:18]  pyseqrna_stats :: INFO : 4296269 input reads in OQ3
+[15:36:19]  pyseqrna_stats :: INFO : 3314311 input reads in OR1
+[15:36:19]  pyseqrna_stats :: INFO : 4649632 input reads in OR2
+[15:36:19]  pyseqrna_stats :: INFO : 4779811 input reads in OR3
+[15:36:20]  pyseqrna_stats :: INFO : 4449030 input reads in OS1
+[15:36:20]  pyseqrna_stats :: INFO : 4643493 input reads in OS2
+[15:36:20]  pyseqrna_stats :: INFO : 4486168 input reads in OS3
+[15:36:21]  pyseqrna_stats :: INFO : 4424494 input reads in OT1
+[15:36:21]  pyseqrna_stats :: INFO : 4274247 input reads in OT2
+[15:36:22]  pyseqrna_stats :: INFO : 2711363 input reads in OT3
+[15:36:22]  pyseqrna_stats :: INFO : 3302688 input reads in OU1
+[15:36:22]  pyseqrna_stats :: INFO : 4680098 input reads in OU2
+[15:36:23]  pyseqrna_stats :: INFO : 3402346 input reads in OU3
+[15:36:23]  pyseqrna_stats :: INFO : 4798184 input reads in OV1
+[15:36:23]  pyseqrna_stats :: INFO : 4997513 input reads in OV2
+[15:36:24]  pyseqrna_stats :: INFO : 4563424 input reads in OV3
+[15:36:24]  pyseqrna_stats :: INFO : 3223988 input reads in OW1
+[15:36:25]  pyseqrna_stats :: INFO : 4716593 input reads in OW2
+[15:36:25]  pyseqrna_stats :: INFO : 4181434 input reads in OW3
+[15:36:25]  pyseqrna_stats :: INFO : 3677886 input reads in OX1
+[15:36:26]  pyseqrna_stats :: INFO : 4613937 input reads in OX2
+[15:36:26]  pyseqrna_stats :: INFO : 4552631 input reads in OX3
+[15:36:34]  pyseqrna_stats :: ERROR : Not able to generate align stats
+[15:42:54]  pyseqrna_stats :: INFO : 3931466 input reads in GA1
+[15:42:54]  pyseqrna_stats :: INFO : 4470312 input reads in GA2
+[15:42:54]  pyseqrna_stats :: INFO : 3992011 input reads in GA3
+[15:42:55]  pyseqrna_stats :: INFO : 3508802 input reads in GB1
+[15:42:55]  pyseqrna_stats :: INFO : 4380051 input reads in GB2
+[15:42:55]  pyseqrna_stats :: INFO : 3183231 input reads in GB3
+[15:42:55]  pyseqrna_stats :: INFO : 3698911 input reads in GC1
+[15:42:56]  pyseqrna_stats :: INFO : 5379082 input reads in GC2
+[15:42:56]  pyseqrna_stats :: INFO : 3187384 input reads in GC3
+[15:42:56]  pyseqrna_stats :: INFO : 3850779 input reads in GD1
+[15:42:56]  pyseqrna_stats :: INFO : 4574353 input reads in GD2
+[15:42:56]  pyseqrna_stats :: INFO : 3828052 input reads in GD3
+[15:42:57]  pyseqrna_stats :: INFO : 4073016 input reads in GE1
+[15:42:57]  pyseqrna_stats :: INFO : 4892135 input reads in GE2
+[15:42:57]  pyseqrna_stats :: INFO : 4372997 input reads in GE3
+[15:42:57]  pyseqrna_stats :: INFO : 3924310 input reads in GF1
+[15:42:58]  pyseqrna_stats :: INFO : 4162178 input reads in GF2
+[15:42:58]  pyseqrna_stats :: INFO : 3960830 input reads in GF3
+[15:42:58]  pyseqrna_stats :: INFO : 4012635 input reads in GG1
+[15:42:58]  pyseqrna_stats :: INFO : 3911453 input reads in GG2
+[15:42:58]  pyseqrna_stats :: INFO : 5807773 input reads in GG3
+[15:42:59]  pyseqrna_stats :: INFO : 4468122 input reads in GH1
+[15:42:59]  pyseqrna_stats :: INFO : 4479294 input reads in GH2
+[15:42:59]  pyseqrna_stats :: INFO : 3455454 input reads in GH3
+[15:42:59]  pyseqrna_stats :: INFO : 4055875 input reads in GI1
+[15:42:59]  pyseqrna_stats :: INFO : 5871999 input reads in GI2
+[15:43:00]  pyseqrna_stats :: INFO : 3423930 input reads in GI3
+[15:43:00]  pyseqrna_stats :: INFO : 3696839 input reads in GJ1
+[15:43:00]  pyseqrna_stats :: INFO : 3545637 input reads in GJ2
+[15:43:00]  pyseqrna_stats :: INFO : 3418915 input reads in GJ3
+[15:43:00]  pyseqrna_stats :: INFO : 4383388 input reads in GK1
+[15:43:01]  pyseqrna_stats :: INFO : 4357336 input reads in GK2
+[15:43:01]  pyseqrna_stats :: INFO : 3922937 input reads in GK3
+[15:43:01]  pyseqrna_stats :: INFO : 3576426 input reads in GL1
+[15:43:01]  pyseqrna_stats :: INFO : 3419084 input reads in GL2
+[15:43:01]  pyseqrna_stats :: INFO : 3398498 input reads in GL3
+[15:43:02]  pyseqrna_stats :: INFO : 3744072 input reads in GM1
+[15:43:02]  pyseqrna_stats :: INFO : 3975733 input reads in GM2
+[15:43:02]  pyseqrna_stats :: INFO : 3101763 input reads in GM3
+[15:43:02]  pyseqrna_stats :: INFO : 4798180 input reads in GN1
+[15:43:02]  pyseqrna_stats :: INFO : 4123558 input reads in GN2
+[15:43:03]  pyseqrna_stats :: INFO : 3942219 input reads in GN3
+[15:43:03]  pyseqrna_stats :: INFO : 4097234 input reads in GO1
+[15:43:03]  pyseqrna_stats :: INFO : 4601809 input reads in GO2
+[15:43:03]  pyseqrna_stats :: INFO : 3357421 input reads in GO3
+[15:43:04]  pyseqrna_stats :: INFO : 5071449 input reads in GP1
+[15:43:04]  pyseqrna_stats :: INFO : 4861904 input reads in GP2
+[15:43:04]  pyseqrna_stats :: INFO : 3265051 input reads in GP3
+[15:43:04]  pyseqrna_stats :: INFO : 3821572 input reads in GQ1
+[15:43:05]  pyseqrna_stats :: INFO : 3811979 input reads in GQ2
+[15:43:05]  pyseqrna_stats :: INFO : 4927479 input reads in GQ3
+[15:43:05]  pyseqrna_stats :: INFO : 3527122 input reads in GR1
+[15:43:05]  pyseqrna_stats :: INFO : 4790520 input reads in GR2
+[15:43:05]  pyseqrna_stats :: INFO : 3674520 input reads in GR3
+[15:43:06]  pyseqrna_stats :: INFO : 4011688 input reads in GS1
+[15:43:06]  pyseqrna_stats :: INFO : 3881753 input reads in GS2
+[15:43:06]  pyseqrna_stats :: INFO : 3323406 input reads in GS3
+[15:43:06]  pyseqrna_stats :: INFO : 4081701 input reads in GT1
+[15:43:06]  pyseqrna_stats :: INFO : 3643166 input reads in GT2
+[15:43:07]  pyseqrna_stats :: INFO : 3868058 input reads in GT3
+[15:43:07]  pyseqrna_stats :: INFO : 4329255 input reads in GU1
+[15:43:07]  pyseqrna_stats :: INFO : 4330352 input reads in GU2
+[15:43:07]  pyseqrna_stats :: INFO : 3650575 input reads in GU3
+[15:43:08]  pyseqrna_stats :: INFO : 5246804 input reads in GV1
+[15:43:08]  pyseqrna_stats :: INFO : 4271587 input reads in GV2
+[15:43:08]  pyseqrna_stats :: INFO : 3220561 input reads in GV3
+[15:43:08]  pyseqrna_stats :: INFO : 4176063 input reads in GW1
+[15:43:09]  pyseqrna_stats :: INFO : 4452014 input reads in GW2
+[15:43:09]  pyseqrna_stats :: INFO : 3479006 input reads in GW3
+[15:43:09]  pyseqrna_stats :: INFO : 4835817 input reads in GX1
+[15:43:09]  pyseqrna_stats :: INFO : 4473538 input reads in GX2
+[15:43:09]  pyseqrna_stats :: INFO : 3424864 input reads in GX3
+[15:43:10]  pyseqrna_stats :: INFO : 5640010 input reads in OA1
+[15:43:10]  pyseqrna_stats :: INFO : 4389291 input reads in OA2
+[15:43:10]  pyseqrna_stats :: INFO : 4311970 input reads in OA3
+[15:43:10]  pyseqrna_stats :: INFO : 3424371 input reads in OB1
+[15:43:11]  pyseqrna_stats :: INFO : 4075387 input reads in OB2
+[15:43:11]  pyseqrna_stats :: INFO : 2956924 input reads in OB3
+[15:43:11]  pyseqrna_stats :: INFO : 3623629 input reads in OC1
+[15:43:11]  pyseqrna_stats :: INFO : 3715275 input reads in OC2
+[15:43:11]  pyseqrna_stats :: INFO : 4278349 input reads in OC3
+[15:43:12]  pyseqrna_stats :: INFO : 3655491 input reads in OD1
+[15:43:12]  pyseqrna_stats :: INFO : 4269599 input reads in OD2
+[15:43:12]  pyseqrna_stats :: INFO : 5058471 input reads in OD3
+[15:43:12]  pyseqrna_stats :: INFO : 2951876 input reads in OE1
+[15:43:12]  pyseqrna_stats :: INFO : 4091045 input reads in OE2
+[15:43:13]  pyseqrna_stats :: INFO : 3382691 input reads in OE3
+[15:43:13]  pyseqrna_stats :: INFO : 4489216 input reads in OF1
+[15:43:13]  pyseqrna_stats :: INFO : 4144691 input reads in OF2
+[15:43:13]  pyseqrna_stats :: INFO : 2850121 input reads in OF3
+[15:43:13]  pyseqrna_stats :: INFO : 4571643 input reads in OG1
+[15:43:14]  pyseqrna_stats :: INFO : 4122288 input reads in OG2
+[15:43:14]  pyseqrna_stats :: INFO : 3109298 input reads in OG3
+[15:43:14]  pyseqrna_stats :: INFO : 6301057 input reads in OH1
+[15:43:14]  pyseqrna_stats :: INFO : 4607711 input reads in OH2
+[15:43:15]  pyseqrna_stats :: INFO : 3329332 input reads in OH3
+[15:43:15]  pyseqrna_stats :: INFO : 4760442 input reads in OI1
+[15:43:15]  pyseqrna_stats :: INFO : 5487219 input reads in OI2
+[15:43:15]  pyseqrna_stats :: INFO : 4125883 input reads in OI3
+[15:43:16]  pyseqrna_stats :: INFO : 3773070 input reads in OJ1
+[15:43:16]  pyseqrna_stats :: INFO : 4059060 input reads in OJ2
+[15:43:16]  pyseqrna_stats :: INFO : 4303695 input reads in OJ3
+[15:43:16]  pyseqrna_stats :: INFO : 3552052 input reads in OK1
+[15:43:16]  pyseqrna_stats :: INFO : 5076311 input reads in OK2
+[15:43:17]  pyseqrna_stats :: INFO : 3508866 input reads in OK3
+[15:43:17]  pyseqrna_stats :: INFO : 4151740 input reads in OL1
+[15:43:17]  pyseqrna_stats :: INFO : 4143506 input reads in OL2
+[15:43:17]  pyseqrna_stats :: INFO : 4975208 input reads in OL3
+[15:43:18]  pyseqrna_stats :: INFO : 2818970 input reads in OM1
+[15:43:18]  pyseqrna_stats :: INFO : 3983604 input reads in OM2
+[15:43:18]  pyseqrna_stats :: INFO : 3234705 input reads in OM3
+[15:43:18]  pyseqrna_stats :: INFO : 4418409 input reads in ON1
+[15:43:18]  pyseqrna_stats :: INFO : 4616109 input reads in ON2
+[15:43:19]  pyseqrna_stats :: INFO : 3419672 input reads in ON3
+[15:43:19]  pyseqrna_stats :: INFO : 3928459 input reads in OO1
+[15:43:19]  pyseqrna_stats :: INFO : 3682762 input reads in OO2
+[15:43:19]  pyseqrna_stats :: INFO : 3986051 input reads in OO3
+[15:43:19]  pyseqrna_stats :: INFO : 5648095 input reads in OP1
+[15:43:20]  pyseqrna_stats :: INFO : 4919063 input reads in OP2
+[15:43:20]  pyseqrna_stats :: INFO : 5021536 input reads in OP3
+[15:43:20]  pyseqrna_stats :: INFO : 3914270 input reads in OQ1
+[15:43:20]  pyseqrna_stats :: INFO : 5077562 input reads in OQ2
+[15:43:21]  pyseqrna_stats :: INFO : 4296269 input reads in OQ3
+[15:43:21]  pyseqrna_stats :: INFO : 3314311 input reads in OR1
+[15:43:21]  pyseqrna_stats :: INFO : 4649632 input reads in OR2
+[15:43:21]  pyseqrna_stats :: INFO : 4779811 input reads in OR3
+[15:43:22]  pyseqrna_stats :: INFO : 4449030 input reads in OS1
+[15:43:22]  pyseqrna_stats :: INFO : 4643493 input reads in OS2
+[15:43:22]  pyseqrna_stats :: INFO : 4486168 input reads in OS3
+[15:43:22]  pyseqrna_stats :: INFO : 4424494 input reads in OT1
+[15:43:22]  pyseqrna_stats :: INFO : 4274247 input reads in OT2
+[15:43:23]  pyseqrna_stats :: INFO : 2711363 input reads in OT3
+[15:43:23]  pyseqrna_stats :: INFO : 3302688 input reads in OU1
+[15:43:23]  pyseqrna_stats :: INFO : 4680098 input reads in OU2
+[15:43:23]  pyseqrna_stats :: INFO : 3402346 input reads in OU3
+[15:43:23]  pyseqrna_stats :: INFO : 4798184 input reads in OV1
+[15:43:24]  pyseqrna_stats :: INFO : 4997513 input reads in OV2
+[15:43:24]  pyseqrna_stats :: INFO : 4563424 input reads in OV3
+[15:43:24]  pyseqrna_stats :: INFO : 3223988 input reads in OW1
+[15:43:24]  pyseqrna_stats :: INFO : 4716593 input reads in OW2
+[15:43:25]  pyseqrna_stats :: INFO : 4181434 input reads in OW3
+[15:43:25]  pyseqrna_stats :: INFO : 3677886 input reads in OX1
+[15:43:25]  pyseqrna_stats :: INFO : 4613937 input reads in OX2
+[15:43:25]  pyseqrna_stats :: INFO : 4552631 input reads in OX3
+[15:43:26]  pyseqrna_stats :: INFO : 3926748 input reads in GA1
+[15:43:26]  pyseqrna_stats :: INFO : 4468519 input reads in GA2
+[15:43:27]  pyseqrna_stats :: INFO : 3991404 input reads in GA3
+[15:43:27]  pyseqrna_stats :: INFO : 3507899 input reads in GB1
+[15:43:27]  pyseqrna_stats :: INFO : 4378775 input reads in GB2
+[15:43:28]  pyseqrna_stats :: INFO : 3182610 input reads in GB3
+[15:43:28]  pyseqrna_stats :: INFO : 3694690 input reads in GC1
+[15:43:29]  pyseqrna_stats :: INFO : 5377443 input reads in GC2
+[15:43:29]  pyseqrna_stats :: INFO : 3186703 input reads in GC3
+[15:43:29]  pyseqrna_stats :: INFO : 3848977 input reads in GD1
+[15:43:30]  pyseqrna_stats :: INFO : 4570428 input reads in GD2
+[15:43:30]  pyseqrna_stats :: INFO : 3827235 input reads in GD3
+[15:43:30]  pyseqrna_stats :: INFO : 4071095 input reads in GE1
+[15:43:31]  pyseqrna_stats :: INFO : 4889779 input reads in GE2
+[15:43:31]  pyseqrna_stats :: INFO : 4371612 input reads in GE3
+[15:43:31]  pyseqrna_stats :: INFO : 3923590 input reads in GF1
+[15:43:32]  pyseqrna_stats :: INFO : 4161552 input reads in GF2
+[15:43:32]  pyseqrna_stats :: INFO : 3958514 input reads in GF3
+[15:43:33]  pyseqrna_stats :: INFO : 4011687 input reads in GG1
+[15:43:33]  pyseqrna_stats :: INFO : 3910648 input reads in GG2
+[15:43:33]  pyseqrna_stats :: INFO : 5806048 input reads in GG3
+[15:43:34]  pyseqrna_stats :: INFO : 4466262 input reads in GH1
+[15:43:34]  pyseqrna_stats :: INFO : 4478372 input reads in GH2
+[15:43:35]  pyseqrna_stats :: INFO : 3454907 input reads in GH3
+[15:43:35]  pyseqrna_stats :: INFO : 4051151 input reads in GI1
+[15:43:35]  pyseqrna_stats :: INFO : 5865710 input reads in GI2
+[15:43:36]  pyseqrna_stats :: INFO : 3423004 input reads in GI3
+[15:43:36]  pyseqrna_stats :: INFO : 3696607 input reads in GJ1
+[15:43:36]  pyseqrna_stats :: INFO : 3544881 input reads in GJ2
+[15:43:37]  pyseqrna_stats :: INFO : 3418466 input reads in GJ3
+[15:43:37]  pyseqrna_stats :: INFO : 4381917 input reads in GK1
+[15:43:38]  pyseqrna_stats :: INFO : 4355539 input reads in GK2
+[15:43:38]  pyseqrna_stats :: INFO : 3922282 input reads in GK3
+[15:43:38]  pyseqrna_stats :: INFO : 3574557 input reads in GL1
+[15:43:39]  pyseqrna_stats :: INFO : 3417695 input reads in GL2
+[15:43:39]  pyseqrna_stats :: INFO : 3397904 input reads in GL3
+[15:43:40]  pyseqrna_stats :: INFO : 3742505 input reads in GM1
+[15:43:40]  pyseqrna_stats :: INFO : 3974953 input reads in GM2
+[15:43:40]  pyseqrna_stats :: INFO : 3101048 input reads in GM3
+[15:43:41]  pyseqrna_stats :: INFO : 4795588 input reads in GN1
+[15:43:41]  pyseqrna_stats :: INFO : 4122810 input reads in GN2
+[15:43:41]  pyseqrna_stats :: INFO : 3941188 input reads in GN3
+[15:43:42]  pyseqrna_stats :: INFO : 4096725 input reads in GO1
+[15:43:42]  pyseqrna_stats :: INFO : 4600688 input reads in GO2
+[15:43:43]  pyseqrna_stats :: INFO : 3356753 input reads in GO3
+[15:43:43]  pyseqrna_stats :: INFO : 5070032 input reads in GP1
+[15:43:43]  pyseqrna_stats :: INFO : 4860889 input reads in GP2
+[15:43:44]  pyseqrna_stats :: INFO : 3264391 input reads in GP3
+[15:43:44]  pyseqrna_stats :: INFO : 3813500 input reads in GQ1
+[15:43:44]  pyseqrna_stats :: INFO : 3809958 input reads in GQ2
+[15:43:45]  pyseqrna_stats :: INFO : 4925823 input reads in GQ3
+[15:43:45]  pyseqrna_stats :: INFO : 3526197 input reads in GR1
+[15:43:45]  pyseqrna_stats :: INFO : 4789544 input reads in GR2
+[15:43:46]  pyseqrna_stats :: INFO : 3673934 input reads in GR3
+[15:43:46]  pyseqrna_stats :: INFO : 4009816 input reads in GS1
+[15:43:46]  pyseqrna_stats :: INFO : 3880868 input reads in GS2
+[15:43:47]  pyseqrna_stats :: INFO : 3322835 input reads in GS3
+[15:43:47]  pyseqrna_stats :: INFO : 4079248 input reads in GT1
+[15:43:48]  pyseqrna_stats :: INFO : 3642489 input reads in GT2
+[15:43:48]  pyseqrna_stats :: INFO : 3867196 input reads in GT3
+[15:43:48]  pyseqrna_stats :: INFO : 4328088 input reads in GU1
+[15:43:49]  pyseqrna_stats :: INFO : 4328997 input reads in GU2
+[15:43:49]  pyseqrna_stats :: INFO : 3649952 input reads in GU3
+[15:43:50]  pyseqrna_stats :: INFO : 5244991 input reads in GV1
+[15:43:50]  pyseqrna_stats :: INFO : 4270559 input reads in GV2
+[15:43:50]  pyseqrna_stats :: INFO : 3219840 input reads in GV3
+[15:43:51]  pyseqrna_stats :: INFO : 4175058 input reads in GW1
+[15:43:51]  pyseqrna_stats :: INFO : 4450827 input reads in GW2
+[15:43:52]  pyseqrna_stats :: INFO : 3478470 input reads in GW3
+[15:43:52]  pyseqrna_stats :: INFO : 4834958 input reads in GX1
+[15:43:52]  pyseqrna_stats :: INFO : 4471107 input reads in GX2
+[15:43:53]  pyseqrna_stats :: INFO : 3424016 input reads in GX3
+[15:43:53]  pyseqrna_stats :: INFO : 5638106 input reads in OA1
+[15:43:54]  pyseqrna_stats :: INFO : 4387840 input reads in OA2
+[15:43:54]  pyseqrna_stats :: INFO : 4311386 input reads in OA3
+[15:43:54]  pyseqrna_stats :: INFO : 3422987 input reads in OB1
+[15:43:55]  pyseqrna_stats :: INFO : 4074392 input reads in OB2
+[15:43:55]  pyseqrna_stats :: INFO : 2956195 input reads in OB3
+[15:43:55]  pyseqrna_stats :: INFO : 3620241 input reads in OC1
+[15:43:56]  pyseqrna_stats :: INFO : 3714522 input reads in OC2
+[15:43:56]  pyseqrna_stats :: INFO : 4277085 input reads in OC3
+[15:43:57]  pyseqrna_stats :: INFO : 3654032 input reads in OD1
+[15:43:57]  pyseqrna_stats :: INFO : 4268401 input reads in OD2
+[15:43:58]  pyseqrna_stats :: INFO : 5056076 input reads in OD3
+[15:43:58]  pyseqrna_stats :: INFO : 2950621 input reads in OE1
+[15:43:58]  pyseqrna_stats :: INFO : 4089901 input reads in OE2
+[15:43:59]  pyseqrna_stats :: INFO : 3381982 input reads in OE3
+[15:43:59]  pyseqrna_stats :: INFO : 4487717 input reads in OF1
+[15:43:59]  pyseqrna_stats :: INFO : 4144016 input reads in OF2
+[15:44:00]  pyseqrna_stats :: INFO : 2849524 input reads in OF3
+[15:44:00]  pyseqrna_stats :: INFO : 4570286 input reads in OG1
+[15:44:01]  pyseqrna_stats :: INFO : 4121565 input reads in OG2
+[15:44:01]  pyseqrna_stats :: INFO : 3108375 input reads in OG3
+[15:44:01]  pyseqrna_stats :: INFO : 6299569 input reads in OH1
+[15:44:02]  pyseqrna_stats :: INFO : 4606531 input reads in OH2
+[15:44:02]  pyseqrna_stats :: INFO : 3328798 input reads in OH3
+[15:44:03]  pyseqrna_stats :: INFO : 4758528 input reads in OI1
+[15:44:03]  pyseqrna_stats :: INFO : 5485545 input reads in OI2
+[15:44:03]  pyseqrna_stats :: INFO : 4124889 input reads in OI3
+[15:44:04]  pyseqrna_stats :: INFO : 3772121 input reads in OJ1
+[15:44:04]  pyseqrna_stats :: INFO : 4058199 input reads in OJ2
+[15:44:05]  pyseqrna_stats :: INFO : 4303180 input reads in OJ3
+[15:44:05]  pyseqrna_stats :: INFO : 3551561 input reads in OK1
+[15:44:05]  pyseqrna_stats :: INFO : 5075294 input reads in OK2
+[15:44:06]  pyseqrna_stats :: INFO : 3508282 input reads in OK3
+[15:44:06]  pyseqrna_stats :: INFO : 4148981 input reads in OL1
+[15:44:07]  pyseqrna_stats :: INFO : 4142483 input reads in OL2
+[15:44:07]  pyseqrna_stats :: INFO : 4972908 input reads in OL3
+[15:44:07]  pyseqrna_stats :: INFO : 2817694 input reads in OM1
+[15:44:08]  pyseqrna_stats :: INFO : 3982275 input reads in OM2
+[15:44:08]  pyseqrna_stats :: INFO : 3234120 input reads in OM3
+[15:44:08]  pyseqrna_stats :: INFO : 4417167 input reads in ON1
+[15:44:09]  pyseqrna_stats :: INFO : 4615520 input reads in ON2
+[15:44:09]  pyseqrna_stats :: INFO : 3418801 input reads in ON3
+[15:44:10]  pyseqrna_stats :: INFO : 3926052 input reads in OO1
+[15:44:10]  pyseqrna_stats :: INFO : 3681778 input reads in OO2
+[15:44:11]  pyseqrna_stats :: INFO : 3985402 input reads in OO3
+[15:44:11]  pyseqrna_stats :: INFO : 5646086 input reads in OP1
+[15:44:11]  pyseqrna_stats :: INFO : 4917986 input reads in OP2
+[15:44:12]  pyseqrna_stats :: INFO : 5021000 input reads in OP3
+[15:44:12]  pyseqrna_stats :: INFO : 3912147 input reads in OQ1
+[15:44:13]  pyseqrna_stats :: INFO : 5071443 input reads in OQ2
+[15:44:13]  pyseqrna_stats :: INFO : 4295425 input reads in OQ3
+[15:44:13]  pyseqrna_stats :: INFO : 3313419 input reads in OR1
+[15:44:14]  pyseqrna_stats :: INFO : 4647861 input reads in OR2
+[15:44:14]  pyseqrna_stats :: INFO : 4778926 input reads in OR3
+[15:44:15]  pyseqrna_stats :: INFO : 4446298 input reads in OS1
+[15:44:15]  pyseqrna_stats :: INFO : 4642844 input reads in OS2
+[15:44:16]  pyseqrna_stats :: INFO : 4485440 input reads in OS3
+[15:44:16]  pyseqrna_stats :: INFO : 4422201 input reads in OT1
+[15:44:16]  pyseqrna_stats :: INFO : 4271251 input reads in OT2
+[15:44:17]  pyseqrna_stats :: INFO : 2710744 input reads in OT3
+[15:44:17]  pyseqrna_stats :: INFO : 3301657 input reads in OU1
+[15:44:17]  pyseqrna_stats :: INFO : 4678317 input reads in OU2
+[15:44:18]  pyseqrna_stats :: INFO : 3401870 input reads in OU3
+[15:44:18]  pyseqrna_stats :: INFO : 4797095 input reads in OV1
+[15:44:19]  pyseqrna_stats :: INFO : 4996771 input reads in OV2
+[15:44:19]  pyseqrna_stats :: INFO : 4558695 input reads in OV3
+[15:44:20]  pyseqrna_stats :: INFO : 3222900 input reads in OW1
+[15:44:20]  pyseqrna_stats :: INFO : 4715131 input reads in OW2
+[15:44:20]  pyseqrna_stats :: INFO : 4180655 input reads in OW3
+[15:44:21]  pyseqrna_stats :: INFO : 3676870 input reads in OX1
+[15:44:21]  pyseqrna_stats :: INFO : 4612762 input reads in OX2
+[15:44:22]  pyseqrna_stats :: INFO : 4551992 input reads in OX3
+[15:44:53]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GA1Aligned.out.bam 
+[15:45:26]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GA2Aligned.out.bam 
+[15:45:59]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GA3Aligned.out.bam 
+[15:46:29]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GB1Aligned.out.bam 
+[15:47:02]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GB2Aligned.out.bam 
+[15:47:28]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GB3Aligned.out.bam 
+[15:47:58]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GC1Aligned.out.bam 
+[15:48:47]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GC2Aligned.out.bam 
+[15:49:16]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GC3Aligned.out.bam 
+[15:49:48]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GD1Aligned.out.bam 
+[15:50:25]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GD2Aligned.out.bam 
+[15:50:56]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GD3Aligned.out.bam 
+[15:51:28]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GE1Aligned.out.bam 
+[15:52:04]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GE2Aligned.out.bam 
+[15:52:38]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GE3Aligned.out.bam 
+[15:53:11]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GF1Aligned.out.bam 
+[15:53:46]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GF2Aligned.out.bam 
+[15:54:17]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GF3Aligned.out.bam 
+[15:54:48]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GG1Aligned.out.bam 
+[15:55:20]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GG2Aligned.out.bam 
+[15:56:10]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GG3Aligned.out.bam 
+[15:56:45]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GH1Aligned.out.bam 
+[15:57:21]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GH2Aligned.out.bam 
+[15:57:50]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GH3Aligned.out.bam 
+[15:58:23]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GI1Aligned.out.bam 
+[15:59:11]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GI2Aligned.out.bam 
+[15:59:37]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GI3Aligned.out.bam 
+[16:00:07]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GJ1Aligned.out.bam 
+[16:00:36]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GJ2Aligned.out.bam 
+[16:01:06]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GJ3Aligned.out.bam 
+[16:01:39]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GK1Aligned.out.bam 
+[16:02:12]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GK2Aligned.out.bam 
+[16:02:42]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GK3Aligned.out.bam 
+[16:03:12]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GL1Aligned.out.bam 
+[16:03:41]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GL2Aligned.out.bam 
+[16:04:10]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GL3Aligned.out.bam 
+[16:04:41]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GM1Aligned.out.bam 
+[16:05:10]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GM2Aligned.out.bam 
+[16:05:36]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GM3Aligned.out.bam 
+[16:06:17]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GN1Aligned.out.bam 
+[16:06:52]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GN2Aligned.out.bam 
+[16:07:24]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GN3Aligned.out.bam 
+[16:07:56]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GO1Aligned.out.bam 
+[16:08:30]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GO2Aligned.out.bam 
+[16:08:57]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GO3Aligned.out.bam 
+[16:09:35]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GP1Aligned.out.bam 
+[16:10:14]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GP2Aligned.out.bam 
+[16:10:40]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GP3Aligned.out.bam 
+[16:11:10]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GQ1Aligned.out.bam 
+[16:11:42]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GQ2Aligned.out.bam 
+[16:12:19]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GQ3Aligned.out.bam 
+[16:12:48]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GR1Aligned.out.bam 
+[16:13:26]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GR2Aligned.out.bam 
+[16:13:56]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GR3Aligned.out.bam 
+[16:14:29]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GS1Aligned.out.bam 
+[16:14:59]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GS2Aligned.out.bam 
+[16:15:27]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GS3Aligned.out.bam 
+[16:16:02]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GT1Aligned.out.bam 
+[16:16:34]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GT2Aligned.out.bam 
+[16:17:05]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GT3Aligned.out.bam 
+[16:17:37]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GU1Aligned.out.bam 
+[16:18:08]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GU2Aligned.out.bam 
+[16:18:37]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GU3Aligned.out.bam 
+[16:19:25]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GV1Aligned.out.bam 
+[16:20:01]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GV2Aligned.out.bam 
+[16:20:28]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GV3Aligned.out.bam 
+[16:21:00]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GW1Aligned.out.bam 
+[16:21:41]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GW2Aligned.out.bam 
+[16:22:11]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GW3Aligned.out.bam 
+[16:22:49]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GX1Aligned.out.bam 
+[16:23:24]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GX2Aligned.out.bam 
+[16:23:55]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GX3Aligned.out.bam 
+[16:24:42]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OA1Aligned.out.bam 
+[16:25:18]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OA2Aligned.out.bam 
+[16:25:55]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OA3Aligned.out.bam 
+[16:26:22]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OB1Aligned.out.bam 
+[16:26:54]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OB2Aligned.out.bam 
+[16:27:18]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OB3Aligned.out.bam 
+[16:27:50]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OC1Aligned.out.bam 
+[16:28:19]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OC2Aligned.out.bam 
+[16:28:51]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OC3Aligned.out.bam 
+[16:29:21]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OD1Aligned.out.bam 
+[16:29:57]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OD2Aligned.out.bam 
+[16:30:34]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OD3Aligned.out.bam 
+[16:30:59]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OE1Aligned.out.bam 
+[16:31:29]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OE2Aligned.out.bam 
+[16:31:55]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OE3Aligned.out.bam 
+[16:32:31]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OF1Aligned.out.bam 
+[16:33:05]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OF2Aligned.out.bam 
+[16:33:29]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OF3Aligned.out.bam 
+[16:34:02]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OG1Aligned.out.bam 
+[16:34:34]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OG2Aligned.out.bam 
+[16:34:59]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OG3Aligned.out.bam 
+[16:35:54]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OH1Aligned.out.bam 
+[16:36:30]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OH2Aligned.out.bam 
+[16:36:59]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OH3Aligned.out.bam 
+[16:37:32]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OI1Aligned.out.bam 
+[16:38:17]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OI2Aligned.out.bam 
+[16:38:46]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OI3Aligned.out.bam 
+[16:39:16]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OJ1Aligned.out.bam 
+[16:39:47]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OJ2Aligned.out.bam 
+[16:40:23]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OJ3Aligned.out.bam 
+[16:40:52]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OK1Aligned.out.bam 
+[16:41:31]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OK2Aligned.out.bam 
+[16:42:00]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OK3Aligned.out.bam 
+[16:42:33]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OL1Aligned.out.bam 
+[16:43:05]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OL2Aligned.out.bam 
+[16:43:43]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OL3Aligned.out.bam 
+[16:44:06]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OM1Aligned.out.bam 
+[16:44:37]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OM2Aligned.out.bam 
+[16:45:03]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OM3Aligned.out.bam 
+[16:45:38]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/ON1Aligned.out.bam 
+[16:46:17]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/ON2Aligned.out.bam 
+[16:46:45]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/ON3Aligned.out.bam 
+[16:47:14]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OO1Aligned.out.bam 
+[16:47:42]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OO2Aligned.out.bam 
+[16:48:12]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OO3Aligned.out.bam 
+[16:49:00]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OP1Aligned.out.bam 
+[16:49:37]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OP2Aligned.out.bam 
+[16:50:16]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OP3Aligned.out.bam 
+[16:50:47]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OQ1Aligned.out.bam 
+[16:51:22]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OQ2Aligned.out.bam 
+[16:51:56]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OQ3Aligned.out.bam 
+[16:52:25]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OR1Aligned.out.bam 
+[16:53:02]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OR2Aligned.out.bam 
+[16:53:39]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OR3Aligned.out.bam 
+[16:54:13]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OS1Aligned.out.bam 
+[16:54:47]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OS2Aligned.out.bam 
+[16:55:23]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OS3Aligned.out.bam 
+[16:55:56]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OT1Aligned.out.bam 
+[16:56:30]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OT2Aligned.out.bam 
+[16:56:54]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OT3Aligned.out.bam 
+[16:57:21]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OU1Aligned.out.bam 
+[16:57:56]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OU2Aligned.out.bam 
+[16:58:22]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OU3Aligned.out.bam 
+[16:59:01]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OV1Aligned.out.bam 
+[16:59:39]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OV2Aligned.out.bam 
+[17:00:15]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OV3Aligned.out.bam 
+[17:00:41]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OW1Aligned.out.bam 
+[17:01:16]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OW2Aligned.out.bam 
+[17:01:47]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OW3Aligned.out.bam 
+[17:02:20]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OX1Aligned.out.bam 
+[17:02:54]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OX2Aligned.out.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Sorting bam completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OX3Aligned.out.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GA1Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GA2Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GA3Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GB1Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GB2Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GB3Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GC1Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GC2Aligned.out_sorted.bam 
+[17:03:32]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GC3Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GD1Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GD2Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GD3Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GE1Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GE2Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GE3Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GF1Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GF2Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GF3Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GG1Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GG2Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GG3Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GH1Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GH2Aligned.out_sorted.bam 
+[17:03:33]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GH3Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GI1Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GI2Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GI3Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GJ1Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GJ2Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GJ3Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GK1Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GK2Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GK3Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GL1Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GL2Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GL3Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GM1Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GM2Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GM3Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GN1Aligned.out_sorted.bam 
+[17:03:34]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GN2Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GN3Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GO1Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GO2Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GO3Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GP1Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GP2Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GP3Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GQ1Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GQ2Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GQ3Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GR1Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GR2Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GR3Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GS1Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GS2Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GS3Aligned.out_sorted.bam 
+[17:03:35]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GT1Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GT2Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GT3Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GU1Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GU2Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GU3Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GV1Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GV2Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GV3Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GW1Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GW2Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GW3Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GX1Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GX2Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/GX3Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OA1Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OA2Aligned.out_sorted.bam 
+[17:03:36]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OA3Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OB1Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OB2Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OB3Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OC1Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OC2Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OC3Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OD1Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OD2Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OD3Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OE1Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OE2Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OE3Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OF1Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OF2Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OF3Aligned.out_sorted.bam 
+[17:03:37]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OG1Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OG2Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OG3Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OH1Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OH2Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OH3Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OI1Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OI2Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OI3Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OJ1Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OJ2Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OJ3Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OK1Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OK2Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OK3Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OL1Aligned.out_sorted.bam 
+[17:03:38]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OL2Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OL3Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OM1Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OM2Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OM3Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/ON1Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/ON2Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/ON3Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OO1Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OO2Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OO3Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OP1Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OP2Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OP3Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OQ1Aligned.out_sorted.bam 
+[17:03:39]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OQ2Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OQ3Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OR1Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OR2Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OR3Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OS1Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OS2Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OS3Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OT1Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OT2Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OT3Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OU1Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OU2Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OU3Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OV1Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OV2Aligned.out_sorted.bam 
+[17:03:40]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OV3Aligned.out_sorted.bam 
+[17:03:41]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OW1Aligned.out_sorted.bam 
+[17:03:41]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OW2Aligned.out_sorted.bam 
+[17:03:41]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OW3Aligned.out_sorted.bam 
+[17:03:41]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OX1Aligned.out_sorted.bam 
+[17:03:41]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OX2Aligned.out_sorted.bam 
+[17:03:41]  pyseqrna_stats :: INFO : Bam Indexing completed for /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/star_results/OX3Aligned.out_sorted.bam 
+[17:03:45]  pyseqrna_stats :: INFO : 3059554 input reads aligned GA1
+[17:03:50]  pyseqrna_stats :: INFO : 2939430 input reads uniquely mapped in GA1
+[17:03:55]  pyseqrna_stats :: INFO : 120124 input reads multi mapped in GA1
+[17:04:00]  pyseqrna_stats :: INFO : 3421515 input reads aligned GA2
+[17:04:06]  pyseqrna_stats :: INFO : 3286960 input reads uniquely mapped in GA2
+[17:04:11]  pyseqrna_stats :: INFO : 134555 input reads multi mapped in GA2
+[17:04:16]  pyseqrna_stats :: INFO : 3445974 input reads aligned GA3
+[17:04:22]  pyseqrna_stats :: INFO : 3360968 input reads uniquely mapped in GA3
+[17:04:27]  pyseqrna_stats :: INFO : 85006 input reads multi mapped in GA3
+[17:04:31]  pyseqrna_stats :: INFO : 3270405 input reads aligned GB1
+[17:04:36]  pyseqrna_stats :: INFO : 3190896 input reads uniquely mapped in GB1
+[17:04:40]  pyseqrna_stats :: INFO : 79509 input reads multi mapped in GB1
+[17:04:45]  pyseqrna_stats :: INFO : 3896909 input reads aligned GB2
+[17:04:52]  pyseqrna_stats :: INFO : 3770196 input reads uniquely mapped in GB2
+[17:04:57]  pyseqrna_stats :: INFO : 126713 input reads multi mapped in GB2
+[17:05:00]  pyseqrna_stats :: INFO : 2914379 input reads aligned GB3
+[17:05:05]  pyseqrna_stats :: INFO : 2838418 input reads uniquely mapped in GB3
+[17:05:09]  pyseqrna_stats :: INFO : 75961 input reads multi mapped in GB3
+[17:05:13]  pyseqrna_stats :: INFO : 2951022 input reads aligned GC1
+[17:05:18]  pyseqrna_stats :: INFO : 2781380 input reads uniquely mapped in GC1
+[17:05:22]  pyseqrna_stats :: INFO : 169642 input reads multi mapped in GC1
+[17:05:30]  pyseqrna_stats :: INFO : 4270026 input reads aligned GC2
+[17:05:37]  pyseqrna_stats :: INFO : 4009197 input reads uniquely mapped in GC2
+[17:05:44]  pyseqrna_stats :: INFO : 260829 input reads multi mapped in GC2
+[17:05:48]  pyseqrna_stats :: INFO : 2571231 input reads aligned GC3
+[17:05:52]  pyseqrna_stats :: INFO : 2442410 input reads uniquely mapped in GC3
+[17:05:56]  pyseqrna_stats :: INFO : 128821 input reads multi mapped in GC3
+[17:06:01]  pyseqrna_stats :: INFO : 3312143 input reads aligned GD1
+[17:06:06]  pyseqrna_stats :: INFO : 3142190 input reads uniquely mapped in GD1
+[17:06:11]  pyseqrna_stats :: INFO : 169953 input reads multi mapped in GD1
+[17:06:16]  pyseqrna_stats :: INFO : 4045483 input reads aligned GD2
+[17:06:22]  pyseqrna_stats :: INFO : 3870122 input reads uniquely mapped in GD2
+[17:06:27]  pyseqrna_stats :: INFO : 175361 input reads multi mapped in GD2
+[17:06:31]  pyseqrna_stats :: INFO : 3514287 input reads aligned GD3
+[17:06:36]  pyseqrna_stats :: INFO : 3398679 input reads uniquely mapped in GD3
+[17:06:41]  pyseqrna_stats :: INFO : 115608 input reads multi mapped in GD3
+[17:06:45]  pyseqrna_stats :: INFO : 2411833 input reads aligned GE1
+[17:06:51]  pyseqrna_stats :: INFO : 2288003 input reads uniquely mapped in GE1
+[17:06:56]  pyseqrna_stats :: INFO : 123830 input reads multi mapped in GE1
+[17:07:01]  pyseqrna_stats :: INFO : 3431127 input reads aligned GE2
+[17:07:08]  pyseqrna_stats :: INFO : 3310919 input reads uniquely mapped in GE2
+[17:07:14]  pyseqrna_stats :: INFO : 120208 input reads multi mapped in GE2
+[17:07:19]  pyseqrna_stats :: INFO : 3125202 input reads aligned GE3
+[17:07:25]  pyseqrna_stats :: INFO : 3015063 input reads uniquely mapped in GE3
+[17:07:30]  pyseqrna_stats :: INFO : 110139 input reads multi mapped in GE3
+[17:07:34]  pyseqrna_stats :: INFO : 3152271 input reads aligned GF1
+[17:07:40]  pyseqrna_stats :: INFO : 3005776 input reads uniquely mapped in GF1
+[17:07:45]  pyseqrna_stats :: INFO : 146495 input reads multi mapped in GF1
+[17:07:49]  pyseqrna_stats :: INFO : 3753869 input reads aligned GF2
+[17:07:55]  pyseqrna_stats :: INFO : 3649444 input reads uniquely mapped in GF2
+[17:08:00]  pyseqrna_stats :: INFO : 104425 input reads multi mapped in GF2
+[17:08:08]  pyseqrna_stats :: INFO : 3455780 input reads aligned GF3
+[17:08:13]  pyseqrna_stats :: INFO : 3322393 input reads uniquely mapped in GF3
+[17:08:18]  pyseqrna_stats :: INFO : 133387 input reads multi mapped in GF3
+[17:08:24]  pyseqrna_stats :: INFO : 2638856 input reads aligned GG1
+[17:08:29]  pyseqrna_stats :: INFO : 2538354 input reads uniquely mapped in GG1
+[17:08:34]  pyseqrna_stats :: INFO : 100502 input reads multi mapped in GG1
+[17:08:39]  pyseqrna_stats :: INFO : 2675278 input reads aligned GG2
+[17:08:44]  pyseqrna_stats :: INFO : 2577778 input reads uniquely mapped in GG2
+[17:08:48]  pyseqrna_stats :: INFO : 97500 input reads multi mapped in GG2
+[17:08:55]  pyseqrna_stats :: INFO : 4195074 input reads aligned GG3
+[17:09:02]  pyseqrna_stats :: INFO : 4067220 input reads uniquely mapped in GG3
+[17:09:08]  pyseqrna_stats :: INFO : 127854 input reads multi mapped in GG3
+[17:09:13]  pyseqrna_stats :: INFO : 3790953 input reads aligned GH1
+[17:09:19]  pyseqrna_stats :: INFO : 3649047 input reads uniquely mapped in GH1
+[17:09:24]  pyseqrna_stats :: INFO : 141906 input reads multi mapped in GH1
+[17:09:29]  pyseqrna_stats :: INFO : 4003636 input reads aligned GH2
+[17:09:34]  pyseqrna_stats :: INFO : 3891612 input reads uniquely mapped in GH2
+[17:09:39]  pyseqrna_stats :: INFO : 112024 input reads multi mapped in GH2
+[17:09:43]  pyseqrna_stats :: INFO : 2998232 input reads aligned GH3
+[17:09:48]  pyseqrna_stats :: INFO : 2901402 input reads uniquely mapped in GH3
+[17:09:52]  pyseqrna_stats :: INFO : 96830 input reads multi mapped in GH3
+[17:09:56]  pyseqrna_stats :: INFO : 2982652 input reads aligned GI1
+[17:10:01]  pyseqrna_stats :: INFO : 2895079 input reads uniquely mapped in GI1
+[17:10:06]  pyseqrna_stats :: INFO : 87573 input reads multi mapped in GI1
+[17:10:12]  pyseqrna_stats :: INFO : 3150835 input reads aligned GI2
+[17:10:19]  pyseqrna_stats :: INFO : 2955830 input reads uniquely mapped in GI2
+[17:10:26]  pyseqrna_stats :: INFO : 195005 input reads multi mapped in GI2
+[17:10:29]  pyseqrna_stats :: INFO : 2299014 input reads aligned GI3
+[17:10:34]  pyseqrna_stats :: INFO : 2220093 input reads uniquely mapped in GI3
+[17:10:37]  pyseqrna_stats :: INFO : 78921 input reads multi mapped in GI3
+[17:10:42]  pyseqrna_stats :: INFO : 3041733 input reads aligned GJ1
+[17:10:47]  pyseqrna_stats :: INFO : 2902739 input reads uniquely mapped in GJ1
+[17:10:51]  pyseqrna_stats :: INFO : 138994 input reads multi mapped in GJ1
+[17:10:55]  pyseqrna_stats :: INFO : 3164053 input reads aligned GJ2
+[17:11:00]  pyseqrna_stats :: INFO : 3065813 input reads uniquely mapped in GJ2
+[17:11:04]  pyseqrna_stats :: INFO : 98240 input reads multi mapped in GJ2
+[17:11:08]  pyseqrna_stats :: INFO : 3031384 input reads aligned GJ3
+[17:11:13]  pyseqrna_stats :: INFO : 2938985 input reads uniquely mapped in GJ3
+[17:11:17]  pyseqrna_stats :: INFO : 92399 input reads multi mapped in GJ3
+[17:11:21]  pyseqrna_stats :: INFO : 3924754 input reads aligned GK1
+[17:11:27]  pyseqrna_stats :: INFO : 3824965 input reads uniquely mapped in GK1
+[17:11:32]  pyseqrna_stats :: INFO : 99789 input reads multi mapped in GK1
+[17:11:37]  pyseqrna_stats :: INFO : 3136333 input reads aligned GK2
+[17:11:42]  pyseqrna_stats :: INFO : 3012073 input reads uniquely mapped in GK2
+[17:11:47]  pyseqrna_stats :: INFO : 124260 input reads multi mapped in GK2
+[17:11:51]  pyseqrna_stats :: INFO : 3329826 input reads aligned GK3
+[17:11:56]  pyseqrna_stats :: INFO : 3238959 input reads uniquely mapped in GK3
+[17:12:01]  pyseqrna_stats :: INFO : 90867 input reads multi mapped in GK3
+[17:12:05]  pyseqrna_stats :: INFO : 3070869 input reads aligned GL1
+[17:12:10]  pyseqrna_stats :: INFO : 2935543 input reads uniquely mapped in GL1
+[17:12:14]  pyseqrna_stats :: INFO : 135326 input reads multi mapped in GL1
+[17:12:18]  pyseqrna_stats :: INFO : 3028072 input reads aligned GL2
+[17:12:22]  pyseqrna_stats :: INFO : 2926760 input reads uniquely mapped in GL2
+[17:12:26]  pyseqrna_stats :: INFO : 101312 input reads multi mapped in GL2
+[17:12:30]  pyseqrna_stats :: INFO : 3104164 input reads aligned GL3
+[17:12:35]  pyseqrna_stats :: INFO : 3018157 input reads uniquely mapped in GL3
+[17:12:39]  pyseqrna_stats :: INFO : 86007 input reads multi mapped in GL3
+[17:12:43]  pyseqrna_stats :: INFO : 2276430 input reads aligned GM1
+[17:12:47]  pyseqrna_stats :: INFO : 2173911 input reads uniquely mapped in GM1
+[17:12:51]  pyseqrna_stats :: INFO : 102519 input reads multi mapped in GM1
+[17:12:55]  pyseqrna_stats :: INFO : 2599151 input reads aligned GM2
+[17:13:01]  pyseqrna_stats :: INFO : 2511041 input reads uniquely mapped in GM2
+[17:13:05]  pyseqrna_stats :: INFO : 88110 input reads multi mapped in GM2
+[17:13:09]  pyseqrna_stats :: INFO : 2206299 input reads aligned GM3
+[17:13:13]  pyseqrna_stats :: INFO : 2140239 input reads uniquely mapped in GM3
+[17:13:16]  pyseqrna_stats :: INFO : 66060 input reads multi mapped in GM3
+[17:13:22]  pyseqrna_stats :: INFO : 3953680 input reads aligned GN1
+[17:13:28]  pyseqrna_stats :: INFO : 3755937 input reads uniquely mapped in GN1
+[17:13:34]  pyseqrna_stats :: INFO : 197743 input reads multi mapped in GN1
+[17:13:39]  pyseqrna_stats :: INFO : 3627517 input reads aligned GN2
+[17:13:45]  pyseqrna_stats :: INFO : 3506765 input reads uniquely mapped in GN2
+[17:13:50]  pyseqrna_stats :: INFO : 120752 input reads multi mapped in GN2
+[17:13:55]  pyseqrna_stats :: INFO : 3477791 input reads aligned GN3
+[17:14:01]  pyseqrna_stats :: INFO : 3364450 input reads uniquely mapped in GN3
+[17:14:05]  pyseqrna_stats :: INFO : 113341 input reads multi mapped in GN3
+[17:14:10]  pyseqrna_stats :: INFO : 3301557 input reads aligned GO1
+[17:14:15]  pyseqrna_stats :: INFO : 3208641 input reads uniquely mapped in GO1
+[17:14:20]  pyseqrna_stats :: INFO : 92916 input reads multi mapped in GO1
+[17:14:25]  pyseqrna_stats :: INFO : 3121307 input reads aligned GO2
+[17:14:31]  pyseqrna_stats :: INFO : 3014504 input reads uniquely mapped in GO2
+[17:14:36]  pyseqrna_stats :: INFO : 106803 input reads multi mapped in GO2
+[17:14:40]  pyseqrna_stats :: INFO : 2526265 input reads aligned GO3
+[17:14:45]  pyseqrna_stats :: INFO : 2448933 input reads uniquely mapped in GO3
+[17:14:49]  pyseqrna_stats :: INFO : 77332 input reads multi mapped in GO3
+[17:14:57]  pyseqrna_stats :: INFO : 4337388 input reads aligned GP1
+[17:15:04]  pyseqrna_stats :: INFO : 4174140 input reads uniquely mapped in GP1
+[17:15:11]  pyseqrna_stats :: INFO : 163248 input reads multi mapped in GP1
+[17:15:16]  pyseqrna_stats :: INFO : 4247516 input reads aligned GP2
+[17:15:23]  pyseqrna_stats :: INFO : 4093096 input reads uniquely mapped in GP2
+[17:15:29]  pyseqrna_stats :: INFO : 154420 input reads multi mapped in GP2
+[17:15:33]  pyseqrna_stats :: INFO : 2890713 input reads aligned GP3
+[17:15:38]  pyseqrna_stats :: INFO : 2799054 input reads uniquely mapped in GP3
+[17:15:42]  pyseqrna_stats :: INFO : 91659 input reads multi mapped in GP3
+[17:15:46]  pyseqrna_stats :: INFO : 2955034 input reads aligned GQ1
+[17:15:50]  pyseqrna_stats :: INFO : 2869472 input reads uniquely mapped in GQ1
+[17:15:55]  pyseqrna_stats :: INFO : 85562 input reads multi mapped in GQ1
+[17:15:59]  pyseqrna_stats :: INFO : 2499330 input reads aligned GQ2
+[17:16:04]  pyseqrna_stats :: INFO : 2404316 input reads uniquely mapped in GQ2
+[17:16:09]  pyseqrna_stats :: INFO : 95014 input reads multi mapped in GQ2
+[17:16:15]  pyseqrna_stats :: INFO : 3703033 input reads aligned GQ3
+[17:16:21]  pyseqrna_stats :: INFO : 3596137 input reads uniquely mapped in GQ3
+[17:16:27]  pyseqrna_stats :: INFO : 106896 input reads multi mapped in GQ3
+[17:16:32]  pyseqrna_stats :: INFO : 3158152 input reads aligned GR1
+[17:16:37]  pyseqrna_stats :: INFO : 3071422 input reads uniquely mapped in GR1
+[17:16:41]  pyseqrna_stats :: INFO : 86730 input reads multi mapped in GR1
+[17:16:47]  pyseqrna_stats :: INFO : 4100271 input reads aligned GR2
+[17:16:53]  pyseqrna_stats :: INFO : 3952624 input reads uniquely mapped in GR2
+[17:16:59]  pyseqrna_stats :: INFO : 147647 input reads multi mapped in GR2
+[17:17:03]  pyseqrna_stats :: INFO : 3237937 input reads aligned GR3
+[17:17:08]  pyseqrna_stats :: INFO : 3140156 input reads uniquely mapped in GR3
+[17:17:13]  pyseqrna_stats :: INFO : 97781 input reads multi mapped in GR3
+[17:17:18]  pyseqrna_stats :: INFO : 2373832 input reads aligned GS1
+[17:17:23]  pyseqrna_stats :: INFO : 2256538 input reads uniquely mapped in GS1
+[17:17:28]  pyseqrna_stats :: INFO : 117294 input reads multi mapped in GS1
+[17:17:32]  pyseqrna_stats :: INFO : 2406846 input reads aligned GS2
+[17:17:37]  pyseqrna_stats :: INFO : 2308874 input reads uniquely mapped in GS2
+[17:17:42]  pyseqrna_stats :: INFO : 97972 input reads multi mapped in GS2
+[17:17:45]  pyseqrna_stats :: INFO : 2304433 input reads aligned GS3
+[17:17:49]  pyseqrna_stats :: INFO : 2229116 input reads uniquely mapped in GS3
+[17:17:53]  pyseqrna_stats :: INFO : 75317 input reads multi mapped in GS3
+[17:17:58]  pyseqrna_stats :: INFO : 3392234 input reads aligned GT1
+[17:18:04]  pyseqrna_stats :: INFO : 3233791 input reads uniquely mapped in GT1
+[17:18:09]  pyseqrna_stats :: INFO : 158443 input reads multi mapped in GT1
+[17:18:13]  pyseqrna_stats :: INFO : 3233199 input reads aligned GT2
+[17:18:18]  pyseqrna_stats :: INFO : 3138238 input reads uniquely mapped in GT2
+[17:18:23]  pyseqrna_stats :: INFO : 94961 input reads multi mapped in GT2
+[17:18:27]  pyseqrna_stats :: INFO : 3451801 input reads aligned GT3
+[17:18:32]  pyseqrna_stats :: INFO : 3351269 input reads uniquely mapped in GT3
+[17:18:37]  pyseqrna_stats :: INFO : 100532 input reads multi mapped in GT3
+[17:18:42]  pyseqrna_stats :: INFO : 2755589 input reads aligned GU1
+[17:18:47]  pyseqrna_stats :: INFO : 2644659 input reads uniquely mapped in GU1
+[17:18:52]  pyseqrna_stats :: INFO : 110930 input reads multi mapped in GU1
+[17:18:57]  pyseqrna_stats :: INFO : 3053189 input reads aligned GU2
+[17:19:02]  pyseqrna_stats :: INFO : 2950587 input reads uniquely mapped in GU2
+[17:19:07]  pyseqrna_stats :: INFO : 102602 input reads multi mapped in GU2
+[17:19:11]  pyseqrna_stats :: INFO : 2638302 input reads aligned GU3
+[17:19:16]  pyseqrna_stats :: INFO : 2556798 input reads uniquely mapped in GU3
+[17:19:21]  pyseqrna_stats :: INFO : 81504 input reads multi mapped in GU3
+[17:19:27]  pyseqrna_stats :: INFO : 4396372 input reads aligned GV1
+[17:19:33]  pyseqrna_stats :: INFO : 4178808 input reads uniquely mapped in GV1
+[17:19:40]  pyseqrna_stats :: INFO : 217564 input reads multi mapped in GV1
+[17:19:45]  pyseqrna_stats :: INFO : 3728010 input reads aligned GV2
+[17:19:50]  pyseqrna_stats :: INFO : 3603190 input reads uniquely mapped in GV2
+[17:19:55]  pyseqrna_stats :: INFO : 124820 input reads multi mapped in GV2
+[17:19:59]  pyseqrna_stats :: INFO : 2823572 input reads aligned GV3
+[17:20:03]  pyseqrna_stats :: INFO : 2727368 input reads uniquely mapped in GV3
+[17:20:07]  pyseqrna_stats :: INFO : 96204 input reads multi mapped in GV3
+[17:20:12]  pyseqrna_stats :: INFO : 2556113 input reads aligned GW1
+[17:20:17]  pyseqrna_stats :: INFO : 2439718 input reads uniquely mapped in GW1
+[17:20:22]  pyseqrna_stats :: INFO : 116395 input reads multi mapped in GW1
+[17:20:27]  pyseqrna_stats :: INFO : 2941058 input reads aligned GW2
+[17:20:33]  pyseqrna_stats :: INFO : 2826736 input reads uniquely mapped in GW2
+[17:20:38]  pyseqrna_stats :: INFO : 114322 input reads multi mapped in GW2
+[17:20:42]  pyseqrna_stats :: INFO : 2587246 input reads aligned GW3
+[17:20:46]  pyseqrna_stats :: INFO : 2508079 input reads uniquely mapped in GW3
+[17:20:50]  pyseqrna_stats :: INFO : 79167 input reads multi mapped in GW3
+[17:20:56]  pyseqrna_stats :: INFO : 4082892 input reads aligned GX1
+[17:21:04]  pyseqrna_stats :: INFO : 3933670 input reads uniquely mapped in GX1
+[17:21:11]  pyseqrna_stats :: INFO : 149222 input reads multi mapped in GX1
+[17:21:16]  pyseqrna_stats :: INFO : 3984716 input reads aligned GX2
+[17:21:22]  pyseqrna_stats :: INFO : 3853166 input reads uniquely mapped in GX2
+[17:21:27]  pyseqrna_stats :: INFO : 131550 input reads multi mapped in GX2
+[17:21:31]  pyseqrna_stats :: INFO : 3027541 input reads aligned GX3
+[17:21:36]  pyseqrna_stats :: INFO : 2938776 input reads uniquely mapped in GX3
+[17:21:39]  pyseqrna_stats :: INFO : 88765 input reads multi mapped in GX3
+[17:21:46]  pyseqrna_stats :: INFO : 5070139 input reads aligned OA1
+[17:21:53]  pyseqrna_stats :: INFO : 4946973 input reads uniquely mapped in OA1
+[17:21:59]  pyseqrna_stats :: INFO : 123166 input reads multi mapped in OA1
+[17:22:04]  pyseqrna_stats :: INFO : 3308947 input reads aligned OA2
+[17:22:09]  pyseqrna_stats :: INFO : 3205690 input reads uniquely mapped in OA2
+[17:22:15]  pyseqrna_stats :: INFO : 103257 input reads multi mapped in OA2
+[17:22:19]  pyseqrna_stats :: INFO : 3429035 input reads aligned OA3
+[17:22:25]  pyseqrna_stats :: INFO : 3340698 input reads uniquely mapped in OA3
+[17:22:30]  pyseqrna_stats :: INFO : 88337 input reads multi mapped in OA3
+[17:22:35]  pyseqrna_stats :: INFO : 3055976 input reads aligned OB1
+[17:22:39]  pyseqrna_stats :: INFO : 2975799 input reads uniquely mapped in OB1
+[17:22:43]  pyseqrna_stats :: INFO : 80177 input reads multi mapped in OB1
+[17:22:48]  pyseqrna_stats :: INFO : 3536111 input reads aligned OB2
+[17:22:54]  pyseqrna_stats :: INFO : 3429309 input reads uniquely mapped in OB2
+[17:22:59]  pyseqrna_stats :: INFO : 106802 input reads multi mapped in OB2
+[17:23:03]  pyseqrna_stats :: INFO : 2599432 input reads aligned OB3
+[17:23:07]  pyseqrna_stats :: INFO : 2521653 input reads uniquely mapped in OB3
+[17:23:10]  pyseqrna_stats :: INFO : 77779 input reads multi mapped in OB3
+[17:23:15]  pyseqrna_stats :: INFO : 2997760 input reads aligned OC1
+[17:23:20]  pyseqrna_stats :: INFO : 2808837 input reads uniquely mapped in OC1
+[17:23:25]  pyseqrna_stats :: INFO : 188923 input reads multi mapped in OC1
+[17:23:29]  pyseqrna_stats :: INFO : 2537105 input reads aligned OC2
+[17:23:34]  pyseqrna_stats :: INFO : 2463994 input reads uniquely mapped in OC2
+[17:23:38]  pyseqrna_stats :: INFO : 73111 input reads multi mapped in OC2
+[17:23:43]  pyseqrna_stats :: INFO : 3058723 input reads aligned OC3
+[17:23:48]  pyseqrna_stats :: INFO : 2938596 input reads uniquely mapped in OC3
+[17:23:54]  pyseqrna_stats :: INFO : 120127 input reads multi mapped in OC3
+[17:23:58]  pyseqrna_stats :: INFO : 3184599 input reads aligned OD1
+[17:24:03]  pyseqrna_stats :: INFO : 3063081 input reads uniquely mapped in OD1
+[17:24:08]  pyseqrna_stats :: INFO : 121518 input reads multi mapped in OD1
+[17:24:13]  pyseqrna_stats :: INFO : 3738383 input reads aligned OD2
+[17:24:19]  pyseqrna_stats :: INFO : 3619146 input reads uniquely mapped in OD2
+[17:24:24]  pyseqrna_stats :: INFO : 119237 input reads multi mapped in OD2
+[17:24:29]  pyseqrna_stats :: INFO : 4534357 input reads aligned OD3
+[17:24:36]  pyseqrna_stats :: INFO : 4395783 input reads uniquely mapped in OD3
+[17:24:42]  pyseqrna_stats :: INFO : 138574 input reads multi mapped in OD3
+[17:24:45]  pyseqrna_stats :: INFO : 1675857 input reads aligned OE1
+[17:24:49]  pyseqrna_stats :: INFO : 1604110 input reads uniquely mapped in OE1
+[17:24:52]  pyseqrna_stats :: INFO : 71747 input reads multi mapped in OE1
+[17:24:57]  pyseqrna_stats :: INFO : 2761506 input reads aligned OE2
+[17:25:03]  pyseqrna_stats :: INFO : 2678966 input reads uniquely mapped in OE2
+[17:25:07]  pyseqrna_stats :: INFO : 82540 input reads multi mapped in OE2
+[17:25:11]  pyseqrna_stats :: INFO : 2367323 input reads aligned OE3
+[17:25:15]  pyseqrna_stats :: INFO : 2300975 input reads uniquely mapped in OE3
+[17:25:20]  pyseqrna_stats :: INFO : 66348 input reads multi mapped in OE3
+[17:25:25]  pyseqrna_stats :: INFO : 3785631 input reads aligned OF1
+[17:25:31]  pyseqrna_stats :: INFO : 3645518 input reads uniquely mapped in OF1
+[17:25:36]  pyseqrna_stats :: INFO : 140113 input reads multi mapped in OF1
+[17:25:40]  pyseqrna_stats :: INFO : 3530555 input reads aligned OF2
+[17:25:46]  pyseqrna_stats :: INFO : 3403607 input reads uniquely mapped in OF2
+[17:25:51]  pyseqrna_stats :: INFO : 126948 input reads multi mapped in OF2
+[17:25:54]  pyseqrna_stats :: INFO : 2505047 input reads aligned OF3
+[17:25:58]  pyseqrna_stats :: INFO : 2432019 input reads uniquely mapped in OF3
+[17:26:01]  pyseqrna_stats :: INFO : 73028 input reads multi mapped in OF3
+[17:26:07]  pyseqrna_stats :: INFO : 2751115 input reads aligned OG1
+[17:26:12]  pyseqrna_stats :: INFO : 2636595 input reads uniquely mapped in OG1
+[17:26:18]  pyseqrna_stats :: INFO : 114520 input reads multi mapped in OG1
+[17:26:22]  pyseqrna_stats :: INFO : 2694222 input reads aligned OG2
+[17:26:28]  pyseqrna_stats :: INFO : 2610970 input reads uniquely mapped in OG2
+[17:26:32]  pyseqrna_stats :: INFO : 83252 input reads multi mapped in OG2
+[17:26:35]  pyseqrna_stats :: INFO : 2249881 input reads aligned OG3
+[17:26:39]  pyseqrna_stats :: INFO : 2187285 input reads uniquely mapped in OG3
+[17:26:43]  pyseqrna_stats :: INFO : 62596 input reads multi mapped in OG3
+[17:26:49]  pyseqrna_stats :: INFO : 5511948 input reads aligned OH1
+[17:26:57]  pyseqrna_stats :: INFO : 5348790 input reads uniquely mapped in OH1
+[17:27:04]  pyseqrna_stats :: INFO : 163158 input reads multi mapped in OH1
+[17:27:09]  pyseqrna_stats :: INFO : 4037972 input reads aligned OH2
+[17:27:15]  pyseqrna_stats :: INFO : 3919667 input reads uniquely mapped in OH2
+[17:27:20]  pyseqrna_stats :: INFO : 118305 input reads multi mapped in OH2
+[17:27:24]  pyseqrna_stats :: INFO : 2931701 input reads aligned OH3
+[17:27:28]  pyseqrna_stats :: INFO : 2852199 input reads uniquely mapped in OH3
+[17:27:32]  pyseqrna_stats :: INFO : 79502 input reads multi mapped in OH3
+[17:27:37]  pyseqrna_stats :: INFO : 3473227 input reads aligned OI1
+[17:27:43]  pyseqrna_stats :: INFO : 3383940 input reads uniquely mapped in OI1
+[17:27:48]  pyseqrna_stats :: INFO : 89287 input reads multi mapped in OI1
+[17:27:54]  pyseqrna_stats :: INFO : 3710574 input reads aligned OI2
+[17:28:01]  pyseqrna_stats :: INFO : 3587839 input reads uniquely mapped in OI2
+[17:28:07]  pyseqrna_stats :: INFO : 122735 input reads multi mapped in OI2
+[17:28:12]  pyseqrna_stats :: INFO : 2774906 input reads aligned OI3
+[17:28:17]  pyseqrna_stats :: INFO : 2692712 input reads uniquely mapped in OI3
+[17:28:22]  pyseqrna_stats :: INFO : 82194 input reads multi mapped in OI3
+[17:28:26]  pyseqrna_stats :: INFO : 3275288 input reads aligned OJ1
+[17:28:31]  pyseqrna_stats :: INFO : 3182147 input reads uniquely mapped in OJ1
+[17:28:36]  pyseqrna_stats :: INFO : 93141 input reads multi mapped in OJ1
+[17:28:41]  pyseqrna_stats :: INFO : 3494369 input reads aligned OJ2
+[17:28:46]  pyseqrna_stats :: INFO : 3375777 input reads uniquely mapped in OJ2
+[17:28:51]  pyseqrna_stats :: INFO : 118592 input reads multi mapped in OJ2
+[17:28:56]  pyseqrna_stats :: INFO : 3783130 input reads aligned OJ3
+[17:29:01]  pyseqrna_stats :: INFO : 3676548 input reads uniquely mapped in OJ3
+[17:29:07]  pyseqrna_stats :: INFO : 106582 input reads multi mapped in OJ3
+[17:29:10]  pyseqrna_stats :: INFO : 3143655 input reads aligned OK1
+[17:29:16]  pyseqrna_stats :: INFO : 3078689 input reads uniquely mapped in OK1
+[17:29:19]  pyseqrna_stats :: INFO : 64966 input reads multi mapped in OK1
+[17:29:26]  pyseqrna_stats :: INFO : 3954382 input reads aligned OK2
+[17:29:33]  pyseqrna_stats :: INFO : 3845857 input reads uniquely mapped in OK2
+[17:29:38]  pyseqrna_stats :: INFO : 108525 input reads multi mapped in OK2
+[17:29:43]  pyseqrna_stats :: INFO : 2886868 input reads aligned OK3
+[17:29:47]  pyseqrna_stats :: INFO : 2821089 input reads uniquely mapped in OK3
+[17:29:51]  pyseqrna_stats :: INFO : 65779 input reads multi mapped in OK3
+[17:29:56]  pyseqrna_stats :: INFO : 3491140 input reads aligned OL1
+[17:30:01]  pyseqrna_stats :: INFO : 3345324 input reads uniquely mapped in OL1
+[17:30:06]  pyseqrna_stats :: INFO : 145816 input reads multi mapped in OL1
+[17:30:11]  pyseqrna_stats :: INFO : 3755415 input reads aligned OL2
+[17:30:17]  pyseqrna_stats :: INFO : 3614816 input reads uniquely mapped in OL2
+[17:30:21]  pyseqrna_stats :: INFO : 140599 input reads multi mapped in OL2
+[17:30:27]  pyseqrna_stats :: INFO : 4421754 input reads aligned OL3
+[17:30:33]  pyseqrna_stats :: INFO : 4265376 input reads uniquely mapped in OL3
+[17:30:40]  pyseqrna_stats :: INFO : 156378 input reads multi mapped in OL3
+[17:30:43]  pyseqrna_stats :: INFO : 1715910 input reads aligned OM1
+[17:30:46]  pyseqrna_stats :: INFO : 1647346 input reads uniquely mapped in OM1
+[17:30:50]  pyseqrna_stats :: INFO : 68564 input reads multi mapped in OM1
+[17:30:54]  pyseqrna_stats :: INFO : 2752936 input reads aligned OM2
+[17:30:59]  pyseqrna_stats :: INFO : 2667975 input reads uniquely mapped in OM2
+[17:31:03]  pyseqrna_stats :: INFO : 84961 input reads multi mapped in OM2
+[17:31:06]  pyseqrna_stats :: INFO : 2220810 input reads aligned OM3
+[17:31:11]  pyseqrna_stats :: INFO : 2154039 input reads uniquely mapped in OM3
+[17:31:14]  pyseqrna_stats :: INFO : 66771 input reads multi mapped in OM3
+[17:31:19]  pyseqrna_stats :: INFO : 3553874 input reads aligned ON1
+[17:31:25]  pyseqrna_stats :: INFO : 3385775 input reads uniquely mapped in ON1
+[17:31:31]  pyseqrna_stats :: INFO : 168099 input reads multi mapped in ON1
+[17:31:36]  pyseqrna_stats :: INFO : 4056904 input reads aligned ON2
+[17:31:42]  pyseqrna_stats :: INFO : 3944675 input reads uniquely mapped in ON2
+[17:31:47]  pyseqrna_stats :: INFO : 112229 input reads multi mapped in ON2
+[17:31:51]  pyseqrna_stats :: INFO : 2900532 input reads aligned ON3
+[17:31:55]  pyseqrna_stats :: INFO : 2804877 input reads uniquely mapped in ON3
+[17:32:00]  pyseqrna_stats :: INFO : 95655 input reads multi mapped in ON3
+[17:32:04]  pyseqrna_stats :: INFO : 3029099 input reads aligned OO1
+[17:32:09]  pyseqrna_stats :: INFO : 2949747 input reads uniquely mapped in OO1
+[17:32:13]  pyseqrna_stats :: INFO : 79352 input reads multi mapped in OO1
+[17:32:17]  pyseqrna_stats :: INFO : 2329534 input reads aligned OO2
+[17:32:22]  pyseqrna_stats :: INFO : 2249462 input reads uniquely mapped in OO2
+[17:32:26]  pyseqrna_stats :: INFO : 80072 input reads multi mapped in OO2
+[17:32:30]  pyseqrna_stats :: INFO : 2746018 input reads aligned OO3
+[17:32:36]  pyseqrna_stats :: INFO : 2668811 input reads uniquely mapped in OO3
+[17:32:40]  pyseqrna_stats :: INFO : 77207 input reads multi mapped in OO3
+[17:32:47]  pyseqrna_stats :: INFO : 4971476 input reads aligned OP1
+[17:32:54]  pyseqrna_stats :: INFO : 4813056 input reads uniquely mapped in OP1
+[17:33:01]  pyseqrna_stats :: INFO : 158420 input reads multi mapped in OP1
+[17:33:06]  pyseqrna_stats :: INFO : 4240693 input reads aligned OP2
+[17:33:13]  pyseqrna_stats :: INFO : 4108949 input reads uniquely mapped in OP2
+[17:33:19]  pyseqrna_stats :: INFO : 131744 input reads multi mapped in OP2
+[17:33:24]  pyseqrna_stats :: INFO : 4465395 input reads aligned OP3
+[17:33:31]  pyseqrna_stats :: INFO : 4348706 input reads uniquely mapped in OP3
+[17:33:37]  pyseqrna_stats :: INFO : 116689 input reads multi mapped in OP3
+[17:33:41]  pyseqrna_stats :: INFO : 2800508 input reads aligned OQ1
+[17:33:46]  pyseqrna_stats :: INFO : 2718050 input reads uniquely mapped in OQ1
+[17:33:50]  pyseqrna_stats :: INFO : 82458 input reads multi mapped in OQ1
+[17:33:56]  pyseqrna_stats :: INFO : 3280197 input reads aligned OQ2
+[17:34:02]  pyseqrna_stats :: INFO : 3132444 input reads uniquely mapped in OQ2
+[17:34:08]  pyseqrna_stats :: INFO : 147753 input reads multi mapped in OQ2
+[17:34:12]  pyseqrna_stats :: INFO : 3064147 input reads aligned OQ3
+[17:34:18]  pyseqrna_stats :: INFO : 2982273 input reads uniquely mapped in OQ3
+[17:34:23]  pyseqrna_stats :: INFO : 81874 input reads multi mapped in OQ3
+[17:34:27]  pyseqrna_stats :: INFO : 2969100 input reads aligned OR1
+[17:34:31]  pyseqrna_stats :: INFO : 2888580 input reads uniquely mapped in OR1
+[17:34:35]  pyseqrna_stats :: INFO : 80520 input reads multi mapped in OR1
+[17:34:40]  pyseqrna_stats :: INFO : 4062145 input reads aligned OR2
+[17:34:46]  pyseqrna_stats :: INFO : 3927000 input reads uniquely mapped in OR2
+[17:34:51]  pyseqrna_stats :: INFO : 135145 input reads multi mapped in OR2
+[17:34:56]  pyseqrna_stats :: INFO : 4212591 input reads aligned OR3
+[17:35:03]  pyseqrna_stats :: INFO : 4093129 input reads uniquely mapped in OR3
+[17:35:09]  pyseqrna_stats :: INFO : 119462 input reads multi mapped in OR3
+[17:35:13]  pyseqrna_stats :: INFO : 3308298 input reads aligned OS1
+[17:35:19]  pyseqrna_stats :: INFO : 3204876 input reads uniquely mapped in OS1
+[17:35:24]  pyseqrna_stats :: INFO : 103422 input reads multi mapped in OS1
+[17:35:29]  pyseqrna_stats :: INFO : 3119572 input reads aligned OS2
+[17:35:35]  pyseqrna_stats :: INFO : 3021031 input reads uniquely mapped in OS2
+[17:35:41]  pyseqrna_stats :: INFO : 98541 input reads multi mapped in OS2
+[17:35:45]  pyseqrna_stats :: INFO : 2941177 input reads aligned OS3
+[17:35:51]  pyseqrna_stats :: INFO : 2850561 input reads uniquely mapped in OS3
+[17:35:56]  pyseqrna_stats :: INFO : 90616 input reads multi mapped in OS3
+[17:36:02]  pyseqrna_stats :: INFO : 3622094 input reads aligned OT1
+[17:36:08]  pyseqrna_stats :: INFO : 3473931 input reads uniquely mapped in OT1
+[17:36:13]  pyseqrna_stats :: INFO : 148163 input reads multi mapped in OT1
+[17:36:18]  pyseqrna_stats :: INFO : 3580646 input reads aligned OT2
+[17:36:24]  pyseqrna_stats :: INFO : 3373188 input reads uniquely mapped in OT2
+[17:36:29]  pyseqrna_stats :: INFO : 207458 input reads multi mapped in OT2
+[17:36:33]  pyseqrna_stats :: INFO : 2374389 input reads aligned OT3
+[17:36:36]  pyseqrna_stats :: INFO : 2304946 input reads uniquely mapped in OT3
+[17:36:39]  pyseqrna_stats :: INFO : 69443 input reads multi mapped in OT3
+[17:36:43]  pyseqrna_stats :: INFO : 2025944 input reads aligned OU1
+[17:36:47]  pyseqrna_stats :: INFO : 1941912 input reads uniquely mapped in OU1
+[17:36:51]  pyseqrna_stats :: INFO : 84032 input reads multi mapped in OU1
+[17:36:56]  pyseqrna_stats :: INFO : 3292056 input reads aligned OU2
+[17:37:02]  pyseqrna_stats :: INFO : 3184877 input reads uniquely mapped in OU2
+[17:37:07]  pyseqrna_stats :: INFO : 107179 input reads multi mapped in OU2
+[17:37:11]  pyseqrna_stats :: INFO : 2337822 input reads aligned OU3
+[17:37:16]  pyseqrna_stats :: INFO : 2273539 input reads uniquely mapped in OU3
+[17:37:20]  pyseqrna_stats :: INFO : 64283 input reads multi mapped in OU3
+[17:37:25]  pyseqrna_stats :: INFO : 3981737 input reads aligned OV1
+[17:37:31]  pyseqrna_stats :: INFO : 3822183 input reads uniquely mapped in OV1
+[17:37:37]  pyseqrna_stats :: INFO : 159554 input reads multi mapped in OV1
+[17:37:43]  pyseqrna_stats :: INFO : 4319355 input reads aligned OV2
+[17:37:50]  pyseqrna_stats :: INFO : 4190608 input reads uniquely mapped in OV2
+[17:37:55]  pyseqrna_stats :: INFO : 128747 input reads multi mapped in OV2
+[17:38:00]  pyseqrna_stats :: INFO : 3876125 input reads aligned OV3
+[17:38:06]  pyseqrna_stats :: INFO : 3740152 input reads uniquely mapped in OV3
+[17:38:12]  pyseqrna_stats :: INFO : 135973 input reads multi mapped in OV3
+[17:38:16]  pyseqrna_stats :: INFO : 1921479 input reads aligned OW1
+[17:38:20]  pyseqrna_stats :: INFO : 1839855 input reads uniquely mapped in OW1
+[17:38:24]  pyseqrna_stats :: INFO : 81624 input reads multi mapped in OW1
+[17:38:28]  pyseqrna_stats :: INFO : 3127411 input reads aligned OW2
+[17:38:34]  pyseqrna_stats :: INFO : 3019228 input reads uniquely mapped in OW2
+[17:38:40]  pyseqrna_stats :: INFO : 108183 input reads multi mapped in OW2
+[17:38:44]  pyseqrna_stats :: INFO : 2786714 input reads aligned OW3
+[17:38:49]  pyseqrna_stats :: INFO : 2701258 input reads uniquely mapped in OW3
+[17:38:54]  pyseqrna_stats :: INFO : 85456 input reads multi mapped in OW3
+[17:38:59]  pyseqrna_stats :: INFO : 3180422 input reads aligned OX1
+[17:39:04]  pyseqrna_stats :: INFO : 3084576 input reads uniquely mapped in OX1
+[17:39:08]  pyseqrna_stats :: INFO : 95846 input reads multi mapped in OX1
+[17:39:13]  pyseqrna_stats :: INFO : 4067278 input reads aligned OX2
+[17:39:19]  pyseqrna_stats :: INFO : 3951828 input reads uniquely mapped in OX2
+[17:39:24]  pyseqrna_stats :: INFO : 115450 input reads multi mapped in OX2
+[17:39:30]  pyseqrna_stats :: INFO : 4007341 input reads aligned OX3
+[17:39:36]  pyseqrna_stats :: INFO : 3901270 input reads uniquely mapped in OX3
+[17:39:42]  pyseqrna_stats :: INFO : 106071 input reads multi mapped in OX3
+[18:47:14]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes
+[19:05:58]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology
+[19:05:58]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:05:59]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//genes/GA-GE.txt
+[19:06:24]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology.1
+[19:06:24]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:06:24]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/genes/GA-GE.txt
+[19:07:13]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology.2
+[19:07:13]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:07:14]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes/genes/GA-GE.txt
+[19:07:30]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology.3
+[19:07:30]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:07:31]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes/GA-GE.txt
+[19:10:22]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology
+[19:10:43]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:10:43]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes/GA-GE.txt
+[19:17:38]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:17:39]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes/GA-GE.txt
+[19:27:42]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:27:43]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes/GA-GE.txt
+[19:33:26]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology.1
+[19:33:35]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[19:33:36]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes/GA-GE.txt
+[01:43:40]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology.2
+[01:44:47]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:44:47]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/diff_genes/GA-GE.txt
+[01:48:52]  pyseqrna_utils :: INFO : Succesfully created directory /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results/Gene_Ontology
+[01:49:02]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:49:02]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GA-GE.txt
+[01:49:21]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:49:22]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GB-GF.txt
+[01:49:33]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:49:33]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GC-GG.txt
+[01:49:57]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:49:57]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GD-GH.txt
+[01:50:19]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:20]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GI-GM.txt
+[01:50:20]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:20]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GJ-GN.txt
+[01:50:21]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:21]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GK-GO.txt
+[01:50:36]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:36]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GL-GP.txt
+[01:50:45]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:45]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GQ-GU.txt
+[01:50:50]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:51]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GR-GV.txt
+[01:50:58]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:58]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GS-GW.txt
+[01:50:58]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:50:59]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/GT-GX.txt
+[01:51:00]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:51:00]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OA-OE.txt
+[01:51:15]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:51:16]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OB-OF.txt
+[01:51:24]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:51:25]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OC-OG.txt
+[01:51:37]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:51:37]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OD-OH.txt
+[01:51:47]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:51:47]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OI-OM.txt
+[01:51:48]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:51:48]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OJ-ON.txt
+[01:51:48]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:51:49]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OK-OO.txt
+[01:52:01]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:52:02]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OL-OP.txt
+[01:52:07]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:52:07]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OQ-OU.txt
+[01:52:12]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:52:13]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OR-OV.txt
+[01:52:14]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:52:15]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OS-OW.txt
+[01:52:19]  gene_ontology :: INFO : Fetching Gene Ontology from Biomart
+[01:52:20]  gene_ontology :: INFO : Performing GO enrichment analysis on /home/naveen/Documents/Projects/barley_mali/morex_assembly/barley_pyseqrna_results//diff_genes/OT-OX.txt

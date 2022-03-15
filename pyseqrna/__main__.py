@@ -278,7 +278,7 @@ def main():
 
     heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
 
-    pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination)
+    pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
 
     if options.geneontology:
         outgo = os.path.join(outdir,"Gene_Ontology")
@@ -311,9 +311,9 @@ def main():
             x.savefig(outma+"/"+c+"_MA.png")
     
     if options.vennplot:
-        degfile = pd.read_excel(os.path.join(outdir,"filtered_DEGs.xlsx"))
+        degfile = os.path.join(outdir,"filtered_DEGs.xlsx")
         if options.venncombination:
-            k = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=outdir)
+            x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=outdir)
             x.savefig(outdir+ "/_Venn.png")
         else:
             vnum = len(combination)/4
@@ -321,7 +321,7 @@ def main():
         
         
             for i in range(0, len(vlist)):
-                k = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=outdir)
+                x = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=outdir)
                 x.savefig(outdir+"/Venn_"+i+".png")
         
     endTime = time.ctime()

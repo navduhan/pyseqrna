@@ -134,7 +134,7 @@ def enrichGO(gdata, file):
     go_dict = {}
 
     for value in df_goList:
-        go_dict[value[0]] = value[1]
+        go_dict[value[0]] = str(value[1]).upper()
 
     count = df[['ID', 'Gene_length']].values.tolist()
     go_count = {}
@@ -155,7 +155,7 @@ def enrichGO(gdata, file):
     get_user_id_count_for_GO = dict()
 
     user_provided_uniq_ids = dict()
-
+    user_genecount = []
     for item in go_dict:
 
         get_gene_ids_from_user[item] = []
@@ -182,13 +182,17 @@ def enrichGO(gdata, file):
                 get_gene_ids_from_user[k1].append(k2)
                 get_user_id_count_for_GO[k1] += 1
                 anot_count += 1
+                if k2 not in user_genecount:
+                    user_genecount.append(k2)
+
+
 
 
     pvalues = []
     enrichment_result = []
     # get total mapped genes from user list
-    mapped_query_ids = sum(get_user_id_count_for_GO.values())
-
+    # mapped_query_ids = sum(get_user_id_count_for_GO.values())
+    mapped_query_ids = len(user_genecount)
     for k in get_user_id_count_for_GO:
         gene_in_category = get_user_id_count_for_GO[k]
 
@@ -205,7 +209,8 @@ def enrichGO(gdata, file):
 
         gID = gID.rsplit("/", 1)[0]
         pvalue = stats.hypergeom.sf(
-            gene_in_category - 1, bg_gene_count, gene_GO_count[k], mapped_query_ids)
+            gene_in_category -1, bg_gene_count, gene_GO_count[k], mapped_query_ids)
+        
 
         if gene_in_category > 0:
             pvalues.append(pvalue)

@@ -11,3 +11,5 @@ mtry.ipynb
 build
 pySeqRNA.egg-info
 .Rprofile
+pyseqrna.log
+test2.ipynb
