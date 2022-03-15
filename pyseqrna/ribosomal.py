@@ -18,7 +18,7 @@ from pyseqrna import pyseqrna_utils as pu
 log = PyseqrnaLogger(mode="a",log='ribosomal')
 
 
-def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, mem=10, cpu=8, task=1, slurm=False, dep=''):
+def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results",rnaDatabases=None, pairedEND= False, mem=10, cpu=8, task=1, slurm=False, dep=''):
     """
      This Function execute sortMeRNA to remove ribosomal RNA from fastq reads. 
     Args:
@@ -46,7 +46,9 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
 
     try:
 
-        refDB = glob.glob("pyseqrna/example/data/sortmerna_db/rRNA_databases/*.fasta")
+        # refDB = glob.glob("pyseqrna/example/data/sortmerna_db/rRNA_databases/*.fasta")
+        
+        refDB = glob.glob(f"{rnaDatabases}/*.fasta")
 
         sortmernaREF =""
 
@@ -59,6 +61,8 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
 
     
     outsortmeRNA = {}
+    
+    job_id = []
 
     for key, sample in sampleDict.items():
 
@@ -108,8 +112,9 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
             if slurm:
 
                 try:
-                        job_id = pu.clusterRun(job_name='sortmeRNA',sout=os.path.join(output, "sortmeRNA.out"), serror=os.path.join(output, "sortmeRNA.err"), command= sortmernaCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
+                        job = pu.clusterRun(job_name='sortmeRNA',sout=os.path.join(output, "sortmeRNA.out"), serror=os.path.join(output, "sortmeRNA.err"), command= sortmernaCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
 
+                        job_id.append(job)
                         log.info("Job successfully submited for {} with {}".format(sample[0], job_id))
 
                 except Exception:
@@ -121,8 +126,8 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
                 try:
                      with open(os.path.join(output, "sortmeRNA.out"), 'w+') as fout:
                         with open(os.path.join(output, "sortmeRNA.err"), 'w+') as ferr:
-                            job_id = subprocess.call(sortmernaCmd, shell=True, stdout=fout,stderr=ferr)
-
+                            job = subprocess.call(sortmernaCmd, shell=True, stdout=fout,stderr=ferr)
+                            job_id.append('')
                             log.info("Job successfully submited for {} ".format(sample[0]))
 
                 except Exception:
@@ -130,5 +135,5 @@ def sortmernaRun(sampleDict= None,outDir="pySeqRNA_results", pairedEND= False, m
                     log.error("Job sumission failed")
         
 
-    return outsortmeRNA
+    return outsortmeRNA, job_id
 

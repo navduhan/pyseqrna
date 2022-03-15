@@ -126,7 +126,7 @@ def main():
 
         log.info("Removing ribosomal RNA ")
         
-        outtrim, jobs = ribo.sortmernaRun(outtrim,outdir, options.paired,cpu=options.threads, slurm=options.slurm)
+        outtrim, jobs = ribo.sortmernaRun(outtrim, outdir, options.paired,cpu=options.threads, slurm=options.slurm)
 
         if options.slurm:
 
