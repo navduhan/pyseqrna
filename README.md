@@ -16,3 +16,10 @@ pip install .
 ## Run pyseqrna
 
 pyseqrna -h
+
+
+## Contact
+
+Written by Naveen Duhan (naveen.duhan@usu.edu),
+Kaundal Bioinformatics Lab, Utah State University,
+Released under the terms of GNU General Public Licence v3
