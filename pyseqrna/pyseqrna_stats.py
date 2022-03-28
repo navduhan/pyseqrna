@@ -92,8 +92,8 @@ def sort_bam(file):
         log.error("Bam sorting failed")
 
 def index_bam(file):
-    outfile = file.split(".bam")[0] + "_sorted.bam"
-    samtools_cmd = f'samtools index -c {outfile}'
+   
+    samtools_cmd = f'samtools index -c {file}'
     try:
         with open("bam_index.out", 'w+') as fout:
             with open("bam_index.err", 'w+') as ferr:

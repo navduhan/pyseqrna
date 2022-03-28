@@ -65,7 +65,7 @@ def main():
 
     if options.fastqc:
         
-        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=outdir, slurm=options.slurm, paired=options.paired)
+        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, paired=options.paired)
 
         if options.slurm:
             for job in jobid:
@@ -107,7 +107,7 @@ def main():
     
     if options.fastqc2:
         
-        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=outdir, slurm=options.slurm, paired=options.paired)
+        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, paired=options.paired)
 
         if options.slurm:
             for job in jobid:
@@ -274,9 +274,10 @@ def main():
     log.info("Writting DEGs summary to excel file")
     filtered_DEG['summary'].to_excel(os.path.join(outdir,"DEG_count_summary.xlsx"))
     log.info("Creating heatmap of top 50 DEGs")
-    heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
+    if options.heatmap:
+        heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
 
-    heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
+        heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
 
     pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
 
@@ -316,7 +317,11 @@ def main():
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=outdir)
             x.savefig(outdir+ "/_Venn.png")
         else:
-            vnum = len(combination)/4
+            if len(combination)<4:
+                vnum= len(combination)
+            else:
+                vnum = len(combination)/4
+                
             vlist = np.array_split(combination, vnum)
         
         
