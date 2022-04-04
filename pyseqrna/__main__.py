@@ -286,7 +286,7 @@ def main():
         pu.make_directory(outgo)
         gdata = go.query(options.gospecies)
         for c in combination:
-            file = f"{outdir}/genes/{c}.txt"
+            file = f"{outdir}/diff_genes/{c}.txt"
             ontology_results = go.enrichGO(gdata, file)
             ontology_results.to_csv(os.path.join(outgo, f"{c}_gene_ontology.txt"), sep="\t", index=False)
     
@@ -294,9 +294,9 @@ def main():
         outkegg = os.path.join(outdir,"KEGG_pathway")
         pu.make_directory(outkegg)
         for c in combination:
-            file = f"{outdir}/genes/{c}.txt"
+            file = f"{outdir}/diff_genes/{c}.txt"
             kegg_results = go.enrichGO(options.keggspecies, file)
-            kegg_results.to_csv(os.path.join(outkegg, f"{c}_gene_ontology.txt"), sep="\t", index=False)
+            kegg_results.to_csv(os.path.join(outkegg, f"{c}_kegg.txt"), sep="\t", index=False)
     if options.volcanoplot:
         outvolcano = os.path.join(outdir,"Volcano_Plots")
         pu.make_directory(outvolcano)
