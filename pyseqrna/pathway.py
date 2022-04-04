@@ -107,6 +107,7 @@ def enrichKEGG(file, df, background_count):
     get_user_id_count_for_kegg = dict()
 
     user_provided_uniq_ids = []
+    user_genecount = []
 
     for item in kegg_dict:
 
@@ -133,11 +134,20 @@ def enrichKEGG(file, df, background_count):
         get_gene_ids_from_user[k1]=list(intersection)
         get_user_id_count_for_kegg[k1] = len(intersection)
         anot_count += len(intersection)
+
+    for k1 in kegg_dict:
+        for k2 in user_provided_uniq_ids:
+            if k2 in kegg_dict[k1]:
+                # if the user input id present in df_dict_glist increment count
+                if k2 not in user_genecount:
+                    user_genecount.append(k2)
+    
     
     pvalues = []
     enrichment_result = []
     # get total mapped genes from user list
-    mapped_query_ids = sum(get_user_id_count_for_kegg.values())
+    # mapped_query_ids = sum(get_user_id_count_for_kegg.values())
+    mapped_query_ids = len(user_genecount)
 
     for k in get_user_id_count_for_kegg:
         gene_in_category = get_user_id_count_for_kegg[k]
