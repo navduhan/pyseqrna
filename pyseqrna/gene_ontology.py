@@ -45,7 +45,7 @@ def query(species, type):
     root.set('datasetConfigVersion', '0.6')
 
     dataset = ElementTree.SubElement(root, 'Dataset')
-    dataset.set('name', species+"_eg_gene")
+    dataset.set('name', species)
     dataset.set('interface', 'default')
     attributes = ["ensembl_gene_id", "ensembl_transcript_id",
                   "go_id", "name_1006", "namespace_1003", "definition_1006"]
