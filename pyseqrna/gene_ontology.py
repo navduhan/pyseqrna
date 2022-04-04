@@ -28,9 +28,17 @@ def _add_attr_node(root, attr):
     attr_el.set('name', attr)
 
 
-def query(species):
+def query(species, type):
+
+    if type == 'animals':
+        uri= "https://ensembl.org/biomart/martservice"
+        scheme = 'default'
+    if type == 'plants':
+        uri = "https://plants.ensembl.org/biomart/martservice"
+        scheme = 'plants_mart'
+
     root = ElementTree.Element('Query')
-    root.set('virtualSchemaName', 'plants_mart')
+    root.set('virtualSchemaName', scheme)
     root.set('formatter', 'TSV')
     root.set('header', '1')
     root.set('uniqueRows', native_str(int(True)))
@@ -44,8 +52,9 @@ def query(species):
     for attr in attributes:
         _add_attr_node(dataset, attr)
 
+
     response = get_request(
-        "https://plants.ensembl.org/biomart/martservice", query=ElementTree.tostring(root))
+       uri , query=ElementTree.tostring(root))
     result = pd.read_csv(StringIO(response.text), sep='\t')
     result.columns = ['Gene', 'Transcript', 'GO_ID',
                   'GO_term', 'GO_ontology', 'GO_def']
