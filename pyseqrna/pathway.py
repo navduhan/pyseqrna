@@ -129,16 +129,12 @@ def enrichKEGG(file, df, background_count):
 
     anot_count = 0
     for k1 in kegg_dict:
-        intersection = set(user_provided_uniq_ids). intersection(kegg_dict[k1]) 
-                # if the user input id present in df_dict_glist increment count
-        get_gene_ids_from_user[k1]=list(intersection)
-        get_user_id_count_for_kegg[k1] = len(intersection)
-        anot_count += len(intersection)
-
-    for k1 in kegg_dict:
         for k2 in user_provided_uniq_ids:
             if k2 in kegg_dict[k1]:
                 # if the user input id present in df_dict_glist increment count
+                get_gene_ids_from_user[k1].append(k2)
+                get_user_id_count_for_kegg[k1] += 1
+                anot_count += 1
                 if k2 not in user_genecount:
                     user_genecount.append(k2)
     
