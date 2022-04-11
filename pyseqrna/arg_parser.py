@@ -6,7 +6,7 @@ import sys
 
 ver = pyseqrna.version.__version__
 parser = argparse.ArgumentParser(description="""pyseqrna {} : a python based RNAseq data analysis package""".format(ver),
-usage="""%(prog)s [options] input_file, samples_path, refernece_genome, feature_file""",
+usage="""%(prog)s  input_file, samples_path, refernece_genome, feature_file [options]""",
 epilog="""Written by Naveen Duhan (naveen.duhan@usu.edu),
 Kaundal Bioinformatics Lab, Utah State University,
 Released under the terms of GNU General Public Licence v3""",    
@@ -101,7 +101,7 @@ tools = parser.add_argument_group("External tool arguments")
 
 tools.add_argument("--trimming", action='store', dest="trimming", type=str, default='trim_galore', choices=['flexbar', 'trimmomatic', 'trim_galore'], 
     help="Select a tool for quality based read trimming.\n[default: trim_galore]"  )
-tools.add_argument('--aligner', dest='aligners', default='STAR', choices=['STAR', 'hisat2', 'bowtie2'], 
+tools.add_argument('--aligner', dest='aligners', default='STAR', choices=['STAR', 'hisat2'], 
     help="Select a read alignment tool.\n[default: STAR]")
 tools.add_argument('--quant-tool', dest='quantification',default= 'featureCounts', choices=['featureCounts','Htseq'], 
     help= "Select a feature quantification tool.\n[default:featureCounts]")

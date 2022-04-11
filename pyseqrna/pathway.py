@@ -75,9 +75,6 @@ def kegg_list(sp):
 
 def enrichKEGG(file, df, background_count):
 
-   
-    
-    
     log.info(f"Performing KEGG enrichment analysis on {file}")  
 
     df_keggList = df[['ID', 'Gene']].values.tolist()
@@ -101,21 +98,21 @@ def enrichKEGG(file, df, background_count):
         kegg_description[line[0]] = line[1]
     
 
-    get_gene_ids_from_user = dict()
+    user_gene_ids = dict()
     gene_kegg_count = dict()
 
-    get_user_id_count_for_kegg = dict()
+    userID_count_kegg = dict()
 
-    user_provided_uniq_ids = []
+    user_unique_gene_id = []
     user_genecount = []
 
     for item in kegg_dict:
 
-        get_gene_ids_from_user[item] = []
+        user_gene_ids[item] = []
 
         gene_kegg_count[item] = kegg_count[item]
 
-        get_user_id_count_for_kegg[item] = 0
+        userID_count_kegg[item] = 0
         # GO terms
     bg_gene_count = int(background_count)
 
@@ -123,37 +120,37 @@ def enrichKEGG(file, df, background_count):
     for gene_id in read_id_file:
         gene_id = gene_id.strip().upper()
     # remove the duplicate ids and keep unique
-        user_provided_uniq_ids.append(gene_id)
+        user_unique_gene_id.append(gene_id)
     read_id_file.close()
 
 
-    anot_count = 0
+    pathway_annotation_count = 0
     for k1 in kegg_dict:
-        for k2 in user_provided_uniq_ids:
+        for k2 in user_unique_gene_id:
             if k2 in kegg_dict[k1]:
                 # if the user input id present in df_dict_glist increment count
-                get_gene_ids_from_user[k1].append(k2)
-                get_user_id_count_for_kegg[k1] += 1
-                anot_count += 1
+                user_gene_ids[k1].append(k2)
+                userID_count_kegg[k1] += 1
+                pathway_annotation_count += 1
                 if k2 not in user_genecount:
                     user_genecount.append(k2)
-    
+
     
     pvalues = []
     enrichment_result = []
     # get total mapped genes from user list
-    # mapped_query_ids = sum(get_user_id_count_for_kegg.values())
-    mapped_query_ids = len(user_genecount)
+    # mapped_user_ids = sum(userID_count_kegg.values())
+    mapped_user_ids = len(user_genecount)
 
-    for k in get_user_id_count_for_kegg:
-        gene_in_category = get_user_id_count_for_kegg[k]
+    for k in userID_count_kegg:
+        gene_in_pathway = userID_count_kegg[k]
 
-        gene_not_in_category_but_in_sample = mapped_query_ids - gene_in_category
-        gene_not_in_catgory_but_in_genome = gene_kegg_count[k] - gene_in_category
-        bg_gene_kegg_ids = gene_kegg_count[k]
-        bg_in_genome = bg_gene_count - mapped_query_ids - (gene_in_category + gene_not_in_catgory_but_in_genome) \
-            + gene_in_category
-        gene_ids = get_gene_ids_from_user[k]
+        # gene_not_in_pathway_but_in_query = mapped_user_ids - gene_in_pathway
+        gene_not_in_catgory_but_in_genome = gene_kegg_count[k] - gene_in_pathway
+        # bg_gene_kegg_ids = gene_kegg_count[k]
+        bg_in_genome = bg_gene_count - mapped_user_ids - (gene_in_pathway + gene_not_in_catgory_but_in_genome) \
+            + gene_in_pathway
+        gene_ids = user_gene_ids[k]
         gID = ""
 
         for g in gene_ids:
@@ -161,13 +158,13 @@ def enrichKEGG(file, df, background_count):
 
         gID = gID.rsplit(",", 1)[0]
         pvalue = stats.hypergeom.sf(
-            gene_in_category - 1, bg_gene_count, gene_kegg_count[k], mapped_query_ids)
+            gene_in_pathway - 1, bg_gene_count, gene_kegg_count[k], mapped_user_ids)
 
-        if gene_in_category > 0:
+        if gene_in_pathway > 0:
             pvalues.append(pvalue)
 
             enrichment_result.append([k, kegg_description[k], 
-                                    f"{gene_in_category}/{mapped_query_ids}", f"{kegg_count[k]}/{bg_gene_count}", pvalue,len(gene_ids), gID])
+                                    f"{gene_in_pathway}/{mapped_user_ids}", f"{kegg_count[k]}/{bg_gene_count}", pvalue,len(gene_ids), gID])
 
     fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
 
@@ -179,6 +176,9 @@ def enrichKEGG(file, df, background_count):
 
 
     return end
+
+
+    
 
   
 
