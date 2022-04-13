@@ -17,6 +17,9 @@ pip install .
 
 pyseqrna -h
 
+## Please Cite
+
+Duhan N and Kaundal R. pySeqRNA: an automated Python package for RNA sequencing data analysis [version 1; not peer reviewed]. F1000Research 2020, 9(ISCB Comm J):1128 (poster) (https://doi.org/10.7490/f1000research.1118314.1) 
 
 ## Contact
 

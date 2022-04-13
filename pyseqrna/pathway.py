@@ -1,5 +1,6 @@
 import io
-from urllib.request import urlopen
+import os
+from urllib.request import urlopen, urlretrieve
 from statsmodels.stats.multitest import multipletests
 import scipy.stats as stats
 import numpy as np
@@ -71,6 +72,24 @@ def kegg_list(sp):
     bg_count = len(np.unique(x))
 
     return df, bg_count
+
+def myfunc(df, path):
+    path=pd.read_csv(path, delimiter="\t")
+  
+
+    pl = df.values.tolist()
+    pp = {}
+    for p in pl:
+        pp[p[1]] = p[0]
+
+    for i, row in path.iterrows():
+        Genes = str(path.at[i, 'geneID']).split(",")
+        result = []
+        for gene in Genes:
+            result.append(pp[gene])
+        res = ",".join(result)
+        path.at[i, 'geneID'] = res
+    return path
 
 
 def enrichKEGG(file, df, background_count):
@@ -173,6 +192,8 @@ def enrichKEGG(file, df, background_count):
     end = pd.DataFrame(enrichment_result)
     end.columns = ['Pathway_ID', 'Description',  'GeneRatio', 'BgRatio','Pvalues', 'Count', 'Genes' ]
     end.insert(5, 'FDR', fdr)
+
+    
 
 
     return end
