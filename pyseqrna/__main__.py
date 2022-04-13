@@ -284,7 +284,7 @@ def main():
     if options.geneontology:
         outgo = os.path.join(outdir,"Gene_Ontology")
         pu.make_directory(outgo)
-        gdata = go.query(options.gospecies)
+        gdata = go.query(options.gospecies, options.gotype)
         for c in combination:
             file = f"{outdir}/diff_genes/{c}.txt"
             ontology_results = go.enrichGO(gdata, file)
