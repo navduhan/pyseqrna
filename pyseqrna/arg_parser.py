@@ -6,7 +6,7 @@ import sys
 
 ver = pyseqrna.version.__version__
 parser = argparse.ArgumentParser(description="""pyseqrna {} : a python based RNAseq data analysis package""".format(ver),
-usage="""%(prog)s  input_file, samples_path, refernece_genome, feature_file [options]""",
+usage="""%(prog)s  input_file, samples_path, reference_genome, feature_file [options]""",
 epilog="""Written by Naveen Duhan (naveen.duhan@usu.edu),
 Kaundal Bioinformatics Lab, Utah State University,
 Released under the terms of GNU General Public Licence v3""",    
@@ -98,7 +98,8 @@ annotation.add_argument('--kegg-pathway', action="store_true", default=False, de
     help="""Enables kegg pathway functional enrichment using KEGG""")
 
 annotation.add_argument('--kegg-species',required='--kegg-pathway' in sys.argv,  default=None, dest="keggspecies",
-    help="""Species name for kegg pathway functional enrichment using KEGG""")
+    help="""Species name for kegg pathway functional enrichment using KEGG Note:
+    KEGG uses ENTREZID for enrichment. Please convert your IDs to ENTREZID.""")
 
 tools = parser.add_argument_group("External tool arguments")
 
