@@ -82,6 +82,8 @@ internal.add_argument('--venn-combinations',  dest='venncombination', type=str, 
     help="""Provide space separated 2-4 combination of samples to be compared for differential expresion.
 For example M1-A1 M1-V1 Z1-M1 \n[Default is to make random vennplot of 4 combinations]."""
 )
+internal.add_argument('--cluster', dest='cluster',default=False, action='store_true',
+help="Cluster samples to find dissimilarities in data")
 
 annotation= parser.add_argument_group("Functional annotation arguments")
 
