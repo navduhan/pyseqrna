@@ -20,7 +20,7 @@ import pandas as pd
 log = PyseqrnaLogger(mode="a", log="quant")
 
 
-def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, slurm=False, outDir="pySeqRNA_results", dep=''):
+def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, slurm=False, outDir=".", dep=''):
     """[summary]
 
     Args:
@@ -109,11 +109,13 @@ def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, s
         df= pd.read_csv(outFile, sep="\t", comment="#")
         newCountDF = df.drop(columns=["Chr", "Start", "End", "Strand","Length"])
         newCountDF.columns = col
-        newCountDF.to_csv(os.path.join(outDir,"Counts_final.txt"), index=False, sep="\t")
+        newCountDF = newCountDF.str.replace('gene:', '').str.upper()
+        newCountDF.to_excel(os.path.join(outDir,"Counts_final.txt"), index=False)
+        os.remove(outFile)
     return job_id
 
 
-def htseqCount(configFile=None,bamDict=None, gff=None,mem=8,cpu=8,tasks=1, slurm=False, outDir="pySeqRNA_results", dep=''):
+def htseqCount(configFile=None,bamDict=None, gff=None,mem=8,cpu=8,tasks=1, slurm=False, outDir=".", dep=''):
     """[summary]
 
     Args:
@@ -204,6 +206,7 @@ def htseqCount(configFile=None,bamDict=None, gff=None,mem=8,cpu=8,tasks=1, slurm
     df = pd.read_csv(outFile, sep="\t")
     df.columns = col    
     newCountDF = df.iloc[:-5]
-    newCountDF.to_csv(os.path.join(outDir,"Counts_final.txt"), index=False, sep="\t")
-
+    newCountDF = newCountDF.str.replace('gene:', '').str.upper()
+    newCountDF.to_excel(os.path.join(outDir,"Counts_final.txt"), index=False)
+    os.remove(outFile)
     return job_id

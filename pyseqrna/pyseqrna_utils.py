@@ -508,7 +508,7 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
             df = pd.read_excel(file, sheet_name=c)
 
             gene = df['Gene'].copy()
-            gene = gene.str.replace('gene:','')
+            gene = gene.str.replace('gene:','').str.upper()
             gene.to_csv(os.path.join(outDir,"diff_genes",f"{c}.txt"), sep="\t", index = False)
    
     else:
