@@ -13,7 +13,7 @@ def clusterSample(countDF = None):
     R = shc.dendrogram(
                     linked,
                     truncate_mode='lastp',  # show only the last p merged clusters
-                    p=len(r.columns),  # show only the last p merged clusters
+                    p=len(countDF.columns),  # show only the last p merged clusters
                     no_plot=True,
                     )
 
@@ -24,7 +24,7 @@ def clusterSample(countDF = None):
     shc.dendrogram(
             linked,
             truncate_mode='lastp',  # show only the last p merged clusters
-            p=len(r.columns),  # show only the last p merged clusters
+            p=len(countDF.columns),  # show only the last p merged clusters
             leaf_label_func=llf(temp),
             orientation='left',
            
