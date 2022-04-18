@@ -500,14 +500,15 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
     else:
 
         make_directory("diff_genes")
+        outDir = "."
 
     if multisheet:
         
         for c in combinations:
             df = pd.read_excel(file, sheet_name=c)
 
-            gene = df['Gene'].copy().replace('gene:','')
-
+            gene = df['Gene'].copy()
+            gene = gene.str.replace('gene:','')
             gene.to_csv(os.path.join(outDir,"diff_genes",f"{c}.txt"), sep="\t", index = False)
    
     else:
