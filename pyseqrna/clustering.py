@@ -3,20 +3,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as shc
 
-
-
-
+def llf(temp,xx):
+   
+    return "{}".format(temp[xx])
 def clusterSample(countDF = None):
 
     corrCount = countDF.corr()
     linked = shc.linkage(corrCount, 'ward')
+    R = shc.dendrogram(
+                    linked,
+                    truncate_mode='lastp',  # show only the last p merged clusters
+                    p=len(r.columns),  # show only the last p merged clusters
+                    no_plot=True,
+                    )
 
+    temp = {R["leaves"][ii]: countDF.columns[ii] for ii in range(len(R["leaves"]))}
+    
+   
 
     shc.dendrogram(
             linked,
             truncate_mode='lastp',  # show only the last p merged clusters
             p=len(r.columns),  # show only the last p merged clusters
-            leaf_label_func=llf,
+            leaf_label_func=llf(temp),
             orientation='left',
            
             leaf_font_size=8.,
