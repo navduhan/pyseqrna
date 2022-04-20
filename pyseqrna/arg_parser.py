@@ -92,7 +92,7 @@ annotation.add_argument('--gene-ontology', action="store_true", default=False, d
 
 annotation.add_argument('--go-species',required='--gene-ontology' in sys.argv,  default=None, dest="gospecies",
     help="""Species name for gene ontology functional enrichment using BioMart. 
-        For example Arabidopsis thaliana species name will be athaliana""")
+For example Arabidopsis thaliana species name will be athaliana""")
 
 annotation.add_argument('--go-type',required='--gene-ontology' in sys.argv,  default=None, dest="gotype",
     help="""Type [plants , animals] name for gene ontology functional enrichment using BioMart""")
@@ -101,8 +101,8 @@ annotation.add_argument('--kegg-pathway', action="store_true", default=False, de
     help="""Enables kegg pathway functional enrichment using KEGG""")
 
 annotation.add_argument('--kegg-species',required='--kegg-pathway' in sys.argv,  default=None, dest="keggspecies",
-    help="""Species name for kegg pathway functional enrichment using KEGG Note:
-    KEGG uses ENTREZID for enrichment. Please convert your IDs to ENTREZID.""")
+    help="""Species name for kegg pathway functional enrichment using KEGG.
+Note:KEGG uses ENTREZID for enrichment. Please convert your IDs to ENTREZID.""")
 
 tools = parser.add_argument_group("External tool arguments")
 
