@@ -48,7 +48,8 @@ internal.add_argument('--rnadb',required='--ribosomal' in sys.argv, dest='rnadb'
 internal.add_argument('--multimapped-groups', dest='mmgg', action='store_true', default=False, help="Enable multimapped gene group quantification \n[default:True]")
 
 internal.add_argument('--combination', dest='combination', type=str, nargs='+', default='all', 
-    help="""Provide space separated combination of samples to be compared for differential expresion.
+    help="""Provide space separated combination of samples to 
+be compared for differential expresion.
 For example M1-A1 M1-V1 Z1-M1\n[Default:all]""")
 
 internal.add_argument('--fdr', dest='fdr',default=0.05,type=float,
@@ -80,8 +81,8 @@ internal.add_argument('--venn-plot',  dest='vennplot', default=False, action='st
     help="Enables venplot of differentially expressed genes.\n[default: False] ")
 
 internal.add_argument('--venn-combinations',  dest='venncombination', type=str, nargs='+', default='random',
-    help="""Provide space separated 2-4 combination of samples to be compared for differential expresion.
-For example M1-A1 M1-V1 Z1-M1 \n[Default is to make random vennplot of 4 combinations]."""
+    help="""Provide space separated 2-4 combination of samples to 
+be compared for differential expresion.For example M1-A1 M1-V1 Z1-M1\n[Default is to make random vennplot of 4 combinations]."""
 )
 internal.add_argument('--cluster', dest='cluster',default=False, action='store_true',
 help="Cluster samples to find dissimilarities in data")
