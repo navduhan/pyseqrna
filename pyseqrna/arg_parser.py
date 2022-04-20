@@ -55,7 +55,8 @@ internal.add_argument('--fdr', dest='fdr',default=0.05,type=float,
     help="False Discovery Rate threshold\n[default:0.05]" )
 
 internal.add_argument('--fold', dest='fold', default=2,type=int,
-    help="FOLD change value for filtering DEGs. Remember pyseqrna performs log2 of the given value\n[default:2]")
+    help="""FOLD change value for filtering DEGs. 
+Remember pyseqrna performs log2 of the given value\n[default:2]""")
 
 internal.add_argument('--normalize-count', dest='normalizecount',action='store', default=False, 
     help="Enables normalized counts\n[default:True]")
@@ -95,7 +96,8 @@ annotation.add_argument('--go-species',required='--gene-ontology' in sys.argv,  
 For example Arabidopsis thaliana species name will be athaliana""")
 
 annotation.add_argument('--go-type',required='--gene-ontology' in sys.argv,  default=None, dest="gotype",
-    help="""Type [plants , animals] name for gene ontology functional enrichment using BioMart""")
+    help="""Type [plants , animals] name for gene ontology functional enrichment
+using BioMart""")
 
 annotation.add_argument('--kegg-pathway', action="store_true", default=False, dest="keggpathway",
     help="""Enables kegg pathway functional enrichment using KEGG""")
