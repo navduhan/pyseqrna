@@ -168,19 +168,12 @@ def dotplotGO(df=None, nrows=20, colorBy='logPvalues'):
         df = df
         title = 'FDR'
 
-    
-
     df =df.sort_values('Counts', ascending=False)
     df = df.head(nrows)
     df =df.sort_values('Counts', ascending=True)
 
-    data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
-
-    my_cmap = plt.cm.get_cmap('RdYlBu')
-    colors = my_cmap(data_color_normalized)
-
-    fig, ax = plt.subplots(figsize=(10,10), dpi=300, color=colors)
-    scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts']*0.25, c=df[type])
+    fig, ax = plt.subplots(figsize=(10,10), dpi=300)
+    scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts']*0.25, c=df[colorBy])
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_bounds((0, 20))
