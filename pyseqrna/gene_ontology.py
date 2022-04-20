@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+'''
+Title: gene_ontology module is for doing gene ontology enrichment analysis of differentially expressed genes
+Created : 
+@author : Naveen Duhan
+'''
+
 from __future__ import division
 from statsmodels.stats.multitest import multipletests
 import scipy.stats as stats
@@ -8,6 +17,8 @@ from io import StringIO
 from xml.etree import ElementTree
 from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
+import matplotlib.pyplot as plt
+from matplotlib.cm import ScalarMappable
 
 
 log = PyseqrnaLogger(mode='a', log="go")
@@ -30,12 +41,18 @@ def _add_attr_node(root, attr):
 
 def query(species, type):
 
+    # first need to check if the species is animal or plant
+
     if type == 'animals':
         uri= "https://ensembl.org/biomart/martservice"
         scheme = 'default'
+        fspecies = species+"_gene_ensembl"
     if type == 'plants':
         uri = "https://plants.ensembl.org/biomart/martservice"
         scheme = 'plants_mart'
+        fspecies = species+"_eg_gene"
+
+    # build query
 
     root = ElementTree.Element('Query')
     root.set('virtualSchemaName', scheme)
@@ -45,13 +62,12 @@ def query(species, type):
     root.set('datasetConfigVersion', '0.6')
 
     dataset = ElementTree.SubElement(root, 'Dataset')
-    dataset.set('name', species)
+    dataset.set('name', fspecies)
     dataset.set('interface', 'default')
     attributes = ["ensembl_gene_id", "ensembl_transcript_id",
                   "go_id", "name_1006", "namespace_1003", "definition_1006"]
     for attr in attributes:
         _add_attr_node(dataset, attr)
-
 
     response = get_request(
        uri , query=ElementTree.tostring(root))
@@ -63,6 +79,7 @@ def query(species, type):
 
 
 def preprocessBioMart(data):
+
     df = data
     
     df2 = df[df['GO_ID'].notna()]
@@ -130,11 +147,122 @@ def fdr_calc(x):
     l = [l[k] if l[k] < 1.0 else 1.0 for k in ro]
     return l
 
-def enrichGO(gdata, file):
+def dotplotGO(df=None, nrows=20, colorBy='logPvalues'):
+    """_summary_
 
-    log.info("Fetching Gene Ontology from Biomart")
+    Args:
+        df (_type_, optional): _description_. Defaults to None.
+        nrows (int, optional): _description_. Defaults to 20.
+        colorBy (str, optional): _description_. Defaults to 'logPvalues'.
+       
+
+    Returns:
+        _type_: _description_
+    """
+
+    if colorBy=='logPvalues':
+        df['logPvalues'] = round(-np.log10(df['Pvalues']),2)
+        title = '-log10(Pvalues)'
+    
+    if colorBy=='FDR':
+        df = df
+        title = 'FDR'
+
     
 
+    df =df.sort_values('Counts', ascending=False)
+    df = df.head(nrows)
+    df =df.sort_values('Counts', ascending=True)
+
+    data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
+
+    my_cmap = plt.cm.get_cmap('RdYlBu')
+    colors = my_cmap(data_color_normalized)
+
+    fig, ax = plt.subplots(figsize=(10,10), dpi=300, color=colors)
+    scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts']*0.25, c=df[type])
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_bounds((0, 20))
+    # add some space between the axis and the plot
+    ax.spines['left'].set_position(('outward', 8))
+    ax.spines['bottom'].set_position(('outward', 5))
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xlabel("Counts", fontsize=12, fontweight='bold')
+    plt.ylabel("GO Description", fontsize=12, fontweight='bold')
+
+    cbar = plt.colorbar(scatter,shrink=.25, pad=.2, aspect=10)
+    cbar.ax.set_title(title,pad=20, fontweight='bold')
+    fig.tight_layout()
+
+    return fig
+
+def barplotGO(df=None,nrows=20, colorBy='logPvalues' ):
+
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    
+    if colorBy=='logPvalues':
+        df['logPvalues'] = round(-np.log10(df['Pvalues']),2)
+        title = '-log10(Pvalues)'
+    
+    if colorBy=='FDR':
+        df = df
+        title = 'FDR'
+
+    df =df.sort_values('Counts', ascending=False)
+    df = df.head(nrows)
+    df =df.sort_values('Counts', ascending=True)
+    counts = df['Counts'].values.tolist()
+    terms = df['GO Term'].values.tolist()
+
+    data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
+
+    fig, ax = plt.subplots(figsize=(15, 10), dpi=300)
+
+    my_cmap = plt.cm.get_cmap('RdYlBu')
+    colors = my_cmap(data_color_normalized)
+
+    rects = ax.barh(terms, counts, color=colors)
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_bounds((0, 20))
+    # add some space between the axis and the plot
+    ax.spines['left'].set_position(('outward', 8))
+    ax.spines['bottom'].set_position(('outward', 5))
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xlabel("Counts", fontsize=12, fontweight='bold')
+    plt.ylabel("GO Description", fontsize=12, fontweight='bold')
+    sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0,max(df[colorBy])))
+
+    sm.set_array([])
+
+    cbar = plt.colorbar(sm, shrink=0.25,pad=.02, aspect=10)
+    cbar.ax.set_title(title,pad=20,fontweight='bold')
+    fig.tight_layout()
+
+    return fig
+
+def enrichGO( file= None, species=None,type=None, pvalueCutoff=0.05, plot=True, plotType= 'dotplot', nrows=20,colorBy='logPvalues'):
+
+    # Need to add support for different database IDs
+
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+
+    log.info("Fetching Gene Ontology from Biomart")
+    gdata = query(species,type)
+    log.info("Proceeing Gene Ontology data from Biomart")
     df, background_count = preprocessBioMart(gdata)
     log.info(f"Performing GO enrichment analysis on {file}")  
 
@@ -193,10 +321,6 @@ def enrichGO(gdata, file):
                 anot_count += 1
                 if k2 not in user_genecount:
                     user_genecount.append(k2)
-
-
-
-
     pvalues = []
     enrichment_result = []
     # get total mapped genes from user list
@@ -235,5 +359,13 @@ def enrichGO(gdata, file):
     
     end.insert(7, 'FDR', fdr)
 
-    return end
+    end = end[end['Pvalues']<=pvalueCutoff]
+
+    if plot:
+        if plotType == 'dotplot':
+            fig = dotplotGO(end,nrows,colorBy)
+        if plotType == 'barplot':
+            fig = barplotGO(end,nrows,colorBy)
+
+    return {'result': end, 'plot': fig}
 
