@@ -173,7 +173,7 @@ def dotplotGO(df=None, nrows=20, colorBy='logPvalues'):
     df =df.sort_values('Counts', ascending=True)
 
     fig, ax = plt.subplots(figsize=(10,10), dpi=300)
-    scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts']*0.25, c=df[colorBy])
+    scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts'], c=df[colorBy])
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_bounds((0, 20))
