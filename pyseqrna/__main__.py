@@ -286,16 +286,16 @@ def main():
         pu.make_directory(outgo)
         
         for c in combination:
-            file = f"{outdir}/diff_genes/{c}.txt"
-            ontology_results = go.enrichGO(file =file,species=options.gospecies, type=options.gotype), 
+            file_deg = f"{outdir}/diff_genes/{c}.txt"
+            ontology_results = go.enrichGO(file =file_deg,species=options.gospecies, type=options.gotype), 
             ontology_results.to_csv(os.path.join(outgo, f"{c}_gene_ontology.txt"), sep="\t", index=False)
     
     if options.keggpathway:
         outkegg = os.path.join(outdir,"KEGG_pathway")
         pu.make_directory(outkegg)
         for c in combination:
-            file = f"{outdir}/diff_genes/{c}.txt"
-            kegg_results = go.enrichGO(options.keggspecies, file)
+            file_deg = f"{outdir}/diff_genes/{c}.txt"
+            kegg_results = go.enrichGO(options.keggspecies, file_deg)
             kegg_results.to_csv(os.path.join(outkegg, f"{c}_kegg.txt"), sep="\t", index=False)
     if options.volcanoplot:
         outvolcano = os.path.join(outdir,"Volcano_Plots")
