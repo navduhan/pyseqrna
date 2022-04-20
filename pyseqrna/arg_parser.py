@@ -91,7 +91,8 @@ annotation.add_argument('--gene-ontology', action="store_true", default=False, d
     help="""Enables gene ontology functional enrichment using BioMart""")
 
 annotation.add_argument('--go-species',required='--gene-ontology' in sys.argv,  default=None, dest="gospecies",
-    help="""Species name for gene ontology functional enrichment using BioMart""")
+    help="""Species name for gene ontology functional enrichment using BioMart. 
+        For example Arabidopsis thaliana species name will be athaliana""")
 
 annotation.add_argument('--go-type',required='--gene-ontology' in sys.argv,  default=None, dest="gotype",
     help="""Type [plants , animals] name for gene ontology functional enrichment using BioMart""")
