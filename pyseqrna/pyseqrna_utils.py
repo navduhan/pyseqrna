@@ -495,12 +495,12 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
 
     if os.path.exists(outDir):
 
-        make_directory(os.path.join(outDir,"diff_genes"))
+        out = make_directory(os.path.join(outDir,"diff_genes"))
 
     else:
 
-        make_directory("diff_genes")
-        outDir = "."
+        out = make_directory(os.path.join(".","diff_genes"))
+        
 
     if multisheet:
         
@@ -509,7 +509,7 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
 
             gene = df['Gene'].copy()
             gene = gene.str.replace('gene:','').str.upper()
-            gene.to_csv(os.path.join(outDir,"diff_genes",f"{c}.txt"), sep="\t", index = False)
+            gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
    
     else:
 
@@ -519,6 +519,6 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
 
             gene = df['Gene'].copy()
 
-            gene.to_csv(os.path.join(outDir,"diff_genes",f"{c}.txt"), sep="\t", index = False)
+            gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
 
-    return
+    return 
