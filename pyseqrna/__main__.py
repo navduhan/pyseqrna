@@ -62,7 +62,7 @@ def main():
         
         # check if fastqc is turned on 
 
-        dill.dump(input_data,dill_save,protocol=dill.HIGHEST_PROTOCOL)
+        dill.dump([input_data],dill_save,protocol=dill.HIGHEST_PROTOCOL)
 
         log.info("Starting with read quality check")
 
@@ -96,7 +96,8 @@ def main():
         elif options.trimming == 'trim_galore':
 
             outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=outdir,paired=options.paired)
-            dill.dump(outtrim,dill_save,protocol=dill.HIGHEST_PROTOCOL)
+        
+        dill.dump([input_data, outtrim],dill_save,protocol=dill.HIGHEST_PROTOCOL)
         if options.slurm:
             for job in jobidt:
                 wait(lambda: pu.check_status(job), waiting_for="trimming to finish")
