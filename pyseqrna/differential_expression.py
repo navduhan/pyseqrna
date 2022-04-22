@@ -10,8 +10,8 @@ from rpy2.robjects import pandas2ri, numpy2ri, Formula
 from rpy2.robjects.conversion import localconverter
 from rpy2.robjects.packages import importr
 import matplotlib.pyplot as plt
-
-
+from rpy2.rinterface_lib.callbacks import logger as rpy2_logger
+rpy2_logger.setLevel(logging.ERROR)
 
 log = PyseqrnaLogger(mode='a', log="diff")
 

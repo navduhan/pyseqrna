@@ -276,8 +276,9 @@ def main():
     # filtered_DEG['plot'].close()
     log.info("Writting DEGs summary to excel file")
     filtered_DEG['summary'].to_excel(os.path.join(outdir,"DEG_count_summary.xlsx"))
-    log.info("Creating heatmap of top 50 DEGs")
+    
     if options.heatmap:
+        log.info("Creating heatmap of top 50 DEGs")
         heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
 
         heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
