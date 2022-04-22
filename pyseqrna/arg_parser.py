@@ -65,8 +65,8 @@ internal.add_argument('--normalize-count', dest='normalizecount',action='store',
 internal.add_argument('--normalization-type', dest='normalizationtype', default='RPKM', choices=['RPKM', 'TPM', 'CPM', 'medianRatiocount'], 
     help="Convert raw read counts to normalized counts\n[default:RPKM]")
 
-internal.add_argument('--heatmap', dest='heatmap',action='store', default=False, 
-    help="Create heatmap\n[default:True]")
+internal.add_argument('--heatmap', dest='heatmap',action='store_true', default=False, 
+    help="Create heatmap\n[default:False]")
 
 internal.add_argument('--heatmap-type', dest='heatmaptype', default='degs', choices=['counts', 'degs'],
     help="""Create heatmap based on selected choice \n[default: logFold-based]""" )
