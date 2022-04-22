@@ -348,17 +348,18 @@ def enrichGO( file= None, species=None,type=None, pvalueCutoff=0.05, plot=True, 
 
     a = [i for i in fdr if i <= 0.05]
     end = pd.DataFrame(enrichment_result)
-    end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
+    if end.shape[0]>1:
+        end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
     
-    end.insert(7, 'FDR', fdr)
+        end.insert(7, 'FDR', fdr)
 
-    end = end[end['Pvalues']<=pvalueCutoff]
+        end = end[end['Pvalues']<=pvalueCutoff]
 
-    if plot:
-        if plotType == 'dotplot':
-            fig = dotplotGO(end,nrows,colorBy)
-        if plotType == 'barplot':
-            fig = barplotGO(end,nrows,colorBy)
+        if plot:
+            if plotType == 'dotplot':
+                fig = dotplotGO(end,nrows,colorBy)
+            if plotType == 'barplot':
+                fig = barplotGO(end,nrows,colorBy)
 
     return {'result': end, 'plot': fig}
 
