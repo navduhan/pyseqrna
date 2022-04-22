@@ -77,6 +77,7 @@ def main():
         
             log.info("Read quality check completed succesfully")
 
+        dill.dump_session(os.path.join(options.outdir,'pyseq.pyseqrna'))
     # Trimming
 
     log.info(f"Read trimming started with {options.trimming}")
@@ -280,7 +281,7 @@ def main():
         heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
 
     pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
-
+    dill.dump_session(os.path.join(options.outdir,'pyseq.pyseqrna'))
     if options.geneontology:
         outgo = os.path.join(outdir,"Gene_Ontology")
         pu.make_directory(outgo)
