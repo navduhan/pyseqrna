@@ -360,6 +360,8 @@ def enrichGO( file= None, species=None,type=None, pvalueCutoff=0.05, plot=True, 
                 fig = dotplotGO(end,nrows,colorBy)
             if plotType == 'barplot':
                 fig = barplotGO(end,nrows,colorBy)
+            
+            return {'result': end, 'plot': fig}
 
-    return {'result': end, 'plot': fig}
+    return "No Gene Ontology"
 

@@ -292,8 +292,11 @@ def main():
         for c in combination:
             file_deg = f"{outdir}/diff_genes/{c}.txt"
             ontology_results = go.enrichGO(file =file_deg,species=options.gospecies, type=options.gotype), 
-            ontology_results['result'].to_excel(os.path.join(outgo, f"{c}_gene_ontology.xlsx"), index=False)
-            ontology_results['plot'].savefig(os.path.join(outgo, f"{c}_go_dotplot.png"))
+            if ontology_results is dict:
+                ontology_results['result'].to_excel(os.path.join(outgo, f"{c}_gene_ontology.xlsx"), index=False)
+                ontology_results['plot'].savefig(os.path.join(outgo, f"{c}_go_dotplot.png"))
+            else:
+                log.info(f"No ontology found for {c}")
     
     if options.keggpathway:
         outkegg = os.path.join(outdir,"KEGG_pathway")
