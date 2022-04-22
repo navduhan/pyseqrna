@@ -222,6 +222,8 @@ def main():
      
     log.info("Feature Count from aligned reads started")
 
+    dill.dump_session(os.path.join(options.outdir,'pyseq.pyseqrna'))
+
     if options.quantification == 'featureCounts':
 
         fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=outdir)
@@ -249,13 +251,13 @@ def main():
     targets = input_data['targets']
     if options.detool == 'DESeq2':
 
-        count=pd.read_csv(os.path.join(outdir,"Counts_final.txt"), sep="\t")
+        count=pd.read_excel(os.path.join(outdir,"Counts_final.xlsx"))
         result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
         result.to_excel(os.path.join(outdir,"Raw_DEGs_all.xlsx"), index=False)
         
     elif options.detool == 'edgeR':
 
-        count=pd.read_csv(os.path.join(outdir,"Counts_final.txt"), sep="\t")
+        count=pd.read_excel(os.path.join(outdir,"Counts_final.xlsx"))
         result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
         result.to_excel(os.path.join(outdir,"Raw_DEGs_all.xlsx"), index=False)
         
