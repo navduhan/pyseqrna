@@ -6,7 +6,10 @@ import scipy.stats as stats
 import numpy as np
 import pandas as pd
 from io import StringIO
+import matplotlib.pyplot as plt
+from matplotlib.cm import ScalarMappable
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
+
 
 log = PyseqrnaLogger(mode='a', log="pathway")
 
@@ -91,6 +94,100 @@ def myfunc(df, path):
         path.at[i, 'geneID'] = res
     return path
 
+def dotplotKEGG(df=None, nrows=20, colorBy='logPvalues'):
+    """_summary_
+
+    Args:
+        df (_type_, optional): _description_. Defaults to None.
+        nrows (int, optional): _description_. Defaults to 20.
+        colorBy (str, optional): _description_. Defaults to 'logPvalues'.
+       
+
+    Returns:
+        _type_: _description_
+    """
+
+    if colorBy=='logPvalues':
+        df['logPvalues'] = round(-np.log10(df['Pvalues']),2)
+        title = '-log10(Pvalues)'
+    
+    if colorBy=='FDR':
+        df = df
+        title = 'FDR'
+
+    df =df.sort_values('Counts', ascending=False)
+    df = df.head(nrows)
+    df =df.sort_values('Counts', ascending=True)
+
+    fig, ax = plt.subplots(figsize=(10,10), dpi=300)
+    scatter = ax.scatter(x=df['Counts'], y= df['Description'], s=df['Counts'], c=df[colorBy])
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_bounds((0, 20))
+    # add some space between the axis and the plot
+    ax.spines['left'].set_position(('outward', 8))
+    ax.spines['bottom'].set_position(('outward', 5))
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xlabel("Counts", fontsize=12, fontweight='bold')
+    plt.ylabel("Description", fontsize=12, fontweight='bold')
+
+    cbar = plt.colorbar(scatter,shrink=.25, pad=.2, aspect=10)
+    cbar.ax.set_title(title,pad=20, fontweight='bold')
+    fig.tight_layout()
+
+    return fig
+
+def barplotKEGG(df=None,nrows=20, colorBy='logPvalues' ):
+
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    
+    if colorBy=='logPvalues':
+        df['logPvalues'] = round(-np.log10(df['Pvalues']),2)
+        title = '-log10(Pvalues)'
+    
+    if colorBy=='FDR':
+        df = df
+        title = 'FDR'
+
+    df =df.sort_values('Counts', ascending=False)
+    df = df.head(nrows)
+    df =df.sort_values('Counts', ascending=True)
+    counts = df['Counts'].values.tolist()
+    terms = df['Description'].values.tolist()
+
+    data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
+
+    fig, ax = plt.subplots(figsize=(15, 10), dpi=300)
+
+    my_cmap = plt.cm.get_cmap('RdYlBu')
+    colors = my_cmap(data_color_normalized)
+
+    rects = ax.barh(terms, counts, color=colors)
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_bounds((0, 20))
+    # add some space between the axis and the plot
+    ax.spines['left'].set_position(('outward', 8))
+    ax.spines['bottom'].set_position(('outward', 5))
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xlabel("Counts", fontsize=12, fontweight='bold')
+    plt.ylabel("Description", fontsize=12, fontweight='bold')
+    sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0,max(df[colorBy])))
+
+    sm.set_array([])
+
+    cbar = plt.colorbar(sm, shrink=0.25,pad=.02, aspect=10)
+    cbar.ax.set_title(title,pad=20,fontweight='bold')
+    fig.tight_layout()
+
+    return fig
 
 def enrichKEGG(file, df, background_count):
 
@@ -190,7 +287,7 @@ def enrichKEGG(file, df, background_count):
     a = [i for i in fdr if i <= 0.05]
 
     end = pd.DataFrame(enrichment_result)
-    end.columns = ['Pathway_ID', 'Description',  'GeneRatio', 'BgRatio','Pvalues', 'Count', 'Genes' ]
+    end.columns = ['Pathway_ID', 'Description',  'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
     end.insert(5, 'FDR', fdr)
 
     
