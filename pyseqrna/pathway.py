@@ -94,6 +94,19 @@ def myfunc(df, path):
         path.at[i, 'geneID'] = res
     return path
 
+def fdr_calc(x):
+    """
+    Assumes a list or numpy array x which contains p-values for multiple tests
+    Copied from p.adjust function from R  
+    """
+    o = [i[0] for i in sorted(enumerate(x), key=lambda v:v[1],reverse=True)]
+    ro = [i[0] for i in sorted(enumerate(o), key=lambda v:v[1])]
+    q = sum([1.0/i for i in range(1,len(x)+1)])
+    l = [q*len(x)/i*x[j] for i,j in zip(reversed(range(1,len(x)+1)),o)]
+    l = [l[k] if l[k] < 1.0 else 1.0 for k in ro]
+    return l
+
+
 def dotplotKEGG(df=None, nrows=20, colorBy='logPvalues'):
     """_summary_
 
@@ -282,7 +295,8 @@ def enrichKEGG(file, df, background_count):
             enrichment_result.append([k, kegg_description[k], 
                                     f"{gene_in_pathway}/{mapped_user_ids}", f"{kegg_count[k]}/{bg_gene_count}", pvalue,len(gene_ids), gID])
 
-    fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
+    # fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
+    fdr = list(fdr_calc(pvalues))
 
     a = [i for i in fdr if i <= 0.05]
 
