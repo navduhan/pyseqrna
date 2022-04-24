@@ -13,7 +13,6 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../pyseqrna'))
-from pyseqrna import version
 import sphinx_rtd_theme
 html_theme = 'sphinx_rtd_theme'
 htm_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
@@ -28,7 +27,7 @@ author = 'Naveen Duhan'
 
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'
-version = version.__version__
+version = 0.0.1
 
 
 # -- General configuration ---------------------------------------------------
