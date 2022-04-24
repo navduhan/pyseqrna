@@ -4,7 +4,7 @@
 
 @author: naveen duhan
 
-Read pyrpipe configuration
+Read pyseqrna configuration
 """
 
 

@@ -2,11 +2,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''
+"""
 Title: This modules contains read align class functions for pySeqRNA
-Created : 
+
+Created : July 21, 2021
+
 @author : Naveen Duhan
-'''
+"""
 
 import os
 from posixpath import join
@@ -23,19 +25,11 @@ from pyseqrna import pyseqrna_utils as pu
 log = PyseqrnaLogger(mode="a",log='aligner')
 
 class STAR_Aligner:
+    """Class for STAR alignment program
 
-    """ Class for STAR alignment program
-    Parameters
-    __________
-    STAR_config: string
-        Path to STAR config file. This file will used to get the parameters for STAR alignment program
+    :param configFile : Path to STAR config file. This file will used to get the parameters for STAR alignment program
 
-    Slurm= string
-        To  run commands with slurm task-scheduler.
-
-    cpu = int
-    No. of threads to use
-
+    :param slurm (boolean, options): To run commands with slurm task-scheduler.
     """
 
     def __init__(self, genome=None, configFile=None, outDir='pySeqRNA_results', slurm=False):
@@ -68,14 +62,15 @@ class STAR_Aligner:
     
     def build_index(self,  mem= 20, tasks = 1,cpu= 8 , gff=None,  dep=''):
 
-        """[summary]
+        """This function build geneome index for read alignment
 
-        Args:
-            mem (int, optional): [description]. Defaults to 20.
-            tasks (int, optional): [description]. Defaults to 1.
-            gff ([type], optional): [description]. Defaults to None.
-            dep (str, optional): [description]. Defaults to ''.
+            :param mem: Provide memory in GB to use. Defaults to 20.
 
+            :param tasks: Number of tasks to run. Defaults to 1.
+
+            :param gff:. Defaults to None.
+
+            :param: dep (str, optional): [description]. Defaults to ''.
         """
         const = ['runThreadN', '-n'] #require when change number of CPUs
 

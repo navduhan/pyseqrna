@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''
-Title: This modules contains read quality check functions for pySeqRNA
-Created : 
-@author : Naveen Duhan
-'''
+"""
+Title: This modules contains read quality check functions for pySeqRNA\n
+
+Created :\n
+
+@author : Naveen Duhan\n
+
+"""
 
 import os
 import shutil
@@ -27,16 +30,16 @@ def flexbarRun(sampleDict,  configFile=None, slurm=False, mem=10, cpu=8, task=1,
        https://github.com/seqan/flexbar
 
     Args:
-        Samples (Dictionary, required): [Dictionary containing samples]. 
-        inputPath (str, required): [input files path]. Defaults to None.
-        configFile ([type], required): [Tool parameters file]. Defaults flexbar.ini in settings.
-        slurm (bool, optional): [Check if Slurm job scheduling available]. Defaults to False.
-        mem (int, required with slurm): [Memory to be used]. Defaults to 10.
-        cpu (int, required with slurm): [Number of CPU]. Defaults to 8.
-        task (int, required with slurm): [Number of task]. Defaults to 1.
-        pairedEND (bool, optional): [True if paired end samples ]. Defaults to False.
-        outDir (str, optional): [output directory for results]. Defaults to "pySeqRNA_results".
-        dep (str, optional with slurm): [if depends on previsous job]. Defaults to ''.
+        Samples (Dictionary, required): [Dictionary containing samples]. \n
+        inputPath (str, required): [input files path]. Defaults to None.\n
+        configFile ([type], required): [Tool parameters file]. Defaults flexbar.ini in settings.\n
+        slurm (bool, optional): [Check if Slurm job scheduling available]. Defaults to False.\n
+        mem (int, required with slurm): [Memory to be used]. Defaults to 10.\n
+        cpu (int, required with slurm): [Number of CPU]. Defaults to 8.\n
+        task (int, required with slurm): [Number of task]. Defaults to 1.\n
+        pairedEND (bool, optional): [True if paired end samples ]. Defaults to False.\n
+        outDir (str, optional): [output directory for results]. Defaults to "pySeqRNA_results".\n
+        dep (str, optional with slurm): [if depends on previsous job]. Defaults to ''.\n
     """
 
     if configFile != None:

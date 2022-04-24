@@ -18,13 +18,15 @@ log = PyseqrnaLogger(mode='a', log="stats")
 
 
 def getNreads(file, rdict, sp):
-    """
-        Get total number of reads in fastq file
-    Args:
-        file ([type]): fastq file
 
-    Returns:
-        [type]: total number of reads
+    """
+    
+    Get total number of reads in fastq file
+
+    file ([type]): fastq file
+
+    [type]: total number of reads
+
     """
     result = len(pyfastx.Fastq(file))
     

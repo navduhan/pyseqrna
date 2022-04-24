@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 '''
-Title: This script contains quality trimming tools for pySeqRNA
-Author: Naveen Duhan
-Version: 0.1
+
+:Title: This script contains quality trimming tools for pySeqRNA
+
+:Author: Naveen Duhan
+
+:Version: 0.1
+
 '''
 import re
 import logging
