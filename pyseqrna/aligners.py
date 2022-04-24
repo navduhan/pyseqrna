@@ -27,9 +27,9 @@ log = PyseqrnaLogger(mode="a",log='aligner')
 class STAR_Aligner:
     """Class for STAR alignment program
 
-    :param configFile : Path to STAR config file. This file will used to get the parameters for STAR alignment program
+    :param configFile: Path to STAR config file. This file will used to get the parameters for STAR alignment program
 
-    :param slurm (boolean, options): To run commands with slurm task-scheduler.
+    :param slurm: To run commands with slurm task-scheduler.
     """
 
     def __init__(self, genome=None, configFile=None, outDir='pySeqRNA_results', slurm=False):
@@ -60,17 +60,17 @@ class STAR_Aligner:
 
         return
     
-    def build_index(self,  mem= 20, tasks = 1,cpu= 8 , gff=None,  dep=''):
+    def build_index(self,  mem= 20, tasks = 1, cpu= 8 , gff=None,  dep= ""):
 
         """This function build geneome index for read alignment
 
             :param mem: Provide memory in GB to use. Defaults to 20.
 
-            :param tasks: Number of tasks to run. Defaults to 1.
+            :param tasks: Number of cpu-tasks to run. Defaults to 1.
 
-            :param gff:. Defaults to None.
+            :param gff: Gene feature file to index with genome. Defaults to None.
 
-            :param: dep (str, optional): [description]. Defaults to ''.
+            :param dep: slurm job id on which this job depends.  Defaults to ''.
         """
         const = ['runThreadN', '-n'] #require when change number of CPUs
 
@@ -156,11 +156,7 @@ class STAR_Aligner:
 
         """Function to check if star index is valid and exists.
 
-           Parameters
-           ----------
-
-           :return: Return true if index is valid
-
+           :return: Return true if genome index is valid.
            """
         for k, args in self.config.items():
 
@@ -185,13 +181,15 @@ class STAR_Aligner:
         return  False
 
     def run_Alignment(self, target=None, pairedEND=False, mem= 20,cpu=8, tasks=1,  dep='' ):
-        """[summary]
+        """This function align reads against indexed reference genome.
 
-        Args:
-            target ([type], optional): [description]. Defaults to None.
-            mem (int, optional): [description]. Defaults to 20.
-            tasks (int, optional): [description]. Defaults to 1.
-            dep (str, optional): [description]. Defaults to ''.
+            :param target: target dictionary containing sample information.
+
+            :param mem: Provide memory in GB to use. Defaults to 20.
+
+            :param tasks: Number of cpu-tasks to run. Defaults to 1.
+
+            :param dep: slurm job id on which this job depends.  Defaults to ''.
         """
         const = ['runThreadN', '-n'] #require when change number of CPUs
 
@@ -298,12 +296,6 @@ class STAR_Aligner:
 
 
 class hisat2_Aligner():
-
-    """
-    
-
-    """
-
     def __init__(self, genome=None, configFile=None,  outDir='pySeqRNA_results', slurm=False):
 
         self.genome = genome
@@ -332,12 +324,10 @@ class hisat2_Aligner():
         return
     
     def build_index(self, mem=8, tasks=1, cpu= 8, dep=''):
-        """
-        Description of build_index
+        """Description of build_index
 
         Args:
             self (undefined):
-
         """
         const = ['--threads','-p']
 
@@ -425,13 +415,11 @@ class hisat2_Aligner():
     
     def check_index(self, indexName=None, largeIndex=False):
 
-        """
-        Description of check_index
+        """Description of check_index
 
         Args:
            
-            directory : directory location for hisat2 index files
-
+        directory : directory location for hisat2 index files
         """
         for k, args in self.config.items():
 
