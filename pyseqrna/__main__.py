@@ -19,6 +19,7 @@ from pyseqrna import pyseqrna_plots as pp
 from pyseqrna import ribosomal as ribo
 from pyseqrna import multimapped_groups as mmg
 from pyseqrna import gene_ontology as go
+from pyseqrna import pathway as pp
 import pyseqrna.version
 import pandas as pd
 import numpy as np
@@ -33,6 +34,18 @@ log = pu.PyseqrnaLogger(mode="w", log="analysis")
 
 def main():
     
+    if sys.argv[1] == '--kegg-organism':
+
+        organisms = pp.kegg_organism().values.tolist()
+        with open('Kegg_organism.list', 'w')as fp:
+            fp.write(f"Code\tOrganism\n")
+            for o in organisms:
+                print(f"{o[1]}\t{o[2]}\n")
+                fp.write(f"{o[1]}\t{o[2]}\n")
+            fp.close()
+
+        sys.exit(1)
+
     # Get all the options from the user
     options, unknownargs = arg_parser.parser.parse_known_args()  
 

@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-@author: naveen duhan
+Title: Argument parser module for pyseqrna
 
-title: Argument parser module
+@author: Naveen Duhan
 """
 
 import argparse
@@ -38,7 +38,8 @@ mandatory.add_argument(
     "feature_file", type=str,
     help="Path to the GTF/GFF file ")
 
-parser.add_argument("--version", action="version", version= 'pySeqRNA (version {})'.format(ver), help= "Show version information and exit")
+parser.add_argument("--version", action="version", version= 'pyseqrna (version {})'.format(ver), help= "Show version information and exit")
+
 internal = parser.add_argument_group("Internal arguments")
 
 internal.add_argument( "--outdir",  default='pySeqRNA_results', 
@@ -115,7 +116,8 @@ annotation.add_argument('--kegg-pathway', action="store_true", default=False, de
 annotation.add_argument('--kegg-species',required='--kegg-pathway' in sys.argv,  default=None, dest="keggspecies",
     help="""Species name for kegg pathway functional enrichment using KEGG.
 Note:KEGG uses ENTREZID for enrichment. Please convert your IDs to ENTREZID.""")
-
+annotation.add_argument('--kegg-organism', required='--kegg-organism', default=None, dest="keggorganism",
+    help=""" Print all kegg organism avaiable """)
 tools = parser.add_argument_group("External tool arguments")
 
 tools.add_argument("--trimming", action='store', dest="trimming", type=str, default='trim_galore', choices=['flexbar', 'trimmomatic', 'trim_galore'], 

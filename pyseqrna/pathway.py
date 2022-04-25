@@ -31,6 +31,19 @@ def _q(op, arg1, arg2=None, arg3=None):
     handle.url = resp.url
     return handle
 
+def kegg_organism():
+
+    resp =  urlopen("http://rest.kegg.jp/list/organism")
+
+    handle = io.TextIOWrapper(resp, encoding="UTF-8")
+    handle.url = resp.url
+
+    df = pd.read_csv(handle, sep="\t", names=['Organism ID', 'Organism Code', 'Organism Name', 'Taxonomy'])
+
+    organisms = df[['Organism ID', 'Organism Code', 'Organism Name']]
+
+    return organisms
+
 def kegg_list(sp):
     resp= _q("list","pathway",sp)
 

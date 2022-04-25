@@ -10,6 +10,7 @@ Created : July 21, 2021
 @author : Naveen Duhan
 """
 
+from cmath import e
 import os
 from posixpath import join
 import sys
@@ -32,7 +33,14 @@ class STAR_Aligner:
     :param slurm: To run commands with slurm task-scheduler.
     """
 
-    def __init__(self, genome=None, configFile=None, outDir='pySeqRNA_results', slurm=False):
+    def __init__(self, genome=None, configFile=None, outDir=None, slurm=False):
+        """Default arguments for class STAR_Aligner
+
+            :param genome: Reference genome file. 
+            :param config_file: Parameter file for STAR. Default is from default parameters.
+            :param outdir: Output directory to store alignement results. Default current working directory.
+            :param slurm: To execute jobs with slurm scheduler.  
+        """
 
         self.genome = genome
 
@@ -70,6 +78,8 @@ class STAR_Aligner:
 
             :param gff: Gene feature file to index with genome. Defaults to None.
 
+            :param cpu: Total number of threads to use. Default 8.
+
             :param dep: slurm job id on which this job depends.  Defaults to ''.
         """
         const = ['runThreadN', '-n'] #require when change number of CPUs
@@ -93,16 +103,24 @@ class STAR_Aligner:
         else:
             
             output = pu.make_directory(directory)
-    
-        try:
+        # check genome file extension
+        genome_extensions = tuple(['.fa', '.fasta', '.fna', '.fa.gz', 'fna.gz', '.fasta.gz'])
+        
+        if self.genome.endswith(genome_extensions):
+
+            if self.genome.endswith(".gz"):
+
+                os.system(' '.join(["gunzip", self.genome]))
 
             os.system(' '.join(["cp", self.genome, output]))
 
             log.info(f"{pu.get_basename(self.genome)} copied successfully in {directory}")
 
-        except Exception:
+        else:
 
-            log.error("please provide a valid genome fasta file ")
+            log.error(f"Please provide a valid genome fasta file with these {genome_extensions} extensions")
+
+            sys.exit(1)
 
         GenomeFasta = os.path.join(output, pu.get_basename(self.genome))
 
@@ -113,7 +131,8 @@ class STAR_Aligner:
         if execPATH is None:
 
             log.error("STAR aligner not found in path")
-            sys.exit()
+
+            sys.exit(1)
         
         else:
 
@@ -129,7 +148,7 @@ class STAR_Aligner:
 
                 try:
                 
-                    job_id = pu.clusterRun(job_name='star_index', sout=os.path.join(output, "star_index.out"), serror=os.path.join(output, "star_index.err"), command= star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
+                    job_id = pu.clusterRun(job_name='star_index', sout=os.path.join(output, "star_index"), serror=os.path.join(output, "star_index"), command= star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
 
                     log.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
 
@@ -185,9 +204,13 @@ class STAR_Aligner:
 
             :param target: target dictionary containing sample information.
 
-            :param mem: Provide memory in GB to use. Defaults to 20.
+            :param pairedEND: True if samples are paired.
+
+            :param mem: Provide memory in GB to use. Default 20 GB.
 
             :param tasks: Number of cpu-tasks to run. Defaults to 1.
+
+            :param cpu: Total number of threads to use. Default 8.
 
             :param dep: slurm job id on which this job depends.  Defaults to ''.
         """
@@ -250,7 +273,8 @@ class STAR_Aligner:
             if execPATH is None:
 
                 log.error("STAR aligner not found in path")
-                sys.exit()
+
+                sys.exit(1)
             
             else:
             
@@ -296,7 +320,22 @@ class STAR_Aligner:
 
 
 class hisat2_Aligner():
+
+    """Class for HISAT2 alignment program
+
+    :param configFile: Path to HISAT2 config file. This file will used to get the parameters for HISAT2 alignment program.
+
+    :param slurm: To run commands with slurm task-scheduler.
+    """
     def __init__(self, genome=None, configFile=None,  outDir='pySeqRNA_results', slurm=False):
+
+        """Default arguments for class hisat2_Aligner
+
+            :param genome: Reference genome file. 
+            :param config_file: Parameter file for HISAT2. Default is from default parameters.
+            :param outdir: Output directory to store alignement results. Default current working directory.
+            :param slurm: To execute jobs with slurm scheduler.  
+        """
 
         self.genome = genome
 
@@ -324,10 +363,18 @@ class hisat2_Aligner():
         return
     
     def build_index(self, mem=8, tasks=1, cpu= 8, dep=''):
-        """Description of build_index
 
-        Args:
-            self (undefined):
+        """This function build geneome index for read alignment
+
+            :param mem: Provide memory in GB to use. Defaults to 20.
+
+            :param tasks: Number of cpu-tasks to run. Defaults to 1.
+
+            :param gff: Gene feature file to index with genome. Defaults to None.
+
+            :param cpu: Total number of threads to use. Default 8.
+
+            :param dep: slurm job id on which this job depends.  Defaults to ''.
         """
         const = ['--threads','-p']
 
@@ -353,15 +400,23 @@ class hisat2_Aligner():
             
             output = pu.make_directory(directory)
 
-        try:
+        genome_extensions = tuple(['.fa', '.fasta', '.fna', '.fa.gz', 'fna.gz', '.fasta.gz'])
+        
+        if self.genome.endswith(genome_extensions):
+
+            if self.genome.endswith(".gz"):
+
+                os.system(' '.join(["gunzip", self.genome]))
 
             os.system(' '.join(["cp", self.genome, output]))
 
             log.info(f"{pu.get_basename(self.genome)} copied successfully in {directory}")
 
-        except Exception:
+        else:
 
-            log.error("please provide a valid genome fasta file ")
+            log.error(f"Please provide a valid genome fasta file with these {genome_extensions} extensions")
+
+            sys.exit(1)
 
 
         if indexName != 'NA':
@@ -381,7 +436,7 @@ class hisat2_Aligner():
         if execPATH is None:
 
             log.error("hisat2-build not found in path")
-            sys.exit()
+            sys.exit(1)
         else:
             hisat2_command = f"{execPATH} {arg} {GenomeFasta} {basename} "
 
@@ -413,13 +468,13 @@ class hisat2_Aligner():
         return job_id
 
     
-    def check_index(self, indexName=None, largeIndex=False):
+    def check_index(self, largeIndex=False):
 
-        """Description of check_index
+        """Function to check if star index is valid and exists.
 
-        Args:
-           
-        directory : directory location for hisat2 index files
+            :param: True if genome indexed with large index.
+
+            :return: Return true if genome index is valid.
         """
         for k, args in self.config.items():
 
@@ -455,6 +510,21 @@ class hisat2_Aligner():
 
     
     def run_Alignment(self, target=None, pairedEND=False,  mem= 20, cpu=8, tasks=1, dep=''):
+
+        """This function align reads against indexed reference genome.
+
+            :param target: target dictionary containing sample information.
+
+            :param pairedEND: True if samples are paired.
+
+            :param mem: Provide memory in GB to use. Default 20 GB.
+
+            :param tasks: Number of cpu-tasks to run. Defaults to 1.
+
+            :param cpu: Total number of threads to use. Default 8.
+
+            :param dep: slurm job id on which this job depends.  Defaults to ''.
+        """
 
         consta = ['--threads', '-p']
 
@@ -520,7 +590,7 @@ class hisat2_Aligner():
             if execPATH is None:
 
                 log.error("hisat2 aligner not found in path")
-                sys.exit()
+                sys.exit(1)
             
             else:
             

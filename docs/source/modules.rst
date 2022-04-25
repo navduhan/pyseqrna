@@ -1,4 +1,4 @@
-pyseqrna
+modules
 ========
 
 .. toctree::
