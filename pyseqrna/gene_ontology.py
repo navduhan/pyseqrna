@@ -13,13 +13,13 @@ import scipy.stats as stats
 import numpy as np
 import requests
 import pandas as pd
-from io import StringIO
+from io import StringIO, TextIOWrapper
 from xml.etree import ElementTree
 from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
-
+from urllib.request import urlopen, urlretrieve
 
 log = PyseqrnaLogger(mode='a', log="go")
 
@@ -33,6 +33,21 @@ def get_request(url,  **params):
 
     return r
 
+def go_organism(type = "plants"):
+    if type == "plants":
+        resp =  urlopen("https://plants.ensembl.org/biomart/martservice?type=datasets&requestid=biomaRt&mart=plants_mart")
+
+    if type == 'animals':
+        resp =  urlopen("https://www.ensembl.org/biomart/martservice?type=datasets&requestid=biomaRt&mart=ENSEMBL_MART_ENSEMBL")
+
+    handle = TextIOWrapper(resp, encoding="UTF-8")
+    handle.url = resp.url
+
+    df =pd.read_csv(handle, sep="\t", names=['Table', 'Code', 'Organism', 'A', 'Assembly', 'B', 'C', 'Default', 'Date'])
+
+    organism = df[['Code', 'Organism']]
+
+    return organism
 
 def _add_attr_node(root, attr):
     attr_el = ElementTree.SubElement(root, 'Attribute')
