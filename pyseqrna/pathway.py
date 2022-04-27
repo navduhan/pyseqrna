@@ -314,13 +314,16 @@ def enrichKEGG(file, df, background_count):
     a = [i for i in fdr if i <= 0.05]
 
     end = pd.DataFrame(enrichment_result)
-    end.columns = ['Pathway_ID', 'Description',  'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
-    end.insert(5, 'FDR', fdr)
+    if end.shape[0]>1:
+        end.columns = ['Pathway_ID', 'Description',  'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
+        end.insert(5, 'FDR', fdr)
+
+        return end
 
     
 
 
-    return end
+    return 'No Pathway'
 
 
     

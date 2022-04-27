@@ -142,7 +142,7 @@ def preprocessBioMart(data):
             v[0][2] = 'BP'
 
         dd.append([v[0][0], v[0][1], v[0][2], v[0][3],
-                    v[1], len(v[1])])
+                    v[1].upper(), len(v[1])])
 
     finalDF = pd.DataFrame(dd, columns=[
                            'ID', 'Term', 'Ontology', 'Function', 'Gene', 'Gene_length'])
