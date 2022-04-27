@@ -33,21 +33,11 @@ log = pu.PyseqrnaLogger(mode="w", log="analysis")
 
 
 def main():
-    
-    if sys.argv[1] == '--kegg-organism':
-
-        organisms = pp.kegg_organism().values.tolist()
-        with open('Kegg_organism.list', 'w')as fp:
-            fp.write(f"Code\tOrganism\n")
-            for o in organisms:
-                print(f"{o[1]}\t{o[2]}\n")
-                fp.write(f"{o[1]}\t{o[2]}\n")
-            fp.close()
-
-        sys.exit(1)
 
     # Get all the options from the user
+    
     options, unknownargs = arg_parser.parser.parse_known_args()  
+
 
     if options.threads =='80% of available CPU' :
     
@@ -309,7 +299,7 @@ def main():
         for c in combination:
             file_deg = f"{outdir}/diff_genes/{c}.txt"
             ontology_results = go.enrichGO(file =file_deg,species=options.gospecies, type=options.gotype), 
-            if ontology_results is dict:
+            if ontology_results != "No Gene Ontology":
                 ontology_results['result'].to_excel(os.path.join(outgo, f"{c}_gene_ontology.xlsx"), index=False)
                 ontology_results['plot'].savefig(os.path.join(outgo, f"{c}_go_dotplot.png"))
             else:

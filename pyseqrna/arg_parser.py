@@ -38,7 +38,18 @@ mandatory.add_argument(
     "feature_file", type=str,
     help="Path to the GTF/GFF file ")
 
+
 parser.add_argument("--version", action="version", version= 'pyseqrna (version {})'.format(ver), help= "Show version information and exit")
+
+# parser.add_argument('--kegg-organism', type=str,
+#     help=""" Print all kegg organism avaiable """)
+
+# parser.add_argument('--go-plants-organism', type=str, default=None,
+#     help=""" Print all go plants organism avaiable """)
+
+# parser.add_argument('--go-animals-organism', type=str, default=None,
+#     help=""" Print all go animals organism avaiable """)
+
 
 internal = parser.add_argument_group("Internal arguments")
 
@@ -106,12 +117,9 @@ annotation.add_argument('--go-species',required='--gene-ontology' in sys.argv,  
     help="""Species name for gene ontology functional enrichment using BioMart. 
 For example Arabidopsis thaliana species name will be athaliana""")
 
-annotation.add_argument('--species-type',required='--gene-ontology' in sys.argv,  default=None, dest="gotype",
+annotation.add_argument('--gospecies-type', required='--gene-ontology' in sys.argv,  default=None, dest="gotype",
     help="""Type [plants , animals] name for gene ontology functional enrichment
 using BioMart""")
-
-annotation.add_argument('--go-organism', required='--species-type', default=None, dest="goorganism",
-    help=""" Print all go organism avaiable """)
 
 annotation.add_argument('--kegg-pathway', action="store_true", default=False, dest="keggpathway",
     help="""Enables kegg pathway functional enrichment using KEGG""")
@@ -119,8 +127,7 @@ annotation.add_argument('--kegg-pathway', action="store_true", default=False, de
 annotation.add_argument('--kegg-species',required='--kegg-pathway' in sys.argv,  default=None, dest="keggspecies",
     help="""Species name for kegg pathway functional enrichment using KEGG.
 Note:KEGG uses ENTREZID for enrichment. Please convert your IDs to ENTREZID.""")
-annotation.add_argument('--kegg-organism', required='--kegg-organism', default=None, dest="keggorganism",
-    help=""" Print all kegg organism avaiable """)
+
 tools = parser.add_argument_group("External tool arguments")
 
 tools.add_argument("--trimming", action='store', dest="trimming", type=str, default='trim_galore', choices=['flexbar', 'trimmomatic', 'trim_galore'], 
