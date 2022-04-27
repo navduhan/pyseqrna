@@ -298,7 +298,8 @@ def main():
         
         for c in combination:
             file_deg = f"{outdir}/diff_genes/{c}.txt"
-            ontology_results = go.enrichGO(file =file_deg,species=options.gospecies, type=options.gotype), 
+            ontology_results = go.enrichGO(file =file_deg,species=options.gospecies, type=options.gotype)
+            print(type(ontology_results))
             if ontology_results != "No Gene Ontology":
                 ontology_results['result'].to_excel(os.path.join(outgo, f"{c}_gene_ontology.xlsx"), index=False)
                 ontology_results['plot'].savefig(os.path.join(outgo, f"{c}_go_dotplot.png"))
