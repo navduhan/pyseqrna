@@ -19,7 +19,7 @@ from pyseqrna import pyseqrna_plots as pp
 from pyseqrna import ribosomal as ribo
 from pyseqrna import multimapped_groups as mmg
 from pyseqrna import gene_ontology as go
-from pyseqrna import pathway as pp
+from pyseqrna import pathway as pt
 import pyseqrna.version
 import pandas as pd
 import numpy as np
@@ -308,9 +308,10 @@ def main():
     if options.keggpathway:
         outkegg = os.path.join(outdir,"KEGG_pathway")
         pu.make_directory(outkegg)
+        df , bg =pt.kegg_list(options.keggspecies)
         for c in combination:
             file_deg = f"{outdir}/diff_genes/{c}.txt"
-            kegg_results = go.enrichGO(options.keggspecies, file_deg)
+            kegg_results = pt.enrichKEGG(file_deg,df,bg)
             kegg_results.to_csv(os.path.join(outkegg, f"{c}_kegg.txt"), sep="\t", index=False)
     if options.volcanoplot:
         outvolcano = os.path.join(outdir,"Volcano_Plots")
