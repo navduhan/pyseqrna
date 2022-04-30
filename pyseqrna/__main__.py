@@ -71,7 +71,7 @@ def main():
 
     if options.fastqc:
         
-        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, paired=options.paired)
+        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
         if options.slurm:
             for job in jobid:
@@ -115,7 +115,7 @@ def main():
     
     if options.fastqc2:
         
-        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, paired=options.paired)
+        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
         if options.slurm:
             for job in jobid:

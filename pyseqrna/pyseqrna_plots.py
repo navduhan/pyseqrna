@@ -207,7 +207,7 @@ def GenerateCollection(data=None):
         GeneCollections[key] = value
     return GeneCollections
 
-def plotVenn(DEGFile=None, FOLD=2,comparisons=None, degLabel="total", outDir=None, fontsize=14, figsize=(12,12),dpi=300):
+def plotVenn(DEGFile=None, FOLD=2,comparisons=None, degLabel="total",  fontsize=14, figsize=(12,12),dpi=300):
     global labelsUp, labelsDown, labels, fig
     data = []
     Up = []

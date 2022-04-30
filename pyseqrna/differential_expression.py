@@ -10,6 +10,7 @@ from rpy2.robjects import pandas2ri, numpy2ri, Formula
 from rpy2.robjects.conversion import localconverter
 from rpy2.robjects.packages import importr
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 from rpy2.rinterface_lib.callbacks import logger as rpy2_logger
 rpy2_logger.setLevel(logging.ERROR)
 
@@ -42,6 +43,8 @@ def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene
             deseq = importr('DESeq2', lib_loc="/home/nav/R/x86_64-pc-linux-gnu-library/4.0")
     except Exception:
         log.error("DESeq2 installation was not found ")
+
+    
     gene_id = countDF[[gene_column]].values
 
     countDF.set_index(gene_column, inplace=True)
@@ -310,7 +313,7 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
     DEGs = {}
     Ups = {}
     Downs = {}
-    summary = pd.DataFrame()
+    # summary = pd.DataFrame()
 
     degDF = degDF.set_index('Gene')
 
@@ -347,7 +350,7 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         Ups[c] = upDF
         Downs[c] = downDF
 
-    summary =summary.append(pd.DataFrame({"Comparisons": CompareList, "Total_DEGs": Total, "Up_DEGs": Up, "Down_DEGs": Down}))
+    summary =pd.DataFrame({"Comparisons": CompareList, "Total_DEGs": Total, "Up_DEGs": Up, "Down_DEGs": Down})
 
     if plot == True:
 
@@ -356,15 +359,14 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         updata= summary['Up_DEGs'].values.tolist()
         downdata = summary['Down_DEGs'].values.tolist()
         my_range=list(range(1,len(summary.index)+1))
-        fig, ax = plt.subplots()
-        plt.barh(labels,updata, color='mediumseagreen')
-        plt.barh(labels,downdata, left=updata, color='salmon')
-
+        fig, ax = plt.subplots(dpi=300)
+        ax.barh(labels,updata, color='mediumseagreen')
+        ax.barh(labels,downdata, left=updata, color='salmon')
         plt.xticks(fontsize=12)
         plt.yticks(fontsize=12)
         plt.xlabel("Number of Genes", fontsize=10)
         plt.ylabel("Comparisons", fontsize=10)
-        plt.legend(['Up-regulated', 'Down-regulated'], bbox_to_anchor=(0.4, 1.2),ncol = 2, loc='center', fontsize=12)
+        plt.legend(['Up-regulated', 'Down-regulated'],  ncol =2, loc='center', bbox_to_anchor=(0.5, 1.1))
 
 
         ax.spines['top'].set_visible(False)
@@ -375,9 +377,9 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         ax.spines['bottom'].set_position(('outward', 5))
         # plt.savefig('deg.png', dpi=300, bbox_inches='tight')
         if replicate:
-            plt.title(f'Filter DEGs (Fold:{FOLD} and FDR:{FDR})', loc='center')
+            plt.title(f'Filter DEGs (Fold:{FOLD} and FDR:{FDR})', loc='center', pad=40)
         else:
-            plt.title(f'Filter DEGs (Fold:{FOLD} )', loc='center')
+            plt.title(f'Filter DEGs (Fold:{FOLD} )', loc='center', pad=40)
+        fig.tight_layout()
         
-        
-    return {'summary': summary, "filtered": DEGs,"filteredup":Ups, "filtereddown":Downs, "plot": plt}
+    return {'summary': summary, "filtered": DEGs,"filteredup":Ups, "filtereddown":Downs, "plot": fig}
