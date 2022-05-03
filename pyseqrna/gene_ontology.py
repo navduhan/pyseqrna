@@ -133,7 +133,7 @@ def preprocessBioMart(data):
     
     for k, v in d.items():
         v[1] = [i for i in v[1] if str(i) != 'NaN']
-
+        v[1] =[x.upper() for x in v[1]]
         if v[0][2] == 'cellular_component':
             v[0][2] = 'CC'
         if v[0][2] == 'molecular_function':
@@ -142,7 +142,7 @@ def preprocessBioMart(data):
             v[0][2] = 'BP'
 
         dd.append([v[0][0], v[0][1], v[0][2], v[0][3],
-                    v[1].upper(), len(v[1])])
+                    v[1], len(v[1])])
 
     finalDF = pd.DataFrame(dd, columns=[
                            'ID', 'Term', 'Ontology', 'Function', 'Gene', 'Gene_length'])
