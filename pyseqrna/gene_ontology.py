@@ -19,7 +19,6 @@ from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
-from matplotlib.ticker import MaxNlocator
 from urllib.request import urlopen, urlretrieve
 
 log = PyseqrnaLogger(mode='a', log="go")
