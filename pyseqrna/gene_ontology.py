@@ -19,6 +19,7 @@ from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
+from matplotlib.ticker import MaxNlocator
 from urllib.request import urlopen, urlretrieve
 
 log = PyseqrnaLogger(mode='a', log="go")
@@ -189,6 +190,7 @@ def dotplotGO(df=None, nrows=20, colorBy='logPvalues'):
 
     fig, ax = plt.subplots(figsize=(10,10), dpi=300)
     scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts'], c=df[colorBy])
+    ax.xaxis.get_major_locator().set_params(integer=True)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_bounds((0, 20))
@@ -236,7 +238,7 @@ def barplotGO(df=None,nrows=20, colorBy='logPvalues' ):
     colors = my_cmap(data_color_normalized)
 
     rects = ax.barh(terms, counts, color=colors)
-
+    ax.xaxis.get_major_locator().set_params(integer=True)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_bounds((0, 20))
