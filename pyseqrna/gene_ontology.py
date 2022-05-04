@@ -162,7 +162,7 @@ def fdr_calc(x):
     l = [l[k] if l[k] < 1.0 else 1.0 for k in ro]
     return l
 
-def dotplotGO(df=None, nrows=20,height=10, width=10, colorBy='logPvalues'):
+def dotplotGO(df=None, nrows=20, colorBy='logPvalues'):
     """_summary_
 
     Args:
@@ -187,7 +187,7 @@ def dotplotGO(df=None, nrows=20,height=10, width=10, colorBy='logPvalues'):
     df = df.head(nrows)
     df =df.sort_values('Counts', ascending=True)
 
-    fig, ax = plt.subplots(figsize=(height,width), dpi=300)
+    fig, ax = plt.subplots(figsize=(10,10), dpi=300)
     scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts'], c=df[colorBy])
     ax.xaxis.get_major_locator().set_params(integer=True)
     ax.spines['top'].set_visible(False)
@@ -207,7 +207,7 @@ def dotplotGO(df=None, nrows=20,height=10, width=10, colorBy='logPvalues'):
 
     return fig
 
-def barplotGO(df=None,nrows=20, height=15, width=10, colorBy='logPvalues' ):
+def barplotGO(df=None,nrows=20, colorBy='logPvalues' ):
 
     """_summary_
 
@@ -231,7 +231,7 @@ def barplotGO(df=None,nrows=20, height=15, width=10, colorBy='logPvalues' ):
 
     data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
 
-    fig, ax = plt.subplots(figsize=(height, width), dpi=300)
+    fig, ax = plt.subplots(figsize=(15, 10), dpi=300)
 
     my_cmap = plt.cm.get_cmap('RdYlBu')
     colors = my_cmap(data_color_normalized)
