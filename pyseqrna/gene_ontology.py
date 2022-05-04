@@ -107,7 +107,7 @@ class GeneOntology:
         return result
 
 
-    def preprocessBioMart(data):
+    def preprocessBioMart(self,data):
 
         df = data
         
@@ -164,7 +164,7 @@ class GeneOntology:
         return finalDF, bg_count
 
 
-    def fdr_calc(x):
+    def fdr_calc(self, x):
         """
         Assumes a list or numpy array x which contains p-values for multiple tests
         Copied from p.adjust function from R  
