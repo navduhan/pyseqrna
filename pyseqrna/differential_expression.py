@@ -397,7 +397,8 @@ class Gene_Description:
         self.combinations = combinations
         self.filtered = filtered
         self.degFile = degFile
-
+        self.names = self.query(species=self.species, type=self.type)
+        
         return
 
 
@@ -418,18 +419,18 @@ class Gene_Description:
         return
 
 
-    def query(self):
+    def query(self, species, type):
 
         # first need to check if the species is animal or plant
 
-        if self.type == 'animals':
+        if type == 'animals':
             uri= "https://ensembl.org/biomart/martservice"
             scheme = 'default'
-            fspecies = self.species+"_gene_ensembl"
-        if self.type == 'plants':
+            fspecies = species+"_gene_ensembl"
+        if type == 'plants':
             uri = "https://plants.ensembl.org/biomart/martservice"
             scheme = 'plants_mart'
-            fspecies = self.species+"_eg_gene"
+            fspecies = species+"_eg_gene"
 
         # build query
 
@@ -457,19 +458,32 @@ class Gene_Description:
 
     def add_names(self):
 
-        names = self.query()
         file = self.degFile.split(".xlsx")[0]
-        wd = pd.ExcelWriter(f"{file}_Gene_name_added.xlsx")
 
-        for c in combinations:
+        if self.filtered:
 
-            df = pd.read_excel(self.degFile, sheet_name=c)
+            wd = pd.ExcelWriter(f"{file}_Gene_name_added.xlsx")
 
-            final = df.merge(names, on='Gene')
+            for c in self.combinations:
 
-            final.to_excel(wd, sheet_name=c)
+                df = pd.read_excel(self.degFile, sheet_name=c)
 
-        wd.save()
+                col =df.columns
+
+                col = col.insert(1, 'Name')
+
+                col = col.insert(2, 'Description')
+
+                final = df.merge(self.names, on='Gene')
+
+                final = final[col]
+
+                final.to_excel(wd, sheet_name=c, index=False)
+
+            wd.save()
+        else:
+
+            print("please provide the filtered DEGs file")
 
         return
 
