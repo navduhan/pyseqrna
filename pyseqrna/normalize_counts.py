@@ -144,7 +144,7 @@ class Normalization():
         This function convert counts to counts per million
         """
 
-        df = pd.read_csv(self.countFile, sep="\t")
+        df = pd.read_excel(self.countFile)
 
         countDF = df.set_index(self.geneColumn)
 
@@ -180,7 +180,7 @@ class Normalization():
             [type]: [description]
         """
 
-        df = pd.read_csv(self.countFile, sep="\t")
+        df = pd.read_excel(self.countFile)
 
         countDF = df.set_index(self.geneColumn)
 
@@ -224,7 +224,7 @@ class Normalization():
             [type]: [description]
         """
 
-        df = pd.read_csv(self.countFile, sep="\t")
+        df = pd.read_excel(self.countFile)
 
         countDF = df.set_index(self.geneColumn)
 
@@ -265,7 +265,7 @@ class Normalization():
 
     def meanRatioCount(self):
 
-        df = pd.read_csv(self.countFile, sep="\t")
+        df = pd.read_excel(self.countFile)
         df2 = df.set_index('Gene')
         col = df2.columns.tolist()
         df3 = df2[df2[col] !=0]
