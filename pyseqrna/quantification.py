@@ -109,7 +109,7 @@ def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, s
         df= pd.read_csv(outFile, sep="\t", comment="#")
         newCountDF = df.drop(columns=["Chr", "Start", "End", "Strand","Length"])
         newCountDF.columns = col
-        
+        newCountDF['Gene']= newCountDF['Gene'].str.replace("gene:", "")
         newCountDF.to_excel(os.path.join(outDir,"Counts_final.xlsx"), index=False)
         os.remove(outFile)
     return job_id
@@ -206,7 +206,7 @@ def htseqCount(configFile=None,bamDict=None, gff=None,mem=8,cpu=8,tasks=1, slurm
     df = pd.read_csv(outFile, sep="\t")
     df.columns = col    
     newCountDF = df.iloc[:-5]
-   
+    newCountDF['Gene']= newCountDF['Gene'].str.replace("gene:", "")
     newCountDF.to_excel(os.path.join(outDir,"Counts_final.xlsx"), index=False)
     os.remove(outFile)
     return job_id
