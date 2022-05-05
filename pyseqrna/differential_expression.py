@@ -4,6 +4,10 @@ from itertools import combinations
 import pandas as pd
 import numpy as np
 import logging
+import requests
+from io import StringIO, TextIOWrapper
+from xml.etree import ElementTree
+from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 import rpy2.robjects as robjects
 from rpy2.robjects import pandas2ri, numpy2ri, Formula
@@ -16,11 +20,11 @@ rpy2_logger.setLevel(logging.ERROR)
 
 log = PyseqrnaLogger(mode='a', log="diff")
 
-
-
 to_dataframe = robjects.r('function(x) data.frame(x)')
 
 numpy2ri.activate()
+
+
 
 def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene', subset=False, lib=None):
     """[summary]
@@ -297,7 +301,7 @@ def run_edgeR(countDF=None, targetFile=None, combination=None,  gene_column='Gen
     
     return edgeR_results
 
-def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6), replicate=True):
+def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6), replicate=True, extraColumns=None):
     """[summary]
 
     Args:
@@ -316,7 +320,6 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
     # summary = pd.DataFrame()
 
     degDF = degDF.set_index('Gene')
-
         
     for c in CompareList:
 
@@ -325,6 +328,8 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         FDRR = "FDR("+c+")"
 
         LFC = "logFC("+c+")"
+
+
         if replicate:
 
             fdr = dk[dk[FDRR]<=FDR].dropna()
@@ -383,3 +388,94 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         fig.tight_layout()
         
     return {'summary': summary, "filtered": DEGs,"filteredup":Ups, "filtereddown":Downs, "plot": fig}
+
+class Gene_Description:
+
+    def __init__(self, species, type, combinations=None, degFile= None, filtered=True) :
+        self.species = species
+        self.type = type
+        self.combinations = combinations
+        self.filtered = filtered
+        self.degFile = degFile
+
+        return
+
+
+    def get_request(self, url,  **params):
+
+        if params:
+            r = requests.get(url, params=params, stream=True)
+        else:
+            r = requests.get(url)
+        r.raise_for_status()
+
+        return r
+
+    def _add_attr_node(self, root, attr):
+        attr_el = ElementTree.SubElement(root, 'Attribute')
+        attr_el.set('name', attr)
+
+        return
+
+
+    def query(self):
+
+        # first need to check if the species is animal or plant
+
+        if self.type == 'animals':
+            uri= "https://ensembl.org/biomart/martservice"
+            scheme = 'default'
+            fspecies = self.species+"_gene_ensembl"
+        if self.type == 'plants':
+            uri = "https://plants.ensembl.org/biomart/martservice"
+            scheme = 'plants_mart'
+            fspecies = self.species+"_eg_gene"
+
+        # build query
+
+        root = ElementTree.Element('Query')
+        root.set('virtualSchemaName', scheme)
+        root.set('formatter', 'TSV')
+        root.set('header', '1')
+        root.set('uniqueRows', native_str(int(True)))
+        root.set('datasetConfigVersion', '0.6')
+
+        dataset = ElementTree.SubElement(root, 'Dataset')
+        dataset.set('name', fspecies)
+        dataset.set('interface', 'default')
+        attributes = ["ensembl_gene_id", "external_gene_name","description"]
+        for attr in attributes:
+            self._add_attr_node(dataset, attr)
+
+        response = self.get_request(
+        uri , query=ElementTree.tostring(root))
+        result = pd.read_csv(StringIO(response.text), sep='\t')
+        result.columns = ['Gene', 'Name','Description']
+        
+        return result
+
+
+    def add_names(self):
+
+        names = self.query()
+        file = self.degFile.split(".xlsx")[0]
+        wd = pd.ExcelWriter(f"{file}_Gene_name_added.xlsx")
+
+        for c in combinations:
+
+            df = pd.read_excel(self.degFile, sheet_name=c)
+
+            final = df.merge(names, on='Gene')
+
+            final.to_excel(wd, sheet_name=c)
+
+        wd.save()
+
+        return
+
+
+
+
+
+
+        

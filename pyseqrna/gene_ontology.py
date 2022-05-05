@@ -35,8 +35,6 @@ class GeneOntology:
         log.info("Proceeing Gene Ontology data from Biomart")
         self.df, self.background_count = self.preprocessBioMart(self.gdata)
         
-        
-
     def get_request(self, url,  **params):
 
         if params:
@@ -47,27 +45,28 @@ class GeneOntology:
 
         return r
 
-    def go_organism(self, type = "plants"):
-        if type == "plants":
-            resp =  urlopen("https://plants.ensembl.org/biomart/martservice?type=datasets&requestid=biomaRt&mart=plants_mart")
-
-        if type == 'animals':
-            resp =  urlopen("https://www.ensembl.org/biomart/martservice?type=datasets&requestid=biomaRt&mart=ENSEMBL_MART_ENSEMBL")
-
-        handle = TextIOWrapper(resp, encoding="UTF-8")
-        handle.url = resp.url
-
-        df =pd.read_csv(handle, sep="\t", names=['Table', 'Code', 'Organism', 'A', 'Assembly', 'B', 'C', 'Default', 'Date'])
-
-        organism = df[['Code', 'Organism']]
-
-        return organism
-
     def _add_attr_node(self, root, attr):
         attr_el = ElementTree.SubElement(root, 'Attribute')
         attr_el.set('name', attr)
 
+        return
 
+    def go_organism(self, type = "plants"):
+            if type == "plants":
+                resp =  urlopen("https://plants.ensembl.org/biomart/martservice?type=datasets&requestid=biomaRt&mart=plants_mart")
+
+            if type == 'animals':
+                resp =  urlopen("https://www.ensembl.org/biomart/martservice?type=datasets&requestid=biomaRt&mart=ENSEMBL_MART_ENSEMBL")
+
+            handle = TextIOWrapper(resp, encoding="UTF-8")
+            handle.url = resp.url
+
+            df =pd.read_csv(handle, sep="\t", names=['Table', 'Code', 'Organism', 'A', 'Assembly', 'B', 'C', 'Default', 'Date'])
+
+            organism = df[['Code', 'Organism']]
+
+            return organism
+            
     def query(self, species, type):
 
         # first need to check if the species is animal or plant
