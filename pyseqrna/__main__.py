@@ -18,7 +18,7 @@ from pyseqrna import differential_expression as de
 from pyseqrna import pyseqrna_plots as pp
 from pyseqrna import ribosomal as ribo
 from pyseqrna import multimapped_groups as mmg
-from pyseqrna import gene_ontology as go
+from pyseqrna.gene_ontology import GeneOntology
 from pyseqrna import pathway as pt
 import pyseqrna.version
 import pandas as pd
@@ -290,15 +290,15 @@ def main():
 
         heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
 
-    pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
+    genes= pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
     
     if options.geneontology:
         outgo = os.path.join(outdir,"Gene_Ontology")
         pu.make_directory(outgo)
-        
+        go = GeneOntology(species=options.gospecies, type=options.gotype)
         for c in combination:
-            file_deg = f"{outdir}/diff_genes/{c}.txt"
-            ontology_results = go.enrichGO(file =file_deg,species=options.gospecies, type=options.gotype)
+            file_deg = f"{outdir}/{genes}/{c}.txt"
+            ontology_results = go.enrichGO(file=file_deg)
             print(type(ontology_results))
             if ontology_results != "No Gene Ontology":
                 ontology_results['result'].to_excel(os.path.join(outgo, f"{c}_gene_ontology.xlsx"), index=False)
