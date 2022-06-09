@@ -20,7 +20,7 @@ from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
 from urllib.request import urlopen, urlretrieve
-
+import textwrap
 log = PyseqrnaLogger(mode='a', log="go")
 
 
@@ -200,7 +200,7 @@ class GeneOntology:
         df = df.head(nrows)
         df =df.sort_values('Counts', ascending=True)
 
-        fig, ax = plt.subplots( dpi=300)
+        fig, ax = plt.subplots(figsize=(10, 8), dpi=300)
         scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts'], c=df[colorBy])
         ax.xaxis.get_major_locator().set_params(integer=True)
         ax.spines['top'].set_visible(False)
@@ -244,21 +244,25 @@ class GeneOntology:
 
         data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
 
-        fig, ax = plt.subplots(dpi=300)
+        fig, ax = plt.subplots(figsize=(10, 8), dpi=300)
 
         my_cmap = plt.cm.get_cmap('RdYlBu')
         colors = my_cmap(data_color_normalized)
 
-        rects = ax.barh(terms, counts, color=colors)
+        ax.barh(terms, counts, color=colors)
         ax.xaxis.get_major_locator().set_params(integer=True)
+        
+        
+        
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_bounds((0, 20))
         # add some space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
-        plt.xticks(fontsize=12)
-        plt.yticks(fontsize=12)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10, wrap=True)
+
         plt.xlabel("Counts", fontsize=12, fontweight='bold')
         plt.ylabel("GO Description", fontsize=12, fontweight='bold')
         sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0,max(df[colorBy])))

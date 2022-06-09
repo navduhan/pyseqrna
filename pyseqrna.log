@@ -1,0 +1,118 @@
+[23:17:56]  __main__ :: INFO : Analysis started at Wed Jun  8 23:17:56 2022
+[23:17:56]  __main__ :: INFO : Starting with read quality check
+[23:17:56]  __main__ :: INFO : Read trimming started with trim_galore
+[23:17:56]  __main__ :: INFO : Read trimming completed succesfully
+[23:17:56]  __main__ :: INFO : Starting Alignment process
+[23:17:56]  __main__ :: INFO : Genome indexing started
+[23:18:21]  __main__ :: INFO : Genome index completed succesfully
+[23:18:21]  __main__ :: INFO : Checking genome index
+[23:18:21]  __main__ :: INFO : Genome index is valid
+[23:18:21]  __main__ :: INFO : Alignment started
+[23:18:23]  __main__ :: INFO : Read alignment completed succesfully
+[23:18:23]  __main__ :: INFO : Calculating alignment statistics
+[23:18:32]  __main__ :: ERROR : Unable to calculate read alignment
+[23:18:32]  __main__ :: INFO : Feature Count from aligned reads started
+ly created directory /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/trim_galore_results
+[23:17:56]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446027_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446028_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446029_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446030_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446031_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446032_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446033_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446034_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446035_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446036_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446037_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446038_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446039_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446040_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446041_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446042_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446043_1.fastq.gz 
+[23:17:56]  quality_trimming :: INFO : Job successfully completed for SRR446044_1.fastq.gz 
+[23:17:56]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/.conda/envs/pyseqrna_0.0.1/lib/python3.8/site-packages/pyseqrna/param/STAR.ini
+[23:17:56]  aligners :: INFO : Using default config file STAR.ini
+[23:17:56]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[23:17:56]  pyseqrna_utils :: INFO : Succesfully created directory /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_index
+[23:17:56]  aligners :: INFO : tair10.fasta copied successfully in star_index
+[23:18:20]  aligners :: INFO : Job successfully completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_index/tair10.fasta for indexing
+[23:18:21]  pyseqrna_utils :: WARNING : number of threads changed to available 3
+[23:18:21]  pyseqrna_utils :: INFO : Succesfully created directory /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results
+[23:18:23]  aligners :: INFO : Job successfully completed for M1A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for M1B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for A1A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for A1B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for V1A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for V1B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for M6A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for M6B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for A6A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for A6B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for V6A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for V6B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for M12A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for M12B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for A12A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for A12B_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for V12A_trimmed.fq.gz for alignment
+[23:18:23]  aligners :: INFO : Job successfully completed for V12B_trimmed.fq.gz for alignment
+[23:18:26]  pyseqrna_stats :: INFO : 96459 input reads in M1A
+[23:18:27]  pyseqrna_stats :: INFO : 98742 input reads in M1B
+[23:18:27]  pyseqrna_stats :: INFO : 94935 input reads in A1A
+[23:18:27]  pyseqrna_stats :: INFO : 94427 input reads in A1B
+[23:18:28]  pyseqrna_stats :: INFO : 99366 input reads in V1A
+[23:18:28]  pyseqrna_stats :: INFO : 97771 input reads in V1B
+[23:18:28]  pyseqrna_stats :: INFO : 98617 input reads in M6A
+[23:18:28]  pyseqrna_stats :: INFO : 90452 input reads in M6B
+[23:18:28]  pyseqrna_stats :: INFO : 91570 input reads in A6A
+[23:18:28]  pyseqrna_stats :: INFO : 98289 input reads in A6B
+[23:18:28]  pyseqrna_stats :: INFO : 97102 input reads in V6A
+[23:18:29]  pyseqrna_stats :: INFO : 99207 input reads in V6B
+[23:18:29]  pyseqrna_stats :: INFO : 99717 input reads in M12A
+[23:18:29]  pyseqrna_stats :: INFO : 94477 input reads in M12B
+[23:18:29]  pyseqrna_stats :: INFO : 93961 input reads in A12A
+[23:18:29]  pyseqrna_stats :: INFO : 99895 input reads in A12B
+[23:18:30]  pyseqrna_stats :: INFO : 96961 input reads in V12A
+[23:18:30]  pyseqrna_stats :: INFO : 90503 input reads in V12B
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M1AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M1BAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A1AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A1BAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V1AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V1BAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M6AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M6BAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A6AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A6BAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V6AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V6BAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M12AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M12BAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A12AAligned.out.bam 
+[23:18:30]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A12BAligned.out.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V12AAligned.out.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Sorting bam completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V12BAligned.out.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M1AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M1BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A1AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A1BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V1AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V1BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M6AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M6BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A6AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A6BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V6AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V6BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M12AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/M12BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A12AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/A12BAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V12AAligned.out_sorted.bam 
+[23:18:31]  pyseqrna_stats :: INFO : Bam Indexing completed for /run/media/nav/WAREHOUSE/tools/pyseqrna/pySeqRNA_results.1/star_results/V12BAligned.out_sorted.bam 
+[23:18:32]  pyseqrna_stats :: ERROR : Not able to generate align stats
+[23:18:32]  pyseqrna_utils :: INFO : Config generated succesfully from /home/nav/.conda/envs/pyseqrna_0.0.1/lib/python3.8/site-packages/pyseqrna/param/featureCount.ini
+[23:18:32]  quantification :: INFO : Using default config file featureCount.ini
+[23:18:32]  quantification :: INFO : Job successfully completed for feature count

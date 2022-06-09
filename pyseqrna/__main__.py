@@ -290,14 +290,14 @@ def main():
 
         heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
 
-    genes= pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
+    pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
     
     if options.geneontology:
         outgo = os.path.join(outdir,"Gene_Ontology")
         pu.make_directory(outgo)
         go = GeneOntology(species=options.gospecies, type=options.gotype)
         for c in combination:
-            file_deg = f"{outdir}/{genes}/{c}.txt"
+            file_deg = f"{outdir}/diff_genes/{c}.txt"
             ontology_results = go.enrichGO(file=file_deg)
             print(type(ontology_results))
             if ontology_results != "No Gene Ontology":
