@@ -266,7 +266,7 @@ def main():
 
     targets = input_data['targets']
 
-    diffdir = pu.make_directory(os.path.join(outdir, "Differebtial_Expression_Analysis"))
+    diffdir = pu.make_directory(os.path.join(outdir, "Differential_Expression_Analysis"))
     if options.detool == 'DESeq2':
 
         count=pd.read_excel(os.path.join(quantdir,"Counts_final.xlsx"))
