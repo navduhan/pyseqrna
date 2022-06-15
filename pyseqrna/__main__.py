@@ -7,6 +7,7 @@
 Run pyseqrna
 """
 
+from matplotlib.pyplot import plot
 from pyseqrna import arg_parser
 from pyseqrna import pyseqrna_utils as pu
 from pyseqrna import quality_check as qc
@@ -69,9 +70,11 @@ def main():
 
     log.info("Starting with read quality check")
 
+    qualitydir = pu.make_directory(os.path.join(outdir, "Quality_Analysis"))
+    
     if options.fastqc:
         
-        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
         if options.slurm:
             for job in jobid:
@@ -88,17 +91,19 @@ def main():
 
     log.info(f"Read trimming started with {options.trimming}")
 
+
+    trimmingdir = pu.make_directory(os.path.join(outdir, "Trimming_Analysis"))
     if options.trimming == 'flexbar':
 
-        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=outdir)
+        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=trimmingdir)
     
     elif options.trimming == 'trimmomatic':
 
-        outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=outdir,paired=options.paired)
+        outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=trimmingdir,paired=options.paired)
         
     elif options.trimming == 'trim_galore':
 
-        outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=outdir,paired=options.paired)
+        outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=trimmingdir,paired=options.paired)
     
     # dill.dump([input_data, outtrim],dill_save,protocol=dill.HIGHEST_PROTOCOL)
     if options.slurm:
@@ -115,7 +120,7 @@ def main():
     
     if options.fastqc2:
         
-        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=outdir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
         if options.slurm:
             for job in jobid:
@@ -129,12 +134,12 @@ def main():
 
     
     # Removal of ribosomal RNA
-
+    ribosomaldir = pu.make_directory(os.path.join(outdir, "Ribosomal_RNA"))
     if options.ribosomal:
 
         log.info("Removing ribosomal RNA ")
         
-        outtrim, jobs = ribo.sortmernaRun(outtrim, outdir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm)
+        outtrim, jobs = ribo.sortmernaRun(outtrim, ribosomaldir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm)
 
         if options.slurm:
 
@@ -148,10 +153,10 @@ def main():
     # Alignment Section
     
     log.info("Starting Alignment process")
-
+    aligndir = pu.make_directory(os.path.join(outdir, "Alignment"))
     if options.aligners == 'STAR':
 
-        aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=outdir)
+        aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir)
 
         log.info("Genome indexing started")
 
@@ -178,7 +183,7 @@ def main():
     
     elif options.aligners == 'hisat2':
 
-        aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=outdir)
+        aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir)
 
         log.info("Genome indexing started")
 
@@ -218,9 +223,9 @@ def main():
     try:
         align_stat = ps.align_stats(samples,outtrim, outalign,pairedEND=options.paired)
 
-        align_stat.to_excel(outdir+"/alignment_statistics.xlsx", index=False)
+        align_stat.to_excel(aligndir+"/alignment_statistics.xlsx", index=False)
 
-        log.info(f"alignment stats completed and written to {outdir}/alignment_statistics.xlsx")
+        log.info(f"alignment stats completed and written to {aligndir}/alignment_statistics.xlsx")
 
     except Exception:
 
@@ -230,19 +235,19 @@ def main():
     log.info("Feature Count from aligned reads started")
 
     # dill.dump_session(os.path.join(options.outdir,'pyseq.pyseqrna'))
-
+    quantdir = pu.make_directory(os.path.join(outdir, "Quantification"))
     if options.quantification == 'featureCounts':
 
-        fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=outdir)
+        fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
 
-        log.info("feature counts completed and written in %s/Counts.txt",outdir)
+        log.info("feature counts completed and written in %s/Counts.txt",quantdir)
     
     elif options.quantification == 'Htseq':
 
-        fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign, outDir=outdir)
+        fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
 
 
-        log.info("feature counts completed and written in %s/Counts.txt",outdir)
+        log.info("feature counts completed and written in %s/Counts.txt",quantdir)
     
         # Multi mapped 
     
@@ -250,88 +255,90 @@ def main():
         log.info("Counting multimapped read grouops")
     
         mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file+".bed")
-        mmg_count.to_excel(os.path.join(outdir,"mmg_count.xlsx", index=False))
+        mmg_count.to_excel(os.path.join(quantdir,"mmg_count.xlsx", index=False))
         log.info("counting of multimapped read group finished")
 
     log.info("Differential Expression started with %s",options.detool)
 
     targets = input_data['targets']
+
+    diffdir = pu.make_directory(os.path.join(outdir, "Differebtial_Expression_Analysis"))
     if options.detool == 'DESeq2':
 
-        count=pd.read_excel(os.path.join(outdir,"Counts_final.xlsx"))
+        count=pd.read_excel(os.path.join(quantdir,"Counts_final.xlsx"))
         result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
-        result.to_excel(os.path.join(outdir,"Raw_DEGs_all.xlsx"), index=False)
+        result.to_excel(os.path.join(diffdir,"Raw_DEGs_all.xlsx"), index=False)
         
     elif options.detool == 'edgeR':
 
-        count=pd.read_excel(os.path.join(outdir,"Counts_final.xlsx"))
+        count=pd.read_excel(os.path.join(quantdir,"Counts_final.xlsx"))
         result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
-        result.to_excel(os.path.join(outdir,"Raw_DEGs_all.xlsx"), index=False)
+        result.to_excel(os.path.join(diffdir,"Raw_DEGs_all.xlsx"), index=False)
         
     log.info("Differential expression analysis completed")
     log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
     filtered_DEG= de.degFilter(degDF=result, CompareList=combination,FDR=options.fdr, FOLD=options.fold)
     log.info("filtering DEGs completed ")
     log.info("writting filter DEGs combination wise to excel sheets")
-    wd= pd.ExcelWriter(os.path.join(outdir,"filtered_DEGs.xlsx"))
+    wd= pd.ExcelWriter(os.path.join(diffdir,"filtered_DEGs.xlsx"))
     for key, value in filtered_DEG['filtered'].items():
         value.to_excel(wd,sheet_name=key)
         wd.save()
     wd.close()
     log.info("ploting DEG count figure")
-    filtered_DEG['plot'].savefig(os.path.join(outdir,"DEG_figure.png"),dpi=300, bbox_inches='tight')
+    filtered_DEG['plot'].savefig(os.path.join(diffdir,"DEG_figure.png"),dpi=300, bbox_inches='tight')
     # filtered_DEG['plot'].close()
     log.info("Writting DEGs summary to excel file")
-    filtered_DEG['summary'].to_excel(os.path.join(outdir,"DEG_count_summary.xlsx"))
-    
+    filtered_DEG['summary'].to_excel(os.path.join(diffdir,"DEG_count_summary.xlsx"))
+    plotdir = pu.make_directory(os.path.join(outdir, "Plots"))
     if options.heatmap:
         log.info("Creating heatmap of top 50 DEGs")
         heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
 
-        heatmap.savefig(os.path.join(outdir,"Top50_gene.png"))
+        heatmap.savefig(os.path.join(plotdir,"Top50_gene.png"))
 
-    pu.getGenes(os.path.join(outdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=outdir)
-    
+    genesdir = pu.getGenes(os.path.join(diffdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
+    annodir = pu.make_directory(os.path.join(outdir, "Functional_Annotation"))
     if options.geneontology:
-        outgo = os.path.join(outdir,"Gene_Ontology")
+        outgo = os.path.join(plotdir,"Gene_Ontology")
         pu.make_directory(outgo)
         go = GeneOntology(species=options.gospecies, type=options.gotype)
         for c in combination:
-            file_deg = f"{outdir}/diff_genes/{c}.txt"
+            file_deg = f"{diffdir}/{genesdir}/{c}.txt"
             ontology_results = go.enrichGO(file=file_deg)
             print(type(ontology_results))
             if ontology_results != "No Gene Ontology":
                 ontology_results['result'].to_excel(os.path.join(outgo, f"{c}_gene_ontology.xlsx"), index=False)
-                ontology_results['plot'].savefig(os.path.join(outgo, f"{c}_go_dotplot.png"))
+                ontology_results['plot'].savefig(os.path.join(outgo, f"{c}_go_dotplot.png"), bbox_inches='tight')
             else:
                 log.info(f"No ontology found for {c}")
     
     if options.keggpathway:
-        outkegg = os.path.join(outdir,"KEGG_pathway")
+        outkegg = os.path.join(annodir,"KEGG_pathway")
         pu.make_directory(outkegg)
         df , bg =pt.kegg_list(options.keggspecies)
         for c in combination:
-            file_deg = f"{outdir}/diff_genes/{c}.txt"
+            file_deg = f"{diffdir}/{genesdir}/{c}.txt"
             kegg_results = pt.enrichKEGG(file_deg,df,bg)
             kegg_results.to_csv(os.path.join(outkegg, f"{c}_kegg.txt"), sep="\t", index=False)
     if options.volcanoplot:
-        outvolcano = os.path.join(outdir,"Volcano_Plots")
+        outvolcano = os.path.join(plotdir,"Volcano_Plots")
         pu.make_directory(outvolcano)
         for c in combination:
             x,y =pp.plotVolcano(result,c,1)
             x.savefig(outvolcano+"/"+c+"_volcano.png")
         
     if options.maplot:
-        outma = os.path.join(outdir,"MA_Plots")
+        outma = os.path.join(plotdir,"MA_Plots")
         pu.make_directory(outma)
         for m in combination:
             x,y =pp.plotMA(result,count,m,1)
             x.savefig(outma+"/"+c+"_MA.png")
     
     if options.vennplot:
-        degfile = os.path.join(outdir,"filtered_DEGs.xlsx")
+        degfile = os.path.join(diffdir,"filtered_DEGs.xlsx")
         if options.venncombination:
-            x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=outdir)
+            x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=plotdir)
             x.savefig(outdir+ "/_Venn.png")
         else:
             if len(combination)<4:
@@ -343,7 +350,7 @@ def main():
         
         
             for i in range(0, len(vlist)):
-                x = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=outdir)
+                x = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=plotdir)
                 x.savefig(outdir+"/Venn_"+i+".png")
             
     endTime = time.ctime()
