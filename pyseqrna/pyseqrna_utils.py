@@ -521,7 +521,7 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
 
             gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
 
-    return 
+    return  out
 
 
 

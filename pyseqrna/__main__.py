@@ -70,9 +70,10 @@ def main():
 
     log.info("Starting with read quality check")
 
-    qualitydir = pu.make_directory(os.path.join(outdir, "Quality_Analysis"))
+    
     
     if options.fastqc:
+        qualitydir = pu.make_directory(os.path.join(outdir, "Quality_Analysis"))
         
         jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
@@ -119,6 +120,8 @@ def main():
     # Check if read quality check is activated after trimming
     
     if options.fastqc2:
+        if not os.path.isdir(os.path.join(outdir, "Quality_Analysis")):
+            qualitydir = pu.make_directory(os.path.join(outdir, "Quality_Analysis"))
         
         jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
@@ -134,8 +137,9 @@ def main():
 
     
     # Removal of ribosomal RNA
-    ribosomaldir = pu.make_directory(os.path.join(outdir, "Ribosomal_RNA"))
+    
     if options.ribosomal:
+        ribosomaldir = pu.make_directory(os.path.join(outdir, "Ribosomal_RNA"))
 
         log.info("Removing ribosomal RNA ")
         
