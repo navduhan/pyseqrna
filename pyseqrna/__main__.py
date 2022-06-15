@@ -299,16 +299,16 @@ def main():
         log.info("Creating heatmap of top 50 DEGs")
         heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
 
-        heatmap.savefig(os.path.join(plotdir,"Top50_gene.png"))
+        heatmap.savefig(os.path.join(plotdir,"Top50_gene.png"), bbox_inches='tight')
 
     genesdir = pu.getGenes(os.path.join(diffdir,"filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
     annodir = pu.make_directory(os.path.join(outdir, "Functional_Annotation"))
     if options.geneontology:
-        outgo = os.path.join(plotdir,"Gene_Ontology")
+        outgo = os.path.join(annodir,"Gene_Ontology")
         pu.make_directory(outgo)
         go = GeneOntology(species=options.gospecies, type=options.gotype)
         for c in combination:
-            file_deg = f"{diffdir}/{genesdir}/{c}.txt"
+            file_deg = f"{genesdir}/{c}.txt"
             ontology_results = go.enrichGO(file=file_deg)
             print(type(ontology_results))
             if ontology_results != "No Gene Ontology":
@@ -322,7 +322,7 @@ def main():
         pu.make_directory(outkegg)
         df , bg =pt.kegg_list(options.keggspecies)
         for c in combination:
-            file_deg = f"{diffdir}/{genesdir}/{c}.txt"
+            file_deg = f"{genesdir}/{c}.txt"
             kegg_results = pt.enrichKEGG(file_deg,df,bg)
             kegg_results.to_csv(os.path.join(outkegg, f"{c}_kegg.txt"), sep="\t", index=False)
     if options.volcanoplot:
