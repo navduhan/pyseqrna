@@ -361,14 +361,18 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
 
         category_names= ['UP', 'Down']
         labels= summary['Comparisons'].values.tolist()
+
+        if len(labels)>10:
+            hg =len(labels)
+
         updata= summary['Up_DEGs'].values.tolist()
         downdata = summary['Down_DEGs'].values.tolist()
         my_range=list(range(1,len(summary.index)+1))
-        fig, ax = plt.subplots(dpi=300)
+        fig, ax = plt.subplots(figsize=(hg,8),dpi=300)
         ax.barh(labels,updata, color='mediumseagreen')
         ax.barh(labels,downdata, left=updata, color='salmon')
-        plt.xticks(fontsize=12)
-        plt.yticks(fontsize=12)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
         plt.xlabel("Number of Genes", fontsize=10)
         plt.ylabel("Comparisons", fontsize=10)
         plt.legend(['Up-regulated', 'Down-regulated'],  ncol =2, loc='center', bbox_to_anchor=(0.5, 1.1))
