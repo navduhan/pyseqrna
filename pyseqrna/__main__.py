@@ -7,7 +7,7 @@
 Run pyseqrna
 """
 
-from matplotlib.pyplot import plot
+import matplotlib.pyplot as plt
 from pyseqrna import arg_parser
 from pyseqrna import pyseqrna_utils as pu
 from pyseqrna import quality_check as qc
@@ -21,6 +21,7 @@ from pyseqrna import ribosomal as ribo
 from pyseqrna import multimapped_groups as mmg
 from pyseqrna.gene_ontology import GeneOntology
 from pyseqrna import pathway as pt
+
 import pyseqrna.version
 import pandas as pd
 import numpy as np
@@ -358,7 +359,7 @@ def main():
                 ontology_results['result'].to_excel(os.path.join(outgo, f"{gofiles}/{c}_gene_ontology.xlsx"), index=False)
 
                 ontology_results['plot'].savefig(os.path.join(outgo, f"{goplots}/{c}_go_dotplot.png"), bbox_inches='tight')
-
+                plt.close()
             else:
                 log.info(f"No ontology found for {c}")
     
@@ -377,14 +378,14 @@ def main():
         for c in combination:
             x,y =pp.plotVolcano(result,c,1)
             x.savefig(outvolcano+"/"+c+"_volcano.png")
-            x.close()
+            plt.close()
     if options.maplot:
         outma = os.path.join(plotdir,"MA_Plots")
         pu.make_directory(outma)
         for m in combination:
             x,y =pp.plotMA(result,count,m,1)
             x.savefig(outma+"/"+c+"_MA.png")
-            x.close()
+            plt.close()
     if options.vennplot:
         degfile = os.path.join(diffdir,"filtered_DEGs.xlsx")
         if options.venncombination:
@@ -402,7 +403,7 @@ def main():
             for i in range(0, len(vlist)):
                 x = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=plotdir)
                 x.savefig(outdir+"/Venn_"+i+".png")
-                x.close()
+                plt.close()
             
     endTime = time.ctime()
     log.info("Analysis Complted at %s", endTime)
