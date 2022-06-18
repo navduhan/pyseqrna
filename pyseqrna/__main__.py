@@ -393,6 +393,7 @@ def main():
         if options.venncombination:
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
             x.savefig(plotdir+ "/_Venn.png")
+            plt.close()
         else:
             if len(combination)<4:
                 vnum= len(combination)
@@ -400,7 +401,6 @@ def main():
                 vnum = len(combination)/4
                 
             vlist = np.array_split(combination, vnum)
-        
         
             for i in range(0, len(vlist)):
                 print(vlist[i])
