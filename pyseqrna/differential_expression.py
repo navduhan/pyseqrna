@@ -363,7 +363,9 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         labels= summary['Comparisons'].values.tolist()
 
         if len(labels)>10:
-            hg =len(labels)/2
+            hg = 15
+        else:
+            hg = 10
             
 
         updata= summary['Up_DEGs'].values.tolist()
