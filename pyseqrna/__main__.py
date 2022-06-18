@@ -404,7 +404,7 @@ def main():
         
             for i in range(0, len(vlist)):
                 print(vlist[i])
-                x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold)
+                x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold, degLabel=None)
                 x.savefig(plotdir+"/Venn_"+i+".png")
                 plt.close()
             
