@@ -63,10 +63,6 @@ def main():
     else:
 
         combination = input_data['combinations']
-    
-    # check if fastqc is turned on 
-
-    # dill.dump([input_data],dill_save,protocol=dill.HIGHEST_PROTOCOL)
 
     log.info("Starting with read quality check")
 
@@ -157,7 +153,9 @@ def main():
     # Alignment Section
     
     log.info("Starting Alignment process")
+
     aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"))
+
     if options.aligners == 'STAR':
 
         aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir)
@@ -196,6 +194,7 @@ def main():
         if options.slurm:
 
             wait(lambda: pu.check_status(jobida), waiting_for="genome indexing to finish")
+
             log.info("Genome index completed succesfully")
         else:
             log.info("Genome index completed succesfully")
@@ -214,7 +213,9 @@ def main():
     if options.slurm:
         for job in jobalign:
             wait(lambda: pu.check_status(job), waiting_for="alignment to finish")
+
             log.info(f"Alignment completed for job {job}")
+
         log.info("Read alignment completed succesfully")
     else:
 
@@ -235,10 +236,8 @@ def main():
 
         log.error("Unable to calculate read alignment")
     
-    
     log.info("Feature Count from aligned reads started")
 
-    # dill.dump_session(os.path.join(options.outdir,'pyseq.pyseqrna'))
     quantdir = pu.make_directory(os.path.join(outdir, "3_Quantification"))
     if options.quantification == 'featureCounts':
 
@@ -250,7 +249,6 @@ def main():
 
         fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
 
-
         log.info("feature counts completed and written in %s/Raw_Counts.txt",quantdir)
     
         # Multi mapped 
@@ -259,7 +257,9 @@ def main():
         log.info("Counting multimapped read grouops")
     
         mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file+".bed")
+
         mmg_count.to_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx", index=False))
+
         log.info("counting of multimapped read group finished")
 
     log.info("Differential Expression started with %s",options.detool)
@@ -270,62 +270,101 @@ def main():
     if options.detool == 'DESeq2':
 
         count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
         result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
+
         result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
         
     elif options.detool == 'edgeR':
 
         count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
         result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
+
         result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
         
     log.info("Differential expression analysis completed")
+
     log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
+
     filtered_DEG= de.degFilter(degDF=result, CompareList=combination,FDR=options.fdr, FOLD=options.fold)
+
     log.info("filtering DEGs completed ")
+
     log.info("writting filter DEGs combination wise to excel sheets")
+    # write up and down filtered genes together
     wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_DEGs.xlsx"))
+
     for key, value in filtered_DEG['filtered'].items():
         value.to_excel(wa,sheet_name=key)
         wa.save()
     wa.close()
+
+    # write up filtered genes together
     wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upDEGs.xlsx"))
+
     for key, value in filtered_DEG['filteredup'].items():
         value.to_excel(wu,sheet_name=key)
         wu.save()
     wu.close()
+    # write down filtered genes together
     wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downDEGs.xlsx"))
+
     for key, value in filtered_DEG['filtereddown'].items():
         value.to_excel(wd,sheet_name=key)
         wd.save()
     wd.close()
+
     log.info("ploting DEG count figure")
+
     filtered_DEG['plot'].savefig(os.path.join(diffdir,"Filtered_DEG.png"),dpi=300, bbox_inches='tight')
+
     filtered_DEG['plot'].close()
+
     log.info("Writting DEGs summary to excel file")
+
     filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"))
+
     plotdir = pu.make_directory(os.path.join(outdir, "5_Plots"))
+
     if options.heatmap:
+
         log.info("Creating heatmap of top 50 DEGs")
+
         heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
 
         heatmap.savefig(os.path.join(plotdir,f"Heatmap_top50.png"), bbox_inches='tight')
+
         heatmap.close()
+
     genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
+
     annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
+
     if options.geneontology:
+
         outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
+
         gofiles = pu.make_directory(os.path.join(outgo,"GO_Files"))
+
         goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
+
         go = GeneOntology(species=options.gospecies, type=options.gotype)
+
         for c in combination:
+
             file_deg = f"{genesdir}/{c}.txt"
+
             ontology_results = go.enrichGO(file=file_deg)
-            print(type(ontology_results))
+
             if ontology_results != "No Gene Ontology":
+
                 ontology_results['result'].to_excel(os.path.join(outgo, f"{gofiles}/{c}_gene_ontology.xlsx"), index=False)
+
                 ontology_results['plot'].savefig(os.path.join(outgo, f"{goplots}/{c}_go_dotplot.png"), bbox_inches='tight')
+
                 ontology_results['plot'].close()
+                
             else:
                 log.info(f"No ontology found for {c}")
     
