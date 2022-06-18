@@ -491,16 +491,22 @@ def findFiles(searchPATH = None, searchPattern = None, recursive = False, verbos
     
     return searchResult
 
-def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
+def getGenes(file=None, combinations=None, multisheet=True, geneType='all',  outDir='pySeqRNA_results'):
 
     if os.path.exists(outDir):
 
-        out = make_directory(os.path.join(outDir,"diff_genes"))
+        if os.path.exists(os.path.join(outDir,"diff_genes")):
+            pass
+        else:
+            out = make_directory(os.path.join(outDir,"diff_genes"))
 
     else:
 
-        out = make_directory(os.path.join(".","diff_genes"))
-        
+        if os.path.exists(os.path.join(outDir,"diff_genes")):
+            pass
+        else:
+            out = make_directory(os.path.join(outDir,"diff_genes"))
+
 
     if multisheet:
         
@@ -509,7 +515,12 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
 
             gene = df['Gene'].copy()
             gene = gene.str.replace('gene:','').str.upper()
-            gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
+            if geneType == 'all':
+                gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
+            if geneType == 'up':
+                gene.to_csv(os.path.join(out,f"{c}_up.txt"), sep="\t", index = False)
+            if geneType == 'down':
+                gene.to_csv(os.path.join(out,f"{c}_down.txt"), sep="\t", index = False)
    
     else:
 
@@ -522,6 +533,7 @@ def getGenes(file, combinations, multisheet=True, outDir='pySeqRNA_results'):
             gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
 
     return  out
+
 
 
 
