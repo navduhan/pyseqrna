@@ -376,18 +376,20 @@ def main():
         outvolcano = os.path.join(plotdir,"Volcano_Plots")
         pu.make_directory(outvolcano)
         for c in combination:
-            x,y =pp.plotVolcano(result,c,1)
-            x.savefig(outvolcano+"/"+c+"_volcano.png")
-            plt.close()
+            x = pp.plotVolcano(result,c,1)
+            if type(x) != str:
+                x.savefig(outvolcano+"/"+c+"_volcano.png")
+                plt.close()
     if options.maplot:
         outma = os.path.join(plotdir,"MA_Plots")
         pu.make_directory(outma)
         for m in combination:
-            x,y =pp.plotMA(result,count,m,1)
-            x.savefig(outma+"/"+c+"_MA.png")
-            plt.close()
+            x = pp.plotMA(result,count,m,1)
+            if type(x) != str:
+                x.savefig(outma+"/"+c+"_MA.png")
+                plt.close()
     if options.vennplot:
-        degfile = os.path.join(diffdir,"filtered_DEGs.xlsx")
+        degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
         if options.venncombination:
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
             x.savefig(plotdir+ "/_Venn.png")

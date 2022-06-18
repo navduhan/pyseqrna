@@ -29,9 +29,7 @@ def plotVolcano(degDF=None, comp=None,FOLD=2,pValue=0.05,color=('red','grey','gr
 
     dk = degDF.filter(regex=comp, axis=1)
     
-    if dk.empty:
-        pass
-    else:
+    try:
         
         final = dk[dk[PVAL]<=pValue].copy()
 
@@ -56,9 +54,11 @@ def plotVolcano(degDF=None, comp=None,FOLD=2,pValue=0.05,color=('red','grey','gr
         ax.set_xlabel(_x)
         ax.set_ylabel(_y)
         fig.tight_layout()
-    
 
-    return fig ,ax
+    except Exception:
+        return 'No Volcano'
+
+    return fig 
 
 
 def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green'), dim=(8,5), dotsize=8, markerType='o', alpha=0.5):
@@ -82,9 +82,7 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green
     _x = r'$ log_{2}(Mean Count)$'
 
     dk = degDF.filter(regex=comp, axis=1)
-    if dk.empty:
-        pass
-    else:
+    try:
 
         cdf1 = countDF.filter(regex=comp.split("-")[0], axis=1)
         cdf2 = countDF.filter(regex=comp.split("-")[1], axis=1)
@@ -132,9 +130,10 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green
         ax.set_ylabel(_y)
 
         fig.tight_layout()
+    except Exception:
+        return "no ma"
    
-
-    return fig ,ax
+    return fig 
 
 
 
