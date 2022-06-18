@@ -8,6 +8,7 @@ Run pyseqrna
 """
 
 import matplotlib.pyplot as plt
+from matplotlib.transforms import Bbox
 from pyseqrna import arg_parser
 from pyseqrna import pyseqrna_utils as pu
 from pyseqrna import quality_check as qc
@@ -18,8 +19,10 @@ from pyseqrna import quantification as quant
 from pyseqrna import differential_expression as de
 from pyseqrna import pyseqrna_plots as pp
 from pyseqrna import ribosomal as ribo
+from pyseqrna import clustering as cl
 from pyseqrna import multimapped_groups as mmg
 from pyseqrna.gene_ontology import GeneOntology
+from pyseqrna.normalize_counts import Normalization
 from pyseqrna import pathway as pt
 
 import pyseqrna.version
@@ -266,6 +269,50 @@ def main():
 
     log.info("Differential Expression started with %s",options.detool)
 
+    log.info("Converting Raw Counts to normalized counts")
+
+    if options.normalizecount:
+
+        count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
+        norm = Normalization(countFile=count, featureFile=options.feature_file)
+
+        if options.normalizationtype == 'RPKM':
+            
+            r = norm.RPKM()
+
+            r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'))
+
+            r[1].savefig(os.path.join(quantdir,'RPKM_vs_Raw_counts.png'), bbox_inches='tight')
+
+        if options.normalizationtype == 'CPM':
+            
+            r = norm.CPM()
+
+            r[0].to_excel(os.path.join(quantdir,'CPM_counts.xlsx'))
+
+            r[1].savefig(os.path.join(quantdir,'CPM_vs_Raw_counts.png'), bbox_inches='tight')
+        
+        if options.normalizationtype == 'TPM':
+            
+            r = norm.CPM()
+
+            r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'))
+
+            r[1].savefig(os.path.join(quantdir,'TPM_vs_Raw_counts.png'), bbox_inches='tight')
+
+        if options.normalizationtype == 'medianRatiocount':
+            
+            r = norm.meanRatioCount()
+
+            r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'))
+
+    log.info("Clustering samples based on similarity")
+    
+    if options.cluster:
+        plot = cl.clusterSample(countDF=count)
+        plot.savefig(os.path.join(quantdir,'Cluster.png'), bbox_inches='tight')
+
     targets = input_data['targets']
 
     diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"))
@@ -377,24 +424,23 @@ def main():
         outvolcano = os.path.join(plotdir,"Volcano_Plots")
         pu.make_directory(outvolcano)
         for c in combination:
-            x = pp.plotVolcano(result,c,1)
+            x = pp.plotVolcano(result,c,FOLD=options.FOLD)
             if type(x) != str:
                 x.savefig(outvolcano+"/"+c+"_volcano.png")
                 plt.close()
     if options.maplot:
         count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
-        outma = os.path.join(plotdir,"MA_Plots")
-        pu.make_directory(outma)
+        outma = pu.make_directory(os.path.join(plotdir,"MA_Plots"))
         for m in combination:
-            x = pp.plotMA(result,count,m,1)
+            x = pp.plotMA(degDF= result,countDF= count,comp=m,FOLD=options.FOLD, FDR=options.FDR)
             if type(x) != str:
-                x.savefig(outma+"/"+c+"_MA.png")
+                x.savefig(outma+"/"+m+"_MA.png")
                 plt.close()
     if options.vennplot:
         degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
         if options.venncombination != 'random':
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
-            x.savefig(plotdir+ "/_Venn.png")
+            x.savefig(plotdir+ "/Venn.png")
             plt.close()
         else:
             if len(combination)<4:
@@ -407,7 +453,7 @@ def main():
             for i in range(0, len(vlist)):
                 print(vlist[i])
                 x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold, degLabel=None)
-                x.savefig(plotdir+"/Venn_"+i+".png")
+                x.savefig(plotdir+"/Venn_"+str(i)+".png")
                 plt.close()
             
     endTime = time.ctime()

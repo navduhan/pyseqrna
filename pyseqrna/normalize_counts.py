@@ -213,7 +213,7 @@ class Normalization():
 
             ax.set_ylabel('log counts')
        
-        return rpkmDF, fig, ax
+        return rpkmDF, fig
 
 
     def TPM(self, plot=True, figsize=(20,10)):
