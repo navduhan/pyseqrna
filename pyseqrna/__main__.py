@@ -319,8 +319,6 @@ def main():
 
     filtered_DEG['plot'].savefig(os.path.join(diffdir,"Filtered_DEG.png"),dpi=300, bbox_inches='tight')
 
-    filtered_DEG['plot'].close()
-
     log.info("Writting DEGs summary to excel file")
 
     filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"))
@@ -334,8 +332,6 @@ def main():
         heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
 
         heatmap.savefig(os.path.join(plotdir,f"Heatmap_top50.png"), bbox_inches='tight')
-
-        heatmap.close()
 
     genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
 
@@ -363,8 +359,6 @@ def main():
 
                 ontology_results['plot'].savefig(os.path.join(outgo, f"{goplots}/{c}_go_dotplot.png"), bbox_inches='tight')
 
-                ontology_results['plot'].close()
-                
             else:
                 log.info(f"No ontology found for {c}")
     
