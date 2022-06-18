@@ -363,12 +363,13 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         labels= summary['Comparisons'].values.tolist()
 
         if len(labels)>10:
-            hg =len(labels)
+            hg =len(labels)/2
+            
 
         updata= summary['Up_DEGs'].values.tolist()
         downdata = summary['Down_DEGs'].values.tolist()
         my_range=list(range(1,len(summary.index)+1))
-        fig, ax = plt.subplots(figsize=(10,hg),dpi=300)
+        fig, ax = plt.subplots(figsize=(hg,hg),dpi=300)
         ax.barh(labels,updata, color='mediumseagreen')
         ax.barh(labels,downdata, left=updata, color='salmon')
         plt.xticks(fontsize=10)
