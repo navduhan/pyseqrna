@@ -139,8 +139,6 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green
 
 
 
-
-
 def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), type='counts'):
 
     # Need to add argument for all deg hetamp.
