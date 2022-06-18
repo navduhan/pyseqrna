@@ -61,7 +61,7 @@ def plotVolcano(degDF=None, comp=None,FOLD=2,pValue=0.05,color=('red','grey','gr
     return fig 
 
 
-def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green'), dim=(8,5), dotsize=8, markerType='o', alpha=0.5):
+def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','grey','green'), dim=(8,5), dotsize=8, markerType='o', alpha=0.5):
     """
     
 
@@ -77,12 +77,17 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green
     """
 
     LFC = "logFC("+comp+")"
+    PVAL = "FDR("+comp+")"
     # baseMean ="baseMean("+comp+")"
     _y = r'$ log_{2}(Fold Change)$'
     _x = r'$ log_{2}(Mean Count)$'
 
     dk = degDF.filter(regex=comp, axis=1)
-    try:
+
+    if dk.empty:
+        pass
+    else:
+    
 
         cdf1 = countDF.filter(regex=comp.split("-")[0], axis=1)
         cdf2 = countDF.filter(regex=comp.split("-")[1], axis=1)
@@ -98,12 +103,14 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green
 
         final = final.fillna(0)
 
-        final.loc[final[LFC]>=np.log2(FOLD),'colorADD'] = color[2]
+        final.loc[(final[LFC]>=np.log2(FOLD)) & (final[PVAL]<=FDR),'colorADD'] = color[2]
 
-        final.loc[final[LFC]<=-np.log2(FOLD), 'colorADD'] = color[0]
+        final.loc[(final[LFC]<=-np.log2(FOLD)) & (final[PVAL]<=FDR), 'colorADD'] = color[0]
 
         final['colorADD'].fillna(color[1], inplace=True)  
+
         final['mean'] = final[['first', 'second']].mean(axis=1)
+
         finalDF = final.loc[final['mean']>0].copy()
 
         np.seterr(divide = 'ignore') 
@@ -130,8 +137,7 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2,color=('red','grey','green
         ax.set_ylabel(_y)
 
         fig.tight_layout()
-    except Exception:
-        return "no ma"
+ 
    
     return fig 
 
