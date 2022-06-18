@@ -123,7 +123,7 @@ def main():
     
     if options.fastqc2:
         
-        jobid, fastqc_results = qc.fastqcRun(sampleDict=samples,out="fastqc_results_after_trimming", outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+        jobid, fastqc_results = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
         if options.slurm:
             for job in jobid:
@@ -308,7 +308,7 @@ def main():
             r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'))
 
     log.info("Clustering samples based on similarity")
-    
+
     if options.cluster:
         plot = cl.clusterSample(countDF=count)
         plot.savefig(os.path.join(quantdir,'Cluster.png'), bbox_inches='tight')
