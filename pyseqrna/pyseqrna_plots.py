@@ -226,6 +226,7 @@ def plotVenn(DEGFile=None, FOLD=2,comparisons=None, degLabel="total",  fontsize=
 
         for k in GeneCollections:
             labels[k] += str(len(GeneCollections[k]))
+        print(labels)
     else:
         upGene = GenerateCollection(Up)
 
