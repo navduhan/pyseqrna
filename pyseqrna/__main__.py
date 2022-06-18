@@ -240,6 +240,7 @@ def main():
     log.info("Feature Count from aligned reads started")
 
     quantdir = pu.make_directory(os.path.join(outdir, "3_Quantification"))
+
     if options.quantification == 'featureCounts':
 
         fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
@@ -278,7 +279,7 @@ def main():
         
     elif options.detool == 'edgeR':
 
-        count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+        count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
         result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
 
@@ -381,6 +382,7 @@ def main():
                 x.savefig(outvolcano+"/"+c+"_volcano.png")
                 plt.close()
     if options.maplot:
+        count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
         outma = os.path.join(plotdir,"MA_Plots")
         pu.make_directory(outma)
         for m in combination:
@@ -390,7 +392,7 @@ def main():
                 plt.close()
     if options.vennplot:
         degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
-        if options.venncombination:
+        if options.venncombination != 'random':
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
             x.savefig(plotdir+ "/_Venn.png")
             plt.close()

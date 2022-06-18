@@ -39,7 +39,7 @@ def plotVolcano(degDF=None, comp=None,FOLD=2,pValue=0.05,color=('red','grey','gr
 
         final['colorADD'].fillna(color[1], inplace=True)  
 
-        final['log(10)_pvalue'] = -(np.log10(dk[PVAL]))
+        final['log(10)_pvalue'] = -(np.log10(final[PVAL]))
         
         color_values = {col: i for i, col in enumerate(color)}
 
