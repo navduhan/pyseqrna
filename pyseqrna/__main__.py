@@ -365,13 +365,13 @@ def main():
     
     if options.keggpathway:
         outkegg = pu.make_directory(os.path.join(annodir,"KEGG_pathway"))
-        keggfiles = pu.make_directory(os.path.join(outkegg,"GO_Files"))
-        keggplots = pu.make_directory(os.path.join(outkegg,"GO_Plots"))
+        keggfiles = pu.make_directory(os.path.join(outkegg,"Kegg_Files"))
+        keggplots = pu.make_directory(os.path.join(outkegg,"Kegg_Plots"))
         df , bg =pt.kegg_list(options.keggspecies)
         for c in combination:
             file_deg = f"{genesdir}/{c}.txt"
             kegg_results = pt.enrichKEGG(file_deg,df,bg)
-            kegg_results.to_csv(os.path.join(outkegg, f"{c}_kegg.txt"), sep="\t", index=False)
+            kegg_results.to_csv(os.path.join(keggfiles, f"{c}_kegg.txt"), sep="\t", index=False)
     if options.volcanoplot:
         outvolcano = os.path.join(plotdir,"Volcano_Plots")
         pu.make_directory(outvolcano)
@@ -403,7 +403,8 @@ def main():
         
         
             for i in range(0, len(vlist)):
-                x = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold)
+                print(vlist[i])
+                x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold)
                 x.savefig(plotdir+"/Venn_"+i+".png")
                 plt.close()
             
