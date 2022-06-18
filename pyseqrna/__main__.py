@@ -389,8 +389,8 @@ def main():
     if options.vennplot:
         degfile = os.path.join(diffdir,"filtered_DEGs.xlsx")
         if options.venncombination:
-            x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold,outDir=plotdir)
-            x.savefig(outdir+ "/_Venn.png")
+            x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
+            x.savefig(plotdir+ "/_Venn.png")
         else:
             if len(combination)<4:
                 vnum= len(combination)
@@ -401,8 +401,8 @@ def main():
         
         
             for i in range(0, len(vlist)):
-                x = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold,outDir=plotdir)
-                x.savefig(outdir+"/Venn_"+i+".png")
+                x = pp.plotVenn(DEGFile=degfile, comparisons=vlist[i], FOLD=options.fold)
+                x.savefig(plotdir+"/Venn_"+i+".png")
                 plt.close()
             
     endTime = time.ctime()
