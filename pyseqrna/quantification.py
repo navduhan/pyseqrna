@@ -82,7 +82,7 @@ def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, s
     else:
 
         featureCountCmd = f"{execPATH}  -a {gff} -o {outFile} {arg} {inputFiles}"
-        print(featureCountCmd)
+        # print(featureCountCmd)
         if slurm:
             try:
                     job_id = pu.clusterRun(job_name='featureCount', sout=os.path.join(outDir, "featureCount.out"), serror=os.path.join(outDir, "featureCount.err"), command= featureCountCmd, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
