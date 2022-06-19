@@ -273,7 +273,6 @@ def main():
 
     if options.normalizecount:
 
-        print(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
         norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file)
 
@@ -310,7 +309,8 @@ def main():
     log.info("Clustering samples based on similarity")
 
     if options.cluster:
-        plot = cl.clusterSample(countDF=count)
+        count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+        plot = cl.clusterSample(countDF= )
         plot.savefig(os.path.join(quantdir,'Cluster.png'), bbox_inches='tight')
 
     targets = input_data['targets']
