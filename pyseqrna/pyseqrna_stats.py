@@ -160,13 +160,23 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-            p = Pool(numpro)
-            p.map(target=sort_bam, args=(bamDict[bf][2]))
+            p=multiprocessing.Process(target=sort_bam, args=(bamDict[bf][2],))
+        
+            processes.append(p)
+            p.start()
+            
+            for process in processes:
+                process.join()
         
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
-        p = Pool(numpro)
-        p.map(target=index_bam, args=(file))
+       
+        p=multiprocessing.Process(target=index_bam, args=(file,))
+        processes.append(p)
+        p.start()
+        
+        for process in processes:
+            process.join()
 
     for bf in bamDict:
         try:
