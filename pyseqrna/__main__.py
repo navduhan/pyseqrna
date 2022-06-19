@@ -248,7 +248,7 @@ def main():
 
         fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
 
-        log.info("feature counts completed and written in %s/Raw_Counts.",quantdir)
+        log.info("feature counts completed and written in %s/Raw_Counts.xlsx",quantdir)
     
     elif options.quantification == 'Htseq':
 
@@ -273,7 +273,9 @@ def main():
 
     if options.normalizecount:
 
-        norm = Normalization(countFile=os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file)
+        print(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
+        norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file)
 
         if options.normalizationtype == 'RPKM':
             
