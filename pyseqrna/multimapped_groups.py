@@ -23,9 +23,9 @@ def Bam2Bed(bamDict):
         out = sample.split(".bam")[0]+".bed"
 
         outBed.append(out)
-       
+        input = sample.split('.bam')[0]+"_sorted.bam"
         # pysam.sort("-o",f"{sample.split('.bam')[0]}_sorted.bam", sample)
-        reads = pysam.AlignmentFile(alignFiles[0],'rb')
+        reads = pysam.AlignmentFile(input,'rb')
        
 
         with open(out, 'w') as fp:

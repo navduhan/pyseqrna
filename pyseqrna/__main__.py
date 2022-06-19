@@ -263,7 +263,7 @@ def main():
     
         mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file)
 
-        mmg_count.to_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx", index=False))
+        mmg_count.to_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx" ),index=False)
 
         log.info("counting of multimapped read group finished")
 
