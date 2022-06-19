@@ -5,6 +5,7 @@ Author: Naveen Duhan
 Version: 0.1
 '''
 
+from matplotlib.colors import same_color
 import pandas as pd 
 import pysam
 import pyfastx
@@ -12,6 +13,7 @@ import pandas as pd
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 from pyseqrna import pyseqrna_utils as pu
 import matplotlib as plt
+from multiprocessing import Pool
 import multiprocessing
 import subprocess 
 log = PyseqrnaLogger(mode='a', log="stats")
@@ -120,16 +122,20 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     Ureads = manager.dict()
     Mreads = manager.dict()
     processes = []
+
+    numpro = len(sampleDict)
     
     for sp in sampleDict:
         try:
-            p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
+            p = Pool(numpro)
+            # p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
+            p.map(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
         
-            processes.append(p)
-            p.start()
+            # processes.append(p)
+            # p.start()
             
-            for process in processes:
-                process.join()
+            # for process in processes:
+            #     process.join()
        
             if pairedEND:
                 Ireads.update((x, y*2) for x, y in Ireads.items())
@@ -140,13 +146,17 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     
     for tf in trimDict:
         try:
-            p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
+
+            p = Pool(numpro)
+            p.map(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
+
+            # p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
         
-            processes.append(p)
-            p.start()
+            # processes.append(p)
+            # p.start()
             
-            for process in processes:
-                process.join()
+            # for process in processes:
+            #     process.join()
        
             if pairedEND:
                 Nreads.update((x, y*2) for x, y in Nreads.items())
@@ -154,45 +164,52 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-            
-            sort_bam(bamDict[bf][2])
+            p = Pool(numpro)
+            p.map(target=sort_bam, args=(bamDict[bf][2]))
         
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
-
-        index_bam(file)
+        p = Pool(numpro)
+        p.map(target=index_bam, args=(file))
 
     for bf in bamDict:
         try:
-            p=multiprocessing.Process(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
+            # p=multiprocessing.Process(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
         
-            processes.append(p)
-            p.start()
+            # processes.append(p)
+            # p.start()
             
-            for process in processes:
-                process.join()
+            # for process in processes:
+            #     process.join()
+
+            p = Pool(numpro)
+            p.map(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
        
         except Exception:
             log.error(f"Not able to count Aligned read number in {bf}")
         try:
-            p=multiprocessing.Process(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
+            # p=multiprocessing.Process(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
         
-            processes.append(p)
-            p.start()
+            # processes.append(p)
+            # p.start()
             
-            for process in processes:
-                process.join()
+            # for process in processes:
+            #     process.join()
+            p = Pool(numpro)
+            p.map(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
                 
         except Exception:
             log.error(f"Not able to count Uniquely mapped read number in {bf}")
         try:
-            p=multiprocessing.Process(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
+            # p=multiprocessing.Process(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         
-            processes.append(p)
-            p.start()
+            # processes.append(p)
+            # p.start()
             
-            for process in processes:
-                process.join()           
+            # for process in processes:
+            #     process.join()           
+            p = Pool(numpro)
+            p.map(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         except Exception:
             log.error(f"Not able to count Multi mapped read number in {bf}")
     try:

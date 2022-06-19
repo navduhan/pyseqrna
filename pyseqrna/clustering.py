@@ -15,15 +15,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as shc
 
-def leaf_label(temp,xx):
+def leaf_label(temp):
     """Funtion to generate leaf label for dendrogram
 
     :param temp: Temp leaves arrangment for dendrogram
 
     :return: Return leaf labels for dendrogram.
     """
-   
-    return "{}".format(temp[xx])
+    label =[]
+    for i in range(len(temp)):
+        label.append(temp[i])
+    return label
 def clusterSample(countDF = None):
     """Function to cluster samples based on similarity
 
@@ -48,7 +50,8 @@ def clusterSample(countDF = None):
             linked,
             truncate_mode='lastp',  # show only the last p merged clusters
             p=len(countDF.columns),  # show only the last p merged clusters
-            leaf_label_func=leaf_label(temp),
+            # leaf_label_func=leaf_label(),
+            labels=leaf_label(temp),
             orientation='left',
             leaf_font_size=8.,
             show_contracted=True,  # to get a distribution impression in truncated branches
