@@ -273,9 +273,7 @@ def main():
 
     if options.normalizecount:
 
-        count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
-
-        norm = Normalization(countFile=count, featureFile=options.feature_file)
+        norm = Normalization(countFile=os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file)
 
         if options.normalizationtype == 'RPKM':
             
