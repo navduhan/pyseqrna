@@ -424,7 +424,7 @@ def main():
         outvolcano = os.path.join(plotdir,"Volcano_Plots")
         pu.make_directory(outvolcano)
         for c in combination:
-            x = pp.plotVolcano(result,c,FOLD=options.FOLD)
+            x = pp.plotVolcano(result,c,FOLD=options.fold)
             if type(x) != str:
                 x.savefig(outvolcano+"/"+c+"_volcano.png")
                 plt.close()
@@ -432,7 +432,7 @@ def main():
         count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
         outma = pu.make_directory(os.path.join(plotdir,"MA_Plots"))
         for m in combination:
-            x = pp.plotMA(degDF= result,countDF= count,comp=m,FOLD=options.FOLD, FDR=options.FDR)
+            x = pp.plotMA(degDF= result,countDF= count,comp=m,FOLD=options.fold, FDR=options.fdr)
             if type(x) != str:
                 x.savefig(outma+"/"+m+"_MA.png")
                 plt.close()
