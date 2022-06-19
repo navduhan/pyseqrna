@@ -127,15 +127,14 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     
     for sp in sampleDict:
         try:
-            p = Pool(numpro)
-            # p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
-            p.map(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
+         
+            p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
         
-            # processes.append(p)
-            # p.start()
+            processes.append(p)
+            p.start()
             
-            # for process in processes:
-            #     process.join()
+            for process in processes:
+                process.join()
        
             if pairedEND:
                 Ireads.update((x, y*2) for x, y in Ireads.items())
@@ -147,16 +146,13 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     for tf in trimDict:
         try:
 
-            p = Pool(numpro)
-            p.map(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
-
-            # p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
+            p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
         
-            # processes.append(p)
-            # p.start()
+            processes.append(p)
+            p.start()
             
-            # for process in processes:
-            #     process.join()
+            for process in processes:
+                process.join()
        
             if pairedEND:
                 Nreads.update((x, y*2) for x, y in Nreads.items())
@@ -174,42 +170,36 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
 
     for bf in bamDict:
         try:
-            # p=multiprocessing.Process(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
+            p=multiprocessing.Process(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
         
-            # processes.append(p)
-            # p.start()
+            processes.append(p)
+            p.start()
             
-            # for process in processes:
-            #     process.join()
+            for process in processes:
+                process.join()
 
-            p = Pool(numpro)
-            p.map(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
-       
         except Exception:
             log.error(f"Not able to count Aligned read number in {bf}")
         try:
-            # p=multiprocessing.Process(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
+            p=multiprocessing.Process(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
         
-            # processes.append(p)
-            # p.start()
+            processes.append(p)
+            p.start()
             
-            # for process in processes:
-            #     process.join()
-            p = Pool(numpro)
-            p.map(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
+            for process in processes:
+                process.join()
                 
         except Exception:
             log.error(f"Not able to count Uniquely mapped read number in {bf}")
         try:
-            # p=multiprocessing.Process(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
+            p=multiprocessing.Process(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         
-            # processes.append(p)
-            # p.start()
+            processes.append(p)
+            p.start()
             
-            # for process in processes:
-            #     process.join()           
-            p = Pool(numpro)
-            p.map(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
+            for process in processes:
+                process.join()           
+            
         except Exception:
             log.error(f"Not able to count Multi mapped read number in {bf}")
     try:
