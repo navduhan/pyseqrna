@@ -310,7 +310,7 @@ def main():
 
     if options.cluster:
         count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
-        plot = cl.clusterSample(countDF= )
+        plot = cl.clusterSample(countDF= count)
         plot.savefig(os.path.join(quantdir,'Cluster.png'), bbox_inches='tight')
 
     targets = input_data['targets']
