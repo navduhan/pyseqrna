@@ -226,12 +226,12 @@ class GeneOntology:
         Assumes a list or numpy array x which contains p-values for multiple tests
         Copied from p.adjust function from R  
         """
-        o = [i[0] for i in sorted(enumerate(x), key=lambda v:v[1],reverse=True)]
-        ro = [i[0] for i in sorted(enumerate(o), key=lambda v:v[1])]
-        q = sum([1.0/i for i in range(1,len(x)+1)])
-        l = [q*len(x)/i*x[j] for i,j in zip(reversed(range(1,len(x)+1)),o)]
-        l = [l[k] if l[k] < 1.0 else 1.0 for k in ro]
-        return l
+        p_vals = pd.Series(x)
+        from scipy.stats import rankdata
+        ranked_p_values = rankdata(p_vals)
+        fdr = p_vals * len(p_vals) / ranked_p_values
+        fdr[fdr > 1] = 1
+        return fdr
 
     def dotplotGO(self, df=None, nrows=20, colorBy='logPvalues'):
         """_summary_
