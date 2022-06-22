@@ -106,10 +106,11 @@ def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, s
                 
                 log.exception("Job sumission failed")
     
-        df= pd.read_csv(outFile, sep="\t", comment="#")
+        df= pd.read_csv(outFile, sep="\t", comment="#", low_memory=False)
         newCountDF = df.drop(columns=["Chr", "Start", "End", "Strand","Length"])
         newCountDF.columns = col
         newCountDF['Gene']= newCountDF['Gene'].str.replace("gene:", "")
+        newCountDF['Gene']= newCountDF['Gene'].str.replace("gene-", "")
         newCountDF.to_excel(os.path.join(outDir,"Raw_Counts.xlsx"), index=False)
         os.remove(outFile)
     return job_id
