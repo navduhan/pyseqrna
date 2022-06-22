@@ -23,7 +23,7 @@ class Pathway:
         self.gff = gff
         if self.keyType.lower() == 'ncbi':
              log.info("Fetching Gene Ontology from pyseqrnautils API")
-             self.df, self.background_count = self.kegg_list(self.species)
+             self.df, self.background_count = self.kegg_list()
              self.idmapping = pu.parse_gff(self.gff)
 
     def _q(self,op, arg1, arg2=None, arg3=None):

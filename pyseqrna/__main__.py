@@ -420,7 +420,7 @@ def main():
 
         keggplots = pu.make_directory(os.path.join(outkegg,"Kegg_Plots"))
 
-        pt = Pathway(species=options.keggspecies,keyType=options.source, gff= options.feature_file)
+        pt = Pathway(species=options.keggspecies, keyType=options.source, gff= options.feature_file)
 
         for c in combination:
 
