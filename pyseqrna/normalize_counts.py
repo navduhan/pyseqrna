@@ -109,6 +109,7 @@ def getGeneLength(file=None, feature='gene', typeFile='GFF', attribute='ID'):
     gtf['Length'] = list(map(lambda x: x[4]-x[3]+1,gene_list))
 
     final = gtf [['Gene', 'Length']]
+    final = final.drop_duplicates(subset='Gene')
 
     finalDF = final.set_index('Gene')
 
