@@ -395,7 +395,7 @@ def main():
 
         goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
 
-        go = GeneOntology(species=options.gospecies, type=options.gotype, keyType=options.source, taxid = options.taxid, gff=options.feature_file)
+        go = GeneOntology(species=options.gospecies, type=options.gotype, keyType=options.source, taxid=options.taxid, gff=options.feature_file)
 
         for c in combination:
 
