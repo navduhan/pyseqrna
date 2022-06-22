@@ -17,23 +17,34 @@ from io import StringIO, TextIOWrapper
 from xml.etree import ElementTree
 from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
+from pyseqrna import pyseqrna_utils as pu
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
 from urllib.request import urlopen, urlretrieve
 import textwrap
+import json
 log = PyseqrnaLogger(mode='a', log="go")
 
 
 class GeneOntology:
 
-    def __init__(self, species=None, type=None):
+    def __init__(self, species=None, type=None,  keyType = 'ncbi', taxid=None, gff= None):
 
         self.species = species 
         self.type = type 
-        log.info("Fetching Gene Ontology from Biomart")
-        self.gdata = self.query(self.species,self.type)
-        log.info("Proceeing Gene Ontology data from Biomart")
-        self.df, self.background_count = self.preprocessBioMart(self.gdata)
+        self.keyType = keyType
+        self.taxid = taxid
+        self.gff = gff
+
+        if self.keyType.lower() == 'ensembl':
+            log.info("Fetching Gene Ontology from Biomart")
+            self.gdata = self.query(self.species,self.type)
+            log.info("Proceeing Gene Ontology data from Biomart")
+            self.df, self.background_count = self.preprocessBioMart(self.gdata)
+        if self.keyType.lower() == 'ncbi':
+             log.info("Fetching Gene Ontology from pyseqrnautils API")
+             self.df, self.background_count = self.parse_GO(self.taxid)
+             self.idmapping = pu.parse_gff(self.gff)
         
     def get_request(self, url,  **params):
 
@@ -135,7 +146,7 @@ class GeneOntology:
             if line[2] not in GO_rest:
 
                 GO_rest[line[2]] = [
-                                    line[2], line[3], line[4], line[5]]
+                                    line[2], line[3], line[4]]
 
         ds = [GO_rest, GeneID]
         d = {}
@@ -154,14 +165,61 @@ class GeneOntology:
             if v[0][2] == 'biological_process':
                 v[0][2] = 'BP'
 
-            dd.append([v[0][0], v[0][1], v[0][2], v[0][3],
+            dd.append([v[0][0], v[0][1], v[0][2], 
                         v[1], len(v[1])])
 
         finalDF = pd.DataFrame(dd, columns=[
-                            'ID', 'Term', 'Ontology', 'Function', 'Gene', 'Gene_length'])
+                            'ID', 'Term', 'Ontology',  'Gene', 'Gene_length'])
 
         return finalDF, bg_count
 
+    def parse_GO(self, taxid ):
+
+        resp = requests.get(f"http://bioinfo.usu.edu/pyseqrnautils/api/go/?taxid={taxid}")
+
+        df = pd.DataFrame(json.loads(resp.text))
+
+        gg = list(df['entrez'])
+        x = np.array(gg)
+
+        bg_count = len(np.unique(x))
+
+        lines = df.values.tolist()
+        GeneID = {}
+
+        for line in lines:
+
+            if line[3] not in GeneID:
+
+                GeneID[line[3]] = [line[2]]
+
+            else:
+                GeneID[line[3]].append(line[2])
+
+        GO_rest = {}
+
+        for line in lines:
+
+            if line[3] not in GO_rest:
+
+                GO_rest[line[3]] = [
+                                    line[3], line[5], line[7]]
+
+        ds = [GO_rest, GeneID]
+        d = {}
+        for k in GO_rest.keys():
+            d[k] = list(d[k] for d in ds)
+
+        dd = []
+
+        for k, v in d.items():
+            dd.append([v[0][0], v[0][1], v[0][2], 
+                                v[1], len(v[1])])
+
+        finalDF = pd.DataFrame(dd, columns=[
+                                    'ID', 'Term', 'Ontology',  'Gene', 'Gene_length'])
+        
+        return finalDF, bg_count
 
     def fdr_calc(self, x):
         """
@@ -289,24 +347,26 @@ class GeneOntology:
         
 
         df_goList = self.df[['ID', 'Gene']].values.tolist()
+        count = self.df[['ID', 'Gene_length']].values.tolist()
+        df_List = self.df[['ID', 'Term', 'Ontology']].values.tolist()
 
         go_dict = {}
 
         for value in df_goList:
             go_dict[value[0]] = str(value[1]).upper()
 
-        count = self.df[['ID', 'Gene_length']].values.tolist()
+        
         go_count = {}
 
         for c in count:
             go_count[c[0]] = c[1]
 
-        df_List = self.df[['ID', 'Term', 'Ontology', 'Function']].values.tolist()
+       
         KOdescription = {}
 
         for line in df_List:
 
-            KOdescription[line[0]] = [line[1], line[2], line[3]]
+            KOdescription[line[0]] = [line[1], line[2]]
 
         get_gene_ids_from_user = dict()
         gene_GO_count = dict()
@@ -325,12 +385,27 @@ class GeneOntology:
             # GO terms
         bg_gene_count = self.background_count
 
-        read_id_file = open(file, 'r')
-        for gene_id in read_id_file:
-            gene_id = gene_id.strip().upper()
+        if self.keyType.lower() == 'ncbi':
+
+            ufile = pd.read_csv(file)
+
+            id_intermediate = ufile.merge(self.idmapping, on='Gene').drop_duplicates()
+
+            read_id_file = id_intermediate['entrez'].values.tolist()
+
+            for gene_id in read_id_file:
+                gene_id = gene_id.strip().upper()
         # remove the duplicate ids and keep unique
-            user_provided_uniq_ids[gene_id] = 0
-        read_id_file.close()
+                user_provided_uniq_ids[gene_id] = 0
+
+        if self.keyType.lower()== 'ensembl':
+
+            read_id_file = open(file, 'r')
+            for gene_id in read_id_file:
+                gene_id = gene_id.strip().upper()
+            # remove the duplicate ids and keep unique
+                user_provided_uniq_ids[gene_id] = 0
+            read_id_file.close()
 
 
         anot_count = 0
@@ -348,21 +423,22 @@ class GeneOntology:
         # get total mapped genes from user list
         # mapped_query_ids = sum(get_user_id_count_for_GO.values())
         mapped_query_ids = len(user_genecount)
+
         for k in get_user_id_count_for_GO:
             gene_in_category = get_user_id_count_for_GO[k]
 
             gene_not_in_category_but_in_sample = mapped_query_ids - gene_in_category
             gene_not_in_catgory_but_in_genome = gene_GO_count[k] - gene_in_category
-            bg_gene_GO_ids = gene_GO_count[k]
-            bg_in_genome = bg_gene_count - mapped_query_ids - (gene_in_category + gene_not_in_catgory_but_in_genome) \
-                + gene_in_category
+            # bg_gene_GO_ids = gene_GO_count[k]
+            # bg_in_genome = bg_gene_count - mapped_query_ids - (gene_in_category + gene_not_in_catgory_but_in_genome) \
+            #     + gene_in_category
             gene_ids = get_gene_ids_from_user[k]
             gID = ""
 
             for g in gene_ids:
-                gID += g+"/"
+                gID += g+","
 
-            gID = gID.rsplit("/", 1)[0]
+            gID = gID.rsplit(",", 1)[0]
             pvalue = stats.hypergeom.sf(
                 gene_in_category -1, bg_gene_count, gene_GO_count[k], mapped_query_ids)
             
@@ -370,27 +446,43 @@ class GeneOntology:
             if gene_in_category > 0:
                 pvalues.append(pvalue)
 
-                enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], KOdescription[k][2],
+                enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], 
                                         f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, len(gene_ids), gID])
         
         fdr = list(self.fdr_calc(pvalues))
 
-        a = [i for i in fdr if i <= 0.05]
+        # a = [i for i in fdr if i <= 0.05]
+
         end = pd.DataFrame(enrichment_result)
+
         if end.shape[0]>1:
-            end.columns = ['GO ID', 'GO Term', 'Ontology', 'Definition', 'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
+            end.columns = ['GO ID', 'GO Term', 'Ontology',  'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
         
             end.insert(7, 'FDR', fdr)
 
             end = end[end['Pvalues']<=pvalueCutoff]
 
+            if self.keyType.lower()=='ncbi':
+
+                 results = pu.change_ids(id_intermediate, end)
+
+            if self.keyType.lower()== 'ensembl':
+
+                results = end
+
+            if results.shape[0]>=nrows:
+                nrows = nrows
+            else:
+                nrows = results.shape[0]
+            
+
             if plot:
                 if plotType == 'dotplot':
-                    fig = self.dotplotGO(end,nrows,colorBy)
+                    fig = self.dotplotGO(results,nrows,colorBy)
                 if plotType == 'barplot':
-                    fig = self.barplotGO(end,nrows,colorBy)
+                    fig = self.barplotGO(results,nrows,colorBy)
                 
-            return {'result': end, 'plot': fig}
+            return {'result': results, 'plot': fig}
 
         return "No Gene Ontology"
 

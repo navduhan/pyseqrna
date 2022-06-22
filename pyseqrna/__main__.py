@@ -22,8 +22,9 @@ from pyseqrna import ribosomal as ribo
 from pyseqrna import clustering as cl
 from pyseqrna import multimapped_groups as mmg
 from pyseqrna.gene_ontology import GeneOntology
+from pyseqrna.pathway import Pathway
 from pyseqrna.normalize_counts import Normalization
-from pyseqrna import pathway as pt
+
 
 import pyseqrna.version
 import pandas as pd
@@ -394,7 +395,7 @@ def main():
 
         goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
 
-        go = GeneOntology(species=options.gospecies, type=options.gotype)
+        go = GeneOntology(species=options.gospecies, type=options.gotype, keyType=options.source, taxid = options.taxid, gff=options.feature_file)
 
         for c in combination:
 
@@ -404,56 +405,99 @@ def main():
 
             if ontology_results != "No Gene Ontology":
 
-                ontology_results['result'].to_excel(os.path.join(outgo, f"{gofiles}/{c}_gene_ontology.xlsx"), index=False)
+                ontology_results['result'].to_excel(f"{gofiles}/{c}_gene_ontology.xlsx", index=False)
 
-                ontology_results['plot'].savefig(os.path.join(outgo, f"{goplots}/{c}_go_dotplot.png"), bbox_inches='tight')
+                ontology_results['plot'].savefig(f"{goplots}/{c}_go_dotplot.png", bbox_inches='tight')
                 plt.close()
             else:
-                log.info(f"No ontology found for {c}")
+                log.info(f"No ontology found in {c}")
     
     if options.keggpathway:
+
         outkegg = pu.make_directory(os.path.join(annodir,"KEGG_pathway"))
+
         keggfiles = pu.make_directory(os.path.join(outkegg,"Kegg_Files"))
+
         keggplots = pu.make_directory(os.path.join(outkegg,"Kegg_Plots"))
-        df , bg =pt.kegg_list(options.keggspecies)
+
+        pt = Pathway(species=options.keggspecies,keyType=options.source, gff= options.feature_file)
+
         for c in combination:
+
             file_deg = f"{genesdir}/{c}.txt"
-            kegg_results = pt.enrichKEGG(file_deg,df,bg)
-            kegg_results.to_csv(os.path.join(keggfiles, f"{c}_kegg.txt"), sep="\t", index=False)
+
+            kegg_results = pt.enrichKEGG(file_deg)
+
+            if kegg_results != "No Pathway":
+
+                kegg_results[0].to_excel(os.path.join(keggfiles, f"{c}_kegg.txt"), index=False)
+
+                kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
+
+                plt.close()
+
+            else:
+                log.info(f"No pathway found in {c}")
+
     if options.volcanoplot:
+
         outvolcano = os.path.join(plotdir,"Volcano_Plots")
+
         pu.make_directory(outvolcano)
+
         for c in combination:
+
             x = pp.plotVolcano(result,c,FOLD=options.fold)
+
             if type(x) != str:
+
                 x.savefig(outvolcano+"/"+c+"_volcano.png")
                 plt.close()
+
     if options.maplot:
+
         count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
         outma = pu.make_directory(os.path.join(plotdir,"MA_Plots"))
+
         for m in combination:
+
             x = pp.plotMA(degDF= result,countDF= count,comp=m,FOLD=options.fold, FDR=options.fdr)
+
             if type(x) != str:
+
                 x.savefig(outma+"/"+m+"_MA.png")
                 plt.close()
+
     if options.vennplot:
+        
         degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
+
         if options.venncombination != 'random':
+
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
+
             x.savefig(plotdir+ "/Venn.png")
+
             plt.close()
+
         else:
             if len(combination)<4:
+
                 vnum= len(combination)
+
             else:
+
                 vnum = len(combination)/4
                 
             vlist = np.array_split(combination, vnum)
         
             for i in range(0, len(vlist)):
-                print(vlist[i])
+
                 x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold, degLabel=None)
+
                 x.savefig(plotdir+"/Venn_"+str(i)+".png")
+
                 plt.close()
             
     endTime = time.ctime()

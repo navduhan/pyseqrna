@@ -536,4 +536,39 @@ def getGenes(file=None, combinations=None, multisheet=True, geneType='all',  out
 
 
 
+def parse_gff(file):
 
+    gtf_file = pd.read_csv(file ,sep="\t", header=None, comment="#")
+
+    gtf_file.columns = ['seqname', 'source', 'feature', 'start', 'end', 's1','strand', 's2', 'identifier']
+    gene = pd.DataFrame(gtf_file[gtf_file['feature'] == 'gene'])
+
+    gene['Gene'] = list(map(lambda x: re.search(r'ID=(.*?);',x,re.MULTILINE).group(1).split("gene-")[1],gene['identifier'].values.tolist()))
+    gene['entrez']= list(map(lambda x: re.search(r'GeneID:(.*?);',x,re.MULTILINE).group(1).split(",")[0],gene['identifier'].values.tolist()))
+    gene_list = gene[['Gene', 'entrez']]
+
+    # cds = pd.DataFrame(gtf_file[gtf_file['feature'] == 'CDS'])
+    # cds['cds'] = list(map(lambda x: re.search(r'ID=(.*?);',x,re.MULTILINE).group(1).split("cds-")[1],cds['identifier'].values.tolist()))
+    # cds['entrez']= list(map(lambda x: re.search(r'GeneID:(.*?);',x,re.MULTILINE).group(1).split(",")[0],cds['identifier'].values.tolist()))
+    # cds_list = cds[['cds', 'entrez']]
+
+    # final = gene_list.merge(cds_list, on='entrez')
+
+    final = gene_list.drop_duplicates()
+
+    return final
+def change_ids(df, path):
+    
+    pl = df.values.tolist()
+    pp = {}
+    for p in pl:
+        pp[p[1]] = p[0]
+
+    for i, row in path.iterrows():
+        Genes = str(path.at[i, 'Genes']).split(",")
+        result = []
+        for gene in Genes:
+            result.append(pp[gene])
+        res = ",".join(result)
+        path.at[i, 'Genes'] = res
+    return path
