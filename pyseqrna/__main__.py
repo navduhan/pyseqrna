@@ -275,7 +275,7 @@ def main():
     if options.normalizecount:
 
 
-        norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file)
+        norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
 
         if options.normalizationtype == 'RPKM':
             

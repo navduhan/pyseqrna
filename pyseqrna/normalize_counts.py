@@ -69,57 +69,7 @@ def boxplot(data =None, countType=None, colors=None, figsize=(20,10), **kwargs):
     return fig, ax
 
 
-def getGeneLength(file=None, feature='gene', typeFile='GFF',keyType='ncbi', attribute='ID'):
-    """[summary]
 
-    Args:
-        file ([type], optional): [description]. Defaults to None.
-        feature (str, optional): [description]. Defaults to 'gene'.
-        type (str, optional): [description]. Defaults to 'GFF'.
-        attribute (str, optional): [description]. Defaults to 'ID'.
-    """
-
-    gtf = pd.read_csv(file, sep="\t", header=None, comment="#")
-
-    gtf.columns = ['seqname', 'source', 'feature', 'start', 'end', 's1', 'strand', 's2', 'identifier']
-
-    gtf = gtf[gtf['feature'] == feature]
-
-    if typeFile.upper() == 'GFF':
-
-        try:
-
-           if keyType.lower() == 'ncbi':
-
-                gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene-")[1], gtf['identifier'].values.tolist()))
-            
-           if keyType.lower() =='ensembl':
-
-                gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene:")[1], gtf['identifier'].values.tolist()))
-        
-        except Exception:
-
-            pLog.exception("Attribute not present in GFF file")
-
-    if typeFile.upper() == 'GTF':
-
-        try:
-            gtf['Gene'] = list(map(lambda x:  re.search(attribute+'\s+["](.*?)["]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
-
-        except Exception:
-
-            pLog.exception("Attribute not present in GTF file")
-
-    gene_list = gtf.values.tolist()
-
-    gtf['Length'] = list(map(lambda x: x[4]-x[3]+1,gene_list))
-
-    final = gtf [['Gene', 'Length']]
-    final = final.drop_duplicates(subset='Gene')
-
-    finalDF = final.set_index('Gene')
-
-    return finalDF
 
 
 class Normalization():
@@ -127,7 +77,7 @@ class Normalization():
     This class is for calculation of normalized counts from raw counts
     """
 
-    def __init__(self, countFile=None, featureFile=None, typeFile='GFF', attribute='ID', feature='gene', geneColumn='Gene'):
+    def __init__(self, countFile=None, featureFile=None, typeFile='GFF', keyType='ncbi', attribute='ID', feature='gene', geneColumn='Gene'):
         """[summary]
 
         Args:
@@ -143,8 +93,60 @@ class Normalization():
         self.attribute = attribute
         self.geneColumn = geneColumn
         self.feature = feature
+        self.keyType = keyType
 
         return
+    def getGeneLength(self, file=None, feature='gene', typeFile='GFF', attribute='ID'):
+        """[summary]
+
+        Args:
+            file ([type], optional): [description]. Defaults to None.
+            feature (str, optional): [description]. Defaults to 'gene'.
+            type (str, optional): [description]. Defaults to 'GFF'.
+            attribute (str, optional): [description]. Defaults to 'ID'.
+        """
+
+        gtf = pd.read_csv(file, sep="\t", header=None, comment="#")
+
+        gtf.columns = ['seqname', 'source', 'feature', 'start', 'end', 's1', 'strand', 's2', 'identifier']
+
+        gtf = gtf[gtf['feature'] == feature]
+
+        if typeFile.upper() == 'GFF':
+            
+            try:
+
+                if self.keyType.lower() == 'ncbi':
+
+                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene-")[1], gtf['identifier'].values.tolist()))
+                    
+                if self.keyType.lower() =='ensembl':
+
+                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene:")[1], gtf['identifier'].values.tolist()))
+            
+            except Exception:
+
+                pLog.exception("Attribute not present in GFF file")
+
+        if typeFile.upper() == 'GTF':
+
+            try:
+                gtf['Gene'] = list(map(lambda x:  re.search(attribute+'\s+["](.*?)["]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
+
+            except Exception:
+
+                pLog.exception("Attribute not present in GTF file")
+
+        gene_list = gtf.values.tolist()
+
+        gtf['Length'] = list(map(lambda x: x[4]-x[3]+1,gene_list))
+
+        final = gtf [['Gene', 'Length']]
+        final = final.drop_duplicates(subset='Gene')
+
+        finalDF = final.set_index('Gene')
+
+        return finalDF
 
     def CPM(self, plot=True, figsize=(20,10)):
         """
@@ -191,7 +193,7 @@ class Normalization():
 
         countDF = df.set_index(self.geneColumn)
 
-        geneDF = getGeneLength(self.featureFile,self.feature,self.typeFile, self.attribute)
+        geneDF = self.getGeneLength(self.featureFile,self.feature,self.typeFile, self.attribute)
 
         match_index = pd.Index.intersection(countDF.index, geneDF.index)
 
@@ -235,7 +237,7 @@ class Normalization():
 
         countDF = df.set_index(self.geneColumn)
 
-        geneDF = getGeneLength(self.featureFile,self.feature,self.typeFile, self.attribute)
+        geneDF = self.getGeneLength(self.featureFile,self.feature,self.typeFile, self.attribute)
 
         match_index = pd.Index.intersection(countDF.index, geneDF.index)
 
