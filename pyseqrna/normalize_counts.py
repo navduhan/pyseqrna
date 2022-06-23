@@ -69,7 +69,7 @@ def boxplot(data =None, countType=None, colors=None, figsize=(20,10), **kwargs):
     return fig, ax
 
 
-def getGeneLength(file=None, feature='gene', typeFile='GFF', attribute='ID'):
+def getGeneLength(file=None, feature='gene', typeFile='GFF',keyType='ncbi', attribute='ID'):
     """[summary]
 
     Args:
@@ -85,17 +85,23 @@ def getGeneLength(file=None, feature='gene', typeFile='GFF', attribute='ID'):
 
     gtf = gtf[gtf['feature'] == feature]
 
-    if typeFile == 'GFF':
+    if typeFile.upper() == 'GFF':
 
         try:
 
-            gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
+           if keyType.lower() == 'ncbi':
+
+                gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene-")[1], gtf['identifier'].values.tolist()))
+            
+           if keyType.lower() =='ensembl':
+
+                gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene:")[1], gtf['identifier'].values.tolist()))
         
         except Exception:
 
             pLog.exception("Attribute not present in GFF file")
 
-    if typeFile == 'GTF':
+    if typeFile.upper() == 'GTF':
 
         try:
             gtf['Gene'] = list(map(lambda x:  re.search(attribute+'\s+["](.*?)["]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
