@@ -393,8 +393,6 @@ class GeneOntology:
 
             read_id_file = id_intermediate['entrez'].values.tolist()
 
-            print(read_id_file)
-
             for gene_id in read_id_file:
 
                 gene_id = gene_id.strip().upper()
