@@ -263,7 +263,7 @@ class GeneOntology:
         ax.xaxis.get_major_locator().set_params(integer=True)
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        ax.spines['left'].set_bounds((0, 20))
+        ax.spines['left'].set_bounds((0, nrows))
         # add some space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
@@ -314,7 +314,7 @@ class GeneOntology:
         
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        ax.spines['left'].set_bounds((0, 20))
+        ax.spines['left'].set_bounds((0, nrows))
         # add some space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
@@ -393,7 +393,10 @@ class GeneOntology:
 
             read_id_file = id_intermediate['entrez'].values.tolist()
 
+            print(read_id_file)
+
             for gene_id in read_id_file:
+
                 gene_id = gene_id.strip().upper()
         # remove the duplicate ids and keep unique
                 user_provided_uniq_ids[gene_id] = 0

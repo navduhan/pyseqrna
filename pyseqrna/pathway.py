@@ -143,7 +143,7 @@ class Pathway:
         scatter = ax.scatter(x=df['Counts'], y= df['Description'], s=df['Counts'], c=df[colorBy])
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        ax.spines['left'].set_bounds((0, 20))
+        ax.spines['left'].set_bounds((0, nrows))
         # add some space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
@@ -176,7 +176,7 @@ class Pathway:
 
         df =df.sort_values('Counts', ascending=False)
         df = df.head(nrows)
-        df =df.sort_values('Counts', ascending=True)
+        df = df.sort_values('Counts', ascending=True)
         counts = df['Counts'].values.tolist()
         terms = df['Description'].values.tolist()
 
@@ -191,7 +191,7 @@ class Pathway:
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        ax.spines['left'].set_bounds((0, 20))
+        ax.spines['left'].set_bounds((0, nrows))
         # add some space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
@@ -239,7 +239,7 @@ class Pathway:
 
         userID_count_kegg = dict()
 
-        user_unique_gene_id = []
+        user_unique_gene_id = dict()
         user_genecount = []
 
         for item in kegg_dict:
@@ -259,11 +259,14 @@ class Pathway:
             id_intermediate = ufile.merge(self.idmapping, on='Gene').drop_duplicates()
 
             read_id_file = id_intermediate['entrez'].values.tolist()
+           
 
             for gene_id in read_id_file:
+               
                 gene_id = gene_id.strip().upper()
         # remove the duplicate ids and keep unique
                 user_unique_gene_id[gene_id] = 0
+               
 
         if self.keyType.lower()== 'ensembl':
 
