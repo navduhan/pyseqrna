@@ -41,6 +41,7 @@ def clusterSample(countDF = None):
     if not isinstance(countDF, pd.DataFrame):
         if countDF.endswith(".xlsx"):
             counts = pd.read_excel(countDF)
+          
         if countDF.endswith(".csv"):
             counts = pd.read_csv(countDF)
         if countDF.endswith(".txt"):
@@ -52,7 +53,7 @@ def clusterSample(countDF = None):
     R = shc.dendrogram(
                     linked,
                     truncate_mode='lastp',  # show only the last p merged clusters
-                    p=len(countDF.columns),  # show only the last p merged clusters
+                    p=len(counts.columns),  # show only the last p merged clusters
                     no_plot=True,
                     )
 
