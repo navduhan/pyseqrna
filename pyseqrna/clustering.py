@@ -38,7 +38,7 @@ def clusterSample(countDF = None):
     """
     if isinstance(countDF, pd.DataFrame):
         counts = countDF
-    else:
+    if not isinstance(countDF, pd.DataFrame):
         if countDF.endswith(".xlsx"):
             counts = pd.read_excel(countDF)
         if countDF.endswith(".csv"):
