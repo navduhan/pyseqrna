@@ -59,6 +59,8 @@ def clusterSample(countDF = None):
 
     temp = {R["leaves"][ii]: counts.columns[ii] for ii in range(len(R["leaves"]))}
     
+    height = len(counts.columns)/2
+    fig, ax = plt.subplots(figsize=(height, 10))
 
     shc.dendrogram(
             linked,
@@ -68,7 +70,8 @@ def clusterSample(countDF = None):
             labels=leaf_label(temp),
             orientation='left',
             leaf_font_size=8.,
-            show_contracted=True,  # to get a distribution impression in truncated branches
+            show_contracted=True,
+            ax= ax  # to get a distribution impression in truncated branches
             )
     ax = plt.gca()
 
@@ -82,4 +85,4 @@ def clusterSample(countDF = None):
     for tick in ax.get_xticklines():
         tick.set_visible(False)
 
-    return plt
+    return fig
