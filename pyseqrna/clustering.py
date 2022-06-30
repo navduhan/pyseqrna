@@ -36,15 +36,16 @@ def clusterSample(countDF = None):
 
     :return: A clustered dendrogram of samples
     """
-    if type(countDF) == str:
+    if isinstance(countDF, pd.DataFrame):
+        countDF = countDF
+    else:
         if countDF.endswith(".xlsx"):
             countDF = pd.read_excel(countDF)
         if countDF.endswith(".csv"):
             countDF = pd.read_csv(countDF)
         if countDF.endswith(".txt"):
             countDF = pd.read_csv(countDF, sep="\t")
-    else:
-        countDF = countDF
+   
         
     corrCount = countDF.corr()
     linked = shc.linkage(corrCount, 'ward')
