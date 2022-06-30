@@ -10,8 +10,11 @@ Created : July 21, 2021
 @author : Naveen Duhan
 """
 
+from itertools import count
 import seaborn as sns
 import numpy as np
+import pandas as pd
+import os
 import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as shc
 
@@ -33,7 +36,16 @@ def clusterSample(countDF = None):
 
     :return: A clustered dendrogram of samples
     """
-
+    if type(countDF) == str:
+        if countDF.endswith(".xlsx"):
+            countDF = pd.read_excel(countDF)
+        if countDF.endswith(".csv"):
+            countDF = pd.read_csv(countDF)
+        if countDF.endswith(".txt"):
+            countDF = pd.read_csv(countDF, sep="\t")
+    else:
+        countDF = countDF
+        
     corrCount = countDF.corr()
     linked = shc.linkage(corrCount, 'ward')
     R = shc.dendrogram(
