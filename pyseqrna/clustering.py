@@ -47,7 +47,7 @@ def clusterSample(countDF = None):
         if countDF.endswith(".txt"):
             counts = pd.read_csv(countDF, sep="\t")
    
-        
+    counts = counts.set_index('Gene') 
     corrCount = counts.corr()
     linked = shc.linkage(corrCount, 'ward')
     R = shc.dendrogram(
