@@ -37,17 +37,17 @@ def clusterSample(countDF = None):
     :return: A clustered dendrogram of samples
     """
     if isinstance(countDF, pd.DataFrame):
-        countDF = countDF
+        counts = countDF
     else:
         if countDF.endswith(".xlsx"):
-            countDF = pd.read_excel(countDF)
+            counts = pd.read_excel(countDF)
         if countDF.endswith(".csv"):
-            countDF = pd.read_csv(countDF)
+            counts = pd.read_csv(countDF)
         if countDF.endswith(".txt"):
-            countDF = pd.read_csv(countDF, sep="\t")
+            counts = pd.read_csv(countDF, sep="\t")
    
         
-    corrCount = countDF.corr()
+    corrCount = counts.corr()
     linked = shc.linkage(corrCount, 'ward')
     R = shc.dendrogram(
                     linked,
@@ -56,13 +56,13 @@ def clusterSample(countDF = None):
                     no_plot=True,
                     )
 
-    temp = {R["leaves"][ii]: countDF.columns[ii] for ii in range(len(R["leaves"]))}
+    temp = {R["leaves"][ii]: counts.columns[ii] for ii in range(len(R["leaves"]))}
     
 
     shc.dendrogram(
             linked,
             truncate_mode='lastp',  # show only the last p merged clusters
-            p=len(countDF.columns),  # show only the last p merged clusters
+            p=len(counts.columns),  # show only the last p merged clusters
             # leaf_label_func=leaf_label(),
             labels=leaf_label(temp),
             orientation='left',
