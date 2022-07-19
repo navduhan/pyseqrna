@@ -96,7 +96,7 @@ class Normalization():
         self.keyType = keyType
 
         return
-    def getGeneLength(self, file=None, feature='gene', typeFile='GFF', attribute='ID'):
+    def getGeneLength(self,  feature='gene', typeFile='GFF', attribute='ID'):
         """[summary]
 
         Args:
@@ -106,7 +106,7 @@ class Normalization():
             attribute (str, optional): [description]. Defaults to 'ID'.
         """
 
-        gtf = pd.read_csv(file, sep="\t", header=None, comment="#")
+        gtf = pd.read_csv(self.featureFile, sep="\t", header=None, comment="#")
 
         gtf.columns = ['seqname', 'source', 'feature', 'start', 'end', 's1', 'strand', 's2', 'identifier']
 
