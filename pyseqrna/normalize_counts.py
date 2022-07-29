@@ -118,11 +118,11 @@ class Normalization():
 
                 if self.keyType.lower() == 'ncbi':
 
-                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene-")[1], gtf['identifier'].values.tolist()))
+                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
                     
                 if self.keyType.lower() =='ensembl':
 
-                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1).split("gene:")[1], gtf['identifier'].values.tolist()))
+                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
             
             except Exception:
 
@@ -143,7 +143,6 @@ class Normalization():
 
         final = gtf [['Gene', 'Length']]
         final = final.drop_duplicates(subset='Gene')
-
         finalDF = final.set_index('Gene')
 
         return finalDF
