@@ -86,10 +86,7 @@ internal.add_argument('--fold', dest='fold', default=2,type=int,
     help="""FOLD change value for filtering DEGs. 
 Remember pyseqrna performs log2 of the given value\n[default:2]""")
 
-internal.add_argument('--normalize-count', dest='normalizecount',action='store_true', default=True, 
-    help="Enables normalized counts\n[default:True]")
-
-internal.add_argument('--normalization-type', dest='normalizationtype', default='RPKM', choices=['RPKM', 'TPM', 'CPM', 'medianRatiocount'], 
+internal.add_argument('--normalize-count', dest='normalizecount',default='RPKM', choices=['RPKM', 'TPM', 'CPM', 'medianRatiocount'], 
     help="Convert raw read counts to normalized counts\n[default:RPKM]")
 
 internal.add_argument('--heatmap', dest='heatmap',action='store_true', default=False, 

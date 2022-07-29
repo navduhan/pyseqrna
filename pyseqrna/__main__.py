@@ -272,40 +272,38 @@ def main():
 
     log.info("Converting Raw Counts to normalized counts")
 
-    if options.normalizecount:
 
+    norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
 
-        norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
-
-        if options.normalizationtype == 'RPKM':
-            
-            r = norm.RPKM()
-
-            r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'))
-
-            r[1].savefig(os.path.join(quantdir,'RPKM_vs_Raw_counts.png'), bbox_inches='tight')
-
-        if options.normalizationtype == 'CPM':
-            
-            r = norm.CPM()
-
-            r[0].to_excel(os.path.join(quantdir,'CPM_counts.xlsx'))
-
-            r[1].savefig(os.path.join(quantdir,'CPM_vs_Raw_counts.png'), bbox_inches='tight')
+    if options.normalizecount == 'RPKM':
         
-        if options.normalizationtype == 'TPM':
-            
-            r = norm.CPM()
+        r = norm.RPKM()
 
-            r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'))
+        r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'))
 
-            r[1].savefig(os.path.join(quantdir,'TPM_vs_Raw_counts.png'), bbox_inches='tight')
+        r[1].savefig(os.path.join(quantdir,'RPKM_vs_Raw_counts.png'), bbox_inches='tight')
 
-        if options.normalizationtype == 'medianRatiocount':
-            
-            r = norm.meanRatioCount()
+    if options.normalizecount == 'CPM':
+        
+        r = norm.CPM()
 
-            r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'))
+        r[0].to_excel(os.path.join(quantdir,'CPM_counts.xlsx'))
+
+        r[1].savefig(os.path.join(quantdir,'CPM_vs_Raw_counts.png'), bbox_inches='tight')
+    
+    if options.normalizecount == 'TPM':
+        
+        r = norm.CPM()
+
+        r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'))
+
+        r[1].savefig(os.path.join(quantdir,'TPM_vs_Raw_counts.png'), bbox_inches='tight')
+
+    if options.normalizecount == 'medianRatiocount':
+        
+        r = norm.meanRatioCount()
+
+        r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'))
 
     log.info("Clustering samples based on similarity")
 
