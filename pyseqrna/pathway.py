@@ -1,5 +1,7 @@
 import io
 import os
+import re
+import requests
 from urllib.request import urlopen, urlretrieve
 from statsmodels.stats.multitest import multipletests
 import scipy.stats as stats
@@ -18,29 +20,54 @@ log = PyseqrnaLogger(mode='a', log="pathway")
 class Pathway:
 
     def __init__(self, species=None, keyType=None, gff=None):
+
         self.species = species 
+
         self.keyType = keyType  
+
         self.gff = gff
+
         if self.keyType.lower() == 'ncbi':
+
              log.info("Fetching Pathways from KEGG API")
+
              self.df, self.background_count = self.kegg_list()
+
              self.idmapping = pu.parse_gff(self.gff)
 
+        if self.keyType.lower() == 'ensembl':
+
+             log.info("Fetching Pathways from pyseqrna API")
+
+             self.df, self.background_count = self.get_pathways()
+             
+
     def _q(self,op, arg1, arg2=None, arg3=None):
+
         URL = "http://rest.kegg.jp/%s"
+
         if arg2 and arg3:
+
             args = "%s/%s/%s/%s" % (op, arg1, arg2, arg3)
+
         elif arg2:
+
             args = "%s/%s/%s" % (op, arg1, arg2)
+
         else:
+
             args = "%s/%s" % (op, arg1)
+
         resp = urlopen(URL % (args))
 
         if "image" == arg2:
+
             return resp
 
         handle = io.TextIOWrapper(resp, encoding="UTF-8")
+
         handle.url = resp.url
+
         return handle
 
     def kegg_organism(self):
@@ -48,6 +75,7 @@ class Pathway:
         resp =  urlopen("http://rest.kegg.jp/list/organism")
 
         handle = io.TextIOWrapper(resp, encoding="UTF-8")
+
         handle.url = resp.url
 
         df = pd.read_csv(handle, sep="\t", names=['Organism ID', 'Organism Code', 'Organism Name', 'Taxonomy'])
@@ -57,11 +85,15 @@ class Pathway:
         return organisms
 
     def kegg_list(self):
+
         resp= self._q("list","pathway",self.species)
 
         data =[]
+
         for r in resp:
+
             a, b=r.split("\t")
+            
             data.append([a.split(":")[1],b.rstrip()])
 
 
@@ -100,6 +132,44 @@ class Pathway:
         bg_count = len(np.unique(x))
 
         return df, bg_count
+
+    def get_pathways(self):
+
+        r = requests.get(f"http://localhost:3800/list/pathways/{self.species}")
+        m = re.sub('<[^<]+?>', '', r.text)
+        df = pd.read_csv(io.StringIO(m), sep="\t", names =['Species', 'Gene', 'ID', 'Term'])
+        dd= df.values.tolist()
+        kk = {}
+        kd = {}
+        genes = []
+
+        for d in dd:
+
+            if d[2] in kk:
+
+                kk[d[2]].append(d[1])
+            
+            else:
+
+                kk[d[2]]= [d[1]]
+
+                kd[d[2]] = d[3]
+
+            genes.append(d[1])
+
+        pathways = []
+
+        for k in kk:
+
+            pathways.append([k, kd[k],kk[k], len(kk[k])])
+
+        dp = pd.DataFrame(pathways, columns=['ID', 'Term', 'Gene', 'Gene_length'])
+
+        x= np.array(genes)
+
+        bg_count = len(np.unique(x))
+
+        return dp, bg_count
 
     def fdr_calc(self, x):
         """

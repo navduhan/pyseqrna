@@ -9,6 +9,7 @@ Created :
 '''
 
 import os
+import re
 import sys
 import shutil
 import subprocess
@@ -208,6 +209,7 @@ def htseqCount(configFile=None,bamDict=None, gff=None,mem=8,cpu=8,tasks=1, slurm
     df.columns = col    
     newCountDF = df.iloc[:-5]
     newCountDF['Gene']= newCountDF['Gene'].str.replace("gene:", "")
+    newCountDF['Gene']= newCountDF['Gene'].str.replace("gene-", "")
     newCountDF.to_excel(os.path.join(outDir,"Raw_Counts.xlsx"), index=False)
     os.remove(outFile)
     return job_id
