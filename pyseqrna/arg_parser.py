@@ -59,6 +59,12 @@ internal.add_argument( "--source", dest="source", default='NCBI',
 internal.add_argument( "--taxid", dest='taxid', default=None, 
     help="Provide ncbi taxonomy id of the species")
 
+internal.add_argument( "--species", dest='species', default=None, 
+    help="Provide ncbi taxonomy id of the species")
+
+internal.add_argument( "--organism_type", dest='speciestype', default='plants', 
+    help="Provide Organism class")
+
 internal.add_argument( "--outdir",  default='pySeqRNA_results', 
     help="create output directory name to write results.\n[default: pySeqRNA_results] ")
 
@@ -113,23 +119,11 @@ help="Cluster samples to find dissimilarities in data")
 
 annotation= parser.add_argument_group("Functional annotation arguments")
 
-annotation.add_argument('--gene-ontology', required='--taxid', action="store_true", default=False, dest="geneontology",
+annotation.add_argument('--gene-ontology', action="store_true", default=False, dest="geneontology",
     help="""Enables gene ontology functional enrichment using BioMart""")
-
-annotation.add_argument('--go-species',required='--gene-ontology' in sys.argv,  default=None, dest="gospecies",
-    help="""Species name for gene ontology functional enrichment using BioMart. 
-For example Arabidopsis thaliana species name will be athaliana""")
-
-annotation.add_argument('--go-type', required='--gene-ontology' in sys.argv,  default=None, dest="gotype",
-    help="""Type [plants , animals] name for gene ontology functional enrichment
-using BioMart""")
 
 annotation.add_argument('--kegg-pathway',  action="store_true", default=False, dest="keggpathway",
     help="""Enables kegg pathway functional enrichment using KEGG""")
-
-annotation.add_argument('--kegg-species',required='--kegg-pathway' in sys.argv,  default=None, dest="keggspecies",
-    help="""Species name for kegg pathway functional enrichment using KEGG.
-Note:KEGG uses ENTREZID for enrichment. Please convert your IDs to ENTREZID.""")
 
 tools = parser.add_argument_group("External tool arguments")
 

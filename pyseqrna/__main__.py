@@ -95,6 +95,7 @@ def main():
 
 
     if not os.path.isdir(os.path.join(outdir, "1_Quality")):
+
             qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"))
 
     if options.trimming == 'flexbar':
@@ -393,7 +394,7 @@ def main():
 
         goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
 
-        go = GeneOntology(species=options.gospecies, type=options.gotype, keyType=options.source, taxid=options.taxid, gff=options.feature_file)
+        go = GeneOntology(species=options.species, type=options.speciestype, keyType=options.source, taxid=options.taxid, gff=options.feature_file)
 
         for c in combination:
 
@@ -418,7 +419,7 @@ def main():
 
         keggplots = pu.make_directory(os.path.join(outkegg,"Kegg_Plots"))
 
-        pt = Pathway(species=options.keggspecies, keyType=options.source, gff= options.feature_file)
+        pt = Pathway(species=options.species, keyType=options.source, gff= options.feature_file)
 
         for c in combination:
 
