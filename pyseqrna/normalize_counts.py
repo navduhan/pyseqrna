@@ -153,6 +153,7 @@ class Normalization():
         """
 
         df = pd.read_excel(self.countFile)
+        gene_names = df[self.geneColumn]
 
         countDF = df.set_index(self.geneColumn)
 
@@ -177,7 +178,7 @@ class Normalization():
             
             ax.set_xticklabels(list(countDF.columns)+list(cpmDF.columns), rotation = 90)
         
-
+        cpmDF.insert(0, 'Gene', gene_names)
         return cpmDF, fig, ax
 
 
@@ -207,7 +208,7 @@ class Normalization():
         rpkm =  1e9 * counts / (total_read_per_sample[np.newaxis, :] * gene_lengths[:, np.newaxis])
 
         rpkmDF = pd.DataFrame(data=rpkm,columns=countDF.columns)
-        rpkmDF.insert(0, 'Gene', gene_names)
+        
 
         if plot:
             
@@ -221,6 +222,7 @@ class Normalization():
             ax.set_xlabel('Sample Name')
 
             ax.set_ylabel('log counts')
+        rpkmDF.insert(0, 'Gene', gene_names)
        
         return rpkmDF, fig
 
@@ -268,13 +270,15 @@ class Normalization():
 
             ax.set_ylabel('log counts')
 
-       
+        tpmDF.insert(0, 'Gene', gene_names)
+
         return tpmDF, fig, ax
 
 
     def meanRatioCount(self):
 
         df = pd.read_excel(self.countFile)
+        gene_names = df['Gene']
         df2 = df.set_index('Gene')
         col = df2.columns.tolist()
         df3 = df2[df2[col] !=0]
@@ -285,6 +289,8 @@ class Normalization():
         m = df4.median()
         
         res = df2.div(m,axis=1)
+
+        res.insert(0, 'Gene', gene_names)
         
         return res
 

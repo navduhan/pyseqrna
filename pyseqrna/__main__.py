@@ -280,7 +280,7 @@ def main():
         
         r = norm.RPKM()
 
-        r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'))
+        r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'), index=False)
 
         r[1].savefig(os.path.join(quantdir,'RPKM_vs_Raw_counts.png'), bbox_inches='tight')
 
@@ -288,7 +288,7 @@ def main():
         
         r = norm.CPM()
 
-        r[0].to_excel(os.path.join(quantdir,'CPM_counts.xlsx'))
+        r[0].to_excel(os.path.join(quantdir,'CPM_counts.xlsx'), index=False)
 
         r[1].savefig(os.path.join(quantdir,'CPM_vs_Raw_counts.png'), bbox_inches='tight')
     
@@ -296,7 +296,7 @@ def main():
         
         r = norm.CPM()
 
-        r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'))
+        r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'), index=False)
 
         r[1].savefig(os.path.join(quantdir,'TPM_vs_Raw_counts.png'), bbox_inches='tight')
 
@@ -304,7 +304,7 @@ def main():
         
         r = norm.meanRatioCount()
 
-        r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'))
+        r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'),index=False)
 
     log.info("Clustering samples based on similarity")
 
