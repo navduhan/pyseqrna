@@ -206,7 +206,8 @@ class Normalization():
 
         rpkm =  1e9 * counts / (total_read_per_sample[np.newaxis, :] * gene_lengths[:, np.newaxis])
 
-        rpkmDF = pd.DataFrame(data=rpkm,index=gene_names,columns=countDF.columns)
+        rpkmDF = pd.DataFrame(data=rpkm,columns=countDF.columns)
+        rpkmDF.insert(0, 'Gene', gene_names)
 
         if plot:
             

@@ -429,7 +429,7 @@ def main():
 
             if kegg_results != "No Pathway":
 
-                kegg_results[0].to_excel(os.path.join(keggfiles, f"{c}_kegg.txt"), index=False)
+                kegg_results['result'].to_excel(os.path.join(keggfiles, f"{c}_kegg.xlsx"), index=False)
 
                 kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
 
