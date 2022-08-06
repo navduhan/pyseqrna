@@ -389,7 +389,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <br>
     5. p-value: These are the Wald test p-values. <br>
-    6. FDR: These are also called as the adjusted p-values (padj). By default, DESeq2 uses Benjamini-Hochberg method to adjust the p-values. </p> </div> '''
+    6. FDR: These are also called as the adjusted p-values (padj). By default, DESeq2 uses Benjamini-Hochberg method to adjust the p-values. </p>'''
     if os.path.exists(os.path.join(differential,'All_gene_expression.xlsx')):
         final_deg_header +=f'''\n Differential expression for all genes are presented in <a href="{differential}/All_gene_expression.xlsx"> All gene expression</a>'''
         final_deg_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
@@ -487,7 +487,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 # Functional Annotation
 
-    final_func_header = f'''<div class="row justify-content-center">\n<div class="col-md-4">\n<h5 class="px-5">Functional Annotation</h5>\n<hr>\n</div>\n</div>'''
+    final_func_header = f'''<div class="row justify-content-center">\n<div class="col-md-4">\n<h5 class="px-5">Functional Annotation</h5>\n<hr>\n</div>'''
     if os.path.exists(os.path.join(annotation, 'Gene_Ontology')):
         gofiles = glob.glob(f"{annotation}/Gene_Ontology/GO_Files/*")
         goplots = glob.glob(f"{annotation}/Gene_Ontology/GO_Plots/*")
@@ -629,4 +629,4 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
 
-# generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.1", '', "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
+generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.1", '', "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
