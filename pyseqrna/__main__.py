@@ -24,6 +24,7 @@ from pyseqrna import multimapped_groups as mmg
 from pyseqrna.gene_ontology import GeneOntology
 from pyseqrna.pathway import Pathway
 from pyseqrna.normalize_counts import Normalization
+from pyseqrna import report
 
 
 import pyseqrna.version
@@ -311,7 +312,7 @@ def main():
     if options.cluster:
         count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
         plot = cl.clusterSample(countDF= count)
-        plot.savefig(os.path.join(quantdir,'Cluster.png'), bbox_inches='tight')
+        plot.savefig(os.path.join(quantdir,'Sample_cluster.png'), bbox_inches='tight')
 
     targets = input_data['targets']
 
@@ -498,6 +499,9 @@ def main():
                 x.savefig(plotdir+"/Venn_"+str(i)+".png")
 
                 plt.close()
+    
+    comb_report = ','.join(combination)
+    report.generate_report(outdir, comb_report, options.input_file)
             
     endTime = time.ctime()
     log.info("Analysis Complted at %s", endTime)
