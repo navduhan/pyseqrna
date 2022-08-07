@@ -93,7 +93,7 @@ class Pathway:
         for r in resp:
 
             a, b=r.split("\t")
-            
+
             data.append([a.split(":")[1],b.rstrip()])
 
 
@@ -135,7 +135,7 @@ class Pathway:
 
     def get_pathways(self):
 
-        r = requests.get(f"http://localhost:3800/list/pathways/{self.species}")
+        r = requests.get(f"http://bioinfo.usu.edu/pyseqrna-api/list/pathways/{self.species}")
         m = re.sub('<[^<]+?>', '', r.text)
         df = pd.read_csv(io.StringIO(m), sep="\t", names =['Species', 'Gene', 'ID', 'Term'])
         dd= df.values.tolist()
