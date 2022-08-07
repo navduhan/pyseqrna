@@ -252,7 +252,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     <p class='text-justify'>For the quality check of trimmed fastq reads, <code>fastQC</code> was used.
     fastQC (<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>)
     is a quality control analysis tool designed to spot potential problems in high throughput sequencing datasets.
-    The results are stored in <a href="1_Quality/trim_fastqc/" target="_blank"> trimmed_fastqc_results</a> under the 1_Quality/ subdirectory.</p>
+    The results are stored in <a href="1_Quality/trim_fastqc_results/" target="_blank"> trim_fastqc_results</a> under the 1_Quality/ subdirectory.</p>
     '''
 
     if os.path.exists(os.path.join(quality, "fastqc_results")):
@@ -279,12 +279,12 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
     # Alignment results
-    final_align_header =' <div class="row justify-content-center">\n<div class="col-md-2">\n<h5 class="px-5">Alignments</h5>\n<hr>\n</div>\n</div>'
+    final_align_header =' <div class="row justify-content-center">\n<div class="col-md-2">\n<h5 class="px-5">Alignment</h5>\n<hr>\n</div>\n</div>'
     aligner1 = '''
     <h5 class="mb-3">Reads alignment on reference genome</h5>
     <p clas="text-justify">To determine from where the reads are originated in the genome, the trimmed fastq reads were aligned with the reference genome using the <code>STAR</code> aligner. 
     STAR (<a href="https://github.com/alexdobin/STAR">https://github.com/alexdobin/STAR</a>) is an aligner designed to specifically address many of the challenges of RNA-Seq data mapping using a strategy to account for spliced alignments. 
-    The alignments are stored in a <code>bam</code> format in <a href="2_Alignments/star_results/" target="_blank">star_results</a> under the 2_Alignments/ subfolder of your main output directory, Morrey_RNA-Seq. 
+    The alignments are stored in a <code>bam</code> format in <a href="2_Alignment/star_results/" target="_blank">star_results</a> under the 2_Alignments/ subfolder of your main output directory, Morrey_RNA-Seq. 
     Optionally, users can directly upload these <code>*.bam</code> files on any genomics viewer, like the <a href="https://software.broadinstitute.org/software/igv/home" target="_blank">Integrative Genomics Viewer</a> (IGV) for visualizing the RNA-Seq data. 
     IGV is a high-performance, easy-to-use, interactive tool for the visual exploration of genomics data.</p>
     '''
@@ -292,7 +292,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     <h5 class="mb-3">Reads alignment on reference genome</h5>
     <p clas="text-justify">To determine from where the reads are originated in the genome, the trimmed fastq reads were aligned with the reference genome using the <code>STAR</code> aligner. 
     STAR (<a href="https://github.com/alexdobin/STAR">https://github.com/alexdobin/STAR</a>) is an aligner designed to specifically address many of the challenges of RNA-Seq data mapping using a strategy to account for spliced alignments. 
-    The alignments are stored in a <code>bam</code> format in <a href="2_Alignments/star_results/" target="_blank">star_results</a> under the 2_Alignments/ subfolder of your main output directory, Morrey_RNA-Seq. 
+    The alignments are stored in a <code>bam</code> format in <a href="2_Alignment/star_results/" target="_blank">star_results</a> under the 2_Alignments/ subfolder of your main output directory, Morrey_RNA-Seq. 
     Optionally, users can directly upload these <code>*.bam</code> files on any genomics viewer, like the <a href="https://software.broadinstitute.org/software/igv/home" target="_blank">Integrative Genomics Viewer</a> (IGV) for visualizing the RNA-Seq data. 
     IGV is a high-performance, easy-to-use, interactive tool for the visual exploration of genomics data.</p>
     '''
@@ -300,7 +300,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
     stats = f'''<div class='row justify-content-center'> 
     <h5 class="mb-3">Alignment statistics </h5>
-    <p class="text-justify">The overall alignment statistics for each sample are recorded in <a href="2_Alignments/alignment_statistics.xlsx">alignment_statistics.xlsx</a> under the 2_Alignments/ subdirectory. This file contains 10 columns and all the samples. First column represents the Sample IDs; Second column represents the total number of input reads; Third column represents the total number of cleaned reads followed by the percentage values in the Fourth column; Fifth column represents the total number of reads aligned followed by the percent values in the Sixth column; Seventh column represents the uniquely mapped reads followed by the percentage in the Eighth column; and Ninth column represents the multi-mapped reads followed by the percentage values in the Tenth column.
+    <p class="text-justify">The overall alignment statistics for each sample are recorded in <a href="2_Alignment/alignment_statistics.xlsx">alignment_statistics.xlsx</a> under the 2_Alignments/ subdirectory. This file contains 10 columns and all the samples. First column represents the Sample IDs; Second column represents the total number of input reads; Third column represents the total number of cleaned reads followed by the percentage values in the Fourth column; Fifth column represents the total number of reads aligned followed by the percent values in the Sixth column; Seventh column represents the uniquely mapped reads followed by the percentage in the Eighth column; and Ninth column represents the multi-mapped reads followed by the percentage values in the Tenth column.
     </p>'''
 
     if os.path.exists(os.path.join(alignment, "star_results")):
@@ -353,10 +353,10 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     <h5 class="md-3"> Normalized Counts </h5>
     <p class="text-justify">This step converts the raw counts into normalized counts. The numbers of mapped reads for each gene are proportional to the level of RNA expression, 
     which is both fascinating and uninteresting. Scaling raw count numbers to take into account the "uninteresting" elements is the process of normalization. In this manner,
-     the expression levels within and/or between samples are more similar. </p>
+     the expression levels within and/or between samples are more similar. 
     """
     if os.path.exists(os.path.join(quantification, "RPKM_counts.xlsx")):
-        
+        final_quant_header += 'We have normalized the raw read count using Reads Per Kilobase of transcript, per Million mapped reads (RPKM). The file is available at <a href="3_Quantification/RPKM_counts.xlsx">RPKM normalized counts</a> </p>'
         final_quant_header += '<div class="row justify-content-center"><div class="col-md-10">'
         final_quant_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{quantification}/RPKM_counts.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_quant_header += '</div></div>'
@@ -391,19 +391,19 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     5. p-value: These are the Wald test p-values. <br>
     6. FDR: These are also called as the adjusted p-values (padj). By default, DESeq2 uses Benjamini-Hochberg method to adjust the p-values. </p>'''
     if os.path.exists(os.path.join(differential,'All_gene_expression.xlsx')):
-        final_deg_header +=f'''\n Differential expression for all genes are presented in <a href="{differential}/All_gene_expression.xlsx"> All gene expression</a>'''
+        final_deg_header +=f'''\n Differential expression for all genes are presented in <a href="4_Differential_Expression/All_gene_expression.xlsx"> All gene expression</a>'''
         final_deg_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/All_gene_expression.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs.xlsx')):
         fd = pd.ExcelFile(os.path.join(differential,'Filtered_DEGs.xlsx'))
         fd_sheet = fd.sheet_names
-        final_deg_header +=f'''\n Differential expression was filtered on user provided FOLD >= {FOLD} and FDR <= {FDR}. For example only one comparison is shown below. For each comparison there are different sheets in  <a href="{differential}/Filtered.xlsx"> Filtered differentially expressed genes</a> file. '''
+        final_deg_header +=f'''\n Differential expression was filtered on user provided FOLD >= {FOLD} and FDR <= {FDR}. For example only one comparison is shown below. For each comparison there are different sheets in  <a href="4_Differential_Expression/Filtered_DEGs.xlsx"> Filtered differentially expressed genes</a> file. '''
         final_deg_header += '<div class="row justify-content-center"><div class="col-md-8 my-4">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs.xlsx", sheet_name=fd_sheet[2]).head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs_summary.xlsx')):
-        final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="{differential}/Filtered.xlsx"> Filtered differentially expressed genes</a>'''
+        final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs._summaryxlsx"> Filtered differentially expressed genes</a>'''
         final_deg_header += '<div class="row justify-content-center"><div class="col-md-4 my-4">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs_summary.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
@@ -629,4 +629,4 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
 
-# generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.1", '', "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
+generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.1", '', "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
