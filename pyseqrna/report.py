@@ -516,9 +516,6 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     <img src="{goplots[0]}"  height=600></p>
     </div>
    </div>
-   
-   
- 
          '''
     if os.path.exists(os.path.join(annotation, 'KEGG_pathway')):
         gofiles = glob.glob(f"{annotation}/KEGG_pathway/Kegg_Files/*")
@@ -629,4 +626,4 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
 
-generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.1", '', "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
+# generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.1", '', "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
