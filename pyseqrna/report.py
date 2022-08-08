@@ -68,8 +68,8 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
     align_header='\n<li>\n<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">\n<i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">2. Alignment</span> </a>\n<ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">'
     align_footer = '\n</ul>\n</li>'
-    start_index = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Genome Index</span></a>\n</li>'
-    start_results = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Aligned Reads</span></a>\n</li>'
+    start_index = '\n<li class="w-100"><a href="genome_index" class="nav-link pl-3"> <span class="d-none d-sm-inline">Genome Index</span></a>\n</li>'
+    start_results = '\n<li class="w-100"><a href="genome_alignments" class="nav-link pl-3"> <span class="d-none d-sm-inline">Aligned Reads</span></a>\n</li>'
     align_stats = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Alignment Statistics</span></a>\n</li>'
 
     if os.path.exists(os.path.join(alignment, "star_index")):
@@ -248,11 +248,12 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     positions for RRBS sequence files (for directional, non-directional (or paired-end) sequencing).
     The trimmed fastq files are stored in <a href="1_Quality/trim_galore_results/" target="_blank">trim_galore_results</a> under the 1_Quality/ subdirectory. </p>
     '''
-    quality2 = '''<h5 class="mb-3"> Post trimming quality check </h5>
+    quality2 = ''' <div  class="row" id="trim_fastqc"><h5 class="mb-3" > Post trimming quality check </h5>
     <p class='text-justify'>For the quality check of trimmed fastq reads, <code>fastQC</code> was used.
     fastQC (<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>)
     is a quality control analysis tool designed to spot potential problems in high throughput sequencing datasets.
     The results are stored in <a href="1_Quality/trim_fastqc_results/" target="_blank"> trim_fastqc_results</a> under the 1_Quality/ subdirectory.</p>
+    </div>
     '''
 
     if os.path.exists(os.path.join(quality, "fastqc_results")):
@@ -436,7 +437,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
          '''
     if os.path.exists(os.path.join(plots, 'MA_Plots')):
 
-        maplots = glob.glob(f"./5_Plots/MA_Plots/*")
+        maplots = glob.glob(f"5_Plots/MA_Plots/*")
         final_plots_header += f'''<h5>MA Plots</h5> <br> A 2-dimensional (2D) scatter plot called an MA plot is used to display gene expression datasets. 
         The MA plot uses the log of the mean of the normalized expression counts of the two conditions on the X-axis and the log of the fold change (M) 
         on the Y-axis to display and detect changes in gene expression from two distinct conditions (for example, normal vs. treated). In general, 
@@ -454,7 +455,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
             '''
     if os.path.exists(os.path.join(plots, 'Volcano_Plots')):
 
-        maplots = glob.glob(f"./5_Plots/Volcano_Plots/*")
+        vplots = glob.glob(f"5_Plots/Volcano_Plots/*")
         final_plots_header += f'''<h5>Volcano Plots</h5> <br> A 2-dimensional (2D) scatter plot with a volcano-like form is called a volcano plot. The log fold change (X-axis) and negative log10 of
          the p value are used to visualize and identify statistically significant gene expression changes from two distinct experimental circumstances (e.g., normal vs. treated) (Y-axis). 
          The p value decreases when the Y-axis point is raised. Significant differences in gene expression between the two situations are shown by the larger dispersion of data points in the volcano plot. 
@@ -465,7 +466,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
         <div class="col-md-6 mt-2">
         
-        <img src="{maplots[0]}"  height=600></p>
+        <img src="{vplots[0]}"  height=600></p>
         </div>
         </div>
             '''
