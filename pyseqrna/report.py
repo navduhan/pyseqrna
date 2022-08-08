@@ -514,7 +514,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <div class="col-md-6 mt-2">
     
-    <img src="6_Functional_Annotation/Gene_Ontology/GO_Plots/{combinations[0]}.png"  height=600></p>
+    <img src="6_Functional_Annotation/Gene_Ontology/GO_Plots/{combinations[0]}_go_dotplot.png"  height=600></p>
     </div>
    </div>'''
     if os.path.exists(os.path.join(annotation, 'KEGG_Pathway')):
@@ -542,7 +542,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <div class="col-md-6 mt-2">
     
-    <img src="6_Functional_Annotation/KEGG_Pathway/KEGG_Plots/{combinations[0]}.png"  height=600></p>
+    <img src="6_Functional_Annotation/KEGG_Pathway/KEGG_Plots/{combinations[0]}_kegg_dotplot_.png"  height=600></p>
     </div>
    </div>
          '''
