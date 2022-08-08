@@ -414,11 +414,11 @@ def main():
     
     if options.keggpathway:
 
-        outkegg = pu.make_directory(os.path.join(annodir,"KEGG_pathway"))
+        outkegg = pu.make_directory(os.path.join(annodir,"KEGG_Pathway"))
 
-        keggfiles = pu.make_directory(os.path.join(outkegg,"Kegg_Files"))
+        keggfiles = pu.make_directory(os.path.join(outkegg,"KEGG_Files"))
 
-        keggplots = pu.make_directory(os.path.join(outkegg,"Kegg_Plots"))
+        keggplots = pu.make_directory(os.path.join(outkegg,"KEGG_Plots"))
 
         pt = Pathway(species=options.species, keyType=options.source, gff= options.feature_file)
 

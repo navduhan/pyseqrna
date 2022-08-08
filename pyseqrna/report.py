@@ -518,8 +518,8 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     </div>
    </div>'''
     if os.path.exists(os.path.join(annotation, 'KEGG_Pathway')):
-        keggfiles = glob.glob(f"{annotation}/KEGG_Pathway/Kegg_Files/*")
-        keggplots = glob.glob(f"{annotation}/KEGG_Pathway/Kegg_Plots/*")
+        keggfiles = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Files/*")
+        keggplots = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Plots/*")
         final_func_header += f'''<h5>KEGG Pathway</h5> <br> KEGG pathway is a database resource for understanding high level functions of genes. KEGG pathway results provides plots as well as files. KEGG enrichment results contains 9 columns. 
         <br>
         1. Pathway ID : KEGG Pathway ID <br>
