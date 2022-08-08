@@ -414,7 +414,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
    <div class="row justify-content-center my-4">
     
     <div class="col-md-6 mt-2">
-    <img src="{differential}/Filtered_DEG.png"  height=600></p>
+    <img src="./4_Differential_Expression/Filtered_DEG.png"  height=600></p>
     </div>
    </div>
     <hr>
@@ -449,7 +449,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
         <div class="col-md-6 mt-2">
         
-        <img src="./5_Plots/{combinations[0]}"  height=600></p>
+        <img src="./5_Plots/MA_Plots/{combinations[0]}_MA.png"  height=600></p>
         </div>
         </div>
             '''
@@ -466,7 +466,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
         <div class="col-md-6 mt-2">
         
-        <img src="./5_Plots/{combinations[0]}"  height=600></p>
+        <img src="./5_Plots/Volcano_Plots/{combinations[0]}_volcano.png"  height=600></p>
         </div>
         </div>
             '''
@@ -480,7 +480,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
         <div class="col-md-6 mt-2">
         
-        <img src="./5_Plots/Venn_0.png"  height=600></p>
+        <img src="./5_Plots/Venn_Plots/Venn_0.png"  height=600></p>
         </div>
         </div>
         <hr>
@@ -514,7 +514,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <div class="col-md-6 mt-2">
     
-    <img src="{goplots[0]}"  height=600></p>
+    <img src="6_Functional_Annotation/Gene_Ontology/GO_Plots/{combinations[0]}.png"  height=600></p>
     </div>
    </div>'''
     if os.path.exists(os.path.join(annotation, 'KEGG_Pathway')):
@@ -542,7 +542,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <div class="col-md-6 mt-2">
     
-    <img src="{keggplots[0]}"  height=600></p>
+    <img src="6_Functional_Annotation/KEGG_Pathway/KEGG_Plots/{combinations[0]}.png"  height=600></p>
     </div>
    </div>
          '''
