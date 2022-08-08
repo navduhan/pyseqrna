@@ -403,7 +403,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs.xlsx", sheet_name=fd_sheet[2]).head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs_summary.xlsx')):
-        final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs._summaryxlsx"> Filtered differentially expressed genes</a>'''
+        final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs_summaryxlsx"> Filtered differentially expressed genes</a>'''
         final_deg_header += '<div class="row justify-content-center"><div class="col-md-4 my-4">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs_summary.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
@@ -430,20 +430,20 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <div class="col-md-6 mt-2">
     
-    <img src="{plots}/Heatmap_top50.png"  height=600></p>
+    <img src="./5_Plots/Heatmap_top50.png"  height=600></p>
     </div>
    </div>
          '''
     if os.path.exists(os.path.join(plots, 'MA_Plots')):
 
-        maplots = glob.glob(f"{plots}/MA_Plots/*")
+        maplots = glob.glob(f"./5_Plots/MA_Plots/*")
         final_plots_header += f'''<h5>MA Plots</h5> <br> A 2-dimensional (2D) scatter plot called an MA plot is used to display gene expression datasets. 
         The MA plot uses the log of the mean of the normalized expression counts of the two conditions on the X-axis and the log of the fold change (M) 
         on the Y-axis to display and detect changes in gene expression from two distinct conditions (for example, normal vs. treated). In general, 
         log fold changes for genes with lower mean expression levels will be quite varied. Genes expressed similarly in both normal and treated samples 
         will group together around the M=0 value, i.e. genes expressed similarly across all treatments. Genes with considerable expression are shown by
         points away from the M=0 line. For instance, a gene is upregulated and downregulated if the point is above and below the M=0 line, respectively. Only one comparison plots is depicted below all other comparison MA plots are available 
-        <a href="{plots}/MA_Plots">MA Plots</a>
+        <a href="./5_Plots/MA_Plots">MA Plots</a>
          <div class="row justify-content-center my-4">
     
         <div class="col-md-6 mt-2">
@@ -454,13 +454,13 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
             '''
     if os.path.exists(os.path.join(plots, 'Volcano_Plots')):
 
-        maplots = glob.glob(f"{plots}/Volcano_Plots/*")
+        maplots = glob.glob(f"./5_Plots/Volcano_Plots/*")
         final_plots_header += f'''<h5>Volcano Plots</h5> <br> A 2-dimensional (2D) scatter plot with a volcano-like form is called a volcano plot. The log fold change (X-axis) and negative log10 of
          the p value are used to visualize and identify statistically significant gene expression changes from two distinct experimental circumstances (e.g., normal vs. treated) (Y-axis). 
          The p value decreases when the Y-axis point is raised. Significant differences in gene expression between the two situations are shown by the larger dispersion of data points in the volcano plot. 
          It is simple to identify genes with substantial changes by visualizing the expression of hundreds of genes gathered from omics research (e.g., transcriptomics, genomics, and proteomics). 
          Only one comparison plots is depicted below all other comparison Volcano plots are available
-        <a href="{plots}/Volcano_Plots">Volcano Plots</a>
+        <a href="./5_Plots/Volcano_Plots">Volcano Plots</a>
          <div class="row justify-content-center my-4">
     
         <div class="col-md-6 mt-2">
@@ -472,9 +472,9 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
     if os.path.exists(os.path.join(plots, 'Venn_Plots')):
 
-        maplots = glob.glob(f"{plots}/Venn_Plots/*")
+        maplots = glob.glob(f"./5_Plots/Venn_Plots/*")
         final_plots_header += f'''<h5>Venn Plots</h5> <br> A Venn diagram is a diagram that shows all possible logical relations between a finite collection of different comparisons. 
-        <a href="{plots}/Venn_Plots">Venn Plots</a>
+        <a href="./5_Plots/Venn_Plots">Venn Plots</a>
             <div class="row justify-content-center my-4">
 
         <div class="col-md-6 mt-2">
@@ -515,11 +515,10 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <img src="{goplots[0]}"  height=600></p>
     </div>
-   </div>
-         '''
-    if os.path.exists(os.path.join(annotation, 'KEGG_pathway')):
-        gofiles = glob.glob(f"{annotation}/KEGG_pathway/Kegg_Files/*")
-        goplots = glob.glob(f"{annotation}/KEGG_pathway/Kegg_Plots/*")
+   </div>'''
+    if os.path.exists(os.path.join(annotation, 'KEGG_Pathway')):
+        keggfiles = glob.glob(f"{annotation}/KEGG_Pathway/Kegg_Files/*")
+        keggplots = glob.glob(f"{annotation}/KEGG_Pathway/Kegg_Plots/*")
         final_func_header += f'''<h5>KEGG Pathway</h5> <br> KEGG pathway is a database resource for understanding high level functions of genes. KEGG pathway results provides plots as well as files. KEGG enrichment results contains 9 columns. 
         <br>
         1. Pathway ID : KEGG Pathway ID <br>
@@ -536,13 +535,13 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         ''' 
 
     final_func_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
-    final_func_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(gofiles[0]).head(20).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
+    final_func_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(keggfiles[0]).head(20).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
     final_func_header +='</div></div></div>'
     final_func_header +=f'''<div class="row justify-content-center my-4">
     
     <div class="col-md-6 mt-2">
     
-    <img src="{goplots[0]}"  height=600></p>
+    <img src="{keggplots[0]}"  height=600></p>
     </div>
    </div>
          '''
