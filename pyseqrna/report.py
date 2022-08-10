@@ -475,7 +475,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
     if os.path.exists(os.path.join(plots, 'Venn_Plots')):
 
-        vennplots = glob.glob(f"{[plots]}/Venn_Plots/*")
+        vennplots = glob.glob(f"{plots}/Venn_Plots/*")
         final_plots_header += f'''<h5 id="venn">Venn Plots</h5> <br> A Venn diagram is a diagram that shows all possible logical relations between a finite collection of different comparisons. 
         <a href="./5_Plots/Venn_Plots">Venn Plots</a>
             <div class="row justify-content-center my-4">
@@ -630,4 +630,4 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
 
-# generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.3", ['A1-A6'], "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
+generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.3", ['A1-A6'], "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
