@@ -68,9 +68,9 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
     align_header='\n<li>\n<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">\n<i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">2. Alignment</span> </a>\n<ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">'
     align_footer = '\n</ul>\n</li>'
-    start_index = '\n<li class="w-100"><a href="genome_index" class="nav-link pl-3"> <span class="d-none d-sm-inline">Genome Index</span></a>\n</li>'
-    start_results = '\n<li class="w-100"><a href="genome_alignments" class="nav-link pl-3"> <span class="d-none d-sm-inline">Aligned Reads</span></a>\n</li>'
-    align_stats = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Alignment Statistics</span></a>\n</li>'
+    start_index = '\n<li class="w-100"><a href="#genome_index" class="nav-link pl-3"> <span class="d-none d-sm-inline">Genome Index</span></a>\n</li>'
+    start_results = '\n<li class="w-100"><a href="#genome_alignment" class="nav-link pl-3"> <span class="d-none d-sm-inline">Aligned Reads</span></a>\n</li>'
+    align_stats = '\n<li class="w-100"><a href="#astat" class="nav-link pl-3"> <span class="d-none d-sm-inline">Alignment Statistics</span></a>\n</li>'
 
     if os.path.exists(os.path.join(alignment, "star_index")):
         align_header +=start_index
@@ -93,12 +93,12 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     ## Generate Quantification Navbar
     quant_header= '\n<li>\n<a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">\n<i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">3. Quantification</span> </a>\n<ul class="collapse show nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">'
     quant_footer = '\n</ul>\n</li>'
-    raw_counts = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Raw Counts</span></a>\n</li>'
-    rpkm_counts = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">RPKM Counts</span></a>\n</li>'
-    tpm_counts = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">TPM Counts</span></a>\n</li>'
-    cpm_counts = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">CPM Counts</span></a>\n</li>'
-    median_counts = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Median Ratio Counts</span></a>\n</li>'
-    sample_cluster = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Sample Clustering</span></a>\n</li>'
+    raw_counts = '\n<li class="w-100"><a href="#raw" class="nav-link pl-3"> <span class="d-none d-sm-inline">Raw Counts</span></a>\n</li>'
+    rpkm_counts = '\n<li class="w-100"><a href="#rpkm" class="nav-link pl-3"> <span class="d-none d-sm-inline">RPKM Counts</span></a>\n</li>'
+    tpm_counts = '\n<li class="w-100"><a href="#rpkm" class="nav-link pl-3"> <span class="d-none d-sm-inline">TPM Counts</span></a>\n</li>'
+    cpm_counts = '\n<li class="w-100"><a href="#rpkm" class="nav-link pl-3"> <span class="d-none d-sm-inline">CPM Counts</span></a>\n</li>'
+    median_counts = '\n<li class="w-100"><a href="#rpkm" class="nav-link pl-3"> <span class="d-none d-sm-inline">Median Ratio Counts</span></a>\n</li>'
+    sample_cluster = '\n<li class="w-100"><a href="#cluster" class="nav-link pl-3"> <span class="d-none d-sm-inline">Sample Clustering</span></a>\n</li>'
 
     quant_header += raw_counts
 
@@ -119,9 +119,9 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     de_header= '\n<li>\n<a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">\n<i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">4. Differential Expression</span> </a>\n<ul class="collapse show nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">'
     de_footer = '\n</ul>\n</li>'
 
-    all_gene = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">All Gene Expression</span></a>\n</li>'
-    filt_gene = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Filtered DEGs</span></a>\n</li>'
-    diff_gene = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Differential Genes</span></a>\n</li>'
+    all_gene = '\n<li class="w-100"><a href="#alldeg" class="nav-link pl-3"> <span class="d-none d-sm-inline">All Gene Expression</span></a>\n</li>'
+    filt_gene = '\n<li class="w-100"><a href="#fdeg" class="nav-link pl-3"> <span class="d-none d-sm-inline">Filtered DEGs</span></a>\n</li>'
+    diff_gene = '\n<li class="w-100"><a href="#diff_gene" class="nav-link pl-3"> <span class="d-none d-sm-inline">Differential Genes</span></a>\n</li>'
 
     de_header +=all_gene
     de_header +=filt_gene
@@ -133,9 +133,9 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     plot_header= '\n<li>\n<a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">\n<i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">5. Plots</span> </a>\n<ul class="collapse show nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">'
     plot_footer = '\n</ul>\n</li>'
 
-    maplot = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">MA Plots</span></a>\n</li>'
-    volcano_plot = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Volcano Plots</span></a>\n</li>'
-    venn_plot = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">VENN Plots</span></a>\n</li>'
+    maplot = '\n<li class="w-100"><a href="#ma" class="nav-link pl-3"> <span class="d-none d-sm-inline">MA Plots</span></a>\n</li>'
+    volcano_plot = '\n<li class="w-100"><a href="#volcano" class="nav-link pl-3"> <span class="d-none d-sm-inline">Volcano Plots</span></a>\n</li>'
+    venn_plot = '\n<li class="w-100"><a href="#venn" class="nav-link pl-3"> <span class="d-none d-sm-inline">VENN Plots</span></a>\n</li>'
 
 
     if os.path.exists(os.path.join(plots, 'MA_Plots')):
@@ -153,8 +153,8 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     fa_header= '\n<li>\n<a href="#submenu6" data-bs-toggle="collapse" class="nav-link px-0 align-middle">\n<i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">6. Functional Annotation</span> </a>\n<ul class="collapse show nav flex-column ms-1" id="submenu6" data-bs-parent="#menu">'
     fa_footer = '\n</ul>\n</li>'
 
-    go = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">Gene Ontology</span></a>\n</li>'
-    kegg = '\n<li class="w-100"><a href="#" class="nav-link pl-3"> <span class="d-none d-sm-inline">KEGG Pathway</span></a>\n</li>'
+    go = '\n<li class="w-100"><a href="#go" class="nav-link pl-3"> <span class="d-none d-sm-inline">Gene Ontology</span></a>\n</li>'
+    kegg = '\n<li class="w-100"><a href="#kegg" class="nav-link pl-3"> <span class="d-none d-sm-inline">KEGG Pathway</span></a>\n</li>'
 
 
     if os.path.exists(os.path.join(annotation, 'Gene_Ontology')):
@@ -280,9 +280,9 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
     # Alignment results
-    final_align_header =' <div class="row justify-content-center">\n<div class="col-md-2">\n<h5 class="px-5">Alignment</h5>\n<hr>\n</div>\n</div>'
+    final_align_header =' <div class="row justify-content-center" >\n<div class="col-md-2">\n<h5 class="px-5" id="genome_index">Alignment</h5>\n<hr>\n</div>\n</div>'
     aligner1 = '''
-    <h5 class="mb-3">Reads alignment on reference genome</h5>
+    <h5 class="mb-3" id="genome_alignment">Reads alignment on reference genome</h5>
     <p clas="text-justify">To determine from where the reads are originated in the genome, the trimmed fastq reads were aligned with the reference genome using the <code>STAR</code> aligner. 
     STAR (<a href="https://github.com/alexdobin/STAR">https://github.com/alexdobin/STAR</a>) is an aligner designed to specifically address many of the challenges of RNA-Seq data mapping using a strategy to account for spliced alignments. 
     The alignments are stored in a <code>bam</code> format in <a href="2_Alignment/star_results/" target="_blank">star_results</a> under the 2_Alignments/ subfolder of your main output directory, Morrey_RNA-Seq. 
@@ -300,7 +300,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
     stats = f'''<div class='row justify-content-center'> 
-    <h5 class="mb-3">Alignment statistics </h5>
+    <h5 class="mb-3" id="astat">Alignment statistics </h5>
     <p class="text-justify">The overall alignment statistics for each sample are recorded in <a href="2_Alignment/alignment_statistics.xlsx">alignment_statistics.xlsx</a> under the 2_Alignments/ subdirectory. This file contains 10 columns and all the samples. First column represents the Sample IDs; Second column represents the total number of input reads; Third column represents the total number of cleaned reads followed by the percentage values in the Fourth column; Fifth column represents the total number of reads aligned followed by the percent values in the Sixth column; Seventh column represents the uniquely mapped reads followed by the percentage in the Eighth column; and Ninth column represents the multi-mapped reads followed by the percentage values in the Tenth column.
     </p>'''
 
@@ -312,14 +312,14 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
     if os.path.exists(os.path.join(alignment, "alignment_statistics.xlsx")):
         final_align_header += stats
-        final_align_header += '<div class="row justify-content-center"><div class="col-md-8">'
+        final_align_header += '<div class="row justify-content-center"><div class="col-md-8" >'
         final_align_header += re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{alignment}/alignment_statistics.xlsx").to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_align_header += '</div></div>'
     final_align_header +='<hr>'
 
 
     # Quantification Results 
-    final_quant_header = '<div class="row justify-content-center">\n<div class="col-md-2">\n<h5 class="px-5">Quantification</h5>\n<hr>\n</div>\n</div>'
+    final_quant_header = '<div class="row justify-content-center">\n<div class="col-md-2" id="raw">\n<h5 class="px-5">Quantification</h5>\n<hr>\n</div>\n</div>'
 
     fcount = f"""
     <h5 class="md-3"> Feature counts in the genome </h5>
@@ -328,7 +328,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     they must be summarized in terms of read coverage for genomic features of interest. Here, we perform feature counts for each sample. Results can be found in <a href="3_Quantification/Raw_Counts.xlsx" target="_blank"> Raw_counts.xlsx</a></p>
     """
     corr = """
-    <h5 class="md-3"> Hierarchical cluster analysis of samples </h5>
+    <h5 class="md-3" id="cluster"> Hierarchical cluster analysis of samples </h5>
     <p class="text-justify"> This step perform hierarchical cluster analysis of all the samples to check dissimilarity between samples. 
     Hierarchical clustering, also known as hierarchical clustering is a method for grouping similar objects into groups known as clusters. 
     The endpoint is a collection of clusters, each distinct from the others, and the objects within each cluster are broadly similar. 
@@ -351,7 +351,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         final_quant_header += '</div></div>'
 
     final_quant_header +=  f"""
-    <h5 class="md-3"> Normalized Counts </h5>
+    <h5 class="md-3" id="rpkm"> Normalized Counts </h5>
     <p class="text-justify">This step converts the raw counts into normalized counts. The numbers of mapped reads for each gene are proportional to the level of RNA expression, 
     which is both fascinating and uninteresting. Scaling raw count numbers to take into account the "uninteresting" elements is the process of normalization. In this manner,
      the expression levels within and/or between samples are more similar. 
@@ -379,7 +379,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
    
     ## Differential Expression
 
-    final_deg_header = '''<div class="row justify-content-center">\n<div class="col-md-4">\n<h5 class="px-5">Differential Expression</h5>\n<hr>\n</div>\n</div>'''
+    final_deg_header = '''<div class="row justify-content-center">\n<div class="col-md-4" id ="alldeg">\n<h5 class="px-5">Differential Expression</h5>\n<hr>\n</div>\n</div>'''
     final_deg_header += f'''<p>We have performed differential expression analysis of genes using DESeq2. There are 6 columns for each pairwise comparison, and  total {len(combinations)} pairwise comparisons. Scroll through this excel file (left to right). Here is how these 6 columns can be interpreted:<br>
     1. baseMean: It is a just the average of the normalized count values, dividing by size factors, taken over all the samples.<br> 
     2. logFC (log of Fold Change): logFC (fold change) generally refers to the ratio of average expression between two groups. For a particular gene, a log2 fold change of −1 for condition treated vs untreated means that the treatment induces a change in observed expression level of 2^−1 = 0.5 compared to the untreated condition. In simple terms, value 2 means that the expression has increased 4-fold, and so on. DESeq2 performs pair-wise tests for differential expression between two groups; log2FC=Log2(B)-Log2(A).
@@ -400,14 +400,16 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         fd = pd.ExcelFile(os.path.join(differential,'Filtered_DEGs.xlsx'))
         fd_sheet = fd.sheet_names
         final_deg_header +=f'''\n Differential expression was filtered on user provided FOLD >= {FOLD} and FDR <= {FDR}. For example only one comparison is shown below. For each comparison there are different sheets in  <a href="4_Differential_Expression/Filtered_DEGs.xlsx"> Filtered differentially expressed genes</a> file. '''
-        final_deg_header += '<div class="row justify-content-center"><div class="col-md-8 my-4">'
+        final_deg_header += '<div class="row justify-content-center"><div class="col-md-8 my-4" id="fdeg>'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs.xlsx", sheet_name=fd_sheet[2]).head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs_summary.xlsx')):
         final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs_summaryxlsx"> Filtered differentially expressed genes</a>'''
         final_deg_header += '<div class="row justify-content-center"><div class="col-md-4 my-4">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs_summary.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
+        
         final_deg_header +='</div></div>'
+        final_deg_header +=f'''\n <p id="diff_gene">All filtered differentially expressed gene ID are present in <a href="./4_Differential_Expression/diff_genes/"> DEG gene IDs</a> </p>'''
 
     final_deg_header += f'''\n 
     Summary of filtered DEGs comparison wise are ploted:<br>
@@ -438,7 +440,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     if os.path.exists(os.path.join(plots, 'MA_Plots')):
 
         # maplots = glob.glob(f"{plots}/MA_Plots/*")
-        final_plots_header += f'''<h5>MA Plots</h5> <br> A 2-dimensional (2D) scatter plot called an MA plot is used to display gene expression datasets. 
+        final_plots_header += f'''<h5 id="ma">MA Plots</h5> <br> A 2-dimensional (2D) scatter plot called an MA plot is used to display gene expression datasets. 
         The MA plot uses the log of the mean of the normalized expression counts of the two conditions on the X-axis and the log of the fold change (M) 
         on the Y-axis to display and detect changes in gene expression from two distinct conditions (for example, normal vs. treated). In general, 
         log fold changes for genes with lower mean expression levels will be quite varied. Genes expressed similarly in both normal and treated samples 
@@ -456,7 +458,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     if os.path.exists(os.path.join(plots, 'Volcano_Plots')):
 
         # vplots = glob.glob(f"{plots}/Volcano_Plots/*")
-        final_plots_header += f'''<h5>Volcano Plots</h5> <br> A 2-dimensional (2D) scatter plot with a volcano-like form is called a volcano plot. The log fold change (X-axis) and negative log10 of
+        final_plots_header += f'''<h5 id="volcano">Volcano Plots</h5> <br> A 2-dimensional (2D) scatter plot with a volcano-like form is called a volcano plot. The log fold change (X-axis) and negative log10 of
          the p value are used to visualize and identify statistically significant gene expression changes from two distinct experimental circumstances (e.g., normal vs. treated) (Y-axis). 
          The p value decreases when the Y-axis point is raised. Significant differences in gene expression between the two situations are shown by the larger dispersion of data points in the volcano plot. 
          It is simple to identify genes with substantial changes by visualizing the expression of hundreds of genes gathered from omics research (e.g., transcriptomics, genomics, and proteomics). 
@@ -474,7 +476,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     if os.path.exists(os.path.join(plots, 'Venn_Plots')):
 
         # maplots = glob.glob(f"{[plots]}/Venn_Plots/*")
-        final_plots_header += f'''<h5>Venn Plots</h5> <br> A Venn diagram is a diagram that shows all possible logical relations between a finite collection of different comparisons. 
+        final_plots_header += f'''<h5 id="venn">Venn Plots</h5> <br> A Venn diagram is a diagram that shows all possible logical relations between a finite collection of different comparisons. 
         <a href="./5_Plots/Venn_Plots">Venn Plots</a>
             <div class="row justify-content-center my-4">
 
@@ -492,8 +494,8 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     if os.path.exists(os.path.join(annotation, 'Gene_Ontology')):
         gofiles = glob.glob(f"{annotation}/Gene_Ontology/GO_Files/*")
         goplots = glob.glob(f"{annotation}/Gene_Ontology/GO_Plots/*")
-        final_func_header += f'''<h5>Gene Ontology</h5> <br> Gene Ontology enrichment analysis provides information on the function of genes. It is divided in three categories Biological process (BP),
-        Molecular fucntion (MF), and Cellular component (CC). Gene Ontology results provides plots as well as files. GO enrichment results contains 10 columns. 
+        final_func_header += f'''<h5 id="go">Gene Ontology</h5> <br> Gene Ontology enrichment analysis provides information on the function of genes. It is divided in three categories Biological process (BP),
+        Molecular fucntion (MF), and Cellular component (CC). Gene Ontology results provides plots as well as files. GO enrichment results contains 10 columns. Gene Ontology files and plots can be found at can be found at <a href="./6_Functional_Annotation/Gene_Ontology/">Gene ontology </a> 
         <br>
         1. GO ID : Gene Ontology ID <br>
         2. GO Term : Gene Ontology term description. <br>
@@ -505,22 +507,24 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         8. FDR : Flase discovery rate <br>
         9. Genes : DEGs IDs <br>
         10. logPvalues : Enrichment score calulated by <code> log<sub>10</sub>(1-Pvalues)</code>
-        ''' 
+        </div>''' 
 
     final_func_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
     final_func_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(gofiles[0]).head(20).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
     final_func_header +='</div></div>'
-    final_func_header +=f'''<div class="row justify-content-center my-4">
+    final_func_header +=f'''<div class="row justify-content-center">
     
-    <div class="col-md-6 mt-2">
+    <div class="col-md-8 mt-2">
     
-    <img src="6_Functional_Annotation/Gene_Ontology/GO_Plots/{combinations[0]}_go_dotplot.png"  height=600></p>
+    <img src="{goplots[0].split(outdir+"/")[1]}"  height=600></p>
     </div>
    </div>'''
     if os.path.exists(os.path.join(annotation, 'KEGG_Pathway')):
         keggfiles = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Files/*")
         keggplots = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Plots/*")
-        final_func_header += f'''<h5>KEGG Pathway</h5> <br> KEGG pathway is a database resource for understanding high level functions of genes. KEGG pathway results provides plots as well as files. KEGG enrichment results contains 9 columns. 
+        
+        final_func_header += f'''<h5 id="kegg">KEGG Pathway</h5> <br> KEGG pathway is a database resource for understanding high level functions of genes. KEGG pathway results provides plots as well as files. KEGG enrichment results contains 9 columns.
+        KEGG enrichment files and plots can be found at <a href="./6_Functional_Annotation/KEGG_Pathway/">KEGG results</a> 
         <br>
         1. Pathway ID : KEGG Pathway ID <br>
         2. Description : Pathway description. <br>
@@ -542,7 +546,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <div class="col-md-6 mt-2">
     
-    <img src="6_Functional_Annotation/KEGG_Pathway/KEGG_Plots/{combinations[0]}_kegg_dotplot_.png"  height=600></p>
+    <img src="{keggplots[0].split(outdir+"/")[1]}"  height=600></p>
     </div>
    </div>
          '''
@@ -626,4 +630,4 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
 
-# generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.1", ['A1-A6'], "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)
+generate_report("/home/naveen/Documents/Phd_work/example/pySeqRNA_results.3", ['A1-A6'], "/home/naveen/Documents/Phd_work/example/input_Sample.txt", 2, 0.05)

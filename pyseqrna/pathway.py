@@ -342,6 +342,7 @@ class Pathway:
 
             read_id_file = open(file, 'r')
             for gene_id in read_id_file:
+                
                 gene_id = gene_id.strip().upper()
             # remove the duplicate ids and keep unique
                 user_unique_gene_id[gene_id] = 0
