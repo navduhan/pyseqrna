@@ -400,12 +400,12 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         fd = pd.ExcelFile(os.path.join(differential,'Filtered_DEGs.xlsx'))
         fd_sheet = fd.sheet_names
         final_deg_header +=f'''\n Differential expression was filtered on user provided FOLD >= {FOLD} and FDR <= {FDR}. For example only one comparison is shown below. For each comparison there are different sheets in  <a href="4_Differential_Expression/Filtered_DEGs.xlsx"> Filtered differentially expressed genes</a> file. '''
-        final_deg_header += '<div class="row justify-content-center"><div class="col-md-8 my-4" id="fdeg">'
+        final_deg_header += '<div class="row justify-content-center"><div class="col-md-10 my-4" id="fdeg">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs.xlsx",sheet_name=fd_sheet[0]).head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs_summary.xlsx')):
         final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs_summaryxlsx"> Filtered differentially expressed genes</a>'''
-        final_deg_header += '<div class="row justify-content-center"><div class="col-md-4 my-4">'
+        final_deg_header += '<div class="row justify-content-center"><div class="col-md-5 my-4">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs_summary.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         
         final_deg_header +='</div></div>'
