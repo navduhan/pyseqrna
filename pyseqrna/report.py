@@ -29,7 +29,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
     differential = os.path.join(outdir,'4_Differential_Expression')
 
-    plots = os.path.join(outdir,'5_Plots')
+    plots = os.path.join(outdir,'5_Visualization')
 
     annotation = os.path.join(outdir,'6_Functional_Annotation')
 
@@ -404,7 +404,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs.xlsx",sheet_name=fd_sheet[0]).head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs_summary.xlsx')):
-        final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs_summaryxlsx"> Filtered differentially expressed genes</a>'''
+        final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs_summary.xlsx"> summary of differentially expressed genes</a>'''
         final_deg_header += '<div class="row justify-content-center"><div class="col-md-5 my-4">'
         final_deg_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{differential}/Filtered_DEGs_summary.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
         
@@ -433,7 +433,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
     <div class="col-md-6 mt-2">
     
-    <img src="./5_Plots/Heatmap_top50.png"  height=600></p>
+    <img src="./5_Visualization/Heatmap_top50.png"  height=600></p>
     </div>
    </div>
          '''
@@ -446,7 +446,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         log fold changes for genes with lower mean expression levels will be quite varied. Genes expressed similarly in both normal and treated samples 
         will group together around the M=0 value, i.e. genes expressed similarly across all treatments. Genes with considerable expression are shown by
         points away from the M=0 line. For instance, a gene is upregulated and downregulated if the point is above and below the M=0 line, respectively. Only one comparison plots is depicted below all other comparison MA plots are available 
-        <a href="./5_Plots/MA_Plots">MA Plots</a>
+        <a href="./5_Visualization/MA_Plots">MA Plots</a>
          <div class="row justify-content-center my-4">
     
         <div class="col-md-6 mt-2">
@@ -463,7 +463,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
          The p value decreases when the Y-axis point is raised. Significant differences in gene expression between the two situations are shown by the larger dispersion of data points in the volcano plot. 
          It is simple to identify genes with substantial changes by visualizing the expression of hundreds of genes gathered from omics research (e.g., transcriptomics, genomics, and proteomics). 
          Only one comparison plots is depicted below all other comparison Volcano plots are available
-        <a href="./5_Plots/Volcano_Plots">Volcano Plots</a>
+        <a href="./5_Visualization/Volcano_Plots">Volcano Plots</a>
          <div class="row justify-content-center my-4">
     
         <div class="col-md-6 mt-2">
@@ -477,7 +477,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
         vennplots = glob.glob(f"{plots}/Venn_Plots/*")
         final_plots_header += f'''<h5 id="venn">Venn Plots</h5> <br> A Venn diagram is a diagram that shows all possible logical relations between a finite collection of different comparisons. 
-        <a href="./5_Plots/Venn_Plots">Venn Plots</a>
+        <a href="./5_Visualization/Venn_Plots">Venn Plots</a>
             <div class="row justify-content-center my-4">
 
         <div class="col-md-6 mt-2">

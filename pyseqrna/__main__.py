@@ -371,7 +371,7 @@ def main():
 
     log.info("Writting DEGs summary to excel file")
 
-    filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"))
+    filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"), index=False)
 
     plotdir = pu.make_directory(os.path.join(outdir, "5_Plots"))
 
