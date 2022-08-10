@@ -439,7 +439,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
          '''
     if os.path.exists(os.path.join(plots, 'MA_Plots')):
 
-        # maplots = glob.glob(f"{plots}/MA_Plots/*")
+        maplots = glob.glob(f"{plots}/MA_Plots/*")
         final_plots_header += f'''<h5 id="ma">MA Plots</h5> <br> A 2-dimensional (2D) scatter plot called an MA plot is used to display gene expression datasets. 
         The MA plot uses the log of the mean of the normalized expression counts of the two conditions on the X-axis and the log of the fold change (M) 
         on the Y-axis to display and detect changes in gene expression from two distinct conditions (for example, normal vs. treated). In general, 
@@ -451,13 +451,13 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
         <div class="col-md-6 mt-2">
         
-        <img src="./5_Plots/MA_Plots/{combinations[0]}_MA.png"  height=600></p>
+        <img src="{maplots[0].split(outdir+"/")[1]}"  height=600></p>
         </div>
         </div>
             '''
     if os.path.exists(os.path.join(plots, 'Volcano_Plots')):
 
-        # vplots = glob.glob(f"{plots}/Volcano_Plots/*")
+        vplots = glob.glob(f"{plots}/Volcano_Plots/*")
         final_plots_header += f'''<h5 id="volcano">Volcano Plots</h5> <br> A 2-dimensional (2D) scatter plot with a volcano-like form is called a volcano plot. The log fold change (X-axis) and negative log10 of
          the p value are used to visualize and identify statistically significant gene expression changes from two distinct experimental circumstances (e.g., normal vs. treated) (Y-axis). 
          The p value decreases when the Y-axis point is raised. Significant differences in gene expression between the two situations are shown by the larger dispersion of data points in the volcano plot. 
@@ -468,21 +468,21 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     
         <div class="col-md-6 mt-2">
         
-        <img src="./5_Plots/Volcano_Plots/{combinations[0]}_volcano.png"  height=600></p>
+        <img src="{vplots[0].split(outdir+"/")[1]}"  height=600></p>
         </div>
         </div>
             '''
 
     if os.path.exists(os.path.join(plots, 'Venn_Plots')):
 
-        # maplots = glob.glob(f"{[plots]}/Venn_Plots/*")
+        vennplots = glob.glob(f"{[plots]}/Venn_Plots/*")
         final_plots_header += f'''<h5 id="venn">Venn Plots</h5> <br> A Venn diagram is a diagram that shows all possible logical relations between a finite collection of different comparisons. 
         <a href="./5_Plots/Venn_Plots">Venn Plots</a>
             <div class="row justify-content-center my-4">
 
         <div class="col-md-6 mt-2">
         
-        <img src="./5_Plots/Venn_Plots/Venn_0.png"  height=600></p>
+        <img src="{vennplots[0].split(outdir+"/")[1]}"  height=600></p>
         </div>
         </div>
         <hr>
