@@ -501,7 +501,7 @@ def main():
                 plt.close()
     
     comb_report = ','.join(combination)
-    report.generate_report(outdir, comb_report, options.input_file)
+    report.generate_report(outdir, comb_report, options.input_file, options.FOLD, options.FDR)
             
     endTime = time.ctime()
     log.info("Analysis Complted at %s", endTime)
