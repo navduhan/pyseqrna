@@ -191,7 +191,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
                     <p class="px-5">
                         <b>Experiment:</b>{title}<br> 
                         <b>Sequence type:</b> Single-end reads<br>
-                        <b>Total Samples:</b> 13 samples<br>
+                        <b>Total Samples:</b> {len(combinations)} samples<br>
                         <b>Pairwise comparisons:</b>{combinations}<br>
                         <b>Results Directory:</b> <a href=".">{outdir}</a> <br>
                         <b>Reference:</b> Reference was downloaded from ENSEMBL: <a href="http://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.toplevel.fa.gz" target="_blank">Mouse Reference Genome</a><br>
