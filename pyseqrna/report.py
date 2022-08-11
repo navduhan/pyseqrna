@@ -166,7 +166,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
 
 
     copyright_header = '</ul>\n<hr>\n<div class="d-flex pb-4"><i class="fs-4 bi-speedometer2"></i> <span class="mx-1 d-none d-sm-inline">&copy; USU BioinfoCore 2022</span>  </div> </div> </div>'
-
+    sample_input = pd.read_csv(infile, sep="\t", comment='#')
     infile = re.sub("class=\"dataframe ", "class=\"", pd.read_csv(infile, sep="\t", comment='#').to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
 
     intro = f''' <div class="col-md-9 py-3 pe-5">
@@ -191,7 +191,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
                     <p class="px-5">
                         <b>Experiment:</b>{title}<br> 
                         <b>Sequence type:</b> Single-end reads<br>
-                        <b>Total Samples:</b> {len(combinations)} samples<br>
+                        <b>Total Samples:</b> {sample_input.shape[0]} samples<br>
                         <b>Pairwise comparisons:</b>{combinations}<br>
                         <b>Results Directory:</b> <a href=".">{outdir}</a> <br>
                         <b>Reference:</b> Reference was downloaded from ENSEMBL: <a href="http://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.toplevel.fa.gz" target="_blank">Mouse Reference Genome</a><br>
@@ -335,7 +335,7 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
     Raw counts can be used to perform hierarchical clustering leaving users with options to use RPKM values if needed. This graph can be downloaded here <a href="3_Quantification/Sample_cluster.png" target="_blank"> Sample_cluster</a> <br>
     <div class="row justify-content-center">
     <div class="col-md-6">
-    <img src="3_Quantification/Sample_cluster.png"  height=600></p>
+    <img src="3_Quantification/Sample_cluster.png"  height=600 width=auto></p>
     </div>
     <div>
     <hr>
