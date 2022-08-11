@@ -223,6 +223,8 @@ class Normalization():
 
             ax.set_xlabel('Sample Name')
 
+            plt.xticks(rotation=90)
+
             ax.set_ylabel('log counts')
         rpkmDF.insert(0, 'Gene', gene_names)
        
