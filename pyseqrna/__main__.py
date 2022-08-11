@@ -373,7 +373,7 @@ def main():
 
     filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"), index=False)
 
-    plotdir = pu.make_directory(os.path.join(outdir, "5_Plots"))
+    plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
 
     if options.heatmap:
 
@@ -470,6 +470,8 @@ def main():
                 plt.close()
 
     if options.vennplot:
+
+        outvenn = os.path.join(plotdir,"Venn_Plots")
         
         degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
 
@@ -477,7 +479,7 @@ def main():
 
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
 
-            x.savefig(plotdir+ "/Venn.png")
+            x.savefig(outvenn+ "/Venn.png")
 
             plt.close()
 
@@ -496,7 +498,7 @@ def main():
 
                 x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold, degLabel=None)
 
-                x.savefig(plotdir+"/Venn_"+str(i)+".png")
+                x.savefig(outvenn+"/Venn_"+str(i)+".png")
 
                 plt.close()
     
