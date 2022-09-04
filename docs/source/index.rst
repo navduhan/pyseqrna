@@ -16,6 +16,13 @@ Introduction
 *************
 pyseqrna is an automated python package for RNASeq data analysis.
 
+
+*****************************
+Examples and Case-Studies
+*****************************
+Example usage and case-studies with real data is provided at 
+
+
 Contents
 =========
 

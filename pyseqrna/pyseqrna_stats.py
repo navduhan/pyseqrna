@@ -134,6 +134,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             p.start()
             
             for process in processes:
+                
                 process.join()
        
             if pairedEND:

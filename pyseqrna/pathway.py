@@ -147,11 +147,11 @@ class Pathway:
 
             if d[2] in kk:
 
-                kk[d[2]].append(d[1])
+                kk[d[2]].append(d[1].upper())
             
             else:
 
-                kk[d[2]]= [d[1]]
+                kk[d[2]]= [d[1].upper()]
 
                 kd[d[2]] = d[3]
 
