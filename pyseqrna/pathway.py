@@ -2,6 +2,7 @@ import io
 import os
 import re
 import requests
+import math
 from urllib.request import urlopen, urlretrieve
 from statsmodels.stats.multitest import multipletests
 import scipy.stats as stats
@@ -208,8 +209,8 @@ class Pathway:
         df =df.sort_values('Counts', ascending=False)
         df = df.head(nrows)
         df =df.sort_values('Counts', ascending=True)
-
-        fig, ax = plt.subplots(figsize=(10,10), dpi=300)
+        fsize = math.ceil(nrows/2)
+        fig, ax = plt.subplots(figsize=(fsize,10), dpi=300)
         scatter = ax.scatter(x=df['Counts'], y= df['Description'], s=df['Counts'], c=df[colorBy])
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
@@ -251,8 +252,8 @@ class Pathway:
         terms = df['Description'].values.tolist()
 
         data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
-
-        fig, ax = plt.subplots(figsize=(15, 10), dpi=300)
+        fsize = math.ceil(nrows/2)
+        fig, ax = plt.subplots(figsize=(fsize, 10), dpi=300)
 
         my_cmap = plt.cm.get_cmap('RdYlBu')
         colors = my_cmap(data_color_normalized)

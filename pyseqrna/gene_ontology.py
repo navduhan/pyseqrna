@@ -13,6 +13,7 @@ import scipy.stats as stats
 import numpy as np
 import requests
 import pandas as pd
+import math
 from io import StringIO, TextIOWrapper
 from xml.etree import ElementTree
 from future.utils import native_str
@@ -39,7 +40,7 @@ class GeneOntology:
         if self.keyType.lower() == 'ensembl':
             log.info("Fetching Gene Ontology from Biomart")
             self.gdata = self.query(self.species,self.type)
-            log.info("Proceeing Gene Ontology data from Biomart")
+            log.info("Processing Gene Ontology data from Biomart")
             self.df, self.background_count = self.preprocessBioMart(self.gdata)
         if self.keyType.lower() == 'ncbi':
              log.info("Fetching Gene Ontology from pyseqrnautils API")
@@ -258,7 +259,9 @@ class GeneOntology:
         df = df.head(nrows)
         df =df.sort_values('Counts', ascending=True)
 
-        fig, ax = plt.subplots(figsize=(10, 8), dpi=300)
+        fsize = math.ceil(nrows/2)
+
+        fig, ax = plt.subplots(figsize=(fsize, 8), dpi=300)
         scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts'], c=df[colorBy])
         ax.xaxis.get_major_locator().set_params(integer=True)
         ax.spines['top'].set_visible(False)
@@ -301,8 +304,8 @@ class GeneOntology:
         terms = df['GO Term'].values.tolist()
 
         data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
-
-        fig, ax = plt.subplots(figsize=(10, 8), dpi=300)
+        fsize = math.ceil(nrows/2)
+        fig, ax = plt.subplots(figsize=(fsize, 8), dpi=300)
 
         my_cmap = plt.cm.get_cmap('RdYlBu')
         colors = my_cmap(data_color_normalized)
