@@ -38,7 +38,6 @@ from waiting import wait
 log = pu.PyseqrnaLogger(mode="w", log="analysis")
 
 
-
 def main():
 
     # Get all the options from the user
@@ -318,7 +317,6 @@ def main():
 
     diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"))
 
-    
 
     if options.detool == 'DESeq2':
 

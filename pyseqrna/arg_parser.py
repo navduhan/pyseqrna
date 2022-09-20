@@ -41,20 +41,10 @@ mandatory.add_argument(
 
 parser.add_argument("--version", action="version", version= 'pyseqrna (version {})'.format(ver), help= "Show version information and exit")
 
-# parser.add_argument('--kegg-organism', type=str,
-#     help=""" Print all kegg organism avaiable """)
-
-# parser.add_argument('--go-plants-organism', type=str, default=None,
-#     help=""" Print all go plants organism avaiable """)
-
-# parser.add_argument('--go-animals-organism', type=str, default=None,
-#     help=""" Print all go animals organism avaiable """)
-
-
 internal = parser.add_argument_group("Internal arguments")
 
-internal.add_argument( "--source", dest="source", default='NCBI', 
-    help="Provide the source database of reference and feature file\n[default: NCBI]")
+internal.add_argument( "--source", dest="source", default='ENSEMBL', 
+    help="Provide the source database of reference and feature file\n[default: ENSEMBL]")
 
 internal.add_argument( "--taxid", dest='taxid', default=None, 
     help="Provide ncbi taxonomy id of the species")
@@ -62,7 +52,7 @@ internal.add_argument( "--taxid", dest='taxid', default=None,
 internal.add_argument( "--species", dest='species', default=None, 
     help="Provide ncbi taxonomy id of the species")
 
-internal.add_argument( "--organism_type", dest='speciestype', default='plants', 
+internal.add_argument( "--organismType", dest='speciestype', default='plants', 
     help="Provide Organism class")
 
 internal.add_argument( "--outdir",  default='pySeqRNA_results', 
@@ -72,13 +62,13 @@ internal.add_argument('--paired', dest='paired', action='store_true', default=Fa
 
 internal.add_argument("--fastqc", action="store_true", default=False, dest="fastqc", help= "Enable initial quality check on raw reads with fastqc \n[default:True]")
 
-internal.add_argument("--fastqc-trim", action="store_true", default=False, dest="fastqc2", help= "Enable quality check on trimmed reads with fastqc\n[default:False]")
+internal.add_argument("--fastqcTrim", action="store_true", default=False, dest="fastqc2", help= "Enable quality check on trimmed reads with fastqc\n[default:False]")
 
 internal.add_argument('--ribosomal',  dest='ribosomal', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
 
 internal.add_argument('--rnadb',required='--ribosomal' in sys.argv, dest='rnadb', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
 
-internal.add_argument('--multimapped-groups', dest='mmgg', action='store_true', default=False, help="Enable multimapped gene group quantification \n[default:True]")
+internal.add_argument('--multimappedGroups', dest='mmgg', action='store_true', default=False, help="Enable multimapped gene group quantification \n[default:True]")
 
 internal.add_argument('--combination', dest='combination', type=str, nargs='+', default='all', 
     help="""Provide space separated combination of samples to 
@@ -92,25 +82,25 @@ internal.add_argument('--fold', dest='fold', default=2,type=int,
     help="""FOLD change value for filtering DEGs. 
 Remember pyseqrna performs log2 of the given value\n[default:2]""")
 
-internal.add_argument('--normalize-count', dest='normalizecount',default='RPKM', choices=['RPKM', 'TPM', 'CPM', 'medianRatiocount'], 
+internal.add_argument('--normalizeCount', dest='normalizecount',default='RPKM', choices=['RPKM', 'TPM', 'CPM', 'medianRatiocount'], 
     help="Convert raw read counts to normalized counts\n[default:RPKM]")
 
 internal.add_argument('--heatmap', dest='heatmap',action='store_true', default=False, 
     help="Create heatmap\n[default:False]")
 
-internal.add_argument('--heatmap-type', dest='heatmaptype', default='degs', choices=['counts', 'degs'],
+internal.add_argument('--heatmapType', dest='heatmaptype', default='degs', choices=['counts', 'degs'],
     help="""Create heatmap based on selected choice \n[default: logFold-based]""" )
 
-internal.add_argument('--ma-plot', dest='maplot',action='store_true', default=False, 
+internal.add_argument('--maPlot', dest='maplot',action='store_true', default=False, 
     help="Create MA plot\n[default:True]")
 
 internal.add_argument('--volcano-plot', dest='volcanoplot',action='store_true', default=False, 
     help="Create Volcano plot\n[default:True]")
 
-internal.add_argument('--venn-plot',  dest='vennplot', default=False, action='store_true', 
+internal.add_argument('--vennPlot',  dest='vennplot', default=False, action='store_true', 
     help="Enables venplot of differentially expressed genes.\n[default: False] ")
 
-internal.add_argument('--venn-combinations',  dest='venncombination', type=str, nargs='+', default='random',
+internal.add_argument('--vennCombinations',  dest='venncombination', type=str, nargs='+', default='random',
     help="""Provide space separated 2-4 combination of samples to 
 be compared for differential expresion.For example M1-A1 M1-V1 Z1-M1\n[Default is to make random vennplot of 4 combinations]."""
 )
@@ -119,10 +109,10 @@ help="Cluster samples to find dissimilarities in data")
 
 annotation= parser.add_argument_group("Functional annotation arguments")
 
-annotation.add_argument('--gene-ontology', action="store_true", default=False, dest="geneontology",
+annotation.add_argument('--geneOntology', action="store_true", default=False, dest="geneontology",
     help="""Enables gene ontology functional enrichment using BioMart""")
 
-annotation.add_argument('--kegg-pathway',  action="store_true", default=False, dest="keggpathway",
+annotation.add_argument('--keggPathway',  action="store_true", default=False, dest="keggpathway",
     help="""Enables kegg pathway functional enrichment using KEGG""")
 
 tools = parser.add_argument_group("External tool arguments")
@@ -131,9 +121,9 @@ tools.add_argument("--trimming", action='store', dest="trimming", type=str, defa
     help="Select a tool for quality based read trimming.\n[default: trim_galore]"  )
 tools.add_argument('--aligner', dest='aligners', default='STAR', choices=['STAR', 'hisat2'], 
     help="Select a read alignment tool.\n[default: STAR]")
-tools.add_argument('--quant-tool', dest='quantification',default= 'featureCounts', choices=['featureCounts','Htseq'], 
+tools.add_argument('--quantTool', dest='quantification',default= 'featureCounts', choices=['featureCounts','Htseq'], 
     help= "Select a feature quantification tool.\n[default:featureCounts]")
-tools.add_argument('--de-tool', dest="detool", default='DESeq2', choices=['DESeq2', 'edgeR'],
+tools.add_argument('--deTool', dest="detool", default='DESeq2', choices=['DESeq2', 'edgeR'],
         help="Select a tool for differential expression.\n[default:DESeq2]")
 
 compute = parser.add_argument_group("Computation arguments")
