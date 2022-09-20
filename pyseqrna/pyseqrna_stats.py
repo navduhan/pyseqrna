@@ -5,6 +5,7 @@ Author: Naveen Duhan
 Version: 0.1
 '''
 
+from tkinter import E
 from matplotlib.colors import same_color
 import pandas as pd 
 import pysam
@@ -19,7 +20,7 @@ import subprocess
 log = PyseqrnaLogger(mode='a', log="stats")
 
 
-def getNreads(file, rdict, sp):
+def getNreads(file, rdict, sp, paired=False):
 
     """
     
@@ -33,6 +34,9 @@ def getNreads(file, rdict, sp):
     result = len(pyfastx.Fastq(file))
     
     rdict[sp] = int(result)
+
+    if paired:
+        rdict[sp] = int(result)*2
     # result = subprocess.check_output(f"gzcat {file} | echo $((`wc -l`/4))", shell=True).decode('utf-8').rstrip()
     log.info(f"{result} input reads in {sp}")
     
@@ -125,8 +129,10 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     
     for sp in sampleDict:
         try:
-         
-            p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
+            if pairedEND:
+                p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,True,))
+            else:
+                p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
         
             processes.append(p)
             p.start()
@@ -134,9 +140,6 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             for process in processes:
                 
                 process.join()
-       
-            if pairedEND:
-                Ireads.update((x, y*2) for x, y in Ireads.items())
             
         except Exception:
             log.error(f"Not able to count Input read number in {sp}")
@@ -144,8 +147,10 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     
     for tf in trimDict:
         try:
-
-            p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
+            if pairedEND:
+                p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,True))
+            else:
+                p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
         
             processes.append(p)
             p.start()
@@ -153,8 +158,6 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             for process in processes:
                 process.join()
        
-            if pairedEND:
-                Nreads.update((x, y*2) for x, y in Nreads.items())
         except Exception:
             log.error(f"Not able to count Trim read number in {tf}")
 
