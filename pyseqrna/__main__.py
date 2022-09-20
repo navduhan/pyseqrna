@@ -74,20 +74,20 @@ def main():
 
     
     
-    if options.fastqc:
-        qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"))
-        
-        jobid = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+    
+    qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"))
+    
+    jobid = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
-        if options.slurm:
-            for job in jobid:
-                wait(lambda: pu.check_status(job), waiting_for="quality to finish")
-                log.info(f"Quality check completed for job {job}")
+    if options.slurm:
+        for job in jobid:
+            wait(lambda: pu.check_status(job), waiting_for="quality to finish")
+            log.info(f"Quality check completed for job {job}")
 
-            log.info("Read quality check completed succesfully")
-        else:
-        
-            log.info("Read quality check completed succesfully")
+        log.info("Read quality check completed succesfully")
+    else:
+    
+        log.info("Read quality check completed succesfully")
 
     
     # Trimming
@@ -317,13 +317,19 @@ def main():
     targets = input_data['targets']
 
     diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"))
+
+    
+
     if options.detool == 'DESeq2':
 
         count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
         result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
 
+        results= de.Gene_Description(species=options.species, type=options.speciestype, degFile=results, filtered=False)
+
         result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+
         
     elif options.detool == 'edgeR':
 

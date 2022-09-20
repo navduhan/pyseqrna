@@ -16,6 +16,7 @@ from rpy2.robjects.packages import importr
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from rpy2.rinterface_lib.callbacks import logger as rpy2_logger
+
 rpy2_logger.setLevel(logging.ERROR)
 
 log = PyseqrnaLogger(mode='a', log="diff")
@@ -319,7 +320,13 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
     Downs = {}
     # summary = pd.DataFrame()
 
-    degDF = degDF.set_index('Gene')
+    if extraColumns:
+        
+        degDF = degDF.set_index(['Gene', 'Name', 'Description'])
+
+    else:
+
+        degDF = degDF.set_index('Gene')
         
     for c in CompareList:
 
@@ -328,7 +335,6 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         FDRR = "FDR("+c+")"
 
         LFC = "logFC("+c+")"
-
 
         if replicate:
 
@@ -341,7 +347,6 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
             upDF = dk[dk[LFC]>=np.log2(FOLD)]
 
             downDF = dk[dk[LFC]<=-np.log2(FOLD)]
-
 
         Up.append(upDF.shape[0])
 
@@ -490,9 +495,27 @@ class Gene_Description:
             wd.save()
         else:
 
+            if isinstance(self.degFile, pd.DataFrame):
+
+                deg = self.degFile
+
+            else:
+
+                deg = pd.read_excel(self.degFile)
+            
+            col =deg.columns
+
+            col = col.insert(1, 'Name')
+
+            col = col.insert(2, 'Description')
+
+            final = df.merge(self.names, on='Gene')
+
+            final = final[col]
+
             print("please provide the filtered DEGs file")
 
-        return
+        return final
 
 
 
