@@ -322,7 +322,9 @@ def main():
 
         result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
 
-        result= de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
+        ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
+
+        result = ge.add_names()
 
         result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
 
