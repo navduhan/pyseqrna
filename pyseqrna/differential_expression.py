@@ -511,7 +511,7 @@ class Gene_Description:
 
             col = col.insert(2, 'Description')
 
-            final = df.merge(self.names, on='Gene')
+            final = deg.merge(self.names, on='Gene')
 
             final = final[col]
 
