@@ -509,16 +509,16 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         10. logPvalues : Enrichment score calulated by <code> log<sub>10</sub>(1-Pvalues)</code>
         </div>''' 
 
-    final_func_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
-    final_func_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(gofiles[0]).head(20).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
-    final_func_header +='</div></div>'
-    final_func_header +=f'''<div class="row justify-content-center">
-    
-    <div class="col-md-8 mt-2">
-    
-    <img src="{goplots[0].split(outdir+"/")[1]}"  height=600></p>
-    </div>
-   </div>'''
+        final_func_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
+        final_func_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(gofiles[0]).head(20).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
+        final_func_header +='</div></div>'
+        final_func_header +=f'''<div class="row justify-content-center">
+        
+        <div class="col-md-8 mt-2">
+        
+        <img src="{goplots[0].split(outdir+"/")[1]}"  height=600></p>
+        </div>
+        </div>'''
     if os.path.exists(os.path.join(annotation, 'KEGG_Pathway')):
         keggfiles = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Files/*")
         keggplots = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Plots/*")
@@ -544,12 +544,12 @@ def generate_report(outdir, combinations, infile, FOLD, FDR):
         final_func_header +='</div></div></div>'
         final_func_header +=f'''<div class="row justify-content-center my-4">
     
-    <div class="col-md-6 mt-2">
-    
-    <img src="{keggplots[0].split(outdir+"/")[1]}"  height=600></p>
-    </div>
-   </div>
-         '''
+        <div class="col-md-6 mt-2">
+        
+        <img src="{keggplots[0].split(outdir+"/")[1]}"  height=600></p>
+        </div>
+        </div>
+            '''
 
     header = '''<html>
     <head>
