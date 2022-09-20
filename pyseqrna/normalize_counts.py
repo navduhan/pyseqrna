@@ -141,7 +141,7 @@ class Normalization():
 
         gtf['Length'] = list(map(lambda x: x[4]-x[3]+1,gene_list))
 
-        final = gtf [['Gene', 'Length']]
+        final = gtf [['Gene', 'Length']].copy()
         final['Gene']= final['Gene'].str.replace("gene:", "")
         final['Gene']= final['Gene'].str.replace("gene-", "")
         final = final.drop_duplicates(subset='Gene')
