@@ -122,8 +122,6 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     Ureads = manager.dict()
     Mreads = manager.dict()
     processes = []
-
-    numpro = len(sampleDict)
     
     for sp in sampleDict:
         try:
@@ -136,12 +134,12 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             for process in processes:
                 
                 process.join()
-       
-            if pairedEND:
-                Ireads.update((x, y*2) for x, y in Ireads.items())
             
         except Exception:
             log.error(f"Not able to count Input read number in {sp}")
+
+    if pairedEND:
+        Ireads.update((x, y*2) for x, y in Ireads.items())
    
     
     for tf in trimDict:
@@ -155,10 +153,12 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             for process in processes:
                 process.join()
        
-            if pairedEND:
-                Nreads.update((x, y*2) for x, y in Nreads.items())
+            
         except Exception:
             log.error(f"Not able to count Trim read number in {tf}")
+            
+    if pairedEND:
+        Nreads.update((x, y*2) for x, y in Nreads.items())
 
     for bf in bamDict:
             p=multiprocessing.Process(target=sort_bam, args=(bamDict[bf][2],))
