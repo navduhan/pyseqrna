@@ -89,12 +89,12 @@ internal.add_argument('--heatmap', dest='heatmap',action='store_true', default=F
     help="Create heatmap\n[default:False]")
 
 internal.add_argument('--heatmapType', dest='heatmaptype', default='degs', choices=['counts', 'degs'],
-    help="""Create heatmap based on selected choice \n[default: logFold-based]""" )
+    help="""Create heatmap based on selected choice \n[default: counts]""" )
 
 internal.add_argument('--maPlot', dest='maplot',action='store_true', default=False, 
     help="Create MA plot\n[default:True]")
 
-internal.add_argument('--volcano-plot', dest='volcanoplot',action='store_true', default=False, 
+internal.add_argument('--volcanoPlot', dest='volcanoplot',action='store_true', default=False, 
     help="Create Volcano plot\n[default:True]")
 
 internal.add_argument('--vennPlot',  dest='vennplot', default=False, action='store_true', 
