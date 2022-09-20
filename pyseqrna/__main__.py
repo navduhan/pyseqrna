@@ -72,8 +72,6 @@ def main():
     log.info("Starting with read quality check")
 
     
-    
-    
     qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"))
     
     jobid = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
@@ -324,7 +322,7 @@ def main():
 
         result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
 
-        results= de.Gene_Description(species=options.species, type=options.speciestype, degFile=results, filtered=False)
+        result= de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
 
         result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
 
