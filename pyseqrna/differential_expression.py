@@ -321,7 +321,7 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
     # summary = pd.DataFrame()
 
     if extraColumns:
-        
+
         degDF = degDF.set_index(['Gene', 'Name', 'Description'])
 
     else:
@@ -470,9 +470,11 @@ class Gene_Description:
 
     def add_names(self):
 
-        file = self.degFile.split(".xlsx")[0]
+        
 
         if self.filtered:
+
+            file = self.degFile.split(".xlsx")[0]
 
             wd = pd.ExcelWriter(f"{file}_Gene_name_added.xlsx")
 

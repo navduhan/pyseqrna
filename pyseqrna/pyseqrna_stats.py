@@ -35,10 +35,12 @@ def getNreads(file, rdict, sp, paired=False):
     
     rdict[sp] = int(result)
 
+    log.info(f"{result} input reads in {sp}")
+    
     if paired:
         rdict[sp] = int(result)*2
     # result = subprocess.check_output(f"gzcat {file} | echo $((`wc -l`/4))", shell=True).decode('utf-8').rstrip()
-    log.info(f"{result} input reads in {sp}")
+        log.info(f"{result*2} input reads in {sp}")
     
     return rdict
 
