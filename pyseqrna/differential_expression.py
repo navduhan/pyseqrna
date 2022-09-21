@@ -474,9 +474,9 @@ class Gene_Description:
 
         if self.filtered:
 
-            file = self.degFile.split(".xlsx")[0]
+            file = self.degFile.split("_")[0]
 
-            wd = pd.ExcelWriter(f"{file}_Gene_name_added.xlsx")
+            wd = pd.ExcelWriter(f"{file}_DEGs.xlsx")
 
             for c in self.combinations:
 

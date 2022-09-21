@@ -345,19 +345,23 @@ def main():
 
     log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
 
-    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=True)
+    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold)
 
     log.info("filtering DEGs completed ")
 
     log.info("writting filter DEGs combination wise to excel sheets")
     # write up and down filtered genes together
-    wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_DEGs.xlsx"))
+    wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_raw_DEGs.xlsx"))
 
     for key, value in filtered_DEG['filtered'].items():
         value.to_excel(wa,sheet_name=key)
         wa.save()
     wa.close()
 
+    ge = de.Gene_Description(species=options.species,  type=options.speciestype, degFile=os.path.join(diffdir,"Filtered__raw_DEGs.xlsx"), filtered=True)
+    ge.add_names()
+
+    os.remove(os.path.join(diffdir,"Filtered__raw_DEGs.xlsx"))
     # write up filtered genes together
     wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upDEGs.xlsx"))
 
