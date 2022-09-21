@@ -335,7 +335,7 @@ def main():
 
         result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
 
-        ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
+        ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
 
         results = ge.add_names()
 
@@ -345,35 +345,32 @@ def main():
 
     log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
 
-    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold)
+    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=True)
 
     log.info("filtering DEGs completed ")
 
     log.info("writting filter DEGs combination wise to excel sheets")
     # write up and down filtered genes together
-    wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_raw_DEGs.xlsx"))
+    wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_DEGs.xlsx"))
 
     for key, value in filtered_DEG['filtered'].items():
-        value.to_excel(wa,sheet_name=key)
+        value.to_excel(wa,sheet_name=key, index=False)
         wa.save()
     wa.close()
-
-    ge = de.Gene_Description(species=options.species,combinations=combination,  type=options.speciestype, degFile=os.path.join(diffdir,"Filtered_raw_DEGs.xlsx"), filtered=True)
-    ge.add_names()
 
     os.remove(os.path.join(diffdir,"Filtered_raw_DEGs.xlsx"))
     # write up filtered genes together
     wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upDEGs.xlsx"))
 
     for key, value in filtered_DEG['filteredup'].items():
-        value.to_excel(wu,sheet_name=key)
+        value.to_excel(wu,sheet_name=key, index=False)
         wu.save()
     wu.close()
     # write down filtered genes together
     wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downDEGs.xlsx"))
 
     for key, value in filtered_DEG['filtereddown'].items():
-        value.to_excel(wd,sheet_name=key)
+        value.to_excel(wd,sheet_name=key, index=False)
         wd.save()
     wd.close()
 

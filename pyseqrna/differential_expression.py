@@ -353,9 +353,11 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         Down.append(downDF.shape[0])
 
         Total.append(upDF.shape[0]+downDF.shape[0])
-
+        
+        upDF =upDF.reset_index()
+        downDF =downDF.reset_index()
         final = pd.concat([upDF, downDF], axis=0)
-
+      
         DEGs[c] = final
         Ups[c] = upDF
         Downs[c] = downDF
