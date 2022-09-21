@@ -227,7 +227,10 @@ class GeneOntology:
         Assumes a list or numpy array x which contains p-values for multiple tests
         Copied from p.adjust function from R  
         """
-        p_vals = pd.Series(x)
+        if len(x)!=0:
+            p_vals = pd.Series(x)
+        else:
+            p_vals = pd.Series(x, dtype=object)
         from scipy.stats import rankdata
         ranked_p_values = rankdata(p_vals)
         fdr = p_vals * len(p_vals) / ranked_p_values

@@ -519,8 +519,34 @@ class Gene_Description:
 
         return final
 
+    def add_names_annotation(self, pathway):
+
+        pl = self.names.values.tolist()
+        pp = {}
+        for p in pl:
+            pp[p[0]]=p[1]
+
+        gene_names =[]
+        for i,row in pathway.iterrows():
+            Genes = str(pathway.at[i,'Genes']).split(",")
+            result = []
+            for gene in Genes:
+                result.append(pp[gene])
+            res = ",".join(result)
+
+            gene_names.append([res])
+            
+        pathway['Gene_Name'] = gene_names
 
 
+        for i, row in pathway.iterrows():
+            
+            res = ','.join(pathway.at[i,'Gene_Name'])
+
+            pathway.at[i, 'Gene_Name'] = res
+
+        return pathway
+       
 
 
 

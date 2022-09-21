@@ -324,9 +324,9 @@ def main():
 
         ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
 
-        result = ge.add_names()
+        results = ge.add_names()
 
-        result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+        results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
 
         
     elif options.detool == 'edgeR':
@@ -335,13 +335,17 @@ def main():
 
         result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
 
-        result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+        ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
+
+        results = ge.add_names()
+
+        results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
         
     log.info("Differential expression analysis completed")
 
     log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
 
-    filtered_DEG= de.degFilter(degDF=result, CompareList=combination,FDR=options.fdr, FOLD=options.fold)
+    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=True)
 
     log.info("filtering DEGs completed ")
 
@@ -409,7 +413,9 @@ def main():
 
             if ontology_results != "No Gene Ontology":
 
-                ontology_results['result'].to_excel(f"{gofiles}/{c}_gene_ontology.xlsx", index=False)
+                go_results = ge.add_names_annotation(ontology_results['result'])
+
+                go_results.to_excel(f"{gofiles}/{c}_gene_ontology.xlsx", index=False)
 
                 ontology_results['plot'].savefig(f"{goplots}/{c}_go_dotplot.png", bbox_inches='tight')
                 plt.close()
@@ -434,7 +440,9 @@ def main():
 
             if kegg_results != "No Pathway":
 
-                kegg_results['result'].to_excel(os.path.join(keggfiles, f"{c}_kegg.xlsx"), index=False)
+                k_result = ge.add_names_annotation(kegg_results['result'])
+
+                k_result.to_excel(os.path.join(keggfiles, f"{c}_kegg.xlsx"), index=False)
 
                 kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
 
