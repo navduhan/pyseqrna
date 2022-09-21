@@ -74,7 +74,7 @@ def main():
     
     qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"))
     
-    jobid = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+    jobid, fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
     if options.slurm:
         for job in jobid:
@@ -123,7 +123,7 @@ def main():
     
     if options.fastqc2:
         
-        jobid = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+        jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
 
         if options.slurm:
             for job in jobid:
