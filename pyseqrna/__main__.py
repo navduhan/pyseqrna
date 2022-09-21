@@ -358,7 +358,6 @@ def main():
         wa.save()
     wa.close()
 
-    os.remove(os.path.join(diffdir,"Filtered_raw_DEGs.xlsx"))
     # write up filtered genes together
     wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upDEGs.xlsx"))
 
