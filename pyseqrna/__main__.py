@@ -26,7 +26,7 @@ from pyseqrna.pathway import Pathway
 from pyseqrna.normalize_counts import Normalization
 from pyseqrna import report
 
-
+import math
 import pyseqrna.version
 import pandas as pd
 import numpy as np
@@ -483,18 +483,18 @@ def main():
 
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
 
-            x.savefig(outvenn+ "/Venn0.png")
+            x.savefig(f"{outvenn}/Venn0.png")
 
             plt.close()
 
         else:
             if len(combination)<4:
 
-                vnum= len(combination)
+                vnum = len(combination)
 
             else:
 
-                vnum = len(combination)/4
+                vnum = math.ceil(len(combination)/4)
                 
             vlist = np.array_split(combination, vnum)
         
