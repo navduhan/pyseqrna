@@ -475,7 +475,7 @@ def main():
 
     if options.vennplot:
 
-        outvenn = os.path.join(plotdir,"Venn_Plots")
+        outvenn = pu.make_directory(os.path.join(plotdir,"Venn_Plots"))
         
         degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
 
