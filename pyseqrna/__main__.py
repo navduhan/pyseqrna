@@ -483,7 +483,7 @@ def main():
 
             x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
 
-            x.savefig(outvenn+ "/Venn.png")
+            x.savefig(outvenn+ "/Venn0.png")
 
             plt.close()
 
