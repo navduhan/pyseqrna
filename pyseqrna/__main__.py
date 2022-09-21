@@ -358,10 +358,10 @@ def main():
         wa.save()
     wa.close()
 
-    ge = de.Gene_Description(species=options.species,combinations=combination,  type=options.speciestype, degFile=os.path.join(diffdir,"Filtered__raw_DEGs.xlsx"), filtered=True)
+    ge = de.Gene_Description(species=options.species,combinations=combination,  type=options.speciestype, degFile=os.path.join(diffdir,"Filtered_raw_DEGs.xlsx"), filtered=True)
     ge.add_names()
 
-    os.remove(os.path.join(diffdir,"Filtered__raw_DEGs.xlsx"))
+    os.remove(os.path.join(diffdir,"Filtered_raw_DEGs.xlsx"))
     # write up filtered genes together
     wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upDEGs.xlsx"))
 
