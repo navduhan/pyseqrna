@@ -261,7 +261,7 @@ def main():
     if options.mmgg:
         log.info("Counting multimapped read grouops")
     
-        mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file)
+        mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file, minCount=options.minreadcount, percentSample=options.percentsample)
 
         mmg_count.to_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx" ),index=False)
 

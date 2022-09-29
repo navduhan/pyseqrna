@@ -188,7 +188,7 @@ class Normalization():
         """
         This function convert counts to reads per killobase per million
         Returns:
-            [type]: [description]
+        [type]: [description]
         """
 
         df = pd.read_excel(self.countFile)
@@ -236,7 +236,7 @@ class Normalization():
         """
         This function convert counts to reads per killobase per million
         Returns:
-            [type]: [description]
+        [type]: [description]
         """
 
         df = pd.read_excel(self.countFile)

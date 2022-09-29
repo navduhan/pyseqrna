@@ -68,7 +68,11 @@ internal.add_argument('--ribosomal',  dest='ribosomal', action='store_true', def
 
 internal.add_argument('--rnadb',required='--ribosomal' in sys.argv, dest='rnadb', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
 
-internal.add_argument('--multimappedGroups', dest='mmgg', action='store_true', default=False, help="Enable multimapped gene group quantification \n[default:True]")
+internal.add_argument('--multimappedGroups', dest='mmgg', action='store_true', default=False, help="Enable multimapped gene group quantification \n[default:False]")
+
+internal.add_argument('--minReadCounts', dest='minreadcount', action='store_true', default=100, help="Minimum number of reads to consider per sample for MMG \n[default:100]")
+
+internal.add_argument('--percentSample', dest='percentsample', action='store_true', default=0.5, help="Minimum number of reads to consider in percent of samples for MMG \n[default:0.5]")
 
 internal.add_argument('--combination', dest='combination', type=str, nargs='+', default='all', 
     help="""Provide space separated combination of samples to 

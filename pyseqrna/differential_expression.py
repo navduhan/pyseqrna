@@ -31,7 +31,8 @@ def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene
     """[summary]
 
     Args:
-        countFile ([type], optional): [description]. Defaults to None.
+        :param countFile: Raw read count file. Defaults to None.
+        
         targetFile ([type], optional): [description]. Defaults to None.
         design ([type], optional): [description]. Defaults to None.
         combination ([type], optional): [description]. Defaults to None.
@@ -40,6 +41,7 @@ def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene
 
     Returns:
         [type]: [description]
+
     """
     try:
         if lib is None:

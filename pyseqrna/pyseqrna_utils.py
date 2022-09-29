@@ -261,7 +261,7 @@ def get_cpu():
     """
     This function get actual CPU count of the system 
     Returns:
-        rtype: int with 80 % of CPU count
+    rtype: int with 80 % of CPU count
     """
 
     return math.floor(psutil.cpu_count()*0.8)
