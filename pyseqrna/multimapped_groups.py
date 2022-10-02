@@ -105,6 +105,7 @@ def filterGenes(mmg=None):
     count= 0
     for m in range(0,final.shape[0]):
         mmgid.append("MMG_"+str(count))
+    final.MMG = mmgid
     return final
 
 def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100, percentSample=0.5 ):
