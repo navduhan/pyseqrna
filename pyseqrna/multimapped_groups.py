@@ -150,7 +150,7 @@ def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100
         df.columns=['Gene', b]
         listDF.append(df)
 
-    df_final = functools.reduce(lambda left,right: pd.merge(left,right, on='gene', how='outer'), listDF).fillna(0)
+    df_final = functools.reduce(lambda left,right: pd.merge(left,right, on='Gene', how='outer'), listDF).fillna(0)
     
     final=df_final.values.tolist()
 
