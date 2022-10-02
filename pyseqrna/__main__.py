@@ -259,7 +259,7 @@ def main():
         # Multi mapped 
     
     if options.mmgg:
-        log.info("Counting multimapped read grouops")
+        log.info("Counting multimapped read groups")
     
         mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file, minCount=options.minreadcount, percentSample=options.percentsample)
 

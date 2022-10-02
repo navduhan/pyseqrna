@@ -27,7 +27,7 @@ numpy2ri.activate()
 
 
 
-def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene', subset=False, lib=None):
+def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene', subset=False, mmg =False, lib=None):
     """[summary]
 
     Args:
@@ -51,12 +51,22 @@ def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene
     except Exception:
         log.error("DESeq2 installation was not found ")
 
+    if mmg:
+        gene_id = countDF[['MMG', gene_column]].values
+        countDF.set_index(['MMG', gene_column], inplace=True)
+    else:
+
+        gene_id = countDF[[gene_column]].values
+        countDF.set_index(gene_column, inplace=True)
+
     
-    gene_id = countDF[[gene_column]].values
 
-    countDF.set_index(gene_column, inplace=True)
+    if mmg:
 
-    deseq_results=pd.DataFrame(gene_id,columns=[gene_column]) # Intialize a dataframe with gene names as first column for deseq2 results
+        deseq_results=pd.DataFrame(gene_id,columns=['MMG',gene_column]) # Intialize a dataframe with gene names as first column for deseq2 results
+
+    else: 
+        deseq_results=pd.DataFrame(gene_id,columns=[gene_column])
 
     if subset:
 

@@ -88,7 +88,17 @@ def gffToBed(file=None, feature='gene'):
                 fp.write(f"{gene[0]}\t{gene[3]-1}\t{gene[4]}\t{gene[9]}\t.\t{gene[6]}\n")     
     return out
 
-
+def filterGenes(mmg=None):
+    df = mmg['Gene'].values.tolist()
+    substrings = {w1 for w1 in df for w2 in df if w1 in w2 and w1 != w2}
+    rgenes = list(set(df) - substrings)
+    fgene = []
+    for r in rgenes:
+        if "-" in r:
+            fgene.append(r)
+    fgenes = pd.DataFrame(fgene, columns=['Gene'])
+    final = fgenes.merge(mmg, on='Gene')
+    return final
 
 def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100, percentSample=0.5 ):
 
@@ -137,11 +147,11 @@ def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100
         df.columns=[b]
         df= pd.DataFrame(df[b].value_counts(dropna=False))
         df.reset_index(level=0, inplace=True)
-        df.columns=['gene', b]
+        df.columns=['Gene', b]
         listDF.append(df)
 
     df_final = functools.reduce(lambda left,right: pd.merge(left,right, on='gene', how='outer'), listDF).fillna(0)
-    # df_final.to_csv("final.txt", sep="\t")
+    
     final=df_final.values.tolist()
 
     colna=df_final.columns
@@ -167,8 +177,14 @@ def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100
             kk.append(f)
 
     try:
-        dk = pd.DataFrame(kk).astype(str).replace('\.0', '', regex=True)
-        dk.columns=newNames
+        df = pd.DataFrame(kk).astype(str).replace('\.0', '', regex=True)
+        df.columns= newNames
+
+        df['Gene']= df['Gene'].str.replace("gene:", "")
+        df['Gene']= df['Gene'].str.replace("gene-", "")
+
+        dk = filterGenes(mmg=df)
+
     except Exception:
         log.warning("No multimapped groups found")
     
