@@ -89,6 +89,7 @@ def gffToBed(file=None, feature='gene'):
     return out
 
 def filterGenes(mmg=None):
+    col = mmg.columns
     df = mmg['Gene'].values.tolist()
     substrings = {w1 for w1 in df for w2 in df if w1 in w2 and w1 != w2}
     rgenes = list(set(df) - substrings)
@@ -98,6 +99,8 @@ def filterGenes(mmg=None):
             fgene.append(r)
     fgenes = pd.DataFrame(fgene, columns=['Gene'])
     final = fgenes.merge(mmg, on='Gene')
+
+    final = final[col]
     return final
 
 def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100, percentSample=0.5 ):
