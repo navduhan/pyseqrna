@@ -101,6 +101,10 @@ def filterGenes(mmg=None):
     final = fgenes.merge(mmg, on='Gene')
 
     final = final[col]
+    mmgid = []
+    count= 0
+    for m in range(0,final.shape[0]):
+        mmgid.append("MMG_"+str(count))
     return final
 
 def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100, percentSample=0.5 ):
