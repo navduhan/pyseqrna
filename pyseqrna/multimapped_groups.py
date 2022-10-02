@@ -102,8 +102,8 @@ def filterGenes(mmg=None):
 
     final = final[col]
     mmgid = []
-    count= 0
-    for m in range(0,final.shape[0]):
+   
+    for m in range(1,final.shape[0]):
         mmgid.append("MMG_"+str(m))
     final.MMG = mmgid
     return final
