@@ -22,16 +22,17 @@ pLog=PyseqrnaLogger(mode="a", log="ncount")
 
 
 
-def boxplot(data =None, countType=None, colors=None, figsize=(20,10), **kwargs):
+def boxplot(data =None, countType=None,  figsize=(20,10), **kwargs):
     """
     This function make a boxplot with boxes colored according to the countType they belong to
 
-    Args:
-        data ([float], optional): [list of array-like of float]. Defaults to None.
-        countType ([str], optional): [list of string, same length as `data`]. Defaults to None.
-        colors ([type], optional): [description]. Defaults to None.
-    Other Args:
-        kwargs ([dict], optional): [keyword arguments for `plt.boxplot`]
+    :param data: List containg log data of raw and normalize read counts.
+
+    :param countType: Columns data of raw and normalize read counts.
+
+    :param figsize: Figure size.
+   
+    :param kwargs: Other optional arguments for boxplot.
     """
     allTypes = sorted(set(countType))
 
@@ -78,13 +79,22 @@ class Normalization():
     """
 
     def __init__(self, countFile=None, featureFile=None, typeFile='GFF', keyType='ncbi', attribute='ID', feature='gene', geneColumn='Gene'):
-        """[summary]
+        """
+        
+        :param countFile: Raw read counts file.
 
-        Args:
-            countFile ([type], optional): [description]. Defaults to None.
-            featureFile ([type], optional): [description]. Defaults to None.
-            type (str, optional): [description]. Defaults to 'GFF'.
-            attribute (str, optional): [description]. Defaults to 'ID'.
+        :param featureFile: Gene feature file.
+
+        :param type: Type of gene feature file GFF/GTF. Default is GFF.
+
+        :param keyType: If feature file is from NCBI or ENSEMBL.
+
+        :param attribute: Attribute to consider from gene feature file. Defaults to 'ID'.
+
+        :param feature: type of feature.
+
+        :param geneColumn: Gene column name in raw read count file.
+
         """
 
         self.countFile = countFile
@@ -96,42 +106,39 @@ class Normalization():
         self.keyType = keyType
 
         return
-    def getGeneLength(self, file, feature='gene', typeFile='GFF', attribute='ID'):
-        """[summary]
 
-        Args:
-            file ([type], optional): [description]. Defaults to None.
-            feature (str, optional): [description]. Defaults to 'gene'.
-            type (str, optional): [description]. Defaults to 'GFF'.
-            attribute (str, optional): [description]. Defaults to 'ID'.
+    def _getGeneLength(self):
+        """
+        This function calculate the gene length from gene feature file.
+        
         """
 
-        gtf = pd.read_csv(file, sep="\t", header=None, comment="#")
+        gtf = pd.read_csv(self.featureFile, sep="\t", header=None, comment="#")
 
         gtf.columns = ['seqname', 'source', 'feature', 'start', 'end', 's1', 'strand', 's2', 'identifier']
 
-        gtf = gtf[gtf['feature'] == feature]
+        gtf = gtf[gtf['feature'] == self.feature]
 
-        if typeFile.upper() == 'GFF':
+        if self.typeFile.upper() == 'GFF':
             
             try:
 
                 if self.keyType.lower() == 'ncbi':
 
-                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
+                        gtf['Gene'] = list(map(lambda x: re.search(self.attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
                     
                 if self.keyType.lower() =='ensembl':
 
-                        gtf['Gene'] = list(map(lambda x: re.search(attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
+                        gtf['Gene'] = list(map(lambda x: re.search(self.attribute+'[=](.*?)[;]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
             
             except Exception:
 
                 pLog.exception("Attribute not present in GFF file")
 
-        if typeFile.upper() == 'GTF':
+        if self.typeFile.upper() == 'GTF':
 
             try:
-                gtf['Gene'] = list(map(lambda x:  re.search(attribute+'\s+["](.*?)["]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
+                gtf['Gene'] = list(map(lambda x:  re.search(self.attribute+'\s+["](.*?)["]',x,re.MULTILINE).group(1), gtf['identifier'].values.tolist()))
 
             except Exception:
 
@@ -151,7 +158,11 @@ class Normalization():
 
     def CPM(self, plot=True, figsize=(20,10)):
         """
-        This function convert counts to counts per million
+        This function convert counts to counts per million (CPM)
+
+        :param plot: True if to plot log raw counts and log CPM counts on boxplot.
+
+        :param figsize: Figure size.
         """
 
         df = pd.read_excel(self.countFile)
@@ -186,16 +197,18 @@ class Normalization():
 
     def RPKM(self, plot=True, figsize=(20,10)):
         """
-        This function convert counts to reads per killobase per million
-        Returns:
-        [type]: [description]
+        This function convert counts to reads per killobase per million (RPKM)
+       
+        :param plot: True if to plot log raw counts and log RPKM counts on boxplot.
+
+        :param figsize: Figure size.
         """
 
         df = pd.read_excel(self.countFile)
 
         countDF = df.set_index(self.geneColumn)
 
-        geneDF = self.getGeneLength(self.featureFile,self.feature,self.typeFile, self.attribute)
+        geneDF = self._getGeneLength()
 
         match_index = pd.Index.intersection(countDF.index, geneDF.index)
 
@@ -235,8 +248,10 @@ class Normalization():
 
         """
         This function convert counts to reads per killobase per million
-        Returns:
-        [type]: [description]
+        
+        :param plot: True if to plot log raw counts and log TPM counts on boxplot.
+
+        :param figsize: Figure size.
         """
 
         df = pd.read_excel(self.countFile)
@@ -279,7 +294,15 @@ class Normalization():
         return tpmDF, fig, ax
 
 
-    def meanRatioCount(self):
+    def meanRatioCount(self, plot=True, figsize=(20,10)):
+
+        """
+        This function convert counts to medianRatio count
+        
+        :param plot: True if to plot log raw counts and log TPM counts on boxplot.
+
+        :param figsize: Figure size.
+        """
 
         df = pd.read_excel(self.countFile)
         gene_names = df['Gene']
@@ -294,9 +317,23 @@ class Normalization():
         
         res = df2.div(m,axis=1)
 
+        if plot:
+            
+            logCounts = list(np.log(df2.T+1))
+
+            logNorm_counts = list(np.log(mr.T+1))
+
+            fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['Raw counts']*len(df2.columns)+['medianRatio counts']*len(df2.columns),
+                         labels= list(df2.columns)+list(res.columns), figsize=figsize )
+
+            ax.set_xlabel('Sample Name')
+
+            ax.set_ylabel('log counts')
+
         res.insert(0, 'Gene', gene_names)
+
         
-        return res
+        return res, fig, ax
 
 
 

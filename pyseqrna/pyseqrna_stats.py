@@ -20,7 +20,7 @@ import subprocess
 log = PyseqrnaLogger(mode='a', log="stats")
 
 
-def getNreads(file, rdict, sp, paired=False):
+def _getNreads(file, rdict, sp, paired=False):
 
     """
     
@@ -45,7 +45,7 @@ def getNreads(file, rdict, sp, paired=False):
     
     return rdict
 
-def getAligned_reads(file, rdict, sp):
+def _getAligned_reads(file, rdict, sp):
 
     aligned=0
 
@@ -57,7 +57,7 @@ def getAligned_reads(file, rdict, sp):
     return rdict
 
 
-def getUniquely_mapped(file, rdict, sp):
+def _getUniquely_mapped(file, rdict, sp):
 
     uniq_mapped = 0
     for read in pysam.AlignmentFile(file,'rb'):
@@ -72,7 +72,7 @@ def getUniquely_mapped(file, rdict, sp):
     return rdict
     
 
-def getMulti_mapped(file,rdict, sp):
+def _getMulti_mapped(file,rdict, sp):
 
     multi_mapped = 0 
 
@@ -86,7 +86,7 @@ def getMulti_mapped(file,rdict, sp):
     log.info(f"{multi_mapped} input reads multi mapped in {sp}")
     return rdict
     
-def sort_bam(file):
+def _sort_bam(file):
     outfile = file.split(".bam")[0] + "_sorted.bam"
     samtools_cmd = f'samtools sort {file} > {outfile}'
     try:
@@ -102,7 +102,7 @@ def sort_bam(file):
 
         log.error("Bam sorting failed")
 
-def index_bam(file):
+def _index_bam(file):
    
     samtools_cmd = f'samtools index -c {file}'
     try:
@@ -119,7 +119,22 @@ def index_bam(file):
         log.error("Bam indexing failed")
 
 
-def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, pairedEND=False):
+def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, pairedEND=False):
+
+    """
+    This function calculates the alignment statistics
+
+    :param sampleDict: Raw Reads sample dictionary containing all samples
+
+    :param trinDict: Dictionary containing trimmed samples
+
+    :param bamDict: Dictionary containing all samples bam files.
+
+    :param riboDict: Dictionary containing filtered reads.
+
+    :returns: DataFrame
+    :rtype: A DataFrame containg alignment statistics
+    """
         
     manager = multiprocessing.Manager()
     Ireads = manager.dict()
@@ -133,9 +148,9 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     for sp in sampleDict:
         try:
             if pairedEND:
-                p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,True,))
+                p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,True,))
             else:
-                p=multiprocessing.Process(target= getNreads, args=(sampleDict[sp][2],Ireads, sp,))
+                p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,))
         
             processes.append(p)
             p.start()
@@ -151,9 +166,9 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     for tf in trimDict:
         try:
             if pairedEND:
-                p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,True))
+                p=multiprocessing.Process(target= _getNreads, args=(trimDict[tf][2],Nreads, tf,True))
             else:
-                p=multiprocessing.Process(target= getNreads, args=(trimDict[tf][2],Nreads, tf,))
+                p=multiprocessing.Process(target= _getNreads, args=(trimDict[tf][2],Nreads, tf,))
         
             processes.append(p)
             p.start()
@@ -165,7 +180,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-            p=multiprocessing.Process(target=sort_bam, args=(bamDict[bf][2],))
+            p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2],))
         
             processes.append(p)
             p.start()
@@ -176,7 +191,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
        
-        p=multiprocessing.Process(target=index_bam, args=(file,))
+        p=multiprocessing.Process(target = _index_bam, args=(file,))
         processes.append(p)
         p.start()
         
@@ -185,7 +200,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
 
     for bf in bamDict:
         try:
-            p=multiprocessing.Process(target= getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
+            p=multiprocessing.Process(target= _getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
         
             processes.append(p)
             p.start()
@@ -196,7 +211,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
         except Exception:
             log.error(f"Not able to count Aligned read number in {bf}")
         try:
-            p=multiprocessing.Process(target= getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
+            p=multiprocessing.Process(target= _getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
         
             processes.append(p)
             p.start()
@@ -207,7 +222,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,ribodict=None, paire
         except Exception:
             log.error(f"Not able to count Uniquely mapped read number in {bf}")
         try:
-            p=multiprocessing.Process(target= getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
+            p=multiprocessing.Process(target= _getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         
             processes.append(p)
             p.start()

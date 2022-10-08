@@ -20,6 +20,18 @@ log = PyseqrnaLogger(mode='a', log="pathway")
 
 class Pathway:
 
+
+    """
+    This class is for KEGG Pathway enrichment 
+
+    :param species: Species name. Ex. for Arabidopsis thaliana it is athaliana
+
+    :param keyType: Genes are from NCBI or ENSEMBL. Default is ENSEMBL.
+
+    :param gff: Gene feature file.
+    
+    """
+
     def __init__(self, species=None, keyType=None, gff=None):
 
         self.species = species 
@@ -32,7 +44,7 @@ class Pathway:
 
              log.info("Fetching Pathways from KEGG API")
 
-             self.df, self.background_count = self.kegg_list()
+             self.df, self.background_count = self._kegg_list()
 
              self.idmapping = pu.parse_gff(self.gff)
 
@@ -40,7 +52,7 @@ class Pathway:
 
              log.info("Fetching Pathways from pyseqrna API")
 
-             self.df, self.background_count = self.get_pathways()
+             self.df, self.background_count = self._get_pathways()
              
 
     def _q(self,op, arg1, arg2=None, arg3=None):
@@ -71,7 +83,7 @@ class Pathway:
 
         return handle
 
-    def kegg_organism(self):
+    def _kegg_organism(self):
 
         resp =  urlopen("http://rest.kegg.jp/list/organism")
 
@@ -85,7 +97,7 @@ class Pathway:
 
         return organisms
 
-    def kegg_list(self):
+    def _kegg_list(self):
 
         resp= self._q("list","pathway",self.species)
 
@@ -134,7 +146,7 @@ class Pathway:
 
         return df, bg_count
 
-    def get_pathways(self):
+    def _get_pathways(self):
 
         r = requests.get(f"http://bioinfo.usu.edu/pyseqrna-api/list/pathways/{self.species}")
         m = re.sub('<[^<]+?>', '', r.text)
@@ -172,7 +184,7 @@ class Pathway:
 
         return dp, bg_count
 
-    def fdr_calc(self, x):
+    def _fdr_calc(self, x):
         """
         Assumes a list or numpy array x which contains p-values for multiple tests
         Copied from p.adjust function from R  
@@ -186,16 +198,16 @@ class Pathway:
 
 
     def dotplotKEGG(self, df=None, nrows=20, colorBy='logPvalues'):
-        """_summary_
+        """
+        This function creates a dotplot for KEGG pathway enrichment.
 
-        Args:
-            df (_type_, optional): _description_. Defaults to None.
-            nrows (int, optional): _description_. Defaults to 20.
-            colorBy (str, optional): _description_. Defaults to 'logPvalues'.
+        :param df: KEGG pathway enrichment file from enrichKEGG function.
+
+        :param nrows: Number of rows to plot. Default to 20 rows.
+
+        :param colorBy: Color dot on plots with logPvalues / FDR. Defaults to 'logPvalues'.
         
-
-        Returns:
-            _type_: _description_
+        :returns: a dotplot
         """
 
         if colorBy=='logPvalues':
@@ -231,10 +243,16 @@ class Pathway:
 
     def barplotKEGG(self, df=None,nrows=20, colorBy='logPvalues' ):
 
-        """_summary_
+        """
+        This function creates a barplot for KEGG pathway enrichment.
 
-        Returns:
-            _type_: _description_
+        :param df: KEGG pathway enrichment file from enrichKEGG function.
+
+        :param nrows: Number of rows to plot. Default to 20 rows.
+
+        :param colorBy: Color bar on plots with logPvalues / FDR. Defaults to 'logPvalues'.
+        
+        :returns: a barplot
         """
         
         if colorBy=='logPvalues':
@@ -280,7 +298,30 @@ class Pathway:
 
         return fig
 
-    def enrichKEGG(self,file,pvalueCutoff=0.05, plot=True, plotType= 'dotplot', nrows=20,colorBy='logPvalues'):
+    def enrichKEGG(self,file, pvalueCutoff=0.05, plot=True, plotType= 'dotplot', nrows=20,colorBy='logPvalues'):
+
+                # Need to add support for different database IDs
+        """
+        This function performs KEGG pathway enrichment of DEGs.
+
+        :param file: Differentially expressed genes in a sample.
+
+        :param pvalueCutoff: P-value cutoff for enrichment. Default is 0.05.
+
+        :param plot: True if a plot is needed. Default is True.
+
+        :param plotType: KEGG pathway enrichment visualization on dotplot/barplot. Default is dotplot.
+
+        :param nrows: Number of rows to plot. Default to 20 rows.
+
+        :param colorBy: Color dot on plots with logPvalues / FDR. Defaults to 'logPvalues'.
+        
+        :returns:  a dictionary
+
+        :rtype results: KEGG pathway enrichment results.
+
+        :rtype plot: a dotplot/barplot
+        """
 
         log.info(f"Performing KEGG enrichment analysis on {file}")  
 
@@ -394,7 +435,7 @@ class Pathway:
                                         f"{gene_in_pathway}/{mapped_user_ids}", f"{kegg_count[k]}/{bg_gene_count}", pvalue,len(gene_ids), gID])
 
         # fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
-        fdr = list(self.fdr_calc(pvalues))
+        fdr = list(self._fdr_calc(pvalues))
 
         end = pd.DataFrame(enrichment_result)
         if end.shape[0]>1:

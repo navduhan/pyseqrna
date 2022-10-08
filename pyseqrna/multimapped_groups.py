@@ -11,7 +11,7 @@ from pyseqrna import pyseqrna_utils as pu
 
 log = PyseqrnaLogger(mode='a', log='mmgg')
 
-def Bam2Bed(bamDict):
+def _Bam2Bed(bamDict):
 
     outBed = []
     alignFiles = []
@@ -52,7 +52,7 @@ def Bam2Bed(bamDict):
                     fp.write(read.reference_name+"\t"+str(read.pos)+"\t"+str(read.aend)+"\t"+read.query_name+"\t"+str(read.flag)+"\t"+strand+"\n")
     return outBed
 
-def gffToBed(file=None, feature='gene'):
+def _gffToBed(file=None, feature='gene'):
 
     ext = pu.get_file_extension(file)
 
@@ -88,7 +88,7 @@ def gffToBed(file=None, feature='gene'):
                 fp.write(f"{gene[0]}\t{gene[3]-1}\t{gene[4]}\t{gene[9]}\t.\t{gene[6]}\n")     
     return out
 
-def filterGenes(mmg=None):
+def _filterGenes(mmg=None):
     col = mmg.columns
     df = mmg['Gene'].values.tolist()
     substrings = {w1 for w1 in df for w2 in df if w1 in w2 and w1 != w2}
@@ -110,8 +110,29 @@ def filterGenes(mmg=None):
 
 def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100, percentSample=0.5 ):
 
-    bedFiles = Bam2Bed(bamDict=bamDict)
-    gffBED = gffToBed(file=gff, feature=feature)
+    """
+    This function calculates multimapped gene groups.
+
+    :param sampleDict: a dictionary containing samples information.
+
+    :param bamDict: a dictionary containing BAM files.
+
+    :param gff: gene feature file.
+
+    :param feature: feature type.
+
+    :param minCount: minimum number of reads per sample.
+
+    :param percentSample: minimum number of reads in percent sample.
+
+    :returns: DataFrame
+
+    :rtype: A DataFrame containing multimapped read groups counts.
+    
+    """
+
+    bedFiles = _Bam2Bed(bamDict=bamDict)
+    gffBED = _gffToBed(file=gff, feature=feature)
     intbed=[]
 
     Cmd =  'sort -k 1,1 -k2,2n '+ gffBED+' >tmp && mv tmp '+ gffBED
@@ -191,7 +212,7 @@ def countMMG(sampleDict=None,bamDict=None, gff=None, feature="gene",minCount=100
         df['Gene']= df['Gene'].str.replace("gene:", "")
         df['Gene']= df['Gene'].str.replace("gene-", "")
 
-        dk = filterGenes(mmg=df)
+        dk = _filterGenes(mmg=df)
 
     except Exception:
         log.warning("No multimapped groups found")

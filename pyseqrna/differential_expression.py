@@ -27,27 +27,37 @@ numpy2ri.activate()
 
 
 
-def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene', subset=False, mmg =False, lib=None):
-    """[summary]
+def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene',  mmg =False, subset=False, lib=None):
+    """
+    This function is a wrapper to DESeq2 package in R for differeantial expression analysis from raw read counts.
 
-    Args:
-        :param countFile: Raw read count file. Defaults to None.
+    :param countFile: Raw read count file. 
+    
+    :param targetFile: Tab-delimited target file with replication and sample name
+
+    :param design: [description]. Defaults to None.
+
+    :param combination: Comparison list contaning samples to compare.
+
+    :param gene_column: First column in raw read count file. Defaults to 'Gene'.
+
+    :param mmg: True if raw read counts are from multimapped gene groups.
+
+    :param subset: If runDESeq2 subset raw read count according to comparison.
+
+    :param lib: library path of DESeq2 to use.
+
+    :returns: DataFrame
+
+    :rtype: A datafram containing all gene differantial expression in all combinations.
         
-        targetFile ([type], optional): [description]. Defaults to None.
-        design ([type], optional): [description]. Defaults to None.
-        combination ([type], optional): [description]. Defaults to None.
-        gene_column (str, optional): [description]. Defaults to 'Gene'.
-        subset (bool, optional): [description]. Defaults to False.
-
-    Returns:
-        [type]: [description]
 
     """
     try:
         if lib is None:
             deseq = importr('DESeq2')
         else:
-            deseq = importr('DESeq2', lib_loc="/home/nav/R/x86_64-pc-linux-gnu-library/4.0")
+            deseq = importr('DESeq2', lib_loc=lib)
     except Exception:
         log.error("DESeq2 installation was not found ")
 
@@ -153,31 +163,59 @@ def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene
 
     return deseq_results
 
-def run_edgeR(countDF=None, targetFile=None, combination=None,  gene_column='Gene', subset=False, replicate=True, bcv= 0.4):
-    """[summary]
+def run_edgeR(countDF=None, targetFile=None, combination=None,  gene_column='Gene',  mmg=False, subset=False, replicate=True, bcv= 0.4, lib=None):
+    """
+    This function is a wrapper to edgeR package in R for differeantial expression analysis from raw read counts.
 
-    Args:
-        countFile ([type], optional): [description]. Defaults to None.
-        targetFile ([type], optional): [description]. Defaults to None.
-        design ([type], optional): [description]. Defaults to None.
-        combination ([type], optional): [description]. Defaults to None.
-        gene_column (str, optional): [description]. Defaults to 'Gene'.
-        subset (bool, optional): [description]. Defaults to False.
+    :param countFile: Raw read count file. 
+    
+    :param targetFile: Tab-delimited target file with replication and sample name
 
-    Returns:
-        [type]: [description]
+    :param design: [description]. Defaults to None.
+
+    :param combination: Comparison list contaning samples to compare.
+
+    :param gene_column: First column in raw read count file. Defaults to 'Gene'.
+
+    :param mmg: True if raw read counts are from multimapped gene groups.
+
+    :param subset: If runDESeq2 subset raw read count according to comparison.
+
+    :param replicate: False if there are no replicates.
+
+    :param bcv:  Biological coefficient of variation if there are no replicate.
+
+    :param lib: library path of DESeq2 to use.
+
+    :returns: DataFrame
+
+    :rtype: A datafram containing all gene differantial expression in all combinations.
     """
     try:
-        edgeR = importr('edgeR')
-        limma = importr('limma')
+        if lib is None:
+            edgeR = importr('edgeR')
+            limma = importr('limma')
+        else:
+            edgeR = importr('edgeR', lib_loc=lib)
+            limma = importr('limma', lib_loc=lib)
+            
     except Exception:
         log.error("edgeR installation not found")
-    
-    gene_id = countDF[[gene_column]].values
 
-    countDF.set_index(gene_column, inplace=True)
+    if mmg:
+        gene_id = countDF[['MMG', gene_column]].values
+        countDF.set_index(['MMG', gene_column], inplace=True)
+    else:
 
-    edgeR_results=pd.DataFrame(gene_id,columns=[gene_column]) # Intialize a dataframe with gene names as first column for deseq2 results
+        gene_id = countDF[[gene_column]].values
+        countDF.set_index(gene_column, inplace=True)
+
+    if mmg:
+
+        edgeR_results=pd.DataFrame(gene_id,columns=['MMG',gene_column]) # Intialize a dataframe with gene names as first column for edgeR results
+
+    else: 
+        edgeR_results=pd.DataFrame(gene_id,columns=[gene_column])
 
     if subset:
 
@@ -314,15 +352,19 @@ def run_edgeR(countDF=None, targetFile=None, combination=None,  gene_column='Gen
     
     return edgeR_results
 
-def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6), replicate=True, extraColumns=None):
-    """[summary]
+def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6), replicate=True, extraColumns=False):
+    """
+    This function filter all gene expression file based on given FOLD and FDR
 
-    Args:
-        degDF ([type], optional): [description]. Defaults to None.
-        CompareList ([type], optional): [description]. Defaults to None.
-        FDR (float, optional): [description]. Defaults to 0.05.
-        FOLD (int, optional): [description]. Defaults to 2.
-        plot (bool, optional): [description]. Defaults to True.
+    :param degDF: A datafram containing all gene differantial expression in all combinations.
+
+    :param CompareList: A list of all the sample comparison.
+
+    :param FDR: False Discovery Rate for filtering DEGs. Defaults to 0.05.
+
+    :param FOLD: Fold change value. The log2 of the value will be calculated. Defaults to 2.
+
+    :param plot: True if want to plot DEGs per sample on barplot. Defaults to True.
     """
     Up = []
     Down = []
@@ -417,18 +459,22 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
 
 class Gene_Description:
 
+    """
+    This class fetch gene name and description for genes.
+    """
+
     def __init__(self, species, type, combinations=None, degFile= None, filtered=True) :
         self.species = species
         self.type = type
         self.combinations = combinations
         self.filtered = filtered
         self.degFile = degFile
-        self.names = self.query(species=self.species, type=self.type)
+        self.names = self._query(species=self.species, type=self.type)
         
         return
 
 
-    def get_request(self, url,  **params):
+    def _get_request(self, url,  **params):
 
         if params:
             r = requests.get(url, params=params, stream=True)
@@ -445,7 +491,7 @@ class Gene_Description:
         return
 
 
-    def query(self, species, type):
+    def _query(self, species, type):
 
         # first need to check if the species is animal or plant
 
@@ -474,8 +520,8 @@ class Gene_Description:
         for attr in attributes:
             self._add_attr_node(dataset, attr)
 
-        response = self.get_request(
-        uri , query=ElementTree.tostring(root))
+        response = self._get_request(
+        uri , query = ElementTree.tostring(root))
         result = pd.read_csv(StringIO(response.text), sep='\t')
         result.columns = ['Gene', 'Name','Description']
         
@@ -483,7 +529,12 @@ class Gene_Description:
 
 
     def add_names(self):
+        """
+        This function add gene name and description in DEGs.
 
+        :returns: DataFrame
+        :rtype: DEGs file with gene name and description.
+        """
         
 
         if self.filtered:
@@ -533,7 +584,14 @@ class Gene_Description:
 
         return final
 
-    def add_names_annotation(self, pathway):
+    def add_names_annotation(self, file):
+
+        """
+        This function add gene name and description in functional annotation.
+
+        :returns: DataFrame
+        :rtype: Functional annotation file with gene name and description.
+        """
 
         pl = self.names.values.tolist()
         pp = {}
@@ -541,27 +599,28 @@ class Gene_Description:
             pp[p[0]]=p[1]
         try:
             gene_names =[]
-            for i,row in pathway.iterrows():
-                Genes = str(pathway.at[i,'Genes']).split(",")
+            for i,row in file.iterrows():
+                Genes = str(file.at[i,'Genes']).split(",")
                 result = []
                 for gene in Genes:
-                    result.append(pp[gene])
+                    result.append(pp[gene].upper())
                 res = ",".join(result)
 
                 gene_names.append([res])
                 
-            pathway['Gene_Name'] = gene_names
+            file['Gene_Name'] = gene_names
 
 
-            for i, row in pathway.iterrows():
+            for i, row in file.iterrows():
                 
-                res = ','.join(pathway.at[i,'Gene_Name'])
+                res = ','.join(file.at[i,'Gene_Name'])
 
-                pathway.at[i, 'Gene_Name'] = res
+                file.at[i, 'Gene_Name'] = res
+                
         except Exception:
-            pathway = pathway
+            file = file
 
-        return pathway
+        return file
        
 
 

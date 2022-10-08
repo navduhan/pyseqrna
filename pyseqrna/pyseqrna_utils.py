@@ -3,7 +3,9 @@
 
 '''
 Title: This modules contains utility functions for pySeqRNA
+
 Created : 
+
 @author : Naveen Duhan
 '''
 
@@ -23,11 +25,11 @@ import pandas as pd
 
 def PyseqrnaLogger(mode, log):
 
-    """[intialize logger in the pySeqRNA modules]
+    """ This function intialize logger in the pySeqRNA modules
 
-    Args:
-        logger (str): [logger name for the module]
-        logFile (str): [file name for logging]
+    :param  mode: Logger name for the module
+
+    :param  log: File name for logging
     """
     logger = logging.getLogger(log)
     logger.propagate=False
@@ -58,17 +60,16 @@ log = PyseqrnaLogger(mode='a', log='pu')
 
 def read_input_file(infile, inpath, paired = False):
 
-    """This function reads input sample file and convert into a dictionary. 
-        It also make all possible combination for DEG analysis.
-        Target dataframe for differential analysis.
+    """This function reads input sample file and convert into a dictionary. It also make all possible combination for DEG analysis. Target dataframe for differential analysis.
 
-    Args:
-        inputFile (str, required): [input sample file containing the infromation about project].
-        inputPath ([type], required): [Path for input fastq files]. 
-        pairedEND (bool, required): [Check if reads are paired end]. Defaults to False.
+    :param inputFile: input sample file containing the infromation about project
 
-    Returns:
-        dict: [Contains samples, combinations and target]
+    :param inputPath: Path for input fastq files
+
+    :param pairedEND: Check if reads are paired end]. Defaults to False
+
+    :return:   samples, combinations and targets for differential expression
+    :rtype: A dictionary
     """
     samples = {} # dictionary to collect sample information from input sample file
     factors = [] # list for collecting the Identifier infromation from input sample file
@@ -154,12 +155,11 @@ def parse_config_file(infile):
     """
     This function parse the config file for all the programs used in pySeqRNA
 
-    Args:
-        configFile ([type], optional): [description]. 
+    :param: configFile: <program>.ini config file containing arguments. 
 
-    retrun:
-        rtype: a dictionary
+    :retrun: Program specific arguments 
 
+    :rtype: a dictionary
     """
     sections_dict = {}
 
@@ -206,17 +206,23 @@ def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", command=
     """
     This function is for submitting job on cluster with SLURM job Scheduling
 
-    Args:
-        job_name (str, optional): [description]. Defaults to 'pyseqRNA'.
-        command (str, optional): [description]. Defaults to 'command'.
-        time (int, optional): [description]. Defaults to 4.
-        mem (int, optional): [description]. Defaults to 10.
-        cpu (int, optional): [description]. Defaults to 8.
-        tasks (int, optional): [description]. Defaults to 1.
-        dep (str, optional): [description]. Defaults to ''.
+    :param job_name: Slurm job name on HPC. Defaults to 'pyseqRNA'.
 
-    Returns:
-        [int]: [Slurm sbatch ID]
+    :param command:  Command to excute on HPC.
+
+    :param time: Slurm Job time allotment. 
+
+    :param mem: Memory to use in GB.
+
+    :param cpu: Number of CPUs to use for the job.
+
+    :param tasks: Number of tasks to execute.
+
+    :param dep: Slurm Job dependency. Defaults to ''.
+
+    :returns:
+
+        :rtype: Slurm sbatch ID
     """
     try:
         if dep != '':
@@ -240,11 +246,11 @@ def check_status(job_id):
     """
     This function is check status of slurm job
 
-    Args:
-        job ([int]): [slurm job id]
+    :param job_id: slurm job id
 
-    Returns:
-        [bool]: [If job completed return true]. Default False.
+    :returns: True/False
+
+    :rtype: If job completed return True. Default False.
     """
     d = subprocess.check_output('squeue -j '+str(job_id), shell=True, universal_newlines=True)
 
@@ -260,15 +266,19 @@ def get_cpu():
 
     """
     This function get actual CPU count of the system 
-    Returns:
-    rtype: int with 80 % of CPU count
+
+    :returns: Integer 
+    
+    :rtype: int with 80 % of CPU count
     """
 
     return math.floor(psutil.cpu_count()*0.8)
 
 def replace_cpu(args, args2):
     '''
-    This function replace the actual CPU
+    This function replace the actual CPU in config file.
+
+    :returns: Change CPU count to 80% of available CPU 
     '''
 
     mat = [i for i in args if any(j in i for j in args2)]
@@ -292,6 +302,10 @@ def replace_cpu(args, args2):
     return data
 
 def change_attribute(args):
+
+    '''
+    This function changes the attribute for feature counts based on GFF or GTF file.
+    '''
 
     item = ['-g']
     mat = [i for i in item if any(j in i for j in args)]
@@ -318,8 +332,7 @@ def get_basename(filePATH):
     """
     This function get the base name of the file from full path 
 
-    Args:
-        file ([type]): [path to file]
+    :param  filePATH: Path to file.
     """
 
     return os.path.basename(filePATH)
@@ -329,9 +342,7 @@ def get_directory(filePATH):
     """
     This function retrun directory of a file 
 
-    Args:
-        file ([type]): [Path to file]
-
+    :param  filePATH: Path to file.
     """
 
     return os.path.dirname(filePATH)
@@ -341,8 +352,7 @@ def get_parent(filePATH):
     """
     This function return the file name without extension
 
-    Args:
-        filePATH ([type]): [description]
+    :param  filePATH: Path to file.
     """
 
     return os.path.splitext(filePATH)[0]
@@ -352,8 +362,7 @@ def get_file_extension(filePATH):
     """
     This function return the extension of file 
 
-    Args:
-        filePATH ([type]): [description]
+    :param  filePATH: Path to file.
     """
 
     return os.path.splitext(filePATH)[1]
@@ -363,8 +372,9 @@ def make_directory(dir):
     """
     This function create a directory 
 
-    Args:
-        dirName ([type]): [description]
+    :param  dir: Directory name.
+
+    :returns: Name of created directory.
     """
    
     outputdir = os.path.abspath(dir) 
@@ -395,12 +405,12 @@ def check_files(*args):
     """
     This function check if files exist
 
-    Args:
-        a list of files to check
-    return:
-        retrun true only if all files in list exists
-    rtype:
-        boolean
+    :param args: List of files to check.
+
+    :return: True or False.
+ 
+    :rtype: Retrun true only if all files in list exists in a directory.
+    
     """
     for filepath in args:
 
@@ -417,16 +427,15 @@ def check_files(*args):
 
 def check_path(*args):
 
-    """
+    '''
     This function check if directory exist
 
-    Args:
-        a list of PATH to check
-    return:
-        retrun true only if all path in list exists
-    rtype:
-        boolean
-    """
+    :param args: List of directory to check.
+
+    :return: True or False
+ 
+    :rtype: Retrun true only if all files in list exists in a directory.
+    '''
     flag = False
     
     for dirPath in args:

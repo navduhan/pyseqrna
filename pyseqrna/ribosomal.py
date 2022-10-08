@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """
-
 Title: This script contains sortMeRNA function for removing ribosomal RNA from reads.
+
 Author: Naveen Duhan
+
 Version: 0.1
 
 """
@@ -20,20 +21,26 @@ from pyseqrna import pyseqrna_utils as pu
 log = PyseqrnaLogger(mode="a", log='ribosomal')
 
 
-def sortmernaRun(sampleDict=None, outDir="pySeqRNA_results", rnaDatabases=None, pairedEND=False, mem=10, cpu=8, task=1, slurm=False, dep=''):
+def sortmernaRun(sampleDict=None, outDir=".", rnaDatabases=None, pairedEND=False, slurm=False, mem=10, cpu=8, task=1,  dep=''):
 
     """
-    This Function execute sortMeRNA to remove ribosomal RNA from fastq reads.
+    This function execute sortMeRNA to remove ribosomal RNA from fastq reads.
 
-    Args:
-    sampleDict ([type], optional): [description]. Defaults to None.
-    outDir (str, optional): [description]. Defaults to "pySeqRNA_results".
-    pairedEND (bool, optional): [description]. Defaults to False.
-    mem (int, optional): [description]. Defaults to 10.
-    cpu (int, optional): [description]. Defaults to 8.
-    task (int, optional): [description]. Defaults to 1.
-    slurm (bool, optional): [description]. Defaults to False.
-    dep (str, optional): [description]. Defaults to ''.
+    :param sampleDict: Sample dictionary containing sample information
+
+    :param outDir: Output directory. Defaults to present working directory.
+
+    :param pairedEND: True if samples are paired-end. Defaults to False
+
+    :param slurm: True if SLURM scheduling is available. Defaults to False
+
+    :param mem: Memory in GB. Defaults to 10
+
+    :param cpu: Total number of CPU to use per task. Defaults to 8
+
+    :param task: Number of tasks per job. Defaults to 1
+     
+    :param dep: Slurm job id if depends on other job. Defaults to ''
 
     """
 

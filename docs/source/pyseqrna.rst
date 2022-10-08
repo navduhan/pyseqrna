@@ -5,34 +5,7 @@ Introduction
    :undoc-members:
    :show-inheritance:
 
-General Submodules
-==================
-
-pyseqrna.arg\_parser module
----------------------------
-
-.. automodule:: pyseqrna.arg_parser
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-pyseqrna.pyseqrna\_utils module
--------------------------------
-
-.. automodule:: pyseqrna.pyseqrna_utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-pyseqrna.version module
------------------------
-
-.. automodule:: pyseqrna.version
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Alignment Submodules
+Quality Submodules
 =====================
 
 pyseqrna.quality\_check module
@@ -58,7 +31,10 @@ pyseqrna.ribosomal module
    :members:
    :undoc-members:
    :show-inheritance:
-   
+
+Alignment Submodules
+=====================
+
 pyseqrna.aligners module
 ------------------------
 
@@ -74,6 +50,9 @@ pyseqrna.pyseqrna\_stats module
    :members:
    :undoc-members:
    :show-inheritance:
+
+Quantification Submodules
+==========================
 
 pyseqrna.quantification module
 ------------------------------
@@ -133,6 +112,33 @@ pyseqrna.pathway module
 -----------------------
 
 .. automodule:: pyseqrna.pathway
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Utility Submodules
+==================
+
+pyseqrna.arg\_parser module
+---------------------------
+
+.. automodule:: pyseqrna.arg_parser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pyseqrna.pyseqrna\_utils module
+-------------------------------
+
+.. automodule:: pyseqrna.pyseqrna_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pyseqrna.version module
+-----------------------
+
+.. automodule:: pyseqrna.version
    :members:
    :undoc-members:
    :show-inheritance:

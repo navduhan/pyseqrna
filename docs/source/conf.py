@@ -12,22 +12,21 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../pyseqrna'))
 import sphinx_rtd_theme
 html_theme = 'sphinx_rtd_theme'
 htm_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
-sys.path.insert(0, os.path.abspath('../pyrpipe'))
+sys.path.insert(0, os.path.abspath('../pyseqrna'))
 sys.setrecursionlimit(1500)
 # -- Project information -----------------------------------------------------
 
-project = 'pyseqrna'
+project = 'pySeqRNA'
 copyright = '2022, Naveen Duhan'
 author = 'Naveen Duhan'
 
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'
-version = '0.0.1'
+version = 'latest'
 
 
 # -- General configuration ---------------------------------------------------

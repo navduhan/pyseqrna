@@ -3,7 +3,7 @@ Installation
 ======================
 .. _installation:
 
-pyseqrna is available on PyPI and could be installed via pip::
+pySeqRNA is available on PyPI and could be installed via pip::
 
 	pip install pyseqrna
 

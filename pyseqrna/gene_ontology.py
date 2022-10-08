@@ -29,7 +29,21 @@ log = PyseqrnaLogger(mode='a', log="go")
 
 class GeneOntology:
 
-    def __init__(self, species=None, type=None,  keyType = 'ncbi', taxid=None, gff= None):
+    """
+    This class is for Gene Ontology enrichment 
+
+    :param species: Species name. Ex. for Arabidopsis thaliana it is athaliana
+
+    :param type: Species is from plants or animals.
+
+    :param keyType: Genes are from NCBI or ENSEMBL. Default is ENSEMBL.
+
+    :param taxid: Taxonomy ID if keyType is NCBI.
+
+    :param gff: Gene feature file.
+    
+    """
+    def __init__(self, species=None, type=None,  keyType = 'ensembl', taxid=None, gff= None):
 
         self.species = species 
         self.type = type 
@@ -39,15 +53,15 @@ class GeneOntology:
 
         if self.keyType.lower() == 'ensembl':
             log.info("Fetching Gene Ontology from Biomart")
-            self.gdata = self.query(self.species,self.type)
+            self.gdata = self._query(self.species,self.type)
             log.info("Processing Gene Ontology data from Biomart")
-            self.df, self.background_count = self.preprocessBioMart(self.gdata)
+            self.df, self.background_count = self._preprocessBioMart(self.gdata)
         if self.keyType.lower() == 'ncbi':
              log.info("Fetching Gene Ontology from pyseqrnautils API")
-             self.df, self.background_count = self.parse_GO(self.taxid)
+             self.df, self.background_count = self._parse_GO(self.taxid)
              self.idmapping = pu.parse_gff(self.gff)
         
-    def get_request(self, url,  **params):
+    def _get_request(self, url,  **params):
 
         if params:
             r = requests.get(url, params=params, stream=True)
@@ -63,7 +77,7 @@ class GeneOntology:
 
         return
 
-    def go_organism(self, type = "plants"):
+    def _go_organism(self, type = "plants"):
             if type == "plants":
                 resp =  urlopen("https://plants.ensembl.org/biomart/martservice?type=datasets&requestid=biomaRt&mart=plants_mart")
 
@@ -79,7 +93,7 @@ class GeneOntology:
 
             return organism
             
-    def query(self, species, type):
+    def _query(self, species, type):
 
         # first need to check if the species is animal or plant
 
@@ -109,7 +123,7 @@ class GeneOntology:
         for attr in attributes:
             self._add_attr_node(dataset, attr)
 
-        response = self.get_request(
+        response = self._get_request(
         uri , query=ElementTree.tostring(root))
         result = pd.read_csv(StringIO(response.text), sep='\t')
         result.columns = ['Gene', 'Transcript', 'GO_ID',
@@ -118,7 +132,7 @@ class GeneOntology:
         return result
 
 
-    def preprocessBioMart(self,data):
+    def _preprocessBioMart(self,data):
 
         df = data
         
@@ -174,7 +188,7 @@ class GeneOntology:
 
         return finalDF, bg_count
 
-    def parse_GO(self, taxid ):
+    def _parse_GO(self, taxid ):
 
         resp = requests.get(f"http://bioinfo.usu.edu/pyseqrnautils/api/go/?taxid={taxid}")
 
@@ -222,7 +236,7 @@ class GeneOntology:
         
         return finalDF, bg_count
 
-    def fdr_calc(self, x):
+    def _fdr_calc(self, x):
         """
         Assumes a list or numpy array x which contains p-values for multiple tests
         Copied from p.adjust function from R  
@@ -238,16 +252,16 @@ class GeneOntology:
         return fdr
 
     def dotplotGO(self, df=None, nrows=20, colorBy='logPvalues'):
-        """_summary_
+        """
+        This function creates a dotplot for Gene Ontology enrichment.
 
-        Args:
-            df (_type_, optional): _description_. Defaults to None.
-            nrows (int, optional): _description_. Defaults to 20.
-            colorBy (str, optional): _description_. Defaults to 'logPvalues'.
+        :param df: Gene Ontology enrichment file from enrichGO function.
+
+        :param nrows: Number of rows to plot. Default to 20 rows.
+
+        :param colorBy: Color dot on plots with logPvalues / FDR. Defaults to 'logPvalues'.
         
-
-        Returns:
-            _type_: _description_
+        :returns: a dotplot
         """
 
         if colorBy=='logPvalues':
@@ -286,10 +300,16 @@ class GeneOntology:
 
     def barplotGO(self, df=None,nrows=20, colorBy='logPvalues' ):
 
-        """_summary_
+        """
+        This function creates a barplot for Gene Ontology enrichment.
 
-        Returns:
-            _type_: _description_
+        :param df: Gene Ontology enrichment file from enrichGO function.
+
+        :param nrows: Number of rows to plot. Default to 20 rows.
+
+        :param colorBy: Color bar on plots with logPvalues / FDR. Defaults to 'logPvalues'.
+        
+        :returns: a barplot
         """
         
         if colorBy=='logPvalues':
@@ -316,8 +336,6 @@ class GeneOntology:
         ax.barh(terms, counts, color=colors)
         ax.xaxis.get_major_locator().set_params(integer=True)
         
-        
-        
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_bounds((0, nrows))
@@ -342,11 +360,26 @@ class GeneOntology:
     def enrichGO( self, file= None, pvalueCutoff=0.05, plot=True, plotType= 'dotplot', nrows=20,colorBy='logPvalues'):
 
         # Need to add support for different database IDs
+        """
+        This function performs Gene Ontology enrichment of DEGs.
 
-        """_summary_
+        :param file: Differentially expressed genes in a sample.
 
-        Returns:
-            _type_: _description_
+        :param pvalueCutoff: P-value cutoff for enrichment. Default is 0.05.
+
+        :param plot: True if a plot is needed. Default is True.
+
+        :param plotType: Gene Ontology enrichment visualization on dotplot/barplot. Default is dotplot.
+
+        :param nrows: Number of rows to plot. Default to 20 rows.
+
+        :param colorBy: Color dot on plots with logPvalues / FDR. Defaults to 'logPvalues'.
+        
+        :returns:  a dictionary
+
+        :rtype results: Gene Ontology enrichment results.
+
+        :rtype plot: a dotplot/barplot
         """
 
         log.info(f"Performing GO enrichment analysis on {file}")  
@@ -456,7 +489,7 @@ class GeneOntology:
                 enrichment_result.append([k, KOdescription[k][0], KOdescription[k][1], 
                                         f"{gene_in_category}/{mapped_query_ids}", f"{go_count[k]}/{bg_gene_count}", pvalue, len(gene_ids), gID])
         
-        fdr = list(self.fdr_calc(pvalues))
+        fdr = list(self._fdr_calc(pvalues))
 
         # a = [i for i in fdr if i <= 0.05]
 

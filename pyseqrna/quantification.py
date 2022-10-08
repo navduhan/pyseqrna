@@ -3,8 +3,10 @@
 # -*- coding: utf-8 -*-
 
 '''
-Title: This modules contains read align class functions for pySeqRNA
+Title: This modules contains feature counts in aligned reads for pySeqRNA
+
 Created : 
+
 @author : Naveen Duhan
 '''
 
@@ -21,19 +23,32 @@ import pandas as pd
 log = PyseqrnaLogger(mode="a", log="quant")
 
 
-def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, slurm=False, outDir=".", dep=''):
-    """[summary]
+def featureCount(configFile=None, bamDict=None, gff=None, slurm=False,  mem=8, cpu=8, tasks=1, outDir=".", dep=''):
+    """
+    This function counts feature in the aligned BAM files using featureCounts tool.
 
-    Args:
-        configFile ([type], optional): [description]. Defaults to None.
-        gff ([type], optional): [description]. Defaults to None.
-        bamDict ([type], optional): [description]. Defaults to None.
-        mem (int, optional): [description]. Defaults to 8.
-        cpu (int, optional): [description]. Defaults to 8.
-        tasks (int, optional): [description]. Defaults to 1.
-        slurm (bool, optional): [description]. Defaults to False.
-        outDir (str, optional): [description]. Defaults to "pySeqRNA_results".
-        dep (str, optional): [description]. Defaults to ''.
+    :param configFile: Paramters file for featureCounts.
+    
+    :param bamDict: A dictionary containing all the aligned BAM files.
+
+    :param gff: Gene feature file GFF/GTF
+
+    :param slurm: True if SLURM scheduling is available. Defaults to False
+
+    :param mem: Memory in GB. Defaults to 10
+
+    :param cpu: Total number of CPU to use per task. Defaults to 8
+
+    :param task: Number of tasks per job. Defaults to 1
+
+    :param outDir: Output directory. Defaults to present working directory.
+     
+    :param dep: Slurm job id if depends on other job. Defaults to ''
+
+    :returns: DataFrame
+
+    :rtype: A DataFrame containing read counts per feature per sample.
+
     """
     if configFile != None:
 
@@ -117,19 +132,32 @@ def featureCount(configFile=None, bamDict=None, gff=None, mem=8,cpu=8,tasks=1, s
     return job_id
 
 
-def htseqCount(configFile=None,bamDict=None, gff=None,mem=8,cpu=8,tasks=1, slurm=False, outDir=".", dep=''):
-    """[summary]
+def htseqCount(configFile=None, bamDict=None, gff=None, slurm=False, mem=8, cpu=8, tasks=1, outDir=".", dep=''):
+    """
+    This function counts feature in the aligned BAM files using HTSeq.
 
-    Args:
-        configFile ([type], optional): [description]. Defaults to None.
-        gff ([type], optional): [description]. Defaults to None.
-        bamDir ([type], optional): [description]. Defaults to None.
-        mem (int, optional): [description]. Defaults to 8.
-        cpu (int, optional): [description]. Defaults to 8.
-        tasks (int, optional): [description]. Defaults to 1.
-        slurm (bool, optional): [description]. Defaults to False.
-        outDir (str, optional): [description]. Defaults to "pySeqRNA_results".
-        dep (str, optional): [description]. Defaults to ''.
+    :param configFile: Paramters file for featureCounts.
+    
+    :param bamDict: A dictionary containing all the aligned BAM files.
+
+    :param gff: Gene feature file GFF/GTF
+
+    :param slurm: True if SLURM scheduling is available. Defaults to False
+
+    :param mem: Memory in GB. Defaults to 10
+
+    :param cpu: Total number of CPU to use per task. Defaults to 8
+
+    :param task: Number of tasks per job. Defaults to 1
+
+    :param outDir: Output directory. Defaults to present working directory.
+     
+    :param dep: Slurm job id if depends on other job. Defaults to ''
+
+    :returns: DataFrame
+
+    :rtype: A DataFrame containing read counts per feature per sample.
+
     """
     if configFile != None:
 
