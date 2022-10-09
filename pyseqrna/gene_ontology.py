@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 '''
-Title: gene_ontology module is for doing gene ontology enrichment analysis of differentially expressed genes
-Created : 
-@author : Naveen Duhan
+:Title: gene_ontology module is for performing gene ontology enrichment analysis of differentially expressed genes
+
+:Created: January 5, 2022
+
+:Author: Naveen Duhan
 '''
 
 from __future__ import division

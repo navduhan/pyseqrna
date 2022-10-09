@@ -1,13 +1,12 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
-Title: This module function generate a similarity dendrogram between samples
+:Title: This module function generate a similarity dendrogram between samples
 
-Created : July 21, 2021
+:Created : August 2, 2021
 
-@author : Naveen Duhan
+:Author : Naveen Duhan
 """
 
 from itertools import count

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+:Title: This module is the main funtion to exceute pySeqRNA
 
-@author: naveen duhan
+:Created: September 15, 2021
 
-Run pyseqrna
+:author: naveen duhan
+
+:version: 0.1
 """
 
 import matplotlib.pyplot as plt

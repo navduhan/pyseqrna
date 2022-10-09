@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Title: This script contains sortMeRNA function for removing ribosomal RNA from reads.
+:Title: This script contains sortMeRNA function for removing ribosomal RNA from reads.
 
-Author: Naveen Duhan
+:Created: July 31, 2021
 
-Version: 0.1
-
+:Author: Naveen Duhan
 """
 
 import os

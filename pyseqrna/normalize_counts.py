@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 '''
 
-:Title: This script contains quality trimming tools for pySeqRNA
+:Title: This module converts raw read counts to normalize counts
+
+:Created: August 3, 2021
 
 :Author: Naveen Duhan
-
-:Version: 0.1
 
 '''
 import re
@@ -321,7 +321,7 @@ class Normalization():
             
             logCounts = list(np.log(df2.T+1))
 
-            logNorm_counts = list(np.log(mr.T+1))
+            logNorm_counts = list(np.log(res.T+1))
 
             fig, ax = boxplot(data=logCounts + logNorm_counts,countType=['Raw counts']*len(df2.columns)+['medianRatio counts']*len(df2.columns),
                          labels= list(df2.columns)+list(res.columns), figsize=figsize )

@@ -1,4 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+'''
+:Title: This module finds differentially expressed genes from raw read counts
+
+:Created: October 22, 2021
+
+:Author: Naveen Duhan
+'''
 
 from itertools import combinations
 import pandas as pd
@@ -616,7 +625,7 @@ class Gene_Description:
                 res = ','.join(file.at[i,'Gene_Name'])
 
                 file.at[i, 'Gene_Name'] = res
-                
+
         except Exception:
             file = file
 

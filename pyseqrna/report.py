@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+:Title: This module is generate report for PySeqRNA run.
+
+:Created: May 15, 2022
+
+:Author: naveen duhan
+
+"""
+
+
+
+
 from calendar import different_locale
 from matplotlib.pyplot import title
 import pandas as pd

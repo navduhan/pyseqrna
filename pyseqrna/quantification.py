@@ -1,13 +1,12 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 '''
-Title: This modules contains feature counts in aligned reads for pySeqRNA
+:Title: This modules contains feature counts in aligned reads for pySeqRNA
 
-Created : 
+:Created: July 29, 2021
 
-@author : Naveen Duhan
+:Author: Naveen Duhan
 '''
 
 import os

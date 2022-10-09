@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Title: Argument parser module for pyseqrna
+:Title: Argument parser module for pySeqRNA
 
-@author: Naveen Duhan
+:Created: October 11, 2021
+
+:Author: Naveen Duhan
 """
 
 import argparse

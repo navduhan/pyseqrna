@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+'''
+:Title: This module is for performing KEGG pathway enrichment analysis of differentially expressed genes
+
+:Created: January 10, 2022
+
+:Author: Naveen Duhan
+'''
 import io
 import os
 import re

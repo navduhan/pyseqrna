@@ -2,12 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Title: This modules contains read quality check functions for pySeqRNA\n
+:Title: This modules contains read quality check functions for pySeqRNA
 
-Created :\n
+:Created: May 20, 2021
 
-@author : Naveen Duhan\n
-
+:Author: Naveen Duhan
 """
 
 import os

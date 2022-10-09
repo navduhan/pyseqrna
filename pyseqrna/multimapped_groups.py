@@ -1,4 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+'''
+:Title: This module count multimapped read groups in aligned files.
+
+:Created: June 5, 2022
+
+:Author: Naveen Duhan
+'''
 from numpy import append
 import pysam
 import re

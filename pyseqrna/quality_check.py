@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Title: This modules contains read quality check function
+:Title: This modules contains read quality check function
 
-Created : 
+:Created: May 19, 2021
 
-@author : Naveen Duhan
+:Author: Naveen Duhan
 """
 
 

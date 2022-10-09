@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 '''
-Title: This modules contains utility functions for pySeqRNA
+:Title: This modules contains utility functions for pySeqRNA
 
-Created : 
+:Created : July 11, 2021
 
-@author : Naveen Duhan
+:Author : Naveen Duhan
 '''
 
 
@@ -451,6 +451,15 @@ def check_path(*args):
     return True
 
 def getFiles(pattern, path):
+    """
+    This function searches all files containing patterns in a directory.
+
+    :param pattern: Patteren to search.
+
+    :param path: A direcory path.
+
+    :returns: All files containing a pattern.
+    """
     result = []
     for root, dirs, files in os.walk(path):
         for name in files:
@@ -459,13 +468,16 @@ def getFiles(pattern, path):
     return result
 
 def findFiles(searchPATH = None, searchPattern = None, recursive = False, verbose = False ):
-    """[summary]
+    """
+    This function find searches files.
 
-    Args:
-        searchPATH ([type], optional): [description]. Defaults to None.
-        pattern ([type], optional): [description]. Defaults to None.
-        recursive (bool, optional): [description]. Defaults to False.
-        verbose (bool, optional): [description]. Defaults to False.
+    :param searchPATH: Search directory.
+
+    :param pattern: Pattern to search.
+
+    :param recursive: True if want to search recursively. Defaults to False.
+
+    :param verbose: True if want to print output. Defaults to False.
     """
 
     searchResult = []
@@ -500,7 +512,21 @@ def findFiles(searchPATH = None, searchPattern = None, recursive = False, verbos
     
     return searchResult
 
-def getGenes(file=None, combinations=None, multisheet=True, geneType='all',  outDir='pySeqRNA_results'):
+def getGenes(file=None, combinations=None, multisheet=True, geneType='all',  outDir='.'):
+
+    """
+    This function extract genes from filtered differentiall expressed genes.
+
+    :param file: Filtered DEGs file.
+
+    :param combinations: Comparison list contaning samples.
+
+    :param multisheet: True if file is multisheet.
+
+    :geneType: Genes to extract all, up , down. Default is all.
+
+    :param outDir: Output directory. Default is current working directory.
+    """
 
     if os.path.exists(outDir):
 
@@ -546,6 +572,11 @@ def getGenes(file=None, combinations=None, multisheet=True, geneType='all',  out
 
 
 def parse_gff(file):
+    """
+    This function parse a gene feature file in a dataframe for gene IDs
+
+    :param file: A gene feature file.
+    """
 
     gtf_file = pd.read_csv(file ,sep="\t", header=None, comment="#")
 
@@ -566,18 +597,26 @@ def parse_gff(file):
     final = gene_list.drop_duplicates()
 
     return final
-def change_ids(df, path):
+
+def change_ids(df, file):
+    """
+    This function changes ids to other ids.
+
+    :param df: A DataFrame containing IDs and synonym IDs.
+
+    :param file: A DataFrame in which IDs needs to be replaced.
+    """
     
     pl = df.values.tolist()
     pp = {}
     for p in pl:
         pp[p[1]] = p[0]
 
-    for i, row in path.iterrows():
-        Genes = str(path.at[i, 'Genes']).split(",")
+    for i, row in file.iterrows():
+        Genes = str(file.at[i, 'Genes']).split(",")
         result = []
         for gene in Genes:
             result.append(pp[gene])
         res = ",".join(result)
-        path.at[i, 'Genes'] = res
-    return path
+        file.at[i, 'Genes'] = res
+    return file

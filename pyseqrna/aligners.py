@@ -3,11 +3,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Title: This modules contains read align class functions for pySeqRNA
+:Title: This modules contains read align class functions for pySeqRNA
 
-Created : July 21, 2021
+:Created : July 21, 2021
 
-@author : Naveen Duhan
+:Author : Naveen Duhan
 """
 
 from cmath import e
