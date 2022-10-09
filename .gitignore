@@ -18,3 +18,5 @@ test.ipynb
 pyseqrna.log
 deg.png
 dist
+meta.yaml
+build.sh
