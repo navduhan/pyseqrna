@@ -336,7 +336,7 @@ def main():
 
         count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
-        result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False)
+        result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False, replicate=options.noreplicate)
 
         ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
 

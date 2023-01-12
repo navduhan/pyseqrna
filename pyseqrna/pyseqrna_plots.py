@@ -230,9 +230,9 @@ def _insertEllipse(fig, ax, x, y, w, h, a,  fillcolor):
     e = patches.Ellipse(xy=(x, y),width=w, height=h,angle=a,
         fill="blue",linewidth=2, color=fillcolor)
     ax.add_patch(e)
-def _insertText(fig, ax, x, y, text, fontsize=None, col="black", ha="center", va="center"):
+def _insertText(fig, ax, x, y, text, fontsize=None, col="black", ha="center", va="center", fontweight= 600):
     ax.text(x, y, text, horizontalalignment=ha,
-        verticalalignment=va,fontsize=fontsize,
+        verticalalignment=va,fontsize=fontsize, fontweight=fontweight,
         color=col)
 
 def _GenerateCollection(data=None):
@@ -319,22 +319,24 @@ def plotVenn(DEGFile=None, FOLD=2, comparisons=None, degLabel="",  fontsize=14, 
 
             _insertEllipse(fig, ax, e[0],e[1],e[2],e[3],e[4], c)
 
-        dataPoints=[(0.85,0.42),(0.68, 0.72),(0.77, 0.59),(0.32, 0.72),(0.71, 0.30),(0.50, 0.66),(0.65, 0.50),(0.14, 0.42),
-                    (0.50, 0.17),(0.29, 0.30),(0.37, 0.26),(0.23, 0.59),(0.63, 0.26),(0.35, 0.50),(0.50, 0.38)]
+        # dataPoints=[(0.85,0.42),(0.68, 0.72),(0.77, 0.59),(0.32, 0.72),(0.71, 0.30),(0.50, 0.66),(0.65, 0.50),(0.14, 0.42),
+        #             (0.50, 0.17),(0.29, 0.30),(0.37, 0.26),(0.23, 0.59),(0.63, 0.26),(0.35, 0.50),(0.50, 0.38)]
+        dataPoints=[(0.85,0.42),(0.66, 0.72),(0.77, 0.59),(0.32, 0.72),(0.69, 0.30),(0.50, 0.66),(0.65, 0.50),(0.14, 0.42),
+                    (0.50, 0.17),(0.30, 0.30),(0.38, 0.25),(0.23, 0.59),(0.63, 0.26),(0.35, 0.50),(0.50, 0.38)]
         labelPoints=[('0001', ''),( '0010', ''),( '0011', ''),( '0100', ''),( '0101', ''),( '0110', ''),( '0111', ''),
                      ( '1000', ''),( '1001', ''),( '1010', ''),( '1011', ''),( '1100', ''),( '1101', ''),( '1110', ''),( '1111', '')]
 
         for d, l in zip(dataPoints,labelPoints):
             if degLabel != "total":
-                _insertText(fig, ax, d[0], d[1], labelsUp.get(l[0],''),col="blue", fontsize=fontsize)
-                _insertText(fig, ax, d[0], (d[1]-0.03), labelsDown.get(l[0],''), col="red", fontsize=fontsize)
+                _insertText(fig, ax, d[0], d[1], labelsUp.get(l[0],''),col="blue", fontsize=fontsize, fontweight=600)
+                _insertText(fig, ax, d[0], (d[1]-0.03), labelsDown.get(l[0],''), col="red", fontsize=fontsize, fontweight=600)
             else:
-                _insertText(fig, ax, d[0], d[1], labels.get(l[0], ''), col="blue", fontsize=fontsize)
+                _insertText(fig, ax, d[0], d[1], labels.get(l[0], ''), col="blue", fontsize=fontsize, fontweight=600)
         # legend
-        _insertText(fig, ax, 0.13, 0.18, comparisons[0],  fontsize=fontsize, ha="right")
-        _insertText(fig, ax, 0.18, 0.83, comparisons[1],  fontsize=fontsize, ha="right", va="bottom")
-        _insertText(fig, ax, 0.82, 0.83, comparisons[2],  fontsize=fontsize, ha="left", va="bottom")
-        _insertText(fig, ax, 0.87, 0.18, comparisons[3],  fontsize=fontsize, ha="left", va="top")
+        _insertText(fig, ax, 0.13, 0.18, comparisons[0],  fontsize=fontsize,fontweight=600,  ha="right")
+        _insertText(fig, ax, 0.18, 0.83, comparisons[1],  fontsize=fontsize,fontweight=600,  ha="right", va="bottom")
+        _insertText(fig, ax, 0.82, 0.83, comparisons[2],  fontsize=fontsize,fontweight=600,  ha="left", va="bottom")
+        _insertText(fig, ax, 0.87, 0.18, comparisons[3],  fontsize=fontsize, fontweight=600, ha="left", va="top")
 
     elif len(comparisons)== 3:
         colors = [defaultColors[i] for i in range(3)]
@@ -346,14 +348,14 @@ def plotVenn(DEGFile=None, FOLD=2, comparisons=None, degLabel="",  fontsize=14, 
 
         for d, l in zip(dataPoints, labelPoints):
             if degLabel != "total":
-                _insertText(fig, ax, d[0], d[1], labelsUp.get(l[0], ''), col="blue", fontsize=fontsize)
-                _insertText(fig, ax, d[0], (d[1] - 0.03), labelsDown.get(l[0], ''), col="red", fontsize=fontsize)
+                _insertText(fig, ax, d[0], d[1], labelsUp.get(l[0], ''), col="blue", fontsize=fontsize, fontweight='normal')
+                _insertText(fig, ax, d[0], (d[1] - 0.03), labelsDown.get(l[0], ''), col="red", fontsize=fontsize, fontweight='normal')
             else:
-                _insertText(fig, ax, d[0], d[1], labels.get(l[0], ''), col="blue", fontsize=fontsize)
+                _insertText(fig, ax, d[0], d[1], labels.get(l[0], ''), col="blue", fontsize=fontsize, fontweight='normal')
         # legend
-        _insertText(fig, ax, 0.15, 0.87, comparisons[0], fontsize=fontsize, ha="right", va="bottom")
-        _insertText(fig, ax, 0.85, 0.87, comparisons[1], fontsize=fontsize, ha="left", va="bottom")
-        _insertText(fig, ax, 0.50, 0.02, comparisons[2], fontsize=fontsize, ha="left", va="top")
+        _insertText(fig, ax, 0.15, 0.87, comparisons[0], fontsize=fontsize, fontweight=600, ha="right", va="bottom")
+        _insertText(fig, ax, 0.85, 0.87, comparisons[1], fontsize=fontsize, fontweight=600, ha="left", va="bottom")
+        _insertText(fig, ax, 0.50, 0.02, comparisons[2], fontsize=fontsize, fontweight=600, ha="left", va="top")
 
     elif len(comparisons)== 2:
         colors = [defaultColors[i] for i in range(2)]
