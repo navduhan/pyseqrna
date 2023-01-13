@@ -88,7 +88,7 @@ internal.add_argument('--fold', dest='fold', default=2,type=int,
     help="""FOLD change value for filtering DEGs. 
 Remember pyseqrna performs log2 of the given value\n[default:2]""")
 
-internal.add_argument('--noreplicate', dest='noreplicate',action='store_true', default=False ,
+internal.add_argument('--noreplicate', dest='noreplicate',action='store_false', default=True ,
     help="""Execute Differential gene expression with no replicate""")
 
 internal.add_argument('--normalizeCount', dest='normalizecount',default='RPKM', choices=['RPKM', 'TPM', 'CPM', 'medianRatiocount'], 
