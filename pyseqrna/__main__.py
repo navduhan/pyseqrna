@@ -46,8 +46,8 @@ def main():
     # Get all the options from the user
     
     options, unknownargs = arg_parser.parser.parse_known_args()  
-
-
+    
+   
     if options.threads =='80% of available CPU' :
     
         options.threads = pu.get_cpu()
