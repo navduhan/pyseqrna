@@ -9,7 +9,7 @@ Download the installer: [Miniconda installer for Linux.](https://docs.conda.io/e
 
 conda env create -f pyseqrna_environment.yml
 
-conda activate pyseqrna_0.0.1
+conda activate pyseqrna_0.0.2
 
 pip install . 
 

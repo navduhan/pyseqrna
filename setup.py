@@ -4,7 +4,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 setuptools.setup(
     name='pySeqRNA',
-    version='0.0.1',
+    version='0.0.2',
     description ="pySeqRNA a python based RNA analysis package",
     url="http://bioinfo.usu.edu/pyseqrna",
     author="Naveen Duhan",
