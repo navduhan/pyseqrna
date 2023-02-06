@@ -318,21 +318,7 @@ def main():
 
     diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"))
 
-
-    if options.detool == 'DESeq2':
-
-        count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
-
-        result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
-
-        ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
-
-        results = ge.add_names()
-
-        results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
-
-        
-    elif options.detool == 'edgeR':
+    if options.noreplicate:
 
         count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
@@ -343,6 +329,32 @@ def main():
         results = ge.add_names()
 
         results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+    
+    else:
+
+        if options.detool == 'DESeq2':
+
+            count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
+            result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
+
+            ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
+
+            results = ge.add_names()
+
+            results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+
+        elif options.detool == 'edgeR':
+
+            count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
+            result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False, replicate=options.noreplicate)
+
+            ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
+
+            results = ge.add_names()
+
+            results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
         
     log.info("Differential expression analysis completed")
 
