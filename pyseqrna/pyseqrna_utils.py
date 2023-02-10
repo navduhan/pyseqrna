@@ -512,7 +512,7 @@ def findFiles(searchPATH = None, searchPattern = None, recursive = False, verbos
     
     return searchResult
 
-def getGenes(file=None, combinations=None, multisheet=True, geneType='all',  outDir='.'):
+def getGenes(file=None, combinations=None, multisheet=True,  geneType='all',  outDir='.', mmg=False):
 
     """
     This function extract genes from filtered differentiall expressed genes.
@@ -546,16 +546,33 @@ def getGenes(file=None, combinations=None, multisheet=True, geneType='all',  out
     if multisheet:
         
         for c in combinations:
-            df = pd.read_excel(file, sheet_name=c)
 
-            gene = df['Gene'].copy()
-            gene = gene.str.replace('gene:','').str.upper()
-            if geneType == 'all':
-                gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
-            if geneType == 'up':
-                gene.to_csv(os.path.join(out,f"{c}_up.txt"), sep="\t", index = False)
-            if geneType == 'down':
-                gene.to_csv(os.path.join(out,f"{c}_down.txt"), sep="\t", index = False)
+
+            df = pd.read_excel(file, sheet_name=c)
+            if mmg:
+                mmg_genes = df['Gene'].values.tolist()
+
+                mgenes = []
+                for m in mmg_genes:
+                    mp = m.split("-")
+                    for p in mp:
+                        mgenes.append(p)
+                mgenesDF = pd.DataFrame(mgenes, columns=['Gene'])
+                if geneType == 'all':
+                    mgenesDF.to_csv(os.path.join(out,f"{c}_mmg.txt"), sep="\t", index = False)
+                if geneType == 'up':
+                    mgenesDF.to_csv(os.path.join(out,f"{c}_mmg_up.txt"), sep="\t", index = False)
+                if geneType == 'down':
+                    mgenesDF.to_csv(os.path.join(out,f"{c}_mmg_down.txt"), sep="\t", index = False)
+            else:
+                gene = df['Gene'].copy()
+                gene = gene.str.replace('gene:','').str.upper()
+                if geneType == 'all':
+                    gene.to_csv(os.path.join(out,f"{c}.txt"), sep="\t", index = False)
+                if geneType == 'up':
+                    gene.to_csv(os.path.join(out,f"{c}_up.txt"), sep="\t", index = False)
+                if geneType == 'down':
+                    gene.to_csv(os.path.join(out,f"{c}_down.txt"), sep="\t", index = False)
    
     else:
 

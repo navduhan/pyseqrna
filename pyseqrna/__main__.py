@@ -469,6 +469,10 @@ def main():
 
     genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
 
+    if options.mmgg:
+        
+        genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir, mmg=True)
+
     annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
 
     if options.geneontology:
