@@ -355,12 +355,39 @@ def main():
             results = ge.add_names()
 
             results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+    
+    if options.mmgg:
+
+        if options.detool == 'DESeq2':
+
+            countm = pd.read_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx"))
+
+            resultm = de.runDESeq2(countDF=countm,targetFile=targets,design='sample', combination=combination, subset=False, mmg=True)
+
+            ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
+
+            resultm.to_excel(os.path.join(diffdir,"All_MMG_expression.xlsx"), index=False)
+
+        elif options.detool == 'edgeR':
+
+            countm = pd.read_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx"))
+
+            resultm = de.run_edgeR(countDF=countm,targetFile=targets, combination=combination, subset=False, replicate=options.noreplicate, mmg=True)
+
+            ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
+
+            resultm.to_excel(os.path.join(diffdir,"All_MMG_expression.xlsx"), index=False)
+
         
     log.info("Differential expression analysis completed")
 
     log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
 
     filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=True)
+
+    if options.mmg:
+
+        filtered_DEG= de.degFilter(degDF=resultm, CompareList=combination, FDR=options.fdr, FOLD=options.fold, mmg=True, extraColumns=False)
 
     log.info("filtering DEGs completed ")
 
@@ -388,13 +415,47 @@ def main():
         wd.save()
     wd.close()
 
+    if options.mmg:
+        wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_MMGs.xlsx"))
+
+        for key, value in filtered_DEG['filtered'].items():
+            value.to_excel(wa,sheet_name=key, index=False)
+            wa.save()
+        wa.close()
+
+        # write up filtered genes together
+        wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upMMGs.xlsx"))
+
+        for key, value in filtered_DEG['filteredup'].items():
+            value.to_excel(wu,sheet_name=key, index=False)
+            wu.save()
+        wu.close()
+        # write down filtered genes together
+        wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downMMGs.xlsx"))
+
+        for key, value in filtered_DEG['filtereddown'].items():
+            value.to_excel(wd,sheet_name=key, index=False)
+            wd.save()
+        wd.close()
+
     log.info("ploting DEG count figure")
 
     filtered_DEG['plot'].savefig(os.path.join(diffdir,"Filtered_DEG.png"),dpi=300, bbox_inches='tight')
 
-    log.info("Writting DEGs summary to excel file")
+    if options.mmgg:
 
+        log.info("ploting MMG count figure")
+
+        filtered_DEG['plot'].savefig(os.path.join(diffdir,"Filtered_MMG.png"),dpi=300, bbox_inches='tight')
+
+    log.info("Writting DEGs summary to excel file")
+    
     filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"), index=False)
+
+    if options.mmgg:
+        log.info("Writting MMGs summary to excel file")
+    
+        filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_MMGs_summary.xlsx"), index=False)
 
     plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
 

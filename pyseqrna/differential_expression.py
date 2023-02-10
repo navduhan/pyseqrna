@@ -36,7 +36,7 @@ numpy2ri.activate()
 
 
 
-def runDESeq2(countDF=None, targetFile=None, design=None,combination=None,  gene_column='Gene',  mmg =False, subset=False, lib=None):
+def runDESeq2(countDF=None, targetFile=None, design='sample',combination=None,  gene_column='Gene',  mmg =False, subset=False, lib=None):
     """
     This function is a wrapper to DESeq2 package in R for differeantial expression analysis from raw read counts.
 
@@ -361,7 +361,7 @@ def run_edgeR(countDF=None, targetFile=None, combination=None,  gene_column='Gen
     
     return edgeR_results
 
-def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6), replicate=True, extraColumns=False):
+def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6), replicate=True, mmg=False, extraColumns=False):
     """
     This function filter all gene expression file based on given FOLD and FDR
 
@@ -386,6 +386,11 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
     if extraColumns:
 
         degDF = degDF.set_index(['Gene', 'Name', 'Description'])
+    
+    if mmg:
+
+        degDF = degDF.set_index(['MMG','Gene'])
+
 
     else:
 

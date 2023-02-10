@@ -172,7 +172,7 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','g
 
 
 
-def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), type='counts'):
+def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), extraColumns=False, type='counts'):
 
     """
     This function plots a heatmap based on FOLD change or counts.
@@ -189,8 +189,18 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), type='co
     """
 
     # Need to add argument for all deg hetamp.
-    degDF = degDF.set_index('Gene')
+    if extraColumns:
+         degDF = degDF.drop(columns=['Name', 'Description'])
+         degDF = degDF.set_index('Gene')
+
+    else:
+
+        degDF = degDF.set_index('Gene')
+        
+    
+
     if type.lower() =='degs':
+        degDF = degDF.fillna(0)
         com2=[]
         labelsd = []
         for i in combinations:
@@ -202,7 +212,11 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), type='co
         final=pd.concat([topGene,botGene])
         fin = final[com2]
         fin.columns= labelsd
+
     elif type.lower() =='counts':
+        
+        degDF = degDF.replace(0,np.nan).dropna(axis=1,how="all")
+
         fin=degDF.nlargest(int(num), degDF.columns)
         
     fig, ax = plt.subplots(figsize=figdim)
