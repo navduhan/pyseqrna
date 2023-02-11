@@ -385,9 +385,9 @@ def main():
 
     filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=True)
 
-    if options.mmg:
+    if options.mmgg:
 
-        filtered_DEG= de.degFilter(degDF=resultm, CompareList=combination, FDR=options.fdr, FOLD=options.fold, mmg=True, extraColumns=False)
+        filtered_MMG = de.degFilter(degDF=resultm, CompareList=combination, FDR=options.fdr, FOLD=options.fold, mmg=True, extraColumns=False)
 
     log.info("filtering DEGs completed ")
 
@@ -418,7 +418,7 @@ def main():
     if options.mmg:
         wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_MMGs.xlsx"))
 
-        for key, value in filtered_DEG['filtered'].items():
+        for key, value in filtered_MMG['filtered'].items():
             value.to_excel(wa,sheet_name=key, index=False)
             wa.save()
         wa.close()
@@ -426,14 +426,14 @@ def main():
         # write up filtered genes together
         wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upMMGs.xlsx"))
 
-        for key, value in filtered_DEG['filteredup'].items():
+        for key, value in filtered_MMG['filteredup'].items():
             value.to_excel(wu,sheet_name=key, index=False)
             wu.save()
         wu.close()
         # write down filtered genes together
         wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downMMGs.xlsx"))
 
-        for key, value in filtered_DEG['filtereddown'].items():
+        for key, value in filtered_MMG['filtereddown'].items():
             value.to_excel(wd,sheet_name=key, index=False)
             wd.save()
         wd.close()
@@ -446,7 +446,7 @@ def main():
 
         log.info("ploting MMG count figure")
 
-        filtered_DEG['plot'].savefig(os.path.join(diffdir,"Filtered_MMG.png"),dpi=300, bbox_inches='tight')
+        filtered_MMG['plot'].savefig(os.path.join(diffdir,"Filtered_MMG.png"),dpi=300, bbox_inches='tight')
 
     log.info("Writting DEGs summary to excel file")
     
@@ -455,7 +455,7 @@ def main():
     if options.mmgg:
         log.info("Writting MMGs summary to excel file")
     
-        filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_MMGs_summary.xlsx"), index=False)
+        filtered_MMG['summary'].to_excel(os.path.join(diffdir,"Filtered_MMGs_summary.xlsx"), index=False)
 
     plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
 
@@ -470,7 +470,7 @@ def main():
     genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
 
     if options.mmgg:
-        
+
         genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir, mmg=True)
 
     annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))

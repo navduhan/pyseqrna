@@ -482,6 +482,7 @@ class Gene_Description:
         self.combinations = combinations
         self.filtered = filtered
         self.degFile = degFile
+
         self.names = self._query(species=self.species, type=self.type)
         
         return
