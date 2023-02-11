@@ -387,10 +387,9 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
 
         degDF = degDF.set_index(['Gene', 'Name', 'Description'])
     
-    if mmg:
+    elif mmg:
 
         degDF = degDF.set_index(['MMG','Gene'])
-
 
     else:
 
