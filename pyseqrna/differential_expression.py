@@ -209,7 +209,7 @@ def run_edgeR(countDF=None, targetFile=None, combination=None,  gene_column='Gen
             limma = importr('limma', lib_loc=lib)
             
     except Exception:
-        log.error("edgeR installation not found")
+        log.error("edgeR installation not found. Please install edgeR")
 
     if mmg:
         gene_id = countDF[['MMG', gene_column]].values
