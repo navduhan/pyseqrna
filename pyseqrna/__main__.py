@@ -415,7 +415,7 @@ def main():
         wd.save()
     wd.close()
 
-    if options.mmg:
+    if options.mmgg:
         wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_MMGs.xlsx"))
 
         for key, value in filtered_MMG['filtered'].items():
