@@ -531,14 +531,15 @@ def getGenes(file=None, combinations=None, multisheet=True,  geneType='all',  ou
     if os.path.exists(outDir):
 
         if os.path.exists(os.path.join(outDir,"diff_genes")):
-            pass
+            out = os.path.join(outDir,"diff_genes")
+            
         else:
             out = make_directory(os.path.join(outDir,"diff_genes"))
 
     else:
 
         if os.path.exists(os.path.join(outDir,"diff_genes")):
-            pass
+            out = os.path.join(outDir,"diff_genes")
         else:
             out = make_directory(os.path.join(outDir,"diff_genes"))
 
