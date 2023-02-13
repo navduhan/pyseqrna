@@ -638,3 +638,33 @@ def change_ids(df, file):
         res = ",".join(result)
         file.at[i, 'Genes'] = res
     return file
+
+def add_MMG(degDF=None, anotDF=None, combination=None):
+
+    filtered_Genes = pd.read_excel(degDF, sheet_name=combination)
+    Fgenes = filtered_Genes[['MMG', 'Gene']].values.tolist()
+    
+    Fgenes_List = []
+
+    for k in Fgenes:
+        for m in k[1].split("-"):
+            Fgenes_List.append([k[0], m])
+
+    genes = anotDF[['Genes']].values.tolist()
+    MMG_genes = []
+    for g in genes:
+        gg = g[0].split(",")
+        p = []
+        for g in gg:
+            
+            for m in Fgenes_List:
+                if g == m[1]:
+                    p.append(m[0])
+        MMG_genes.append(','.join(p))
+
+    
+    anotDF['MMG'] = MMG_genes
+
+
+
+    return anotDF

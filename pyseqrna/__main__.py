@@ -501,6 +501,26 @@ def main():
                 plt.close()
             else:
                 log.info(f"No ontology found in {c}")
+        if options.mmgg:
+
+            for c in combination:
+
+                file_deg = f"{genesdir}/{c}_mmg.txt"
+
+                ontology_results_mmg = go.enrichGO(file=file_deg)
+
+                if ontology_results_mmg != "No Gene Ontology":
+
+                    go_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
+
+                    go_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=go_results_MMG, combination=c)
+
+                    go_results_MMG_go.to_excel(f"{gofiles}/{c}_mmg_gene_ontology.xlsx", index=False)
+
+                    ontology_results_mmg['plot'].savefig(f"{goplots}/{c}_mmg_go_dotplot.png", bbox_inches='tight')
+                    plt.close()
+                else:
+                    log.info(f"No ontology found in {c}")
     
     if options.keggpathway:
 
@@ -530,6 +550,27 @@ def main():
 
             else:
                 log.info(f"No pathway found in {c}")
+
+        if options.mmgg:
+
+            for c in combination:
+
+                file_deg = f"{genesdir}/{c}_mmg.txt"
+
+                kegg_results_mmg = pt.enrichKEGG(file=file_deg)
+
+                if kegg_results_mmg != "No Pathway":
+
+                    kegg_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
+
+                    kegg_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=kegg_results_MMG, combination=c)
+                    
+                    kegg_results_MMG_go.to_excel(f"{gofiles}/{c}_mmg_kegg.xlsx", index=False)
+
+                    kegg_results_mmg['plot'].savefig(f"{goplots}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
+                    plt.close()
+                else:
+                    log.info(f"No ontology found in {c}")
 
     if options.volcanoplot:
 
