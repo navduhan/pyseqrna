@@ -482,6 +482,12 @@ def main():
         gofiles = pu.make_directory(os.path.join(outgo,"GO_Files"))
 
         goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
+        
+        if options.mmgg:
+
+            gofilesM = pu.make_directory(os.path.join(outgo,"GO_Files_MMG"))
+
+            goplotsM = pu.make_directory(os.path.join(outgo,"GO_Plots_MMG"))
 
         go = GeneOntology(species=options.species, type=options.speciestype, keyType=options.source, taxid=options.taxid, gff=options.feature_file)
 
@@ -516,11 +522,14 @@ def main():
 
                     go_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=go_results_MMG, combination=c)
 
-                    go_results_MMG_go.to_excel(f"{gofiles}/{c}_mmg_gene_ontology.xlsx", index=False)
+                    go_results_MMG_go.to_excel(f"{gofilesM}/{c}_mmg_gene_ontology.xlsx", index=False)
 
-                    ontology_results_mmg['plot'].savefig(f"{goplots}/{c}_mmg_go_dotplot.png", bbox_inches='tight')
+                    ontology_results_mmg['plot'].savefig(f"{goplotsM}/{c}_mmg_go_dotplot.png", bbox_inches='tight')
+
                     plt.close()
+
                 else:
+                    
                     log.info(f"No ontology found in {c}")
     
     if options.keggpathway:
@@ -530,6 +539,12 @@ def main():
         keggfiles = pu.make_directory(os.path.join(outkegg,"KEGG_Files"))
 
         keggplots = pu.make_directory(os.path.join(outkegg,"KEGG_Plots"))
+
+        if options.mmgg:
+
+            keggfilesM = pu.make_directory(os.path.join(outkegg,"KEGG_Files_MMG"))
+
+            keggplotsM = pu.make_directory(os.path.join(outkegg,"KEGG_Plots_MMG"))
 
         pt = Pathway(species=options.species, keyType=options.source, gff= options.feature_file)
 
@@ -566,9 +581,9 @@ def main():
 
                     kegg_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=kegg_results_MMG, combination=c)
                     
-                    kegg_results_MMG_go.to_excel(f"{gofiles}/{c}_mmg_kegg.xlsx", index=False)
+                    kegg_results_MMG_go.to_excel(f"{keggfilesM}/{c}_mmg_kegg.xlsx", index=False)
 
-                    kegg_results_mmg['plot'].savefig(f"{goplots}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
+                    kegg_results_mmg['plot'].savefig(f"{keggplotsM}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
                     
                     plt.close()
                     
