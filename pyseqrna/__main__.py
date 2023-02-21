@@ -501,13 +501,14 @@ def main():
                 plt.close()
             else:
                 log.info(f"No ontology found in {c}")
+
         if options.mmgg:
 
             for c in combination:
 
-                file_deg = f"{genesdir}/{c}_mmg.txt"
+                file_mmg = f"{genesdir}/{c}_mmg.txt"
 
-                ontology_results_mmg = go.enrichGO(file=file_deg)
+                ontology_results_mmg = go.enrichGO(file=file_mmg)
 
                 if ontology_results_mmg != "No Gene Ontology":
 
@@ -555,9 +556,9 @@ def main():
 
             for c in combination:
 
-                file_deg = f"{genesdir}/{c}_mmg.txt"
+                file_mmgs = f"{genesdir}/{c}_mmg.txt"
 
-                kegg_results_mmg = pt.enrichKEGG(file=file_deg)
+                kegg_results_mmg = pt.enrichKEGG(file=file_mmgs)
 
                 if kegg_results_mmg != "No Pathway":
 
@@ -568,7 +569,9 @@ def main():
                     kegg_results_MMG_go.to_excel(f"{gofiles}/{c}_mmg_kegg.xlsx", index=False)
 
                     kegg_results_mmg['plot'].savefig(f"{goplots}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
+                    
                     plt.close()
+                    
                 else:
                     log.info(f"No ontology found in {c}")
 
