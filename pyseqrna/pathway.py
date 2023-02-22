@@ -439,19 +439,24 @@ class Pathway:
                 gene_in_pathway - 1, bg_gene_count, gene_kegg_count[k], mapped_user_ids)
 
             if gene_in_pathway > 0:
-                pvalues.append(pvalue)
+              
 
                 enrichment_result.append([k, kegg_description[k], 
                                         f"{gene_in_pathway}/{mapped_user_ids}", f"{kegg_count[k]}/{bg_gene_count}", pvalue,len(gene_ids), gID])
 
         # fdr = list(multipletests(pvals=pvalues, method='fdr_bh')[1])
-        fdr = list(self._fdr_calc(pvalues))
+    
 
         end = pd.DataFrame(enrichment_result)
         if end.shape[0]>1:
             end.columns = ['Pathway_ID', 'Description',  'GeneRatio', 'BgRatio','Pvalues', 'Counts', 'Genes' ]
-            end.insert(5, 'FDR', fdr)
+
             end = end[end['Pvalues']<=pvalueCutoff]
+
+            pvalues = end['Pvalues'].values.tolist()
+
+            end.insert(5, 'FDR', fdr)
+           
 
             if self.keyType.lower()=='ncbi':
 
