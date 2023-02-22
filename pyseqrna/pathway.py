@@ -455,6 +455,8 @@ class Pathway:
 
             pvalues = end['Pvalues'].values.tolist()
 
+            fdr = list(self._fdr_calc(pvalues))
+            
             end.insert(5, 'FDR', fdr)
            
 
