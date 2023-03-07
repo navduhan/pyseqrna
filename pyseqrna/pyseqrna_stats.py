@@ -181,6 +181,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
                 p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,))
         
             processes.append(p)
+            print(processes)
         for process in processes:
             process.start()
             
@@ -200,6 +201,8 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
                 p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf, ))
         
             processes.append(p)
+
+            print(processes)
 
         for process in processes:
             process.start()
