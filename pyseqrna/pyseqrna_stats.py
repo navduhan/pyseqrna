@@ -170,22 +170,28 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
     Areads = manager.dict()
     Ureads = manager.dict()
     Mreads = manager.dict()
-    processes = []
+    nprocesses = []
+    tprocesses = []
+    bprocesses = []
+    sprocesses = []
+    iprocesses = []
+    uprocesses = []
+    mprocesses = []
     
     try:
         for sp in sampleDict:
-        
+            
             if pairedEND:
                 p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,True,))
             else:
                 p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,))
         
-            processes.append(p)
-            print(processes)
-        for process in processes:
+            nprocesses.append(p)
+           
+        for process in nprocesses:
             process.start()
             
-        for process in processes:
+        for process in nprocesses:
             
             process.join()
             
@@ -200,14 +206,14 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
             else:
                 p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf, ))
         
-            processes.append(p)
+            tprocesses.append(p)
 
-            print(processes)
+            
 
-        for process in processes:
+        for process in tprocesses:
             process.start()
             
-        for process in processes:
+        for process in tprocesses:
             
             process.join()
        
@@ -217,12 +223,12 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
     for bf in bamDict:
         p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2],))
         
-        processes.append(p)
+        sprocesses.append(p)
 
-    for process in processes:
+    for process in sprocesses:
             process.start()
             
-    for process in processes:
+    for process in sprocesses:
         
         process.join()
         
@@ -230,12 +236,12 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
        
         p=multiprocessing.Process(target = _index_bam, args=(file,))
-        processes.append(p)
+        iprocesses.append(p)
 
-    for process in processes:
+    for process in iprocesses:
             process.start()
             
-    for process in processes:
+    for process in iprocesses:
         
         process.join()
 
@@ -244,12 +250,12 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
         
             p=multiprocessing.Process(target= _getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
         
-            processes.append(p)
+            bprocesses.append(p)
 
-        for process in processes:
+        for process in bprocesses:
             process.start()
             
-        for process in processes:
+        for process in bprocesses:
             
             process.join()
 
@@ -259,13 +265,13 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
         for bf in bamDict:
             p=multiprocessing.Process(target= _getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
         
-            processes.append(p)
+            uprocesses.append(p)
             p.start()
             
-        for process in processes:
+        for process in uprocesses:
             process.start()
             
-        for process in processes:
+        for process in uprocesses:
             
             process.join()
                 
@@ -275,13 +281,13 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
         for bf in bamDict:
             p=multiprocessing.Process(target= _getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         
-            processes.append(p)
+            mprocesses.append(p)
             p.start()
             
-        for process in processes:
+        for process in mprocesses:
             process.start()
             
-        for process in processes:
+        for process in mprocesses:
             
             process.join()       
             
