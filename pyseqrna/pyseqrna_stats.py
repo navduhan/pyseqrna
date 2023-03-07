@@ -22,7 +22,7 @@ import subprocess
 log = PyseqrnaLogger(mode='a', log="stats")
 
 
-def _getNreads(file, rdict, sp, paired=False, trim=False):
+def _getNreads(file, rdict, sp, paired=False):
 
     """
     
@@ -37,18 +37,38 @@ def _getNreads(file, rdict, sp, paired=False, trim=False):
     
     if paired:
         rdict[sp] = int(result)*2
-        if trim:
-            log.info(f"{result*2} trimmed reads in {sp}")
-        else:
-            log.info(f"{result*2} input reads in {sp}")
+        
+        log.info(f"{result*2} input reads in {sp}")
     else: 
 
         rdict[sp] = int(result)
+        
+        log.info(f"{result} input reads in {sp}")
+    
+    return rdict
 
-        if trim:
-            log.info(f"{result} trimmed reads in {sp}")
-        else:
-            log.info(f"{result} input reads in {sp}")
+def _getTreads(file, rdict, sp, paired=False):
+
+    """
+    
+    Get total number of reads in fastq file
+
+    file ([type]): fastq file
+
+    [type]: total number of reads
+
+    """
+    result = len(pyfastx.Fastq(file))
+    
+    if paired:
+        rdict[sp] = int(result)*2
+        
+        log.info(f"{result*2} cleaned reads in {sp}")
+    else: 
+
+        rdict[sp] = int(result)
+        
+        log.info(f"{result} cleaned reads in {sp}")
     
     return rdict
 
@@ -175,9 +195,9 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
         for tf in trimDict:
         
             if pairedEND:
-                p=multiprocessing.Process(target= _getNreads, args=(trimDict[tf][2],Nreads, tf,paired=True, trim=True,))
+                p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf,True,))
             else:
-                p=multiprocessing.Process(target= _getNreads, args=(trimDict[tf][2],Nreads, tf,trim=True, ))
+                p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf, ))
         
             processes.append(p)
 
