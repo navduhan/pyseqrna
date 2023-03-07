@@ -37,15 +37,16 @@ def _getNreads(file, rdict, sp, paired=False):
     
     if paired:
         rdict[sp] = int(result)*2
-        
+
         log.info(f"{result*2} input reads in {sp}")
     else: 
 
         rdict[sp] = int(result)
-        
+
         log.info(f"{result} input reads in {sp}")
     
     return rdict
+
 
 def _getTreads(file, rdict, sp, paired=False):
 
@@ -62,12 +63,12 @@ def _getTreads(file, rdict, sp, paired=False):
     
     if paired:
         rdict[sp] = int(result)*2
-        
+
         log.info(f"{result*2} cleaned reads in {sp}")
     else: 
 
         rdict[sp] = int(result)
-        
+
         log.info(f"{result} cleaned reads in {sp}")
     
     return rdict
@@ -170,129 +171,95 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
     Areads = manager.dict()
     Ureads = manager.dict()
     Mreads = manager.dict()
-    nprocesses = []
-    tprocesses = []
-    bprocesses = []
-    sprocesses = []
-    iprocesses = []
-    uprocesses = []
-    mprocesses = []
+    processes = []
     
-    try:
-        for sp in sampleDict:
-            
+    for sp in sampleDict:
+        try:
             if pairedEND:
                 p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,True,))
             else:
                 p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,))
         
-            nprocesses.append(p)
-           
-        for process in nprocesses:
-            process.start()
+            processes.append(p)
+            p.start()
             
-        for process in nprocesses:
+            for process in processes:
+                
+                process.join()
             
-            process.join()
-            
-    except Exception:
-        log.error(f"Not able to count Input read number in {sp}")
+        except Exception:
+            log.error(f"Not able to count Input read number in {sp}")
    
-    try:
-        for tf in trimDict:
-        
+    
+    for tf in trimDict:
+        try:
             if pairedEND:
-                p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf,True,))
+                p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf,True))
             else:
-                p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf, ))
+                p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf,))
         
-            tprocesses.append(p)
-
+            processes.append(p)
+            p.start()
             
-
-        for process in tprocesses:
-            process.start()
-            
-        for process in tprocesses:
-            
-            process.join()
+            for process in processes:
+                process.join()
        
-    except Exception:
-        log.error(f"Not able to count Trim read number in {tf}")
+        except Exception:
+            log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-        p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2],))
+            p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2],))
         
-        sprocesses.append(p)
-
-    for process in sprocesses:
-            process.start()
+            processes.append(p)
+            p.start()
             
-    for process in sprocesses:
-        
-        process.join()
+            for process in processes:
+                process.join()
         
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
        
         p=multiprocessing.Process(target = _index_bam, args=(file,))
-        iprocesses.append(p)
-
-    for process in iprocesses:
-            process.start()
-            
-    for process in iprocesses:
+        processes.append(p)
+        p.start()
         
-        process.join()
+        for process in processes:
+            process.join()
 
-    try:
-        for bf in bamDict:
-        
+    for bf in bamDict:
+        try:
             p=multiprocessing.Process(target= _getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
         
-            bprocesses.append(p)
-
-        for process in bprocesses:
-            process.start()
+            processes.append(p)
+            p.start()
             
-        for process in bprocesses:
-            
-            process.join()
+            for process in processes:
+                process.join()
 
-    except Exception:
-        log.error(f"Not able to count Aligned read number in {bf}")
-    try:
-        for bf in bamDict:
+        except Exception:
+            log.error(f"Not able to count Aligned read number in {bf}")
+        try:
             p=multiprocessing.Process(target= _getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
         
-            uprocesses.append(p)
+            processes.append(p)
             p.start()
             
-        for process in uprocesses:
-            process.start()
-            
-        for process in uprocesses:
-            
-            process.join()
+            for process in processes:
+                process.join()
                 
-    except Exception:
-        log.error(f"Not able to count Uniquely mapped read number in {bf}")
-    try:
-        for bf in bamDict:
+        except Exception:
+            log.error(f"Not able to count Uniquely mapped read number in {bf}")
+        try:
             p=multiprocessing.Process(target= _getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         
-            mprocesses.append(p)
+            processes.append(p)
             p.start()
             
-        for process in mprocesses:
-            process.start()
+            for process in processes:
+                process.join()           
             
-        for process in mprocesses:
-            
-            process.join()       
-            
-    except Exception:
-        log.error(f"Not able to count Multi mapped read number in {bf}")
+        except Exception:
+            log.error(f"Not able to count Multi mapped read number in {bf}")
     try:
         total = []
         for k in Ireads:
