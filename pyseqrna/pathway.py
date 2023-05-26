@@ -158,7 +158,7 @@ class Pathway:
 
     def _get_pathways(self):
 
-        r = requests.get(f"https://bioinfo.usu.edu/pyseqrna-api/list/pathways/{self.species}")
+        r = requests.get(f"https://bioinfo.usu.edu/pyseqrna-api/list/pathways/{self.species}", verify=False)
         m = re.sub('<[^<]+?>', '', r.text)
         df = pd.read_csv(io.StringIO(m), sep="\t", names =['Species', 'Gene', 'ID', 'Term'])
         dd= df.values.tolist()
