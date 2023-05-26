@@ -67,7 +67,7 @@ class Pathway:
 
     def _q(self,op, arg1, arg2=None, arg3=None):
 
-        URL = "http://rest.kegg.jp/%s"
+        URL = "https://rest.kegg.jp/%s"
 
         if arg2 and arg3:
 
@@ -95,7 +95,7 @@ class Pathway:
 
     def _kegg_organism(self):
 
-        resp =  urlopen("http://rest.kegg.jp/list/organism")
+        resp =  urlopen("https://rest.kegg.jp/list/organism")
 
         handle = io.TextIOWrapper(resp, encoding="UTF-8")
 
@@ -158,7 +158,7 @@ class Pathway:
 
     def _get_pathways(self):
 
-        r = requests.get(f"http://bioinfo.usu.edu/pyseqrna-api/list/pathways/{self.species}")
+        r = requests.get(f"https://bioinfo.usu.edu/pyseqrna-api/list/pathways/{self.species}")
         m = re.sub('<[^<]+?>', '', r.text)
         df = pd.read_csv(io.StringIO(m), sep="\t", names =['Species', 'Gene', 'ID', 'Term'])
         dd= df.values.tolist()
