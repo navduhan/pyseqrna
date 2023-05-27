@@ -17,9 +17,9 @@ PySeqRNA requires a input file containing information of samples and input read 
 
 Example input file:
 
-\#Arabidopsis transcriptome study under high light stress 
-| SampleName | Replication | Identifier | File1 | File2 |
+|\#Arabidopsis transcriptome study under high light stress|||||
 | :---: | :---: | :---: | :---: | :---: |
+| SampleName | Replication | Identifier | File1 | File2 |
 | GL0.5h1 | GL0.5h1 | GL0.5 | SRR6767632_001.fastq.gz | SRR6767632_002.fastq.gz |
 | GLO.5h2 | GLO.5h2 | GL0.5 | SRR6767633_001.fastq.gz | SRR6767633_002.fastq.gz |
 | GL6h1 | GL6h1 | GL6 | SRR6767634_001.fastq.gz | SRR6767634_002.fastq.gz |
