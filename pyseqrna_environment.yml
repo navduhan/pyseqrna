@@ -1,4 +1,4 @@
-name: pyseqrna_0.0.2
+name: pyseqrna-0.2
 channels:
   - conda-forge
   - bioconda

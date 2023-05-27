@@ -6,7 +6,7 @@ setuptools.setup(
     name='pySeqRNA',
     version='0.0.2',
     description ="pySeqRNA a python based RNA analysis package",
-    url="http://bioinfo.usu.edu/pyseqrna",
+    url="https://bioinfo.usu.edu/pyseqrna",
     author="Naveen Duhan",
     author_email = "naveen.duhan@usu.edu",
     license='MIT',

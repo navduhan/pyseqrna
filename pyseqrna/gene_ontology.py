@@ -345,7 +345,7 @@ class GeneOntology:
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
         plt.xticks(fontsize=10)
-        plt.yticks(fontsize=10, wrap=True)
+        plt.yticks(fontsize=10)
 
         plt.xlabel("Counts", fontsize=12, fontweight='bold')
         plt.ylabel("GO Description", fontsize=12, fontweight='bold')
