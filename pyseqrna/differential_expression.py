@@ -594,8 +594,6 @@ class Gene_Description:
 
             final = final[col]
 
-            print("please provide the filtered DEGs file")
-
         return final
 
     def add_names_annotation(self, file):
