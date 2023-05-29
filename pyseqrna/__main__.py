@@ -80,12 +80,15 @@ def main():
 
     if options.resume == 'trimming' or options.resume == 'alignment' or  options.resume == 'differential':
         dryrun = True
+        qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
+    
+        fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
     else: 
         dryrun = False
     
-    qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
-    
-    jobid, fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
+        qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
+        
+        jobid, fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
     if options.slurm:
 
@@ -100,30 +103,43 @@ def main():
 
     
     # Trimming
+    log.info(f"Read trimming started with {options.trimming}")
 
     if options.resume == 'alignment' or  options.resume == 'differential':
         dryrun = True
+
+        qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
+
+        if options.trimming == 'flexbar':
+
+            outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
+        
+        elif options.trimming == 'trimmomatic':
+
+            outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            
+        elif options.trimming == 'trim_galore':
+
+            outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
     else: 
+
         dryrun = False
 
-    log.info(f"Read trimming started with {options.trimming}")
+        if not os.path.isdir(os.path.join(outdir, "1_Quality")):
 
+                qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
 
-    if not os.path.isdir(os.path.join(outdir, "1_Quality")):
+        if options.trimming == 'flexbar':
 
-            qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"))
-
-    if options.trimming == 'flexbar':
-
-        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
-    
-    elif options.trimming == 'trimmomatic':
-
-        outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
         
-    elif options.trimming == 'trim_galore':
+        elif options.trimming == 'trimmomatic':
 
-        outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            
+        elif options.trimming == 'trim_galore':
+
+            outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
     
     if options.slurm:
         for job in jobidt:
@@ -136,7 +152,15 @@ def main():
         log.info("Read trimming completed succesfully")
 
     # Check if read quality check is activated after trimming
-    
+    if options.resume == 'alignment' or  options.resume == 'differential':
+        dryrun = True
+        if options.fastqc2:
+        
+            fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
+
+    else:
+        dryrun = False
+
     if options.fastqc2:
         
         jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
@@ -153,22 +177,27 @@ def main():
 
     
     # Removal of ribosomal RNA
+    if options.resume == 'alignment' or  options.resume == 'differential':
+        dryrun = True
+        if options.ribosomal:
+            outtrim = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
+    else:
+        dryrun = False
+        if options.ribosomal:
+        
+
+            log.info("Removing ribosomal RNA ")
+            
+            outtrim, jobs = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
+
+    if options.slurm:
+
+        wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
+
+        log.info("Ribsomal RNA removal completed succesfully")
+    else:
     
-    if options.ribosomal:
-       
-
-        log.info("Removing ribosomal RNA ")
-        
-        outtrim, jobs = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
-
-        if options.slurm:
-
-            wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
-
-            log.info("Ribsomal RNA removal completed succesfully")
-        else:
-        
-            log.info("Ribsomal RNA removal completed succesfully")
+        log.info("Ribsomal RNA removal completed succesfully")
 
     # Alignment Section
     if options.resume == 'differential':
