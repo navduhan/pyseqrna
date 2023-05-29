@@ -57,7 +57,11 @@ def main():
 
     log.info("Analysis started at %s", startTime)
     # Create directory for results
-    outdir = pu.make_directory(options.outdir)
+    if options.resume != 'all':
+        dryrun = True
+    else: 
+        dryrun = False
+    outdir = pu.make_directory(options.outdir, dryrun=dryrun)
     # with open (os.path.join(outdir,"pyseqrnaa.dill"), 'wb') as dill_save:
         # Read input samples from file
     input_data = pu.read_input_file(options.input_file,options.samples_path, paired = options.paired)
