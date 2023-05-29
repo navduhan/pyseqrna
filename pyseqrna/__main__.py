@@ -78,7 +78,7 @@ def main():
 
     log.info("Starting with read quality check")
 
-    if options.resume != 'all':
+    if options.resume == 'trimming' or options.resume == 'alignment' or  options.resume == 'differential':
         dryrun = True
     else: 
         dryrun = False
@@ -101,7 +101,7 @@ def main():
     
     # Trimming
 
-    if options.resume == 'alignment' or  options.resume == 'differential' or options.resume == 'functional':
+    if options.resume == 'alignment' or  options.resume == 'differential':
         dryrun = True
     else: 
         dryrun = False
