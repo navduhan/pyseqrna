@@ -279,7 +279,7 @@ class STAR_Aligner:
 
                     outPrefix = os.path.join(output, sample[0]+"_")
 
-                    outstarLog[key] = [sample[0],sample[1], outPrefix + "_Aligned.out.bam"]
+                    outstarLog[key] = [sample[0],sample[1], outPrefix + "Aligned.out.bam"]
 
                     inputPair = f'{pu.get_basename(sample[2])} and {pu.get_basename(sample[3])}'
 
@@ -287,7 +287,7 @@ class STAR_Aligner:
 
                     outPrefix = os.path.join(output, sample[0]+"_")
 
-                    outstarLog[key] = [sample[0],sample[1],outPrefix + "_Aligned.out.bam"]
+                    outstarLog[key] = [sample[0],sample[1],outPrefix + "Aligned.out.bam"]
 
                     inputPair = f'{pu.get_basename(sample[2])}'
 
