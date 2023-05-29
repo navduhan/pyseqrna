@@ -188,6 +188,7 @@ def main():
             outtrim = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
     else:
         dryrun = False
+
         if options.ribosomal:
         
 
@@ -195,14 +196,14 @@ def main():
             
             outtrim, jobs = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
 
-        if options.slurm:
+            if options.slurm:
 
-            wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
+                wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
 
-            log.info("Ribsomal RNA removal completed succesfully")
-        else:
-        
-            log.info("Ribsomal RNA removal completed succesfully")
+                log.info("Ribsomal RNA removal completed succesfully")
+            else:
+            
+                log.info("Ribsomal RNA removal completed succesfully")
 
     # Alignment Section
     if options.resume == 'differential':
