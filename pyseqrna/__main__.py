@@ -74,12 +74,17 @@ def main():
 
     log.info("Starting with read quality check")
 
+    if options.resume != 'all':
+        dryrun = True
+    else: 
+        dryrun = False
     
-    qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"))
+    qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
     
-    jobid, fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+    jobid, fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
     if options.slurm:
+
         for job in jobid:
             wait(lambda: pu.check_status(job), waiting_for="quality to finish")
             log.info(f"Quality check completed for job {job}")
@@ -92,6 +97,11 @@ def main():
     
     # Trimming
 
+    if options.resume == 'alignment' or  options.resume == 'differential' or options.resume == 'functional':
+        dryrun = True
+    else: 
+        dryrun = False
+
     log.info(f"Read trimming started with {options.trimming}")
 
 
@@ -101,17 +111,16 @@ def main():
 
     if options.trimming == 'flexbar':
 
-        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir)
+        outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
     
     elif options.trimming == 'trimmomatic':
 
-        outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired)
+        outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
         
     elif options.trimming == 'trim_galore':
 
-        outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired)
+        outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
     
-    # dill.dump([input_data, outtrim],dill_save,protocol=dill.HIGHEST_PROTOCOL)
     if options.slurm:
         for job in jobidt:
             wait(lambda: pu.check_status(job), waiting_for="trimming to finish")
@@ -126,7 +135,7 @@ def main():
     
     if options.fastqc2:
         
-        jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired)
+        jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
         if options.slurm:
             for job in jobid:
@@ -146,7 +155,7 @@ def main():
 
         log.info("Removing ribosomal RNA ")
         
-        outtrim, jobs = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm)
+        outtrim, jobs = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
 
         if options.slurm:
 
@@ -158,6 +167,12 @@ def main():
             log.info("Ribsomal RNA removal completed succesfully")
 
     # Alignment Section
+    if options.resume == 'differential':
+        
+        dryrun = True
+    else: 
+        dryrun = False
+    
     
     log.info("Starting Alignment process")
 
@@ -165,7 +180,7 @@ def main():
 
     if options.aligners == 'STAR':
 
-        aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir)
+        aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
 
         log.info("Genome indexing started")
 
@@ -192,7 +207,7 @@ def main():
     
     elif options.aligners == 'hisat2':
 
-        aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir)
+        aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
 
         log.info("Genome indexing started")
 

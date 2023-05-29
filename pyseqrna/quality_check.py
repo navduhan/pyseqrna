@@ -20,7 +20,7 @@ from pyseqrna import pyseqrna_utils as pu
 
 log = PyseqrnaLogger(mode='a', log='qc')
 
-def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=1, pairedEND =False, afterTrim=False, outDir=None, dep=''):
+def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=1, pairedEND =False, afterTrim=False, dryrun = False, outDir=".", dep=''):
 
     """This function perform fastqc quality using FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
            
@@ -70,11 +70,11 @@ def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=
 
         output1 = os.path.join(outDir,out)
 
-        output = pu.make_directory(output1)
+        output = pu.make_directory(output1, dryrun=dryrun)
 
     else:
         
-        output = pu.make_directory(out)
+        output = pu.make_directory(out, dryrun=dryrun)
 
     const = ['threads', '-t']  # require when change number of CPUs
 
@@ -98,19 +98,26 @@ def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=
             except Exception:
 
                 log.error(
-                    "logease provide a paired END samloge file or input Path is wrong")
+                    "log please provide a paired END samloge file or input Path is wrong")
 
             inputPair = pu.get_basename(input1)+" and " + pu.get_basename(input2)
+
+            
             
             if pu.get_file_extension(value[2]) == "gz":
-                r1 = pu.get_basename(value[2])+".zip"
-                r2 = pu.get_basename(value[3])+".zip"
+
+                r1 = f"{output}/{pu.get_basename(pu.get_basename(value[2]))}.zip"
+
+                r2 = f"{output}/{pu.get_basename(pu.get_basename(value[3]))}.zip"
             
                 fastqcOut[key]=[value[0], value[1], r1, r2]
+
             else: 
 
-                r1 = value[2]+".zip"
-                r2 = value[3]+".zip"
+                r1 = f"{output}/{pu.get_basename(value[2])}.zip"
+
+                r2 = f"{output}/{pu.get_basename(value[3])}.zip"
+
                 fastqcOut[key]=[value[0], value[1], r1, r2]
         else:
             try:
@@ -122,7 +129,18 @@ def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=
             
             inputPair = pu.get_basename(value[2])
 
-        
+            if pu.get_file_extension(inputPair) == "gz":
+                 
+                r1 = f"{output}/{pu.get_basename(inputPair)}.zip"
+
+                fastqcOut[key]=[value[0], value[1], r1 ]
+
+            else:
+
+                r1 = f"{output}/{inputPair}.zip"
+
+                fastqcOut[key]=[value[0], value[1], r1 ]
+
 
         execPATH = shutil.which('fastqc')
               # get absolute path of flexbar
@@ -141,38 +159,43 @@ def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=
 
                 fastqcCmd = f"{execPATH} -o {output} {args} {inputFile}"
             
-
-            if slurm == True:  # check if slurm job scheduling is enabled or not
-
-                try:
-                    job = pu.clusterRun(job_name=
-                        'fastqc', sout= os.path.join(output,"fastqc.out"), serror= os.path.join(output,"fastqc.err"), command=fastqcCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
-
-                    job_id.append(job)
-
-                    log.info(
-                        "Job submitted on slurm successfully for {} with {}".format(inputPair, job))
-
-                except Exception:
-
-                    log.error("Slurm job sumission failed")
-
+            if dryrun:
+                pass
             else:
+                if slurm == True:  # check if slurm job scheduling is enabled or not
 
-                try:
+                    try:
+                        job = pu.clusterRun(job_name=
+                            'fastqc', sout= os.path.join(output,"fastqc.out"), serror= os.path.join(output,"fastqc.err"), command=fastqcCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
+
+                        job_id.append(job)
+
+                        log.info(
+                            "Job submitted on slurm successfully for {} with {}".format(inputPair, job))
+
+                    except Exception:
+
+                        log.error("Slurm job sumission failed")
+
+                else:
+
+                    try:
+                    
+                        with open(os.path.join(output,"fastqc.out"), 'w+') as fout:
+                            with open(os.path.join(output,"fastqc.err"), 'w+') as ferr:
+                                job = subprocess.call(fastqcCmd, shell=True, stdout=fout, stderr=ferr)
+
+                                job_id.append(" ")    
+
+                                log.info("Job successfully completed for {} with status {}".format(inputPair, job))
+
+                    except Exception:
+
+                        log.info("Job submition failed for {} error present in fastqc.err  ".format(pu.get_basename(out)))
                 
-                    with open(os.path.join(output,"fastqc.out"), 'w+') as fout:
-                        with open(os.path.join(output,"fastqc.err"), 'w+') as ferr:
-                            job = subprocess.call(fastqcCmd, shell=True, stdout=fout, stderr=ferr)
-
-                            job_id.append(" ")    
-
-                            log.info("Job successfully completed for {} with status {}".format(inputPair, job))
-
-                except Exception:
-
-                    log.info("Job submition failed for {} error present in fastqc.err  ".format(pu.get_basename(out)))
-                
-
+    if dryrun:
+        
+        return fastqcOut
+        
     return job_id, fastqcOut
 

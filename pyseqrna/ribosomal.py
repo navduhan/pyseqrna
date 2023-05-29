@@ -21,7 +21,7 @@ from pyseqrna import pyseqrna_utils as pu
 log = PyseqrnaLogger(mode="a", log='ribosomal')
 
 
-def sortmernaRun(sampleDict=None, outDir=".", rnaDatabases=None, pairedEND=False, slurm=False, mem=10, cpu=8, task=1,  dep=''):
+def sortmernaRun(sampleDict=None, outDir=".", rnaDatabases=None, pairedEND=False, slurm=False, mem=10, cpu=8, task=1, dryrun=False,  dep=''):
 
     """
     This function execute sortMeRNA to remove ribosomal RNA from fastq reads.
@@ -50,11 +50,11 @@ def sortmernaRun(sampleDict=None, outDir=".", rnaDatabases=None, pairedEND=False
 
         output1 = os.path.join(outDir, output)
 
-        output = pu.make_directory(output1)
+        output = pu.make_directory(output1, dryrun=dryrun)
 
     else:
 
-        output = pu.make_directory(output)
+        output = pu.make_directory(output, dryrun=dryrun)
 
     try:
 
@@ -120,34 +120,40 @@ def sortmernaRun(sampleDict=None, outDir=".", rnaDatabases=None, pairedEND=False
 
                 sortmernaCmd = f"{execPATH} {sortmernaREF} --reads {sample[2]} --aligned {aligned_out} --other {filterd_out}  --fastx true -threads {cpu} -v"
 
-            # print(sortmernaCmd)
-            if slurm:
-
-                try:
-                    job = pu.clusterRun(job_name='sortmeRNA', sout=os.path.join(output, "sortmeRNA.out"), serror=os.path.join(
-                        output, "sortmeRNA.err"), command=sortmernaCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
-
-                    job_id.append(job)
-                    log.info("Job successfully submited for {} with {}".format(
-                        sample[0], job_id))
-
-                except Exception:
-
-                    log.error("Slurm job sumission failed")
+            if dryrun:
+                pass
 
             else:
 
-                try:
-                    with open(os.path.join(output, "sortmeRNA.out"), 'w+') as fout:
-                        with open(os.path.join(output, "sortmeRNA.err"), 'w+') as ferr:
-                            job = subprocess.call(
-                                sortmernaCmd, shell=True, stdout=fout, stderr=ferr)
-                            job_id.append('')
-                            log.info(
-                                "Job successfully submited for {} ".format(sample[0]))
+                if slurm:
 
-                except Exception:
+                    try:
+                        job = pu.clusterRun(job_name='sortmeRNA', sout=os.path.join(output, "sortmeRNA.out"), serror=os.path.join(
+                            output, "sortmeRNA.err"), command=sortmernaCmd, mem=mem, cpu=cpu, tasks=task, dep=dep)
 
-                    log.error("Job sumission failed")
+                        job_id.append(job)
+                        log.info("Job successfully submited for {} with {}".format(
+                            sample[0], job_id))
 
+                    except Exception:
+
+                        log.error("Slurm job sumission failed")
+
+                else:
+
+                    try:
+                        with open(os.path.join(output, "sortmeRNA.out"), 'w+') as fout:
+                            with open(os.path.join(output, "sortmeRNA.err"), 'w+') as ferr:
+                                job = subprocess.call(
+                                    sortmernaCmd, shell=True, stdout=fout, stderr=ferr)
+                                job_id.append('')
+                                log.info(
+                                    "Job successfully submited for {} ".format(sample[0]))
+
+                    except Exception:
+
+                        log.error("Job sumission failed")
+    if dryrun:
+        outsortmeRNA
+        
     return outsortmeRNA, job_id

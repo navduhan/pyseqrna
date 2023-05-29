@@ -368,7 +368,7 @@ def get_file_extension(filePATH):
     return os.path.splitext(filePATH)[1]
 
 
-def make_directory(dir):
+def make_directory(dir, dryrun=False):
     """
     This function create a directory 
 
@@ -376,27 +376,31 @@ def make_directory(dir):
 
     :returns: Name of created directory.
     """
-   
-    outputdir = os.path.abspath(dir) 
+    if dryrun:
 
-    if os.path.exists(dir):
-        parent, base = os.path.split(outputdir)
-        counter = 0
-        for sibdir in os.listdir(parent):
-            if sibdir.startswith(base +'.'):
-                ext = sibdir[len(base)+1:]
-                if ext.isdecimal():
-                    counter = max(counter, int(ext))
-        outdir = os.path.join(parent, base+'.'+str(counter+1))
-
-        os.mkdir(outdir)
-
-        log.info(f"Succesfully created directory {outdir}")
-        
+        return dir
+    
     else:
-        outdir = outputdir
-        os.mkdir(outdir)
-        log.info(f"Succesfully created directory {outdir}")
+        outputdir = os.path.abspath(dir) 
+
+        if os.path.exists(dir):
+            parent, base = os.path.split(outputdir)
+            counter = 0
+            for sibdir in os.listdir(parent):
+                if sibdir.startswith(base +'.'):
+                    ext = sibdir[len(base)+1:]
+                    if ext.isdecimal():
+                        counter = max(counter, int(ext))
+            outdir = os.path.join(parent, base+'.'+str(counter+1))
+
+            os.mkdir(outdir)
+
+            log.info(f"Succesfully created directory {outdir}")
+            
+        else:
+            outdir = outputdir
+            os.mkdir(outdir)
+            log.info(f"Succesfully created directory {outdir}")
     
 
     return outdir

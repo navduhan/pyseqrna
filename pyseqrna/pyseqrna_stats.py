@@ -114,9 +114,9 @@ def _getMulti_mapped(file,rdict, sp):
     log.info(f"{multi_mapped} input reads multi mapped in {sp}")
     return rdict
     
-def _sort_bam(file):
+def _sort_bam(file, cpu):
     outfile = file.split(".bam")[0] + "_sorted.bam"
-    samtools_cmd = f'samtools sort {file} > {outfile}'
+    samtools_cmd = f'samtools sort -@ {cpu} {file} > {outfile}'
     try:
         with open("bamsort.out", 'w+') as fout:
             with open("bamsort.err", 'w+') as ferr:
@@ -130,9 +130,9 @@ def _sort_bam(file):
 
         log.error("Bam sorting failed")
 
-def _index_bam(file):
+def _index_bam(file, cpu):
    
-    samtools_cmd = f'samtools index -c {file}'
+    samtools_cmd = f'samtools index -@ {cpu} -c {file}'
     try:
         with open("bam_index.out", 'w+') as fout:
             with open("bam_index.err", 'w+') as ferr:
@@ -147,7 +147,7 @@ def _index_bam(file):
         log.error("Bam indexing failed")
 
 
-def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, pairedEND=False):
+def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8, pairedEND=False):
 
     """
     This function calculates the alignment statistics
@@ -208,7 +208,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-            p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2],))
+            p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], cpu,))
         
             processes.append(p)
             p.start()
@@ -219,7 +219,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None, paire
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
        
-        p=multiprocessing.Process(target = _index_bam, args=(file,))
+        p=multiprocessing.Process(target = _index_bam, args=(file, cpu,))
         processes.append(p)
         p.start()
         

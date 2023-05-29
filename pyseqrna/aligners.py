@@ -33,7 +33,7 @@ class STAR_Aligner:
     :param slurm: To run commands with slurm task-scheduler.
     """
 
-    def __init__(self, genome=None, configFile=None, outDir=None, slurm=False):
+    def __init__(self, genome=None, configFile=None, outDir=".", slurm=False, dryrun=False):
         """Default arguments for class STAR_Aligner
 
             :param genome: Reference genome file. 
@@ -47,6 +47,8 @@ class STAR_Aligner:
         self.slurm = slurm
 
         self.outDir = outDir
+
+        self.dryrun = dryrun
 
         if configFile != None:
 
@@ -94,15 +96,25 @@ class STAR_Aligner:
 
         directory = str(config[0]).split(" ")[1]
 
-        if os.path.exists(self.outDir):
+        if self.dryrun:
+            if os.path.exists(self.outDir):
 
-            output1 =  os.path.join(self.outDir,directory)
+                output =  os.path.join(self.outDir,directory)
 
-            output = pu.make_directory(output1)
+            else:
+                output =  os.path.join(self.outDir,directory)
 
         else:
-            
-            output = pu.make_directory(directory)
+
+            if os.path.exists(self.outDir):
+
+                output1 =  os.path.join(self.outDir,directory)
+
+                output = pu.make_directory(output1)
+
+            else:
+                
+                output = pu.make_directory(directory)
         # check genome file extension
         genome_extensions = tuple(['.fa', '.fasta', '.fna', '.fa.gz', 'fna.gz', '.fasta.gz'])
         
@@ -144,31 +156,36 @@ class STAR_Aligner:
 
                 star_command = f"{execPATH} --genomeDir {output} {arg}  --genomeFastaFiles {GenomeFasta} "
 
-            if self.slurm:
+            if self.dryrun:
 
-                try:
-                
-                    job_id = pu.clusterRun(job_name='star_index', sout=os.path.join(output, "star_index"), serror=os.path.join(output, "star_index"), command= star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
-
-                    log.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
-
-                except Exception:
-
-                    log.error("Slurm job sumission failed")
+                return star_command
             else:
 
-                try:
-                    with open(os.path.join(output, "star_index.out"), 'w+') as fout:
-                        with open(os.path.join(output, "star_index.err"), 'w+') as ferr:
-                            job_id = subprocess.call(star_command, shell=True,stdout=fout,stderr=ferr)
+                if self.slurm:
 
-                    log.info("Job successfully completed for {} for indexing".format(GenomeFasta))
-
-                except Exception:
+                    try:
                     
-                    log.error("Job sumission failed")
-    
-        return job_id
+                        job_id = pu.clusterRun(job_name='star_index', sout=os.path.join(output, "star_index"), serror=os.path.join(output, "star_index"), command= star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
+
+                        log.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
+
+                    except Exception:
+
+                        log.error("Slurm job sumission failed")
+                else:
+
+                    try:
+                        with open(os.path.join(output, "star_index.out"), 'w+') as fout:
+                            with open(os.path.join(output, "star_index.err"), 'w+') as ferr:
+                                job_id = subprocess.call(star_command, shell=True,stdout=fout,stderr=ferr)
+
+                        log.info("Job successfully completed for {} for indexing".format(GenomeFasta))
+
+                    except Exception:
+                        
+                        log.error("Job sumission failed")
+        
+                return job_id
 
            
     def check_index(self):
@@ -229,14 +246,24 @@ class STAR_Aligner:
         genomeIndex=os.path.join(self.outDir,directory)
 
         output1 = os.path.join(self.outDir, "star_results" )
+        
+        if self.dryrun:
+            if os.path.exists(self.outDir):
 
-        if os.path.exists(self.outDir):
+                output =  os.path.join(self.outDir,"star_results")
 
-            output = pu.make_directory(output1)
-
+            else:
+                output =  os.path.join(self.outDir,"star_results")
+        
         else:
-            parent, base = os.path.split(output1)
-            output = pu.make_directory(base)
+
+            if os.path.exists(self.outDir):
+
+                output = pu.make_directory(output1)
+
+            else:
+                parent, base = os.path.split(output1)
+                output = pu.make_directory(base)
 
         arg = ' '.join(config[1:])
 
@@ -252,7 +279,7 @@ class STAR_Aligner:
 
                     outPrefix = os.path.join(output, sample[0])
 
-                    outstarLog[key] = [sample[0],sample[1],outPrefix + "Aligned.out.bam"]
+                    outstarLog[key] = [sample[0],sample[1],outPrefix + "_Aligned.out.bam"]
 
                     inputPair = f'{pu.get_basename(sample[2])} and {pu.get_basename(sample[3])}'
 
@@ -260,7 +287,7 @@ class STAR_Aligner:
 
                     outPrefix = os.path.join(output, sample[0])
 
-                    outstarLog[key] = [sample[0],sample[1],outPrefix + "Aligned.out.bam"]
+                    outstarLog[key] = [sample[0],sample[1],outPrefix + "_Aligned.out.bam"]
 
                     inputPair = f'{pu.get_basename(sample[2])}'
 
@@ -286,34 +313,44 @@ class STAR_Aligner:
 
                     star_command =f"{execPATH}  --genomeDir {genomeIndex} {arg} --outFileNamePrefix {outPrefix}  --readFilesIn {sample[2]}"
                 
-                if self.slurm:
-                    
-                    try:
-                            job = pu.clusterRun(job_name='star_align',sout=os.path.join(output, "star_index.out"), serror=os.path.join(output, "star_index.err"), command=star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
+                if self.dryrun:
 
-                            job_id.append(job)
-
-                            log.info("Job successfully submited for {} with {} for alignment".format(inputPair, job))
-
-                    except Exception:
-
-                            log.error("Slurm job sumission failed")
-
+                    pass
+                
                 else:
-
-                    try:
-
-                        with open(os.path.join(output, "star_index.out"), 'w+') as fout:
-                            with open(os.path.join(output, "star_index.err"), 'w+') as ferr:
-                                job = subprocess.call(star_command, shell=True,stdout=fout,stderr=ferr)
+                    
+                    if self.slurm:
+                        
+                        try:
+                                job = pu.clusterRun(job_name='star_align',sout=os.path.join(output, "star_index.out"), serror=os.path.join(output, "star_index.err"), command=star_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
 
                                 job_id.append(job)
 
-                                log.info("Job successfully completed for {} for alignment".format(inputPair))
+                                log.info("Job successfully submited for {} with {} for alignment".format(inputPair, job))
 
-                    except Exception:
-                        
-                        log.exception("Job sumission failed")
+                        except Exception:
+
+                                log.error("Slurm job sumission failed")
+
+                    else:
+
+                        try:
+
+                            with open(os.path.join(output, "star_index.out"), 'w+') as fout:
+                                with open(os.path.join(output, "star_index.err"), 'w+') as ferr:
+                                    job = subprocess.call(star_command, shell=True,stdout=fout,stderr=ferr)
+
+                                    job_id.append(job)
+
+                                    log.info("Job successfully completed for {} for alignment".format(inputPair))
+
+                        except Exception:
+                            
+                            log.exception("Job sumission failed")
+
+        if self.dryrun:
+
+            return outstarLog
 
         return outstarLog, job_id
 
@@ -327,7 +364,7 @@ class hisat2_Aligner():
 
     :param slurm: To run commands with slurm task-scheduler.
     """
-    def __init__(self, genome=None, configFile=None,  outDir='pySeqRNA_results', slurm=False):
+    def __init__(self, genome=None, configFile=None,  outDir='.', slurm=False, dryrun=False):
 
         """Default arguments for class hisat2_Aligner
 
@@ -342,6 +379,8 @@ class hisat2_Aligner():
         self.slurm = slurm
 
         self.outDir = outDir
+
+        self.dryrun = dryrun
 
         if configFile != None:
 
@@ -390,15 +429,25 @@ class hisat2_Aligner():
 
         indexName = str(config[1]).split(" ")[0]
 
-        if os.path.exists(self.outDir):
+        if self.dryrun:
+            if os.path.exists(self.outDir):
 
-            output1 =  os.path.join(self.outDir,directory)
+                output =  os.path.join(self.outDir,directory)
 
-            output = pu.make_directory(output1)
-
+            else:
+                output =  os.path.join(self.outDir,directory)
+        
         else:
-            
-            output = pu.make_directory(directory)
+
+            if os.path.exists(self.outDir):
+
+                output1 =  os.path.join(self.outDir,directory)
+
+                output = pu.make_directory(output1)
+
+            else:
+                
+                output = pu.make_directory(directory)
 
         genome_extensions = tuple(['.fa', '.fasta', '.fna', '.fa.gz', 'fna.gz', '.fasta.gz'])
         
@@ -440,29 +489,35 @@ class hisat2_Aligner():
         else:
             hisat2_command = f"{execPATH} {arg} {GenomeFasta} {basename} "
 
-            if self.slurm:
-                try:
+            if self.dryrun:
 
-                    job_id = pu.clusterRun(job_name='hisat2-build',sout=os.path.join(output, "hisat2_build.out") , serror= os.path.join(output, "hisat2_build.err"), command= hisat2_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
-
-                    log.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
-
-                except Exception:
-
-                    log.error("Slurm job sumission failed")
+                return hisat2_command
+            
             else:
 
-                try:
+                if self.slurm:
+                    try:
 
-                    with open(os.path.join(output, "hisat2_build.out"), 'w+') as fout:
-                            with open(os.path.join(output, "hisat2_build.err"), 'w+') as ferr:
-                                job_id = subprocess.call(hisat2_command, shell=True,stdout=fout,stderr=ferr)
+                        job_id = pu.clusterRun(job_name='hisat2-build',sout=os.path.join(output, "hisat2_build.out") , serror= os.path.join(output, "hisat2_build.err"), command= hisat2_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
 
-                                log.info("Job successfully submited for {} for indexing".format(GenomeFasta))
+                        log.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
 
-                except Exception:
-                    
-                    log.error("Job sumission failed")
+                    except Exception:
+
+                        log.error("Slurm job sumission failed")
+                else:
+
+                    try:
+
+                        with open(os.path.join(output, "hisat2_build.out"), 'w+') as fout:
+                                with open(os.path.join(output, "hisat2_build.err"), 'w+') as ferr:
+                                    job_id = subprocess.call(hisat2_command, shell=True,stdout=fout,stderr=ferr)
+
+                                    log.info("Job successfully submited for {} for indexing".format(GenomeFasta))
+
+                    except Exception:
+                        
+                        log.error("Job sumission failed")
 
 
         return job_id
@@ -542,15 +597,26 @@ class hisat2_Aligner():
 
         genomeIndex = os.path.join(self.outDir,directory,reference)
 
-        if os.path.exists(self.outDir):
+        if self.dryrun:
 
-            output1 =  os.path.join(self.outDir,"hisat2_results")
+            if os.path.exists(self.outDir):
 
-            output = pu.make_directory(output1)
+                output =  os.path.join(self.outDir,"hisat2_results")
 
+            else:
+                output =  os.path.join(self.outDir,"hisat2_results")
+        
         else:
-            
-            output = pu.make_directory("hisat2_results")
+
+            if os.path.exists(self.outDir):
+
+                output1 =  os.path.join(self.outDir,"hisat2_results")
+
+                output = pu.make_directory(output1)
+
+            else:
+                
+                output = pu.make_directory("hisat2_results")
 
         arg = ' '.join(config[2:])
 
@@ -564,11 +630,11 @@ class hisat2_Aligner():
 
                 outPrefix = os.path.join(output, sample[0])
 
-                outBAM = outPrefix + "hisat2.bam"
+                outBAM = outPrefix + "_hisat2.bam"
 
                 outhisat2[key] = [sample[0], sample[1], outBAM]
 
-                summary = outPrefix + "hisat2.txt"
+                summary = outPrefix + "_hisat2.txt"
 
                 outsummary [key] = summary
 
@@ -576,11 +642,11 @@ class hisat2_Aligner():
               
                 outPrefix = os.path.join(output, sample[0])
 
-                outBAM = outPrefix + "hisat2.bam"
+                outBAM = outPrefix + "_hisat2.bam"
 
                 outhisat2[key] = [sample[0], sample[1], outBAM]
 
-                summary = outPrefix + "hisat2.txt"
+                summary = outPrefix + "_hisat2.txt"
 
                 outsummary [key] = summary
 
@@ -604,30 +670,34 @@ class hisat2_Aligner():
                     hisat2_command = f"{execPATH} -x {genomeIndex} {arg} -U {sample[2]} --summary-file {summary} | samtools view -Sbh >{outBAM}"
 
                 
-                print(hisat2_command)
-            
-                if self.slurm:
-                    try:
-                        job = pu.clusterRun(job_name='hisat2_align', sout=os.path.join(output, "hisat2.out") , serror=os.path.join(output, "hisat2.err") ,command= hisat2_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
-                        job_id.append(job)
-                        log.info("Job successfully submited for {} with {} for alignment".format(outPrefix, job))
-
-                    except Exception:
-
-                        log.error("Slurm job sumission failed")
-
+                if self.dryrun:
+                    pass
                 else:
-
-                    try:
-                        with open(os.path.join(output, "hisat2.out"), 'w+') as fout:
-                            with open(os.path.join(output, "hisat2.err"), 'w+') as ferr:
-                                job = subprocess.call(hisat2_command, shell=True,stdout=fout,stderr=ferr)
-                                job_id.append(job)
-                                log.info("Job successfully completed for {} for alignment".format(outPrefix))
-
-                    except Exception:
-                        
-                        log.exception("Job sumission failed")
             
+                    if self.slurm:
+                        try:
+                            job = pu.clusterRun(job_name='hisat2_align', sout=os.path.join(output, "hisat2.out") , serror=os.path.join(output, "hisat2.err") ,command= hisat2_command, mem=mem, cpu=cpu, tasks=tasks, dep=dep)
+                            job_id.append(job)
+                            log.info("Job successfully submited for {} with {} for alignment".format(outPrefix, job))
+
+                        except Exception:
+
+                            log.error("Slurm job sumission failed")
+
+                    else:
+
+                        try:
+                            with open(os.path.join(output, "hisat2.out"), 'w+') as fout:
+                                with open(os.path.join(output, "hisat2.err"), 'w+') as ferr:
+                                    job = subprocess.call(hisat2_command, shell=True,stdout=fout,stderr=ferr)
+                                    job_id.append(job)
+                                    log.info("Job successfully completed for {} for alignment".format(outPrefix))
+
+                        except Exception:
+                            
+                            log.exception("Job sumission failed")
+        if self.dryrun:
+
+            return outhisat2  
 
         return  outhisat2, job_id
