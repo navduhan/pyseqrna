@@ -277,15 +277,15 @@ class STAR_Aligner:
 
                 if pairedEND:
 
-                    outPrefix = os.path.join(output, sample[0])
+                    outPrefix = os.path.join(output, sample[0]+"_")
 
-                    outstarLog[key] = [sample[0],sample[1],outPrefix + "_Aligned.out.bam"]
+                    outstarLog[key] = [sample[0],sample[1], outPrefix + "_Aligned.out.bam"]
 
                     inputPair = f'{pu.get_basename(sample[2])} and {pu.get_basename(sample[3])}'
 
                 else:
 
-                    outPrefix = os.path.join(output, sample[0])
+                    outPrefix = os.path.join(output, sample[0]+"_")
 
                     outstarLog[key] = [sample[0],sample[1],outPrefix + "_Aligned.out.bam"]
 
