@@ -90,16 +90,16 @@ def main():
         
         jobid, fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
-    if options.slurm:
+        if options.slurm:
 
-        for job in jobid:
-            wait(lambda: pu.check_status(job), waiting_for="quality to finish")
-            log.info(f"Quality check completed for job {job}")
+            for job in jobid:
+                wait(lambda: pu.check_status(job), waiting_for="quality to finish")
+                log.info(f"Quality check completed for job {job}")
 
-        log.info("Read quality check completed succesfully")
-    else:
-    
-        log.info("Read quality check completed succesfully")
+            log.info("Read quality check completed succesfully")
+        else:
+        
+            log.info("Read quality check completed succesfully")
 
     
     # Trimming
@@ -141,15 +141,15 @@ def main():
 
             outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
     
-    if options.slurm:
-        for job in jobidt:
-            wait(lambda: pu.check_status(job), waiting_for="trimming to finish")
-            log.info(f"Trimming completed for job {job}")
+        if options.slurm:
+            for job in jobidt:
+                wait(lambda: pu.check_status(job), waiting_for="trimming to finish")
+                log.info(f"Trimming completed for job {job}")
 
-        log.info("Read trimming completed succesfully")
-    else:
-    
-        log.info("Read trimming completed succesfully")
+            log.info("Read trimming completed succesfully")
+        else:
+        
+            log.info("Read trimming completed succesfully")
 
     # Check if read quality check is activated after trimming
     if options.resume == 'alignment' or  options.resume == 'differential':
@@ -190,14 +190,14 @@ def main():
             
             outtrim, jobs = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
 
-    if options.slurm:
+        if options.slurm:
 
-        wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
+            wait(lambda: pu.check_status(jobs), waiting_for="ribosomal rna removal to finish")
 
-        log.info("Ribsomal RNA removal completed succesfully")
-    else:
-    
-        log.info("Ribsomal RNA removal completed succesfully")
+            log.info("Ribsomal RNA removal completed succesfully")
+        else:
+        
+            log.info("Ribsomal RNA removal completed succesfully")
 
     # Alignment Section
     if options.resume == 'differential':
