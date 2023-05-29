@@ -220,6 +220,8 @@ def main():
             jobida= aligner.build_index(mem=options.memory,cpu=options.threads)
             outalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
 
+        quantdir = pu.make_directory(os.path.join(outdir, "3_Quantification"), dryrun=dryrun)
+
     else: 
         dryrun = False
     
@@ -244,7 +246,6 @@ def main():
 
             log.info("Checking genome index")
 
-
             if aligner.check_index():
                 log.info("Genome index is valid")
             else:
@@ -253,6 +254,7 @@ def main():
             log.info("Alignment started")
 
             outalign, jobalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
+
         
         elif options.aligners == 'hisat2':
 
@@ -294,89 +296,89 @@ def main():
     
         # Alignment statistics section
 
-    log.info("Calculating alignment statistics")
-    
-    try:
-        align_stat = ps.align_stats(samples,outtrim, outalign,pairedEND=options.paired)
-
-        align_stat.to_excel(aligndir+"/alignment_statistics.xlsx", index=False)
-
-        log.info(f"alignment stats completed and written to {aligndir}/alignment_statistics.xlsx")
-
-    except Exception:
-
-        log.error("Unable to calculate read alignment")
-    
-    log.info("Feature Count from aligned reads started")
-
-    quantdir = pu.make_directory(os.path.join(outdir, "3_Quantification"))
-
-    if options.quantification == 'featureCounts':
-
-        fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
-
-        log.info("feature counts completed and written in %s/Raw_Counts.xlsx",quantdir)
-    
-    elif options.quantification == 'Htseq':
-
-        fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
-
-        log.info("feature counts completed and written in %s/Raw_Counts.txt",quantdir)
-    
-        # Multi mapped 
-    
-    if options.mmgg:
-        log.info("Counting multimapped read groups")
-    
-        mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file, minCount=options.minreadcount, percentSample=options.percentsample)
-
-        mmg_count.to_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx" ),index=False)
-
-        log.info("counting of multimapped read group finished")
-
-    log.info("Differential Expression started with %s",options.detool)
-
-    log.info("Converting Raw Counts to normalized counts")
-
-
-    norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
-
-    if options.normalizecount == 'RPKM':
+        log.info("Calculating alignment statistics")
         
-        r = norm.RPKM()
+        try:
+            align_stat = ps.align_stats(samples,outtrim, outalign,pairedEND=options.paired)
 
-        r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'), index=False)
+            align_stat.to_excel(aligndir+"/alignment_statistics.xlsx", index=False)
 
-        r[1].savefig(os.path.join(quantdir,'RPKM_vs_Raw_counts.png'), bbox_inches='tight')
+            log.info(f"alignment stats completed and written to {aligndir}/alignment_statistics.xlsx")
 
-    if options.normalizecount == 'CPM':
+        except Exception:
+
+            log.error("Unable to calculate read alignment")
         
-        r = norm.CPM()
+        log.info("Feature Count from aligned reads started")
 
-        r[0].to_excel(os.path.join(quantdir,'CPM_counts.xlsx'), index=False)
+        quantdir = pu.make_directory(os.path.join(outdir, "3_Quantification"), dryrun=dryrun)
 
-        r[1].savefig(os.path.join(quantdir,'CPM_vs_Raw_counts.png'), bbox_inches='tight')
-    
-    if options.normalizecount == 'TPM':
+        if options.quantification == 'featureCounts':
+
+            fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
+
+            log.info("feature counts completed and written in %s/Raw_Counts.xlsx",quantdir)
         
-        r = norm.CPM()
+        elif options.quantification == 'Htseq':
 
-        r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'), index=False)
+            fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
 
-        r[1].savefig(os.path.join(quantdir,'TPM_vs_Raw_counts.png'), bbox_inches='tight')
-
-    if options.normalizecount == 'medianRatiocount':
+            log.info("feature counts completed and written in %s/Raw_Counts.txt",quantdir)
         
-        r = norm.meanRatioCount()
+            # Multi mapped 
+        
+        if options.mmgg:
+            log.info("Counting multimapped read groups")
+        
+            mmg_count = mmg.countMMG(sampleDict=samples,bamDict=outalign,gff=options.feature_file, minCount=options.minreadcount, percentSample=options.percentsample)
 
-        r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'),index=False)
+            mmg_count.to_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx" ),index=False)
 
-    log.info("Clustering samples based on similarity")
+            log.info("counting of multimapped read group finished")
 
-    if options.cluster:
-        count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
-        plot = cl.clusterSample(countDF= count)
-        plot.savefig(os.path.join(quantdir,'Sample_cluster.png'), bbox_inches='tight')
+        log.info("Differential Expression started with %s",options.detool)
+
+        log.info("Converting Raw Counts to normalized counts")
+
+
+        norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
+
+        if options.normalizecount == 'RPKM':
+            
+            r = norm.RPKM()
+
+            r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'), index=False)
+
+            r[1].savefig(os.path.join(quantdir,'RPKM_vs_Raw_counts.png'), bbox_inches='tight')
+
+        if options.normalizecount == 'CPM':
+            
+            r = norm.CPM()
+
+            r[0].to_excel(os.path.join(quantdir,'CPM_counts.xlsx'), index=False)
+
+            r[1].savefig(os.path.join(quantdir,'CPM_vs_Raw_counts.png'), bbox_inches='tight')
+        
+        if options.normalizecount == 'TPM':
+            
+            r = norm.CPM()
+
+            r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'), index=False)
+
+            r[1].savefig(os.path.join(quantdir,'TPM_vs_Raw_counts.png'), bbox_inches='tight')
+
+        if options.normalizecount == 'medianRatiocount':
+            
+            r = norm.meanRatioCount()
+
+            r.to_excel(os.path.join(quantdir,'Median_ratio_counts.xlsx'),index=False)
+
+        log.info("Clustering samples based on similarity")
+
+        if options.cluster:
+            count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+            plot = cl.clusterSample(countDF= count)
+            plot.savefig(os.path.join(quantdir,'Sample_cluster.png'), bbox_inches='tight')
 
     targets = input_data['targets']
 
@@ -521,9 +523,11 @@ def main():
     
         filtered_MMG['summary'].to_excel(os.path.join(diffdir,"Filtered_MMGs_summary.xlsx"), index=False)
 
-    plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
+    
 
     if options.heatmap:
+
+        plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
 
         log.info("Creating heatmap of top 50 DEGs")
 
@@ -537,9 +541,11 @@ def main():
 
         genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_MMGs.xlsx"),combinations=combination, outDir=diffdir, mmg=True)
 
-    annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
+    
 
     if options.geneontology:
+
+        annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
 
         outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
 
