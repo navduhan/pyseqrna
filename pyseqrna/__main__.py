@@ -166,19 +166,19 @@ def main():
     else:
         dryrun = False
 
-    if options.fastqc2:
-        
-        jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
+        if options.fastqc2:
+            
+            jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
-        if options.slurm:
-            for job in jobid:
-                wait(lambda: pu.check_status(job), waiting_for="quality to finish")
-                log.info(f"Quality check for trimmed read completed for job {job}")
-    
-            log.info("Read quality check for trimmed reads completed succesfully")
-        else:
+            if options.slurm:
+                for job in jobid:
+                    wait(lambda: pu.check_status(job), waiting_for="quality to finish")
+                    log.info(f"Quality check for trimmed read completed for job {job}")
         
-            log.info("Read quality check for trimmed reads completed succesfully")
+                log.info("Read quality check for trimmed reads completed succesfully")
+            else:
+            
+                log.info("Read quality check for trimmed reads completed succesfully")
 
     
     # Removal of ribosomal RNA
