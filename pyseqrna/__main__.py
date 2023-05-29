@@ -301,7 +301,7 @@ def main():
         log.info("Calculating alignment statistics")
         
         try:
-            align_stat = ps.align_stats(samples,outtrim, outalign,pairedEND=options.paired)
+            align_stat = ps.align_stats(samples,outtrim, outalign,pairedEND=options.paired, cpu=options.threads)
 
             align_stat.to_excel(aligndir+"/alignment_statistics.xlsx", index=False)
 
