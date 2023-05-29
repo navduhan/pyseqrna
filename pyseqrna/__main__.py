@@ -58,14 +58,15 @@ def main():
     startTime= time.ctime()
 
 
-    log.info("Analysis started at %s", startTime)
+    
     # Create directory for results
     if options.resume != 'all':
         dryrun = True
+        log.info("Analysis started at %s", startTime)
         outdir = pu.make_directory(options.outdir, dryrun=dryrun)
     else: 
         dryrun = False
-
+        log.info(f"Analysis resume form {options.resume} at {startTime}")
         outdir = pu.make_directory(options.outdir, dryrun=dryrun)
     # with open (os.path.join(outdir,"pyseqrnaa.dill"), 'wb') as dill_save:
         # Read input samples from file
