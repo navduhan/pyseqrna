@@ -46,7 +46,10 @@ def main():
     # Get all the options from the user
     
     options, unknownargs = arg_parser.parser.parse_known_args()  
-    
+
+    if options.species is None:
+        print("Please provide a species and organism type")
+        sys.exit()
    
     if options.threads =='80% of available CPU' :
     
@@ -59,9 +62,11 @@ def main():
     # Create directory for results
     if options.resume != 'all':
         dryrun = True
+        outdir = pu.make_directory(options.outdir, dryrun=dryrun)
     else: 
         dryrun = False
-    outdir = pu.make_directory(options.outdir, dryrun=dryrun)
+
+        outdir = pu.make_directory(options.outdir, dryrun=dryrun)
     # with open (os.path.join(outdir,"pyseqrnaa.dill"), 'wb') as dill_save:
         # Read input samples from file
     input_data = pu.read_input_file(options.input_file,options.samples_path, paired = options.paired)
@@ -203,78 +208,89 @@ def main():
     if options.resume == 'differential':
         
         dryrun = True
+        if options.aligners == 'STAR':
+            aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
+            aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+            jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
+            outalign= aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
+        
+        elif options.aligners == 'hisat2':
+
+            aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+            jobida= aligner.build_index(mem=options.memory,cpu=options.threads)
+            outalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
+
     else: 
         dryrun = False
     
-    
-    log.info("Starting Alignment process")
+        log.info("Starting Alignment process")
 
-    aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"))
+        aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
 
-    if options.aligners == 'STAR':
+        if options.aligners == 'STAR':
 
-        aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+            aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
 
-        log.info("Genome indexing started")
+            log.info("Genome indexing started")
 
-        jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
-    
+            jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
+        
+            if options.slurm:
+
+                wait(lambda: pu.check_status(jobida), waiting_for="genome indexing to finish")
+                log.info("Genome index completed succesfully")
+            else:
+                log.info("Genome index completed succesfully")
+
+            log.info("Checking genome index")
+
+
+            if aligner.check_index():
+                log.info("Genome index is valid")
+            else:
+                log.info("Genome index is not valid please create it again")
+                sys.exit()
+            log.info("Alignment started")
+
+            outalign, jobalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
+        
+        elif options.aligners == 'hisat2':
+
+            aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+
+            log.info("Genome indexing started")
+
+            jobida= aligner.build_index(mem=options.memory,cpu=options.threads)
+        
+            if options.slurm:
+
+                wait(lambda: pu.check_status(jobida), waiting_for="genome indexing to finish")
+
+                log.info("Genome index completed succesfully")
+            else:
+                log.info("Genome index completed succesfully")
+
+            log.info("Checking genome index")
+
+            if aligner.check_index():
+                log.info("Genome index is valid")
+            else:
+                log.info("Genome index is not valid please create it again")
+                sys.exit()
+            log.info("Alignment started")
+
+            outalign, jobalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
+
         if options.slurm:
+            for job in jobalign:
+                wait(lambda: pu.check_status(job), waiting_for="alignment to finish")
 
-            wait(lambda: pu.check_status(jobida), waiting_for="genome indexing to finish")
-            log.info("Genome index completed succesfully")
+                log.info(f"Alignment completed for job {job}")
+
+            log.info("Read alignment completed succesfully")
         else:
-            log.info("Genome index completed succesfully")
 
-        log.info("Checking genome index")
-
-
-        if aligner.check_index():
-            log.info("Genome index is valid")
-        else:
-            log.info("Genome index is not valid please create it again")
-            sys.exit()
-        log.info("Alignment started")
-
-        outalign, jobalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
-    
-    elif options.aligners == 'hisat2':
-
-        aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
-
-        log.info("Genome indexing started")
-
-        jobida= aligner.build_index(mem=options.memory,cpu=options.threads)
-    
-        if options.slurm:
-
-            wait(lambda: pu.check_status(jobida), waiting_for="genome indexing to finish")
-
-            log.info("Genome index completed succesfully")
-        else:
-            log.info("Genome index completed succesfully")
-
-        log.info("Checking genome index")
-
-        if aligner.check_index():
-            log.info("Genome index is valid")
-        else:
-            log.info("Genome index is not valid please create it again")
-            sys.exit()
-        log.info("Alignment started")
-
-        outalign, jobalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
-
-    if options.slurm:
-        for job in jobalign:
-            wait(lambda: pu.check_status(job), waiting_for="alignment to finish")
-
-            log.info(f"Alignment completed for job {job}")
-
-        log.info("Read alignment completed succesfully")
-    else:
-
-        log.info("Read alignment completed succesfully")
+            log.info("Read alignment completed succesfully")
     
         # Alignment statistics section
 
