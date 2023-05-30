@@ -44,12 +44,25 @@ def fastqcRun(sampleDict=None, configFile=None,slurm=False, mem=10, cpu=8, task=
     
     :param dep: Slurm job dependency.
     """
-
+    
     if configFile != None:
 
-        config = pu.parse_config_file(configFile)
+        try:
+
+            config = pu.parse_config_file(os.path.join(configFile, 'fastqc.ini'))
+
+            log.info(f"Using  config file {os.path.join(configFile, 'fastqc.ini')}")
+
+        except Exception:
+
+            stream = pkg_resources.resource_stream('pyseqrna', "param/fastqc.ini")
+
+            config = pu.parse_config_file(stream.name)
+
+            log.error("Please provide a valid config file. Using default config file fastqc.ini")
 
     else:
+
         stream = pkg_resources.resource_stream('pyseqrna', "param/fastqc.ini")
 
         config = pu.parse_config_file(stream.name)

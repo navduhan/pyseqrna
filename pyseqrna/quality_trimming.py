@@ -40,19 +40,25 @@ def flexbarRun(sampleDict,  configFile=None, slurm=False, mem=10, cpu=8, task=1,
 
         try:
 
-            config = pu.parse_config_file(configFile)
+            config = pu.parse_config_file(os.path.join(configFile, 'flexbar.ini'))
+
+            log.info(f"Using  config file {os.path.join(configFile, 'flexbar.ini')}")
 
         except Exception:
 
-            log.error("Please provide a valid config file")
+            stream = pkg_resources.resource_stream('pyseqrna', "param/flexbar.ini")
+
+            config = pu.parse_config_file(stream.name)
+
+            log.error("Please provide a valid config file. Using default config file flexbar.ini")
 
     else:
-        
-        log.info("Using default config file flexbar.ini")
 
         stream = pkg_resources.resource_stream('pyseqrna', "param/flexbar.ini")
 
         config = pu.parse_config_file(stream.name)
+
+        log.info("Using default config file flexbar.ini")
 
         
 
@@ -194,24 +200,48 @@ def trimmomaticRun(sampleDict=None, configFile=None, slurm=False, mem=10, cpu=8,
 
         try:
 
-            config = pu.parse_config_file(configFile)
+            if paired:
+
+                config = pu.parse_config_file(os.path.join(configFile, 'trimmomaticPE.ini'))
+
+                log.info(f"Using  config file {os.path.join(configFile, 'trimmomaticPE.ini')}")
+
+            else:
+
+                config = pu.parse_config_file(os.path.join(configFile, 'trimmomaticSE.ini'))
+
+                log.info(f"Using  config file {os.path.join(configFile, 'trimmomaticSE.ini')}")
 
         except Exception:
 
-            log.error("Please provide a valid config file")
+            if paired:
+            
+                stream = pkg_resources.resource_stream(
+                    'pyseqrna', "param/trimmomaticPE.ini")
+                config = pu.parse_config_file(stream.name)
+                log.info("Please provide a valid config file. Using default config file trimmomaticPE.ini")
+
+            else:
+                
+                stream = pkg_resources.resource_stream(
+                    'pyseqrna', "param/trimmomaticSE.ini")
+                config = pu.parse_config_file(stream.name)
+                log.info("Please provide a valid config file. Using default config file trimmomaticSE.ini")
 
     else:
         if paired:
-            log.info("Using default config file trimmomaticPE.ini")
+            
             stream = pkg_resources.resource_stream(
                 'pyseqrna', "param/trimmomaticPE.ini")
             config = pu.parse_config_file(stream.name)
+            log.info("Using default config file trimmomaticPE.ini")
 
         else:
-            log.info("Using default config file trimmomaticSE.ini")
+            
             stream = pkg_resources.resource_stream(
                 'pyseqrna', "param/trimmomaticSE.ini")
             config = pu.parse_config_file(stream.name)
+            log.info("Using default config file trimmomaticSE.ini")
            
 
     trimmomatic_config = config[list(config.keys())[0]]
@@ -355,11 +385,16 @@ def trim_galoreRun(sampleDict=None,  configFile=None, slurm=False, mem=10, cpu=8
 
         try:
 
-            config = pu.parse_config_file(configFile)
+            config = pu.parse_config_file(os.paath.join(configFile, 'trim_galore.ini'))
+            log.info(f"Using config file {os.paath.join(configFile, 'trim_galore.ini')}")
 
         except Exception:
 
-            log.error("Please provide a valid config file")
+            stream = pkg_resources.resource_stream(
+            'pyseqrna', "param/trim_galore.ini")
+            config = pu.parse_config_file(stream.name)
+
+            log.error("Please provide a valid config file. Using default config file trim_galore.ini")
 
     else:
 

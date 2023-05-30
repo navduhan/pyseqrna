@@ -3,7 +3,7 @@
 Title: pySeqRNA Wrapper for running pySeqRNA.
 Author: Naveen Duhan
 Lab: KAABiL(Kaundal Artificial Intelligence & Advanced Bioinformatics Lab)
-Version: 0.1
+Version: 0.2
 """
 import pyseqrna
 from pyseqrna import __main__

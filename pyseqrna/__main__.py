@@ -7,7 +7,7 @@
 
 :author: naveen duhan
 
-:version: 0.1
+:version: 0.2
 """
 
 import matplotlib.pyplot as plt
@@ -88,13 +88,13 @@ def main():
         dryrun = True
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
     
-        fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
+        fastqcout = qc.fastqcRun(sampleDict=samples, configFile=options.param, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
     else: 
         dryrun = False
     
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
         
-        jobid, fastqcout = qc.fastqcRun(sampleDict=samples,outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
+        jobid, fastqcout = qc.fastqcRun(sampleDict=samples, configFile=options.param, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
         if options.slurm:
 
@@ -118,15 +118,15 @@ def main():
 
         if options.trimming == 'flexbar':
 
-            outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
+            outtrim, jobidt = qt.flexbarRun(sampleDict=samples, configFile=options.param, paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
         
         elif options.trimming == 'trimmomatic':
 
-            outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples, configFile=options.param, slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
             
         elif options.trimming == 'trim_galore':
 
-            outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples, configFile=options.param, slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
     else: 
 
         dryrun = False
@@ -137,15 +137,15 @@ def main():
 
         if options.trimming == 'flexbar':
 
-            outtrim, jobidt = qt.flexbarRun(sampleDict=samples,paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
+            outtrim, jobidt = qt.flexbarRun(sampleDict=samples, configFile=options.param, paired=options.paired, slurm=options.slurm, mem=options.memory,cpu=options.threads, outDir=qualitydir, dryrun=dryrun)
         
         elif options.trimming == 'trimmomatic':
 
-            outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            outtrim, jobidt = qt.trimmomaticRun(sampleDict=samples, configFile=options.param, slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
             
         elif options.trimming == 'trim_galore':
 
-            outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples,slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
+            outtrim, jobidt = qt.trim_galoreRun(sampleDict=samples, configFile=options.param, slurm=options.slurm,mem=options.memory,cpu=options.threads, outDir=qualitydir,paired=options.paired, dryrun=dryrun)
     
         if options.slurm:
             for job in jobidt:
@@ -162,14 +162,14 @@ def main():
         dryrun = True
         if options.fastqc2:
         
-            fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
+            fastqcout = qc.fastqcRun(sampleDict=outtrim, configFile=options.param, afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
     else:
         dryrun = False
 
         if options.fastqc2:
             
-            jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim,afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
+            jobid, fastqcout = qc.fastqcRun(sampleDict=outtrim, configFile=options.param, afterTrim=True, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
 
             if options.slurm:
                 for job in jobid:
@@ -212,13 +212,13 @@ def main():
         dryrun = True
         if options.aligners == 'STAR':
             aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
-            aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+            aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
             jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
             outalign= aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
         
         elif options.aligners == 'hisat2':
 
-            aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+            aligner = al.hisat2_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
             jobida= aligner.build_index(mem=options.memory,cpu=options.threads)
             outalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
 
@@ -233,7 +233,7 @@ def main():
 
         if options.aligners == 'STAR':
 
-            aligner= al.STAR_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+            aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
 
             log.info("Genome indexing started")
 
@@ -260,7 +260,7 @@ def main():
         
         elif options.aligners == 'hisat2':
 
-            aligner = al.hisat2_Aligner(genome=options.reference_genome,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
+            aligner = al.hisat2_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
 
             log.info("Genome indexing started")
 
@@ -317,13 +317,13 @@ def main():
 
         if options.quantification == 'featureCounts':
 
-            fjob = quant.featureCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
+            fjob = quant.featureCount(gff=options.feature_file, configFile=options.param, bamDict=outalign, outDir=quantdir)
 
             log.info("feature counts completed and written in %s/Raw_Counts.xlsx",quantdir)
         
         elif options.quantification == 'Htseq':
 
-            fjob = quant.htseqCount(gff=options.feature_file, bamDict=outalign, outDir=quantdir)
+            fjob = quant.htseqCount(gff=options.feature_file, configFile=options.param, bamDict=outalign, outDir=quantdir)
 
             log.info("feature counts completed and written in %s/Raw_Counts.txt",quantdir)
         

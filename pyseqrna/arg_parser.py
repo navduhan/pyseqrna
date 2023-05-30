@@ -143,6 +143,8 @@ compute.add_argument('--threads', dest='threads', action='store', default= "80% 
 
 compute.add_argument('--memory', dest='memory', action='store', default=16, help="Max memory to use (in GB)\n[default:16]")
 
+compute.add_argument('-p', '--param', dest='param', default='None', action='store', help="Provide custom config file directory")
+
 compute.add_argument('--resume', dest='resume', action='store', default='all', choices=['trimming', 'alignment', 'differential', 'functional'] )
 
 

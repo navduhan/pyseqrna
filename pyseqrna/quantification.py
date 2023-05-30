@@ -53,11 +53,16 @@ def featureCount(configFile=None, bamDict=None, gff=None, slurm=False,  mem=8, c
 
         try:
 
-            config = pu.parse_config_file(configFile)
+            config = pu.parse_config_file(os.path.join(configFile, 'featureCount.ini'))
+
+            log.info(f"Using default config file {os.path.join(configFile, 'featureCount.ini')}")
             
         except Exception:
 
-            log.error("Please provide a valid config file")
+            stream = pkg_resources.resource_stream('pyseqrna', "param/featureCount.ini")
+            config = pu.parse_config_file(stream.name)
+
+            log.error("Please provide a valid config file. Using default config file featureCount.ini")
 
     else:
         stream = pkg_resources.resource_stream('pyseqrna', "param/featureCount.ini")
@@ -162,11 +167,17 @@ def htseqCount(configFile=None, bamDict=None, gff=None, slurm=False, mem=8, cpu=
 
         try:
 
-            config = pu.parse_config_file(configFile)
+            config = pu.parse_config_file(os.path.join(configFile, 'htseq.ini'))
+
+            log.info(f"Using default config file {os.path.join(configFile, 'htseq.ini')}")
+
             
         except Exception:
 
-            log.error("Please provide a valid config file")
+            stream = pkg_resources.resource_stream('pyseqrna', "param/htseq.ini")
+            config = pu.parse_config_file(stream.name)
+
+            log.error("Please provide a valid config file. Using default config file htseq.ini")
 
     else:
 

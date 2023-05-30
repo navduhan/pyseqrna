@@ -54,13 +54,17 @@ class STAR_Aligner:
 
             try:
 
-                self.config = pu.parse_config_file(configFile)
+                self.config = pu.parse_config_file(os.path.join(configFile, 'STAR.ini'))
 
-                log.info(f"Using  config file {configFile}")
+                log.info(f"Using  config file {os.path.join(configFile, 'STAR.ini')}")
                 
             except Exception:
 
-                log.error("Please provide a valid config file")
+                log.error("Please provide a valid config file. Using default config file STAR.ini")
+
+                stream = pkg_resources.resource_stream('pyseqrna', "param/STAR.ini")
+
+                self.config = pu.parse_config_file(stream.name)
         else:
             stream = pkg_resources.resource_stream('pyseqrna', "param/STAR.ini")
 
@@ -386,13 +390,18 @@ class hisat2_Aligner():
 
             try:
 
-                self.config = pu.parse_config_file(configFile)
+                self.config = pu.parse_config_file(os.path.join(configFile, 'hisat2.ini'))
 
-                log.info(f"Using  config file {configFile}")
+                log.info(f"Using  config file {os.path.join(configFile, 'hisat2.ini')}")
                 
             except Exception:
 
-                log.error("Please provide a valid config file")
+                log.error("Please provide a valid config file. Using default config file hisat2.ini")
+
+                stream = pkg_resources.resource_stream('pyseqrna', "param/hisat2.ini")
+
+                self.config = pu.parse_config_file(stream.name)
+
         else:
             stream = pkg_resources.resource_stream('pyseqrna', "param/hisat2.ini")
 
