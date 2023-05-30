@@ -52,23 +52,23 @@ def featureCount(configFile=None, bamDict=None, gff=None, slurm=False,  mem=8, c
     if configFile != None:
 
         try:
+            log.info(f"Using default config file {os.path.join(configFile, 'featureCount.ini')}")
 
             config = pu.parse_config_file(os.path.join(configFile, 'featureCount.ini'))
-
-            log.info(f"Using default config file {os.path.join(configFile, 'featureCount.ini')}")
             
         except Exception:
+
+            log.error("Please provide a valid config file. Using default config file featureCount.ini")
 
             stream = pkg_resources.resource_stream('pyseqrna', "param/featureCount.ini")
             config = pu.parse_config_file(stream.name)
 
-            log.error("Please provide a valid config file. Using default config file featureCount.ini")
-
     else:
-        stream = pkg_resources.resource_stream('pyseqrna', "param/featureCount.ini")
-        config = pu.parse_config_file(stream.name)
 
         log.info("Using default config file featureCount.ini")
+
+        stream = pkg_resources.resource_stream('pyseqrna', "param/featureCount.ini")
+        config = pu.parse_config_file(stream.name)
 
     ext = pu.get_file_extension(gff)
 
@@ -167,23 +167,24 @@ def htseqCount(configFile=None, bamDict=None, gff=None, slurm=False, mem=8, cpu=
 
         try:
 
-            config = pu.parse_config_file(os.path.join(configFile, 'htseq.ini'))
-
             log.info(f"Using default config file {os.path.join(configFile, 'htseq.ini')}")
+
+            config = pu.parse_config_file(os.path.join(configFile, 'htseq.ini'))
 
             
         except Exception:
 
+            log.error("Please provide a valid config file. Using default config file htseq.ini")
+
             stream = pkg_resources.resource_stream('pyseqrna', "param/htseq.ini")
             config = pu.parse_config_file(stream.name)
 
-            log.error("Please provide a valid config file. Using default config file htseq.ini")
-
     else:
-
+        log.info("Using default config file htseq.ini")
+        
         stream = pkg_resources.resource_stream('pyseqrna', "param/htseq.ini")
         config = pu.parse_config_file(stream.name)
-        log.info("Using default config file htseq.ini")
+        
 
     ext = pu.get_file_extension(gff)
 

@@ -54,10 +54,10 @@ class STAR_Aligner:
 
             try:
 
+                log.info(f"Using  config file {os.path.join(configFile, 'STAR.ini')}")
+
                 self.config = pu.parse_config_file(os.path.join(configFile, 'STAR.ini'))
 
-                log.info(f"Using  config file {os.path.join(configFile, 'STAR.ini')}")
-                
             except Exception:
 
                 log.error("Please provide a valid config file. Using default config file STAR.ini")
@@ -66,12 +66,12 @@ class STAR_Aligner:
 
                 self.config = pu.parse_config_file(stream.name)
         else:
+            log.info("Using default config file STAR.ini")
+
             stream = pkg_resources.resource_stream('pyseqrna', "param/STAR.ini")
 
             self.config = pu.parse_config_file(stream.name)
            
-            log.info("Using default config file STAR.ini")
-
         return
     
     def build_index(self,  mem= 20, tasks = 1, cpu= 8 , gff=None,  dep= ""):
@@ -390,9 +390,9 @@ class hisat2_Aligner():
 
             try:
 
-                self.config = pu.parse_config_file(os.path.join(configFile, 'hisat2.ini'))
-
                 log.info(f"Using  config file {os.path.join(configFile, 'hisat2.ini')}")
+
+                self.config = pu.parse_config_file(os.path.join(configFile, 'hisat2.ini'))
                 
             except Exception:
 
@@ -403,11 +403,14 @@ class hisat2_Aligner():
                 self.config = pu.parse_config_file(stream.name)
 
         else:
+            
+            log.info("Using default config file hisat2.ini")
+
             stream = pkg_resources.resource_stream('pyseqrna', "param/hisat2.ini")
 
             self.config = pu.parse_config_file(stream.name)
            
-            log.info("Using default config file hisat2.ini")
+            
         return
     
     def build_index(self, mem=8, tasks=1, cpu= 8, dep=''):
