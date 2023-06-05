@@ -225,6 +225,7 @@ def main():
         quantdir = pu.make_directory(os.path.join(outdir, "3_Quantification"), dryrun=dryrun)
 
     else: 
+
         dryrun = False
     
         log.info("Starting Alignment process")
@@ -526,10 +527,9 @@ def main():
         filtered_MMG['summary'].to_excel(os.path.join(diffdir,"Filtered_MMGs_summary.xlsx"), index=False)
 
     
+    plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
 
     if options.heatmap:
-
-        plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
 
         log.info("Creating heatmap of top 50 DEGs")
 
@@ -543,11 +543,10 @@ def main():
 
         genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_MMGs.xlsx"),combinations=combination, outDir=diffdir, mmg=True)
 
-    
+    annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
 
     if options.geneontology:
 
-        annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
 
         outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
 
