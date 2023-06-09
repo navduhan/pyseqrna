@@ -58,7 +58,7 @@ def clusterSample(countDF = None):
 
     temp = {R["leaves"][ii]: counts.columns[ii] for ii in range(len(R["leaves"]))}
     
-    height = len(counts.columns)/2
+    height = len(counts.columns)
     fig, ax = plt.subplots(figsize=(height, 10))
 
     shc.dendrogram(
