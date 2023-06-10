@@ -14,6 +14,7 @@ import seaborn as sns
 import numpy as np
 import pandas as pd
 import os
+import math
 import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as shc
 
@@ -57,8 +58,10 @@ def clusterSample(countDF = None):
                     )
 
     temp = {R["leaves"][ii]: counts.columns[ii] for ii in range(len(R["leaves"]))}
-    
-    height = len(counts.columns)
+    if len(count.columns) < 50:
+         height = math.ceil(len(counts.columns)/2)
+    else:
+        height = math.ceil(len(counts.columns)/5)
     fig, ax = plt.subplots(figsize=(10, height))
 
     shc.dendrogram(
