@@ -58,7 +58,7 @@ def clusterSample(countDF = None):
                     )
 
     temp = {R["leaves"][ii]: counts.columns[ii] for ii in range(len(R["leaves"]))}
-    if len(count.columns) < 50:
+    if len(counts.columns) < 50:
          height = math.ceil(len(counts.columns)/2)
     else:
         height = math.ceil(len(counts.columns)/5)
