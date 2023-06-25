@@ -652,7 +652,7 @@ def add_MMG(degDF=None, anotDF=None, combination=None):
 
     for k in Fgenes:
         for m in k[1].split("-"):
-            Fgenes_List.append([k[0], m])
+            Fgenes_List.append([k[0], m.upper()])
 
     genes = anotDF[['Genes']].values.tolist()
     MMG_genes = []

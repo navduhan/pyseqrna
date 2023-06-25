@@ -361,7 +361,7 @@ def run_edgeR(countDF=None, targetFile=None, combination=None,  gene_column='Gen
     
     return edgeR_results
 
-def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6), replicate=True, mmg=False, extraColumns=False):
+def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize=(10,6),text_size=14, replicate=True, mmg=False, extraColumns=False):
     """
     This function filter all gene expression file based on given FOLD and FDR
 
@@ -448,11 +448,14 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         fig, ax = plt.subplots(figsize=(hg,hg),dpi=300)
         ax.barh(labels,updata, color='mediumseagreen')
         ax.barh(labels,downdata, left=updata, color='salmon')
-        plt.xticks(fontsize=10)
-        plt.yticks(fontsize=10)
-        plt.xlabel("Number of Genes", fontsize=10)
-        plt.ylabel("Comparisons", fontsize=10)
-        plt.legend(['Up-regulated', 'Down-regulated'],  ncol =2, loc='center', bbox_to_anchor=(0.5, 1.1))
+        plt.xticks(fontsize=text_size, weight='bold')
+        plt.yticks(fontsize=text_size, weight='bold')
+        if mmg:
+            plt.xlabel("Number of MMGs", fontsize=text_size, weight='bold', labelpad=20)
+        else:
+            plt.xlabel("Number of Genes", fontsize=text_size, weight='bold', labelpad=20)
+        plt.ylabel("Comparisons", fontsize=text_size, weight='bold', labelpad=20)
+        plt.legend(['Up-regulated', 'Down-regulated'],  ncol =2, loc='center', fontsize=text_size, bbox_to_anchor=(0.5, 1.1))
 
 
         ax.spines['top'].set_visible(False)
@@ -463,9 +466,9 @@ def degFilter(degDF=None, CompareList=None, FDR=0.05, FOLD=2, plot=True, figsize
         ax.spines['bottom'].set_position(('outward', 5))
         # plt.savefig('deg.png', dpi=300, bbox_inches='tight')
         if replicate:
-            plt.title(f'Filter DEGs (Fold:{FOLD} and FDR:{FDR})', loc='center', pad=40)
+            plt.title(f'Filter DEGs (Fold:{FOLD} and FDR:{FDR})', loc='center', fontsize=text_size, weight='bold', pad=20)
         else:
-            plt.title(f'Filter DEGs (Fold:{FOLD} )', loc='center', pad=40)
+            plt.title(f'Filter DEGs (Fold:{FOLD} )', loc='center',fontsize=text_size, weight='bold', pad=20)
         fig.tight_layout()
         
     return {'summary': summary, "filtered": DEGs,"filteredup":Ups, "filtereddown":Downs, "plot": fig}
