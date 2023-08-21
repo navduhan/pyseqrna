@@ -537,8 +537,7 @@ class Gene_Description:
         for attr in attributes:
             self._add_attr_node(dataset, attr)
 
-        response = self._get_request(
-        uri , query = ElementTree.tostring(root))
+        response = self._get_request(uri , query = ElementTree.tostring(root))
         result = pd.read_csv(StringIO(response.text), sep='\t')
         result.columns = ['Gene', 'Name','Description']
         

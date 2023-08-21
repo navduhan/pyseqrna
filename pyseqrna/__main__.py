@@ -406,12 +406,16 @@ def main():
             count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
             result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
+            try:
+                ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
 
-            ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
+                results = ge.add_names()
 
-            results = ge.add_names()
-
-            results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+                results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+                deextraColumns=True
+            except Exception:
+                result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+                deextraColumns=False
 
         elif options.detool == 'edgeR':
 
@@ -452,7 +456,7 @@ def main():
 
     log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
 
-    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=True)
+    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=deextraColumns)
 
     if options.mmgg:
 
