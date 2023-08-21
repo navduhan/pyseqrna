@@ -414,7 +414,8 @@ def main():
                 results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
                 deextraColumns=True
             except Exception:
-                result.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+                results = result
+                results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
                 deextraColumns=False
 
         elif options.detool == 'edgeR':
