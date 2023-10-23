@@ -48,14 +48,14 @@ internal = parser.add_argument_group("Internal arguments")
 internal.add_argument( "--source", dest="source", default='ENSEMBL', 
     help="Provide the source database of reference and feature file\n[default: ENSEMBL]")
 
-internal.add_argument( "--taxid", dest='taxid', default=None, 
-    help="Provide ncbi taxonomy id of the species")
+# internal.add_argument( "--taxid", dest='taxid', default=None, 
+#     help="Provide ncbi taxonomy id of the species")
 
 internal.add_argument( "--species", dest='species', default=None, 
-    help="Provide ncbi taxonomy id of the species")
+    help="Provide species name for example for Arabidopsis thaliana it is athaliana")
 
-internal.add_argument( "--organismType", dest='speciestype', default='plants', 
-    help="Provide Organism class")
+internal.add_argument( "--organismType", dest='speciestype', default='plants', choices=['plants', 'animals'],
+    help="Provide species type either plants or animals  ")
 
 internal.add_argument( "--outdir",  default='pySeqRNA_results', 
     help="create output directory name to write results.\n[default: pySeqRNA_results] ")
