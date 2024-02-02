@@ -202,7 +202,7 @@ def parse_config_file(infile):
 
     return sections_dict
 
-def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", command='command', time=4, mem=10, cpu=8, tasks=1, dep=''):
+def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", partition='compute', command='command', time=4, mem=10, cpu=8, tasks=1, dep=''):
     """
     This function is for submitting job on cluster with SLURM job Scheduling
 
@@ -229,8 +229,8 @@ def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", command=
             
             dep = '--dependency=afterok:{} --kill-on-invalid-dep=yes '.format(dep)
 
-        sbatch_command = "sbatch -J {} -o {}.out -e {}.err -t {}:00:00  --mem={}000 --cpus-per-task={} --ntasks={} --wrap='{}' {}".format(
-            job_name, sout, serror, time, mem, cpu, tasks,  command, dep)
+        sbatch_command = "sbatch -J {} -o {}.out -e {}.err -t {}:00:00 -p {} --mem={}000 --cpus-per-task={} --ntasks={} --wrap='{}' {}".format(
+            job_name, sout, serror, time, partition, mem, cpu, tasks,  command, dep)
         
         sbatch_response = subprocess.getoutput(sbatch_command)
 

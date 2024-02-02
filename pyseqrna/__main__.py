@@ -471,7 +471,7 @@ def main():
 
     for key, value in filtered_DEG['filtered'].items():
         value.to_excel(wa,sheet_name=key, index=False)
-        wa.save()
+        
     wa.close()
 
     # write up filtered genes together
@@ -479,14 +479,14 @@ def main():
 
     for key, value in filtered_DEG['filteredup'].items():
         value.to_excel(wu,sheet_name=key, index=False)
-        wu.save()
+        
     wu.close()
     # write down filtered genes together
     wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downDEGs.xlsx"))
 
     for key, value in filtered_DEG['filtereddown'].items():
         value.to_excel(wd,sheet_name=key, index=False)
-        wd.save()
+        
     wd.close()
 
     if options.mmgg:
@@ -494,7 +494,7 @@ def main():
 
         for key, value in filtered_MMG['filtered'].items():
             value.to_excel(wa,sheet_name=key, index=False)
-            wa.save()
+            
         wa.close()
 
         # write up filtered genes together
@@ -502,14 +502,14 @@ def main():
 
         for key, value in filtered_MMG['filteredup'].items():
             value.to_excel(wu,sheet_name=key, index=False)
-            wu.save()
+            
         wu.close()
         # write down filtered genes together
         wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downMMGs.xlsx"))
 
         for key, value in filtered_MMG['filtereddown'].items():
             value.to_excel(wd,sheet_name=key, index=False)
-            wd.save()
+            
         wd.close()
 
     log.info("ploting DEG count figure")
@@ -552,7 +552,6 @@ def main():
 
     if options.geneontology:
 
-
         outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
 
         gofiles = pu.make_directory(os.path.join(outgo,"GO_Files"))
@@ -565,7 +564,7 @@ def main():
 
             goplotsM = pu.make_directory(os.path.join(outgo,"GO_Plots_MMG"))
 
-        go = GeneOntology(species=options.species, type=options.speciestype, keyType=options.source, taxid=options.taxid, gff=options.feature_file)
+        go = GeneOntology(species=options.species, type=options.speciestype, keyType=options.source,  gff=options.feature_file)
 
         for c in combination:
 
