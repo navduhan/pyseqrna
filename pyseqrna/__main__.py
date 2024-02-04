@@ -60,12 +60,12 @@ def main():
 
     
     # Create directory for results
-    if options.resume != 'all':
-        dryrun = True
+    if options.resume == 'all':
+        dryrun = False
         log.info("Analysis started at %s", startTime)
         outdir = pu.make_directory(options.outdir, dryrun=dryrun)
     else: 
-        dryrun = False
+        dryrun = True
         log.info(f"Analysis resume form {options.resume} at {startTime}")
         outdir = pu.make_directory(options.outdir, dryrun=dryrun)
     # with open (os.path.join(outdir,"pyseqrnaa.dill"), 'wb') as dill_save:
@@ -108,11 +108,13 @@ def main():
             log.info("Read quality check completed succesfully")
 
     
-    # Trimming
-    log.info(f"Read trimming started with {options.trimming}")
+    
 
     if options.resume == 'alignment' or  options.resume == 'differential':
         dryrun = True
+
+        # Trimming
+        log.info(f"Read trimming started with {options.trimming}")
 
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
 
@@ -130,6 +132,9 @@ def main():
     else: 
 
         dryrun = False
+
+         # Trimming
+        log.info(f"Read trimming started with {options.trimming}")
 
         if not os.path.isdir(os.path.join(outdir, "1_Quality")):
 
@@ -210,6 +215,7 @@ def main():
     if options.resume == 'differential':
         
         dryrun = True
+        
         if options.aligners == 'STAR':
             aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
             aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)

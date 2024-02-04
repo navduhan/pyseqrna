@@ -128,7 +128,7 @@ class STAR_Aligner:
 
                 os.system(' '.join(["gunzip", self.genome]))
 
-            os.system(' '.join(["cp", self.genome, output]))
+            os.system(' '.join(["cp", self.genome.split(".gz")[0], output]))
 
             log.info(f"{pu.get_basename(self.genome)} copied successfully in {directory}")
 

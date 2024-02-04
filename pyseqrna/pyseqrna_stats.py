@@ -173,8 +173,9 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
     Mreads = manager.dict()
     processes = []
     
-    for sp in sampleDict:
-        try:
+    try:
+        for sp in sampleDict:
+        
             if pairedEND:
                 p=multiprocessing.Process(target= _getNreads, args=(sampleDict[sp][2],Ireads, sp,True,))
             else:
@@ -183,16 +184,16 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             processes.append(p)
             p.start()
             
-            for process in processes:
-                
-                process.join()
+        for process in processes:
             
-        except Exception:
+            process.join()
+            
+    except Exception:
             log.error(f"Not able to count Input read number in {sp}")
    
-    
-    for tf in trimDict:
-        try:
+    try:
+        for tf in trimDict:
+        
             if pairedEND:
                 p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf,True))
             else:
@@ -201,20 +202,20 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             processes.append(p)
             p.start()
             
-            for process in processes:
-                process.join()
+        for process in processes:
+            process.join()
        
-        except Exception:
+    except Exception:
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-            p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], cpu,))
-        
-            processes.append(p)
-            p.start()
+        p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], cpu,))
+    
+        processes.append(p)
+        p.start()
             
-            for process in processes:
-                process.join()
+    for process in processes:
+        process.join()
         
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
@@ -223,42 +224,45 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
         processes.append(p)
         p.start()
         
-        for process in processes:
-            process.join()
+    for process in processes:
+        process.join()
 
-    for bf in bamDict:
-        try:
+    try:
+        for bf in bamDict:
+        
             p=multiprocessing.Process(target= _getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
         
             processes.append(p)
             p.start()
             
-            for process in processes:
-                process.join()
+        for process in processes:
+            process.join()
 
-        except Exception:
-            log.error(f"Not able to count Aligned read number in {bf}")
-        try:
+    except Exception:
+        log.error(f"Not able to count Aligned read number in {bf}")
+    try:
+        for bf in bamDict:
             p=multiprocessing.Process(target= _getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
         
             processes.append(p)
             p.start()
             
-            for process in processes:
-                process.join()
+        for process in processes:
+            process.join()
                 
-        except Exception:
+    except Exception:
             log.error(f"Not able to count Uniquely mapped read number in {bf}")
-        try:
+    try:
+        for bf in bamDict:
             p=multiprocessing.Process(target= _getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         
             processes.append(p)
             p.start()
             
-            for process in processes:
-                process.join()           
+        for process in processes:
+            process.join()           
             
-        except Exception:
+    except Exception:
             log.error(f"Not able to count Multi mapped read number in {bf}")
     try:
         total = []
