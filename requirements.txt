@@ -38,3 +38,4 @@ waiting
 zipp
 wheel
 openpyxl
+notebook
