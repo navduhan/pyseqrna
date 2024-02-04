@@ -190,9 +190,9 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             processes.append(p)
             p.start()
             
-        for process in processes:
-            
-            process.join()
+            for process in processes:
+                
+                process.join()
             
     except Exception:
             log.error(f"Not able to count Input read number in {sp}")
@@ -208,30 +208,30 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             tprocesses.append(p)
             p.start()
             
-        for process in tprocesses:
-            process.join()
+            for process in tprocesses:
+                process.join()
        
     except Exception:
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-        p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], cpu,))
+        p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], pu.cpu(),))
     
         bprocesses.append(p)
         p.start()
             
-    for process in bprocesses:
-        process.join()
+        for process in bprocesses:
+            process.join()
         
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
        
-        p=multiprocessing.Process(target = _index_bam, args=(file, cpu,))
+        p=multiprocessing.Process(target = _index_bam, args=(file, pu.cpu(),))
         bsprocesses.append(p)
         p.start()
         
-    for process in bsprocesses:
-        process.join()
+        for process in bsprocesses:
+            process.join()
 
     try:
         for bf in bamDict:
@@ -241,8 +241,8 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             aprocesses.append(p)
             p.start()
             
-        for process in aprocesses:
-            process.join()
+            for process in aprocesses:
+                process.join()
 
     except Exception:
         log.error(f"Not able to count Aligned read number in {bf}")
@@ -253,8 +253,8 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             uprocesses.append(p)
             p.start()
             
-        for process in uprocesses:
-            process.join()
+            for process in uprocesses:
+                process.join()
                 
     except Exception:
             log.error(f"Not able to count Uniquely mapped read number in {bf}")
@@ -265,8 +265,8 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             mprocesses.append(p)
             p.start()
             
-        for process in mprocesses:
-            process.join()           
+            for process in mprocesses:
+                process.join()           
             
     except Exception:
             log.error(f"Not able to count Multi mapped read number in {bf}")
