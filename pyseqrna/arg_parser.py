@@ -135,9 +135,11 @@ tools.add_argument('--quantTool', dest='quantification',default= 'featureCounts'
 tools.add_argument('--deTool', dest="detool", default='DESeq2', choices=['DESeq2', 'edgeR'],
         help="Select a tool for differential expression.\n[default:DESeq2]")
 
-compute = parser.add_argument_group("Computation arguments")
+compute = parser.add_argument_group("Computational arguments")
 
 compute.add_argument('--slurm', dest='slurm', action='store_true', default=False, help="Enable SLURM job scheduling on HPC\n[default:False]")
+
+compute.add_argument('--slurm-partition', required='--slurm' in sys.argv, dest='slurm-partition', action='store', default='compute', help='Provide slurm partition')
 
 compute.add_argument('--threads', dest='threads', action='store', default= "80% of available CPU", help="Number of processors/threads to use\n[default:80%% of available CPU]")
 
