@@ -215,7 +215,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             log.error(f"Not able to count Trim read number in {tf}")
 
     for bf in bamDict:
-        p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], pu.cpu(),))
+        p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], pu.get_cpu(),))
     
         bprocesses.append(p)
         p.start()
@@ -226,7 +226,7 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
        
-        p=multiprocessing.Process(target = _index_bam, args=(file, pu.cpu(),))
+        p=multiprocessing.Process(target = _index_bam, args=(file, pu.get_cpu(),))
         bsprocesses.append(p)
         p.start()
         
