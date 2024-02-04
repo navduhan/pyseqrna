@@ -97,15 +97,14 @@ def read_input_file(infile, inpath, paired = False):
                     if lines[2] not in factors:
 
                         factors.append(lines[2])
+
+        log.info("Input file %s read succesfully", infile)
+
     except Exception:
 
         log.error("Please provide a valid input file")
 
         sys.exit()
-
-    finally:
-
-        log.info("Input file %s read succesfully", infile)
 
     try:
 
@@ -140,13 +139,11 @@ def read_input_file(infile, inpath, paired = False):
 
         targets = targets.assign(sample=sample)
 
+        log.info("targets dataframe for differenatial created succesfully from %s", infile)
+
     except Exception:
 
         log.error("Please provide a valid input file")
-    
-    finally:
-
-        log.info("targets dataframe for differenatial created succesfully from %s", infile)
 
     return {'samples': samples, "combinations": combinations, "targets": targets}
 
@@ -192,13 +189,11 @@ def parse_config_file(infile):
 
             sections_dict[section] = voption
 
+        log.info("Config generated succesfully from %s", infile)
+
     except Exception:
 
         log.error("Please provide a valid config file")
-    
-    finally:
-
-        log.info("Config generated succesfully from %s", infile)
 
     return sections_dict
 
