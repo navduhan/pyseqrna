@@ -19,6 +19,7 @@ dependencies:
   - htseq
   - samtools
   - bamtools
+  - bedtools
   - pip
   - sortmerna=4.2.0
   - bioconductor-deseq2
