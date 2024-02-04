@@ -172,6 +172,12 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
     Ureads = manager.dict()
     Mreads = manager.dict()
     processes = []
+    tprocesses = []
+    bprocesses = []
+    bsprocesses = []
+    aprocesses = []
+    uprocesses = []
+    mprocesses = []
     
     try:
         for sp in sampleDict:
@@ -199,10 +205,10 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
             else:
                 p=multiprocessing.Process(target= _getTreads, args=(trimDict[tf][2],Nreads, tf,))
         
-            processes.append(p)
+            tprocesses.append(p)
             p.start()
             
-        for process in processes:
+        for process in tprocesses:
             process.join()
        
     except Exception:
@@ -211,20 +217,20 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
     for bf in bamDict:
         p=multiprocessing.Process(target = _sort_bam, args=(bamDict[bf][2], cpu,))
     
-        processes.append(p)
+        bprocesses.append(p)
         p.start()
             
-    for process in processes:
+    for process in bprocesses:
         process.join()
         
     for bf in bamDict:   
         file = bamDict[bf][2].split(".bam")[0] + "_sorted.bam"
        
         p=multiprocessing.Process(target = _index_bam, args=(file, cpu,))
-        processes.append(p)
+        bsprocesses.append(p)
         p.start()
         
-    for process in processes:
+    for process in bsprocesses:
         process.join()
 
     try:
@@ -232,10 +238,10 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
         
             p=multiprocessing.Process(target= _getAligned_reads, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Areads, bf,))
         
-            processes.append(p)
+            aprocesses.append(p)
             p.start()
             
-        for process in processes:
+        for process in aprocesses:
             process.join()
 
     except Exception:
@@ -244,10 +250,10 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
         for bf in bamDict:
             p=multiprocessing.Process(target= _getUniquely_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Ureads, bf,))
         
-            processes.append(p)
+            uprocesses.append(p)
             p.start()
             
-        for process in processes:
+        for process in uprocesses:
             process.join()
                 
     except Exception:
@@ -256,10 +262,10 @@ def align_stats(sampleDict=None,trimDict=None, bamDict=None,riboDict=None,cpu=8,
         for bf in bamDict:
             p=multiprocessing.Process(target= _getMulti_mapped, args=(bamDict[bf][2].split(".bam")[0] + "_sorted.bam",Mreads, bf,))
         
-            processes.append(p)
+            mprocesses.append(p)
             p.start()
             
-        for process in processes:
+        for process in mprocesses:
             process.join()           
             
     except Exception:
