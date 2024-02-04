@@ -97,14 +97,14 @@ internal.add_argument('--normalizeCount', dest='normalizecount',default='RPKM', 
 internal.add_argument('--heatmap', dest='heatmap',action='store_true', default=False, 
     help="Create heatmap\n[default:False]")
 
-internal.add_argument('--heatmapType', dest='heatmaptype', default='degs', choices=['counts', 'degs'],
+internal.add_argument('--heatmapType', required='--heatmap' in sys.argv, dest='heatmaptype', default='degs', choices=['counts', 'degs'],
     help="""Create heatmap based on selected choice \n[default: counts]""" )
 
 internal.add_argument('--maPlot', dest='maplot',action='store_true', default=False, 
-    help="Create MA plot\n[default:True]")
+    help="Create MA plot\n[default:False]")
 
 internal.add_argument('--volcanoPlot', dest='volcanoplot',action='store_true', default=False, 
-    help="Create Volcano plot\n[default:True]")
+    help="Create Volcano plot\n[default:False]")
 
 internal.add_argument('--vennPlot',  dest='vennplot', default=False, action='store_true', 
     help="Enables venplot of differentially expressed genes.\n[default: False] ")
