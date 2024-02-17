@@ -23,7 +23,7 @@ setuptools.setup(
 install_requires = ['certifi','cffi','charset-normalizer','cycler','dill','fonttools','future',
 'idna','importlib-metadata','Jinja2','kiwisolver','Markdown','MarkupSafe','matplotlib','numpy',
 'packaging','pandas','patsy','Pillow','psutil','pycparser','pyfastx','pyparsing','pysam',
-'python-dateutil','pytz','pytz-deprecation-shim','requests','rpy2','scipy','seaborn','six',
+'python-dateutil','pytz','pytz-deprecation-shim','requests', 'adjusttext', 'scikit-learn', 'scipy','seaborn','six',
 'statsmodels','tzdata','tzlocal','urllib3','waiting','zipp','wheel','openpyxl', 'notebook'
 ],
 
@@ -41,7 +41,7 @@ install_requires = ['certifi','cffi','charset-normalizer','cycler','dill','fontt
         # that you indicate whether you support Python 2, Python 3 or both.
         
         'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9'
+        
     ],
     package_data={'': ['param/*.ini']},
     python_requires='>=3.8'

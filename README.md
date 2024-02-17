@@ -134,4 +134,4 @@ For any Questions on the scientific aspects of the pySeqRNA-0.2 method please co
 
 Rakesh Kaundal, (rkaundal@usu.edu)
 
-Naveen Duhan, (naveen.duhan@usu.edu)
+Naveen Duhan, (naveen.duhan@outlook.com)

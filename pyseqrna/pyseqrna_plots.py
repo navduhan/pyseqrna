@@ -17,71 +17,68 @@ from matplotlib.colors import ListedColormap
 import seaborn as sns
 import matplotlib.patches as patches
 from itertools import chain
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+import seaborn as sns
+from adjustText import adjust_text
 
-def plotVolcano(degDF=None, comp=None,FOLD=2,pValue=0.05,color=('red','grey','green'), dim=(8,5), dotsize=8, markerType='o', alpha=0.5):
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+
+def plotVolcano(degDF=None, comp=None, FOLD=2, pValue=0.05, color=('red', 'grey', 'green'), dim=(8, 5), font=14, dotsize=10, markerType='o', alpha=0.5):
     """
-    This function plots a Volcano plot. 
+    This function plots a Volcano plot.
 
     :param degDF: All gene expression file.
-
     :param comp: Sample comparison.
-
     :param FOLD: FOLD change. Defaults to 2.
-
     :param pValue: Pvalues. Defaults to 0.05.
-
-    :param color: Colors to be used in plot. Defaults to ('red','grey','green').
-
-    :param dim: Dimensions of the plot. Defaults to (8,5).
-
+    :param color: Colors to be used in plot. Defaults to ('red', 'grey', 'green').
+    :param dim: Dimensions of the plot. Defaults to (8, 5).
     :param dotsize: Dotsize on plot. Defaults to 8.
-
     :param markeType: Shape to use. Defaults to 'o'.
-
     :param alpha: Transparency of plot. Defaults to 0.5.
     """
 
-    PVAL = "pvalue("+comp+")"
+    PVAL = "pvalue(" + comp + ")"
+    LFC = "logFC(" + comp + ")"
+    _x = r'$ log_{2}(Fold Change)$'
+    _y = r'$ -log_{10}(P-value)$'
+    color = color
+    dk = degDF.filter(like=comp, axis=1)  # Use `like` for regex-like filtering
 
-    LFC = "logFC("+comp+")"
-    _y = r'$ log_{2}(Fold Change)$'
-    _x = r'$ -log_{10}(P-value)$'
-
-    dk = degDF.filter(regex=comp, axis=1)
-    
     try:
-        
-        final = dk[dk[PVAL]<=pValue].copy()
+        final = dk[dk[PVAL] <= pValue].copy()
 
-        final.loc[final[LFC]>=np.log2(FOLD),'colorADD'] = color[2]
-
-        final.loc[final[LFC]<=-np.log2(FOLD), 'colorADD'] = color[0]
-
-        final['colorADD'].fillna(color[1], inplace=True)  
+        final.loc[final[LFC] >= np.log2(FOLD), 'colorADD'] = color[2]
+        final.loc[final[LFC] <= -np.log2(FOLD), 'colorADD'] = color[0]
+        final.fillna({'colorADD': color[1]}, inplace=True)  # Use `fillna` directly
 
         final['log(10)_pvalue'] = -(np.log10(final[PVAL]))
-        
-        color_values = {col: i for i, col in enumerate(color)}
 
+        color_values = {col: i for i, col in enumerate(color)}
         color_num = [color_values[i] for i in final['colorADD']]
-        
-        legendlabels=['Significant down', 'Not significant', 'Significant up']  
+
+        legendlabels = ['Significant down', 'Not significant', 'Significant up']
 
         fig, ax = plt.subplots(figsize=dim)
-
-        a = ax.scatter(final[LFC], final['log(10)_pvalue'], c=color_num, cmap=ListedColormap(color), alpha=alpha,s=dotsize, marker=markerType)
-        ax.legend(handles=a.legend_elements()[0], labels=legendlabels,   bbox_to_anchor=(1.46,1,0,0))
-        ax.set_xlabel(_x)
-        ax.set_ylabel(_y)
+        a = ax.scatter(final[LFC], final['log(10)_pvalue'], c=color_num, cmap=ListedColormap(color), alpha=alpha,
+                      s=dotsize, marker=markerType)
+        ax.legend(handles=a.legend_elements()[0], labels=legendlabels,  bbox_to_anchor=(1.46, 1, 0, 0))
+        ax.set_xlabel(_x, fontsize = font, fontweight='bold')
+        ax.set_ylabel(_y, fontsize = font, fontweight='bold')
         fig.tight_layout()
+
+        return fig
 
     except Exception:
         return 'No Volcano'
 
-    return fig 
 
-
-def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','grey','green'), dim=(8,5), dotsize=8, markerType='o', alpha=0.5):
+def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','grey','green'), font=14, dim=(8,5), dotsize=8, markerType='o', alpha=0.5):
     """
     This function plots a MA plot. 
 
@@ -135,7 +132,8 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','g
 
         final.loc[(final[LFC]<=-np.log2(FOLD)) & (final[PVAL]<=FDR), 'colorADD'] = color[0]
 
-        final['colorADD'].fillna(color[1], inplace=True)  
+        # final['colorADD'].fillna(color[1], inplace=True)  
+        final.fillna({'colorADD': color[1]}, inplace=True)
 
         final['mean'] = final[['first', 'second']].mean(axis=1)
 
@@ -156,13 +154,14 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','g
         a = ax.scatter(finalDF['log(2)_Mean'], finalDF[LFC], c=color_num, cmap=ListedColormap(color),
                             alpha=alpha, s=dotsize, marker=markerType)
         try:
-            ax.legend(handles=a.legend_elements()[0], labels=legendlabels, bbox_to_anchor=(1.46,1,0,0))
+            ax.legend(handles=a.legend_elements()[0], labels=legendlabels,  bbox_to_anchor=(1.46,1,0,0))
         except ValueError:  #raised if `y` is empty.
             pass
+
         plt.axhline(y=0, color='#7d7d7d', linestyle='--')
         
-        ax.set_xlabel(_x)
-        ax.set_ylabel(_y)
+        ax.set_xlabel(_x, fontsize=font, fontweight='bold')
+        ax.set_ylabel(_y, fontsize=font, fontweight='bold')
 
         fig.tight_layout()
  
@@ -395,3 +394,59 @@ def plotVenn(DEGFile=None, FOLD=2, comparisons=None, degLabel="",  fontsize=14, 
     return fig
 
 
+def pcaPlot(ncountdf=None ,legends=False, fontsize=14, figsize=(12,12),dpi=300):
+
+    """
+    
+
+    """
+
+    # Transpose the normalize counts to make sample as rows and genes as columns
+
+    ndf = ncountdf.T
+
+    scaler = StandardScaler()
+
+    data_scaled = scaler.fit_transform(ndf)
+
+    # Perform PCA
+    pca = PCA(n_components=2)
+    pca_result = pca.fit_transform(data_scaled)
+
+    # Create a DataFrame with the principal components
+    pca_df = pd.DataFrame(data=pca_result, columns=['PC1', 'PC2'], index=ndf.index)
+
+    # Assign unique colors to each sample using seaborn color palette
+    colors = sns.color_palette("husl", n_colors=len(pca_df.index))
+
+    # Plot the PCA results with sample labels and color
+    fig, ax = plt.subplots(figsize=figsize)
+    legend_labels = []
+
+    for i, sample in enumerate(pca_df.index):
+        scatter = ax.scatter(pca_df['PC1'].iloc[i], pca_df['PC2'].iloc[i], color=colors[i])
+        legend_labels.append(sample)
+
+    # Add labels to data points with adjustText
+    texts = [plt.text(pca_df['PC1'].iloc[i], pca_df['PC2'].iloc[i], sample, ha='right', va='bottom') for i, sample in enumerate(pca_df.index)]
+
+    # Adjust text positions to avoid overlap
+    adjust_text(texts, arrowprops=dict(arrowstyle="-", color='k', lw=0.5))
+
+    if legends:
+        # Organize legends in columns with a maximum of 10 legends per column
+        num_legends_per_column = 15
+        num_columns = len(legend_labels) // num_legends_per_column + 1
+
+        legend = ax.legend(legend_labels, loc='center left', bbox_to_anchor=(1, 0.5),
+                        title='Sample Legends', ncol=num_columns)
+
+    # Remove top and right spines
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+
+    ax.xlabel('Principal Component 1 (PC1)', fontsize = fontsize)
+    ax.ylabel('Principal Component 2 (PC2)', fontsize = fontsize)
+
+    return fig

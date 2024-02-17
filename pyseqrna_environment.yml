@@ -21,6 +21,8 @@ dependencies:
   - bamtools
   - bedtools
   - pip
+  - matplotlib
+  - rpy2
   - sortmerna=4.2.0
   - bioconductor-deseq2
   - bioconductor-edger

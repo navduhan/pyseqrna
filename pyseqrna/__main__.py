@@ -45,8 +45,8 @@ def main():
 
     # Get all the options from the user
     
-    options, unknownargs = arg_parser.parser.parse_known_args()  
-
+    options = arg_parser.parse_args()  
+    print(options)
     if options.species is None:
         print("Please provide a species and organism type")
         sys.exit()
@@ -56,7 +56,6 @@ def main():
         options.threads = pu.get_cpu()
         
     startTime= time.ctime()
-
 
     
     # Create directory for results
@@ -82,14 +81,14 @@ def main():
 
         combination = input_data['combinations']
 
-    log.info("Starting with read quality check")
-
     if options.resume == 'trimming' or options.resume == 'alignment' or  options.resume == 'differential':
         dryrun = True
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
     
         fastqcout = qc.fastqcRun(sampleDict=samples, configFile=options.param, outDir=qualitydir, slurm=options.slurm, mem=options.memory, cpu=options.threads, pairedEND=options.paired, dryrun=dryrun)
     else: 
+        log.info("Starting with read quality check")
+
         dryrun = False
     
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
@@ -108,13 +107,8 @@ def main():
             log.info("Read quality check completed succesfully")
 
     
-    
-
     if options.resume == 'alignment' or  options.resume == 'differential':
         dryrun = True
-
-        # Trimming
-        log.info(f"Read trimming started with {options.trimming}")
 
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
 
@@ -216,13 +210,13 @@ def main():
         
         dryrun = True
         
-        if options.aligners == 'STAR':
+        if options.aligner == 'STAR':
             aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
             aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
             jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
             outalign= aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
         
-        elif options.aligners == 'hisat2':
+        elif options.aligner == 'hisat2':
 
             aligner = al.hisat2_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
             jobida= aligner.build_index(mem=options.memory,cpu=options.threads)
@@ -238,34 +232,20 @@ def main():
 
         aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
 
-        if options.aligners == 'STAR':
+        if options.aligner == 'STAR':
 
             aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
 
             log.info("Genome indexing started")
 
             jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
-        
-            if options.slurm:
-
-                wait(lambda: pu.check_status(jobida), waiting_for="genome indexing to finish")
-                log.info("Genome index completed succesfully")
-            else:
-                log.info("Genome index completed succesfully")
-
-            log.info("Checking genome index")
-
-            if aligner.check_index():
-                log.info("Genome index is valid")
-            else:
-                log.info("Genome index is not valid please create it again")
-                sys.exit()
+    
             log.info("Alignment started")
 
             outalign, jobalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
 
         
-        elif options.aligners == 'hisat2':
+        elif options.aligner == 'hisat2':
 
             aligner = al.hisat2_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
 

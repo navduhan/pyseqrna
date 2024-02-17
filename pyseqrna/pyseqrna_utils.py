@@ -21,7 +21,8 @@ import logging
 import subprocess
 import configparser
 import pandas as pd
-
+from argparse import Namespace
+from openpyxl import load_workbook
 
 def PyseqrnaLogger(mode, log):
 
@@ -58,6 +59,73 @@ def PyseqrnaLogger(mode, log):
 
 log = PyseqrnaLogger(mode='a', log='pu')
 
+def read_runconfig(config_file):
+    config = configparser.ConfigParser()
+    config.read(config_file)
+
+    # Create Namespace object to hold the values
+    options = Namespace()
+
+    # General section
+    general = config['General']
+    options.input_file = general.get('input_file', '')
+    options.samples_path = general.get('samples_path', '')
+    options.reference_genome = general.get('reference_genome', '')
+    options.feature_file = general.get('feature_file', '')
+    options.version = general.get('version', '')
+
+    # Internal section
+    internal = config['Internal']
+    options.source = internal.get('source', 'ENSEMBL')
+    options.species = internal.get('species', '')
+    options.speciestype = internal.get('organismType', 'plants')
+    options.outdir = internal.get('outdir', 'pySeqRNA_results')
+    options.paired = internal.getboolean('paired', fallback=False)
+    options.fastqc = internal.getboolean('fastqc', fallback=False)
+    options.fastqc2 = internal.getboolean('fastqc2', fallback=False)
+    options.ribosomal = internal.getboolean('ribosomal', fallback=False)
+    options.rnadb = internal.getboolean('rnadb', fallback=False)
+    options.mmgg = internal.getboolean('multimappedGroups', fallback=False)
+    options.minreadcounts = int(internal.get('minReadCounts', 100))
+    options.percentsample = float(internal.get('percentSample', 0.5))
+    combination_value = internal.get('combination', 'all')
+    options.combination = combination_value.split() if combination_value != 'all' else combination_value
+    options.fdr = float(internal.get('fdr', 0.05))
+    options.fold = int(internal.get('fold', 2))
+    options.noreplicate = internal.getboolean('noreplicate', fallback=False)
+    options.normalizecount = internal.get('normalizeCount', 'RPKM')
+    options.heatmap = internal.getboolean('heatmap', fallback=False)
+    options.heatmaptype = internal.get('heatmapType', 'counts')
+    options.maplot = internal.getboolean('maPlot', fallback=False)
+    options.volcanoplot = internal.getboolean('volcanoPlot', fallback=False)
+    options.vennplot = internal.getboolean('vennPlot', fallback=False)
+    venncombination_value = internal.get('vennCombinations', 'random')
+    options.venncombination = venncombination_value.split() if venncombination_value != 'all' else venncombination_value
+    options.cluster = internal.getboolean('cluster', fallback=True)
+
+    # FunctionalAnnotation section
+    annotation = config['FunctionalAnnotation']
+    options.geneontology = annotation.getboolean('geneOntology', fallback=False)
+    options.keggpathway = annotation.getboolean('keggPathway', fallback=False)
+
+    # ExternalTools section
+    tools = config['ExternalTools']
+    options.trimming = tools.get('trimming', 'trim_galore')
+    options.aligner = tools.get('aligner', 'STAR')
+    options.quantification = tools.get('quantTool', 'featureCounts')
+    options.detool = tools.get('deTool', 'DESeq2')
+
+    # Computational section
+    computational = config['Computational']
+    options.slurm = computational.getboolean('slurm', fallback=False)
+    options.slurm_partition = computational.get('slurm_partition', 'compute')
+    options.threads = computational.get('threads', get_cpu())
+    options.memory = int(computational.get('memory', 16))
+    options.param = computational.get('param', fallback=None)
+    options.resume = computational.get('resume', 'all')
+
+    return options
+
 def read_input_file(infile, inpath, paired = False):
 
     """This function reads input sample file and convert into a dictionary. It also make all possible combination for DEG analysis. Target dataframe for differential analysis.
@@ -76,27 +144,31 @@ def read_input_file(infile, inpath, paired = False):
     combinations = [] # list for genrating combinations for differential expression analysis
 
     try:
-        with open(infile) as file:
+      
+        log.info(f"Reading input file {infile}")
 
-            log.info("Reading input samples File ")
+        if infile.endswith('.xlsx'):
+            df = pd.read_excel(infile, comment="#")
+        elif infile.endswith('.csv'):
+            df = pd.read_csv(infile,comment="#")
+        elif infile.endswith('.txt'):
+            df = pd.read_csv(infile, sep="\s+" , comment="#")
+        else:
+            raise TypeError("Unsupported input format")
 
-            for line in file:
+        rows = df.values.tolist()
 
-                if not line.startswith("#") and not line.startswith("SampleName"):
-                    line = line.strip()
-                    lines = re.split('\s+', line.rstrip())
+        for lines in rows:
+            
 
-                    if paired:
+            if paired:
+                samples[lines[1]] = [lines[1],lines[2],os.path.join(inpath,lines[3]), os.path.join(inpath,lines[4])]
+            else:
+                samples[lines[1]] = [lines[1], lines[2], os.path.join(inpath,lines[3])]
 
-                        samples[lines[1]] = [lines[1],lines[2],os.path.join(inpath,lines[3]), os.path.join(inpath,lines[4])]
+            if lines[2] not in factors:
+                factors.append(lines[2])
 
-                    else:
-
-                        samples[lines[1]] = [lines[1], lines[2], os.path.join(inpath,lines[3])]
-
-                    if lines[2] not in factors:
-
-                        factors.append(lines[2])
 
         log.info("Input file %s read succesfully", infile)
 
@@ -117,16 +189,13 @@ def read_input_file(infile, inpath, paired = False):
                     if j+"-"+i not in combinations:
 
                         combinations.append(i+"-"+j)
+        log.info("Combination created succesfully from %s", infile)
     except Exception:
 
         log.error("Please provide a valid input file")
     
-    finally:
-
-        log.info("Combination created succesfully from %s", infile)
-
-        samplename = []
-        sample = []
+    samplename = []
+    sample = []
 
     try:
         for k, s in samples.items():
@@ -146,6 +215,7 @@ def read_input_file(infile, inpath, paired = False):
         log.error("Please provide a valid input file")
 
     return {'samples': samples, "combinations": combinations, "targets": targets}
+
 
 
 def parse_config_file(infile):

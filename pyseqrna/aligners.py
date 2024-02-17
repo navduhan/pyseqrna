@@ -17,6 +17,7 @@ import sys
 import shutil
 import subprocess
 import pkg_resources
+from waiting import wait
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 from pyseqrna import pyseqrna_utils as pu
 
@@ -73,6 +74,35 @@ class STAR_Aligner:
             self.config = pu.parse_config_file(stream.name)
            
         return
+
+    def check_index(self):
+
+        """Function to check if star index is valid and exists.
+
+           :return: Return true if genome index is valid.
+           """
+        for k, args in self.config.items():
+
+            if k =='index':
+
+                directory = str(args[0]).split(" ")[1]
+
+                output =  os.path.join(self.outDir,directory)
+
+        files = ['chrLength.txt', 'chrNameLength.txt', 'chrName.txt', 'chrStart.txt', 'genomeParameters.txt', 'Genome'] 
+
+        if (os.path.exists(output) and os.path.isdir(output)):
+
+            for f in files:
+
+                if not(os.path.isfile(os.path.join(output, f))):
+
+                    return False
+
+            return True
+
+        return  False
+
     
     def build_index(self,  mem= 20, tasks = 1, cpu= 8 , gff=None,  dep= ""):
 
@@ -173,6 +203,10 @@ class STAR_Aligner:
 
                         log.info("Job successfully submited for {} with {} for indexing".format(GenomeFasta, job_id))
 
+                        wait(lambda: pu.check_status(job_id), waiting_for="genome indexing to finish")
+                        log.info("Genome index completed succesfully")
+                        
+
                     except Exception:
 
                         log.error("Slurm job sumission failed")
@@ -188,37 +222,16 @@ class STAR_Aligner:
                     except Exception:
                         
                         log.error("Job sumission failed")
+
+                log.info("Checking genome index")
+
+                if self.check_index():
+                    log.info("Genome index is valid")
+                else:
+                    log.info("Genome index is not valid pprovide a valid genome file")
+                    sys.exit()
         
                 return job_id
-
-           
-    def check_index(self):
-
-        """Function to check if star index is valid and exists.
-
-           :return: Return true if genome index is valid.
-           """
-        for k, args in self.config.items():
-
-            if k =='index':
-
-                directory = str(args[0]).split(" ")[1]
-
-                output =  os.path.join(self.outDir,directory)
-
-        files = ['chrLength.txt', 'chrNameLength.txt', 'chrName.txt', 'chrStart.txt', 'genomeParameters.txt', 'Genome'] 
-
-        if (os.path.exists(output) and os.path.isdir(output)):
-
-            for f in files:
-
-                if not(os.path.isfile(os.path.join(output, f))):
-
-                    return False
-
-            return True
-
-        return  False
 
     def run_Alignment(self, target=None, pairedEND=False, mem= 20,cpu=8, tasks=1,  dep='' ):
         """This function align reads against indexed reference genome.
@@ -351,6 +364,15 @@ class STAR_Aligner:
                         except Exception:
                             
                             log.exception("Job sumission failed")
+
+        if self.slurm:
+            for job in job_id:
+                
+                wait(lambda: pu.check_status(job), waiting_for="alignment to finish")
+
+                log.info(f"Alignment completed for job {job}")
+
+            log.info("Read alignment completed succesfully")
 
         if self.dryrun:
 

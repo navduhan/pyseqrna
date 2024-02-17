@@ -1,0 +1,67 @@
+#!/bin/bash
+
+############################################################
+##                                                        ##
+## install pySeqRNA                                       ## 
+## Author: Naveen Duhan                                   ##
+##                                                        ##
+############################################################
+
+# Function to check if a command is available
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Check operating system
+OS=$(uname -s)
+
+# Check if Miniconda is already installed
+if [ ! -d "$HOME/miniconda3" ]; then
+  echo "Miniconda is not installed. Installing..."
+  
+  # Download Miniconda installer based on OS
+  if [ "$OS" = "Linux" ]; then
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  elif [ "$OS" = "Darwin" ]; then
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+  else
+    echo "Unsupported operating system: $OS"
+    exit 1
+  fi
+  
+  # Install Miniconda unattendedly
+  bash miniconda.sh -b -p ~/miniconda3
+fi
+
+# Activate Miniconda
+source ~/miniconda3/bin/activate
+
+# Check if git is installed via conda, if not, install it
+if ! command_exists git; then
+  echo "Git is not installed via conda. Installing..."
+  conda install git -y
+fi
+
+# Download pySeqRNA 0.2
+wget https://bioinfo.usu.edu/pyseqrna/download/pySeqRNA-0.2.tar.gz
+
+# Extract the downloaded file
+tar -xvzf pySeqRNA-0.2.tar.gz
+
+# Navigate to the extracted directory
+cd pySeqRNA-0.2
+
+# Create and activate a conda environment
+conda env create -f environment.yml
+conda activate pyseqrna-0.2
+
+# Install pySeqRNA
+pip3 install .
+
+##################################################################
+##                                                              ##
+##  Written by Naveen Duhan (naveen.duhan@outlook.com)          ##
+##  Kaundal Bioinformatics Lab, Utah State University           ##
+##  Released under the terms of GNU General Public Licence v3   ## 
+##                                                              ##
+##################################################################

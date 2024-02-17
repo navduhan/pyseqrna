@@ -20,7 +20,7 @@ from future.utils import native_str
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 import rpy2.robjects as robjects
 from rpy2.robjects import pandas2ri, numpy2ri, Formula
-from rpy2.robjects.conversion import localconverter
+from rpy2.robjects.conversion import localconverter, py2rpy, get_conversion
 from rpy2.robjects.packages import importr
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
@@ -107,11 +107,11 @@ def runDESeq2(countDF=None, targetFile=None, design='sample',combination=None,  
 
             subTF = targetFile[targetFile['sample'].str.contains('|'.join([c1,c2] ))] # Subset the target data for one combination
 
-            with localconverter(robjects.default_converter + pandas2ri.converter):
+            with localconverter(get_conversion() + pandas2ri.converter):
 
-                count_matrix = robjects.conversion.py2rpy(subDF)
+                count_matrix = py2rpy(subDF)
 
-                design_matrix = robjects.conversion.py2rpy(subTF)
+                design_matrix = py2rpy(subTF)
 
             designFormula="~ "+design
 
@@ -123,11 +123,11 @@ def runDESeq2(countDF=None, targetFile=None, design='sample',combination=None,  
 
         else:
 
-            with localconverter(robjects.default_converter + pandas2ri.converter):
+            with localconverter(get_conversion() + pandas2ri.converter):
 
-                count_matrix = robjects.conversion.py2rpy(countDF)
+                count_matrix = py2rpy(countDF)
 
-                design_matrix = robjects.conversion.py2rpy(targetFile)
+                design_matrix = py2rpy(targetFile)
 
             designFormula="~ "+design
 
@@ -152,7 +152,7 @@ def runDESeq2(countDF=None, targetFile=None, design='sample',combination=None,  
 
             result=to_dataframe(result)
 
-            with localconverter(robjects.default_converter + pandas2ri.converter):
+            with localconverter(get_conversion() + pandas2ri.converter):
 
                 result = robjects.conversion.rpy2py(result)
 
