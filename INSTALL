@@ -45,14 +45,11 @@ fi
 # Download pySeqRNA 0.2
 git clone https://github.com/navduhan/pyseqrna.git
 
-# Extract the downloaded file
-
-
 # Navigate to the extracted directory
 cd pyseqrna
 
 # Create and activate a conda environment
-conda env create -f environment.yml
+conda env create -f pyseqrna_environment.yml
 conda activate pyseqrna-0.2
 
 # Install pySeqRNA
