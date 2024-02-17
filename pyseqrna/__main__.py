@@ -228,7 +228,7 @@ def main():
 
         dryrun = False
     
-        log.info("Starting Alignment process")
+        log.info(f"Starting Alignment  with {options.aligner}")
 
         aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
 
