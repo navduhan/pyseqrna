@@ -43,13 +43,13 @@ if ! command_exists git; then
 fi
 
 # Download pySeqRNA 0.2
-wget https://bioinfo.usu.edu/pyseqrna/download/pySeqRNA-0.2.tar.gz
+git clone https://github.com/navduhan/pyseqrna.git
 
 # Extract the downloaded file
-tar -xvzf pySeqRNA-0.2.tar.gz
+
 
 # Navigate to the extracted directory
-cd pySeqRNA-0.2
+cd pyseqrna
 
 # Create and activate a conda environment
 conda env create -f environment.yml
