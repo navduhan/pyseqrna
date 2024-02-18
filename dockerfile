@@ -19,8 +19,6 @@ RUN conda init bash
 # Install Git
 RUN apt-get install -y git
 
-# Clone pySeqRNA repository
-RUN git clone https://github.com/navduhan/pyseqrna.git
 
 # Navigate to the pySeqRNA directory
 WORKDIR /pyseqrna
