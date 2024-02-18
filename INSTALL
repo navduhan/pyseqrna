@@ -24,6 +24,8 @@ if [ ! -d "$HOME/miniconda3" ]; then
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   elif [ "$OS" = "Darwin" ]; then
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+    # Set the subdir configuration for Conda on macOS (Darwin) to osx-arm64
+    conda config --env --set subdir osx-arm64
   else
     echo "Unsupported operating system: $OS"
     exit 1
@@ -51,23 +53,7 @@ conda activate pyseqrna-0.2
 # Install pySeqRNA
 pip install .
 
-# Check if git is installed via conda, if not, install it
-if ! command_exists git; then
-  echo "Git is not installed via conda. Installing..."
-  conda install git -y
-fi
 
-# Download pySeqRNA 0.2
-git clone https://github.com/navduhan/pyseqrna.git
-
-# Navigate to the extracted directory
-
-# Create and activate a conda environment
-conda env create -f pyseqrna_environment.yml
-conda activate pyseqrna-0.2
-
-# Install pySeqRNA
-pip3 install .
 
 ##################################################################
 ##                                                              ##
