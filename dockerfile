@@ -1,5 +1,5 @@
 # Use the official Python image as base
-FROM --platform=linux/amd64
+FROM --platform=linux/amd64 Ubuntu:22.04
 FROM python:3.8
 
 # Author: Naveen Duhan
