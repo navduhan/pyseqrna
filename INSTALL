@@ -25,7 +25,7 @@ if [ ! -d "$HOME/miniconda3" ]; then
   elif [ "$OS" = "Darwin" ]; then
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -O miniconda.sh
     # Set the subdir configuration for Conda on macOS (Darwin) to osx-arm64
-    conda config --env --set subdir x86_64
+    conda config --env --set subdir osx-64
   else
     echo "Unsupported operating system: $OS"
     exit 1

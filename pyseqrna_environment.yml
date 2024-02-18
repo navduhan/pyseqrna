@@ -23,6 +23,6 @@ dependencies:
   - pip
   - matplotlib
   - rpy2
-  - sortmerna=4.2.0
+  - sortmerna
   - bioconductor-deseq2
   - bioconductor-edger
