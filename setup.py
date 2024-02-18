@@ -21,7 +21,7 @@ setuptools.setup(
     },
 #     install_requires=[line.rstrip() for line in open("requirements.txt", "rt")],
 install_requires = ['certifi','cffi','charset-normalizer','cycler','dill','fonttools','future',
-'idna','importlib-metadata','Jinja2','kiwisolver','Markdown','MarkupSafe','matplotlib','numpy',
+'idna','importlib-metadata','Jinja2','kiwisolver','Markdown','MarkupSafe','matplotlib','numpy', 'rpy2',
 'packaging','pandas','patsy','Pillow','psutil','pycparser','pyfastx','pyparsing','pysam',
 'python-dateutil','pytz','pytz-deprecation-shim','requests', 'adjusttext', 'scikit-learn', 'scipy','seaborn','six',
 'statsmodels','tzdata','tzlocal','urllib3','waiting','zipp','wheel','openpyxl', 'notebook'
