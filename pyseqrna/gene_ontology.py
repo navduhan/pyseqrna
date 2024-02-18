@@ -278,11 +278,17 @@ class GeneOntology:
         df = df.head(nrows)
         df =df.sort_values('Counts', ascending=True)
 
-        fsize = math.ceil(nrows/2)
+        max_count = df['Counts'].max()
+        if max_count < 20:
+            dot_multiplier = 2
+        else:
+            dot_multiplier = 1
+            
+        fsize = math.ceil(nrows / 2) if nrows > 20 else math.ceil(df.shape[0] / 2)
 
-        fig, ax = plt.subplots(figsize=(10,10), dpi=300)
-        scatter = ax.scatter(x=df['Counts'], y= df['GO Term'], s=df['Counts'], c=df[colorBy])
-        ax.xaxis.get_major_locator().set_params(integer=True)
+        fig, ax = plt.subplots(figsize=(10,fsize), dpi=300)
+        scatter = ax.scatter(x=df['Counts'], y=df['GO Term'], s=df['Counts'] * dot_multiplier, c=df[colorBy])
+        ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_bounds((0, nrows))
@@ -297,51 +303,45 @@ class GeneOntology:
         cbar = plt.colorbar(scatter,shrink=.25, pad=.2, aspect=10)
         cbar.ax.set_title(title,pad=20, fontweight='bold')
         
+        ax.set_yticklabels([textwrap.fill(label, width=15) for label in df['GO Term']], fontsize=12)
 
         return fig
 
-    def barplotGO(self, df=None,nrows=20, colorBy='logPvalues' ):
-
+    def barplotGO(self, df=None, nrows=20, colorBy='logPvalues' ):
         """
         This function creates a barplot for Gene Ontology enrichment.
 
         :param df: Gene Ontology enrichment file from enrichGO function.
-
         :param nrows: Number of rows to plot. Default to 20 rows.
-
         :param colorBy: Color bar on plots with logPvalues / FDR. Defaults to 'logPvalues'.
-        
         :returns: a barplot
         """
         
-        if colorBy=='logPvalues':
-            df['logPvalues'] = round(-np.log10(df['Pvalues']),2)
+        if colorBy == 'logPvalues':
+            df['logPvalues'] = round(-np.log10(df['Pvalues']), 2)
             title = '-log10(Pvalues)'
         
-        if colorBy=='FDR':
-            df = df
+        if colorBy == 'FDR':
             title = 'FDR'
 
-        df =df.sort_values('Counts', ascending=False)
-        df = df.head(nrows)
-        df =df.sort_values('Counts', ascending=True)
+        df = df.sort_values('Counts', ascending=False).head(nrows).sort_values('Counts', ascending=True)
         counts = df['Counts'].values.tolist()
         terms = df['GO Term'].values.tolist()
 
         data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
-        fsize = math.ceil(nrows/2)
-        fig, ax = plt.subplots(figsize=(10, 10), dpi=300)
+        fsize = math.ceil(nrows / 2) if nrows > 20 else math.ceil(df.shape[0] / 2)
+        
+        fig, ax = plt.subplots(figsize=(10, fsize), dpi=300)
 
         my_cmap = plt.cm.get_cmap('RdYlBu')
         colors = my_cmap(data_color_normalized)
 
         ax.barh(terms, counts, color=colors)
-        ax.xaxis.get_major_locator().set_params(integer=True)
+        ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))  # Ensure x-axis ticks are integers
         
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_bounds((0, nrows))
-        # add some space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
         plt.xticks(fontsize=10)
@@ -349,15 +349,18 @@ class GeneOntology:
 
         plt.xlabel("Counts", fontsize=12, fontweight='bold')
         plt.ylabel("GO Description", fontsize=12, fontweight='bold')
-        sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0,max(df[colorBy])))
+        sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0, max(df[colorBy])))
 
         sm.set_array([])
 
-        cbar = plt.colorbar(sm, shrink=0.25,pad=.02, aspect=10)
-        cbar.ax.set_title(title,pad=20,fontweight='bold')
+        cbar = plt.colorbar(sm, shrink=0.25, pad=0.02, aspect=10)
+        cbar.ax.set_title(title, pad=20, fontweight='bold')
         
+        # Split long y-axis tick labels into two rows
+        ax.set_yticklabels([textwrap.fill(label, width=20) for label in terms], fontsize=12)
 
         return fig
+
 
     def enrichGO( self, file= None, pvalueCutoff=0.05, plot=True, plotType= 'dotplot', nrows=20,colorBy='logPvalues'):
 

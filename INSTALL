@@ -36,6 +36,21 @@ fi
 # Activate Miniconda
 source ~/miniconda3/bin/activate
 
+# Check if the conda environment already exists
+if conda env list | grep -q "pyseqrna-0.2"; then
+  echo "pySeqRNA environment already exists. Deleting and recreating..."
+  conda env remove -n pyseqrna-0.2 --yes
+fi
+
+# Install dependencies via conda
+conda env create -f pyseqrna_environment.yml
+
+# Activate the environment
+conda activate pyseqrna-0.2
+
+# Install pySeqRNA
+pip install .
+
 # Check if git is installed via conda, if not, install it
 if ! command_exists git; then
   echo "Git is not installed via conda. Installing..."
