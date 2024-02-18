@@ -1,5 +1,5 @@
 # Use the official Python image as base
-FROM --platform=linux/amd64 Ubuntu:22.04
+FROM --platform=linux/amd64 ubuntu:22.04
 FROM python:3.8
 
 # Author: Naveen Duhan
@@ -20,6 +20,8 @@ RUN conda init bash
 # Install Git
 RUN apt-get install -y git
 
+# Clone pySeqRNA repository
+RUN git clone https://github.com/navduhan/pyseqrna.git
 
 # Navigate to the pySeqRNA directory
 WORKDIR /pyseqrna
