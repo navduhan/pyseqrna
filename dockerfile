@@ -37,6 +37,8 @@ RUN bash -c "source /usr/local/miniconda/etc/profile.d/conda.sh && \
 # Expose port if needed
 # EXPOSE 80
 
+RUN cd ..
+
 # Create data and output directories
 RUN mkdir /data /output
 

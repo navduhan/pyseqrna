@@ -7,7 +7,6 @@
 :Author: Naveen Duhan
 '''
 
-from tkinter import E
 from matplotlib.colors import same_color
 import pandas as pd 
 import pysam
@@ -16,7 +15,6 @@ import pandas as pd
 from pyseqrna.pyseqrna_utils import PyseqrnaLogger
 from pyseqrna import pyseqrna_utils as pu
 import matplotlib as plt
-from multiprocessing import Pool
 import multiprocessing
 import subprocess 
 log = PyseqrnaLogger(mode='a', log="stats")
