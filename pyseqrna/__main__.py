@@ -350,7 +350,7 @@ def main():
         
         if options.normalizecount == 'TPM':
             
-            r = norm.CPM()
+            r = norm.TPM()
 
             r[0].to_excel(os.path.join(quantdir,'TPM_counts.xlsx'), index=False)
 

@@ -57,6 +57,8 @@ conda activate pyseqrna-0.2
 # Install pySeqRNA
 pip install .
 
+echo -e "\n\nThank you for using pySeqRNA\n\nFor exceuting pyseqrna run \n\nsource ~/miniconda/bin/activate pyseqrna-0.2 \n\npyseqrna -h\n\n "
+
 
 
 ##################################################################

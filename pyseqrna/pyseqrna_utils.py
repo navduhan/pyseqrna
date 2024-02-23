@@ -309,22 +309,31 @@ def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", partitio
 
 def check_status(job_id):
     """
-    This function is check status of slurm job
+    Checks the status of a Slurm job.
 
-    :param job_id: slurm job id
+    Args:
+        job_id (int): The ID of the Slurm job to check.
 
-    :returns: True/False
+    Returns:
+        bool: True if the job is completed, False otherwise.
 
-    :rtype: If job completed return True. Default False.
+    Raises:
+        subprocess.CalledProcessError: If the squeue command fails.
     """
-    d = subprocess.check_output('squeue -j '+str(job_id), shell=True, universal_newlines=True)
 
-    data = list(re.split("\s+ ",d))
+    try:
+        output = subprocess.check_output(["squeue", "-j", str(job_id)], text=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error checking job status: {e}")
+        return False
 
-    if len(data)==6:
+    lines = output.splitlines()
+    if lines:  # Ensure there's output to parse
+        job_info = lines[0].split()  # Parse the first line
+        status = job_info[4]  # Extract the status from the 5th column
+        return status == "COMPLETED"  # Check for "COMPLETED" status explicitly
 
-        return True
-
+    # If no output or job not found, return False
     return False
 
 def get_cpu():

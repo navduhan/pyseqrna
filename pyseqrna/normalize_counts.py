@@ -258,7 +258,7 @@ class Normalization():
 
         countDF = df.set_index(self.geneColumn)
 
-        geneDF = self.getGeneLength(self.featureFile,self.feature,self.typeFile, self.attribute)
+        geneDF = self._getGeneLength()
 
         match_index = pd.Index.intersection(countDF.index, geneDF.index)
 
