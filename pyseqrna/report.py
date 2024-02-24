@@ -823,4 +823,4 @@ $(document).ready(function() {{
 
 
 
-generate_report("/home/naveen/Documents/test_workspace/example/pySeqRNA_results.11", ['A1-M6'], "genome", "gff" ,"/home/naveen/Documents/test_workspace/example/new_test.xlsx", 2, 0.05)
+#generate_report("/home/naveen/Documents/test_workspace/example/pySeqRNA_results.11", ['A1-M6'], "genome", "gff" ,"/home/naveen/Documents/test_workspace/example/new_test.xlsx", 2, 0.05)
