@@ -28,7 +28,7 @@ from pyseqrna.gene_ontology import GeneOntology
 from pyseqrna.pathway import Pathway
 from pyseqrna.normalize_counts import Normalization
 from pyseqrna import report
-
+import shutil
 import math
 import pyseqrna.version
 import pandas as pd
@@ -81,7 +81,7 @@ def main():
 
         combination = input_data['combinations']
 
-    if options.resume == 'trimming' or options.resume == 'alignment' or  options.resume == 'differential':
+    if options.resume == 'trimming' or options.resume == 'alignment' or  options.resume == 'differential' or options.resume == 'functional':
         dryrun = True
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
     
@@ -107,7 +107,7 @@ def main():
             log.info("Read quality check completed succesfully")
 
     
-    if options.resume == 'alignment' or  options.resume == 'differential':
+    if options.resume == 'alignment' or  options.resume == 'differential' or options.resume == 'functional':
         dryrun = True
 
         qualitydir = pu.make_directory(os.path.join(outdir, "1_Quality"), dryrun=dryrun)
@@ -157,7 +157,7 @@ def main():
             log.info("Read trimming completed succesfully")
 
     # Check if read quality check is activated after trimming
-    if options.resume == 'alignment' or  options.resume == 'differential':
+    if options.resume == 'alignment' or  options.resume == 'differential' or options.resume == 'functional':
         dryrun = True
         if options.fastqc2:
         
@@ -206,7 +206,7 @@ def main():
                 log.info("Ribsomal RNA removal completed succesfully")
 
     # Alignment Section
-    if options.resume == 'differential':
+    if options.resume == 'differential' or options.resume == 'functional':
         
         dryrun = True
         
@@ -371,40 +371,17 @@ def main():
 
     targets = input_data['targets']
 
-    diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"))
+    if options.resume == 'differential' or options.resume == 'functional':
 
-    if options.noreplicate:
+        if os.path.exists(os.path.join(outdir, "4_Differential_Expression")):
 
-        count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+            diffdir = os.path.join(outdir, "4_Differential_Expression")
 
-        result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False, replicate=options.noreplicate)
+        else:
 
-        ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
+            diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"))
 
-        results = ge.add_names()
-
-        results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
-    
-    else:
-
-        if options.detool == 'DESeq2':
-
-            count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
-
-            result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
-            try:
-                ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
-
-                results = ge.add_names()
-
-                results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
-                deextraColumns=True
-            except Exception:
-                results = result
-                results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
-                deextraColumns=False
-
-        elif options.detool == 'edgeR':
+        if options.noreplicate:
 
             count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
@@ -415,304 +392,364 @@ def main():
             results = ge.add_names()
 
             results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
-    
-    if options.mmgg:
-
-        if options.detool == 'DESeq2':
-
-            countm = pd.read_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx"))
-
-            resultm = de.runDESeq2(countDF=countm,targetFile=targets,design='sample', combination=combination, subset=False, mmg=True)
-
-            ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
-
-            resultm.to_excel(os.path.join(diffdir,"All_MMG_expression.xlsx"), index=False)
-
-        elif options.detool == 'edgeR':
-
-            countm = pd.read_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx"))
-
-            resultm = de.run_edgeR(countDF=countm,targetFile=targets, combination=combination, subset=False, replicate=options.noreplicate, mmg=True)
-
-            ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
-
-            resultm.to_excel(os.path.join(diffdir,"All_MMG_expression.xlsx"), index=False)
-
         
-    log.info("Differential expression analysis completed")
+        else:
 
-    log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
+            if options.detool == 'DESeq2':
 
-    filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=deextraColumns)
+                count=pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
-    if options.mmgg:
+                result = de.runDESeq2(countDF=count,targetFile=targets,design='sample', combination=combination, subset=False)
+                try:
+                    ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
 
-        filtered_MMG = de.degFilter(degDF=resultm, CompareList=combination, FDR=options.fdr, FOLD=options.fold, mmg=True, extraColumns=False)
+                    results = ge.add_names()
 
-    log.info("filtering DEGs completed ")
+                    results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+                    deextraColumns=True
+                except Exception:
+                    results = result
+                    results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
+                    deextraColumns=False
 
-    log.info("writting filter DEGs combination wise to excel sheets")
-    # write up and down filtered genes together
-    wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_DEGs.xlsx"))
+            elif options.detool == 'edgeR':
 
-    for key, value in filtered_DEG['filtered'].items():
-        value.to_excel(wa,sheet_name=key, index=False)
+                count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
+                result = de.run_edgeR(countDF=count,targetFile=targets, combination=combination, subset=False, replicate=options.noreplicate)
+
+                ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
+
+                results = ge.add_names()
+
+                results.to_excel(os.path.join(diffdir,"All_gene_expression.xlsx"), index=False)
         
-    wa.close()
+        if options.mmgg:
 
-    # write up filtered genes together
-    wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upDEGs.xlsx"))
+            if options.detool == 'DESeq2':
 
-    for key, value in filtered_DEG['filteredup'].items():
-        value.to_excel(wu,sheet_name=key, index=False)
-        
-    wu.close()
-    # write down filtered genes together
-    wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downDEGs.xlsx"))
+                countm = pd.read_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx"))
 
-    for key, value in filtered_DEG['filtereddown'].items():
-        value.to_excel(wd,sheet_name=key, index=False)
-        
-    wd.close()
+                resultm = de.runDESeq2(countDF=countm,targetFile=targets,design='sample', combination=combination, subset=False, mmg=True)
 
-    if options.mmgg:
-        wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_MMGs.xlsx"))
+                ge = de.Gene_Description(species=options.species, type=options.speciestype, degFile=result, filtered=False)
 
-        for key, value in filtered_MMG['filtered'].items():
+                resultm.to_excel(os.path.join(diffdir,"All_MMG_expression.xlsx"), index=False)
+
+            elif options.detool == 'edgeR':
+
+                countm = pd.read_excel(os.path.join(quantdir,"Raw_MMGcounts.xlsx"))
+
+                resultm = de.run_edgeR(countDF=countm,targetFile=targets, combination=combination, subset=False, replicate=options.noreplicate, mmg=True)
+
+                ge = de.Gene_Description(species=options.species,combinations=combination, type=options.speciestype, degFile=result, filtered=False)
+
+                resultm.to_excel(os.path.join(diffdir,"All_MMG_expression.xlsx"), index=False)
+
+            
+        log.info("Differential expression analysis completed")
+
+        log.info(f"Filtering differential expressed genes based on logFC {options.fold} and FDR {options.fdr}")
+
+        filtered_DEG= de.degFilter(degDF=results, CompareList=combination,FDR=options.fdr, FOLD=options.fold, extraColumns=deextraColumns)
+
+        if options.mmgg:
+
+            filtered_MMG = de.degFilter(degDF=resultm, CompareList=combination, FDR=options.fdr, FOLD=options.fold, mmg=True, extraColumns=False)
+
+        log.info("filtering DEGs completed ")
+
+        log.info("writting filter DEGs combination wise to excel sheets")
+        # write up and down filtered genes together
+        wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_DEGs.xlsx"))
+
+        for key, value in filtered_DEG['filtered'].items():
             value.to_excel(wa,sheet_name=key, index=False)
             
         wa.close()
 
         # write up filtered genes together
-        wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upMMGs.xlsx"))
+        wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upDEGs.xlsx"))
 
-        for key, value in filtered_MMG['filteredup'].items():
+        for key, value in filtered_DEG['filteredup'].items():
             value.to_excel(wu,sheet_name=key, index=False)
             
         wu.close()
         # write down filtered genes together
-        wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downMMGs.xlsx"))
+        wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downDEGs.xlsx"))
 
-        for key, value in filtered_MMG['filtereddown'].items():
+        for key, value in filtered_DEG['filtereddown'].items():
             value.to_excel(wd,sheet_name=key, index=False)
             
         wd.close()
 
-    log.info("ploting DEG count figure")
+        if options.mmgg:
+            wa = pd.ExcelWriter(os.path.join(diffdir,"Filtered_MMGs.xlsx"))
 
-    filtered_DEG['plot'].savefig(os.path.join(diffdir,"Filtered_DEG.png"),dpi=300, bbox_inches='tight')
+            for key, value in filtered_MMG['filtered'].items():
+                value.to_excel(wa,sheet_name=key, index=False)
+                
+            wa.close()
 
-    if options.mmgg:
+            # write up filtered genes together
+            wu = pd.ExcelWriter(os.path.join(diffdir,"Filtered_upMMGs.xlsx"))
 
-        log.info("ploting MMG count figure")
+            for key, value in filtered_MMG['filteredup'].items():
+                value.to_excel(wu,sheet_name=key, index=False)
+                
+            wu.close()
+            # write down filtered genes together
+            wd = pd.ExcelWriter(os.path.join(diffdir,"Filtered_downMMGs.xlsx"))
 
-        filtered_MMG['plot'].savefig(os.path.join(diffdir,"Filtered_MMG.png"),dpi=300, bbox_inches='tight')
+            for key, value in filtered_MMG['filtereddown'].items():
+                value.to_excel(wd,sheet_name=key, index=False)
+                
+            wd.close()
 
-    log.info("Writting DEGs summary to excel file")
-    
-    filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"), index=False)
+        log.info("ploting DEG count figure")
 
-    if options.mmgg:
-        log.info("Writting MMGs summary to excel file")
-    
-        filtered_MMG['summary'].to_excel(os.path.join(diffdir,"Filtered_MMGs_summary.xlsx"), index=False)
+        filtered_DEG['plot'].savefig(os.path.join(diffdir,"Filtered_DEG.png"),dpi=300, bbox_inches='tight')
 
-    
-    plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
+        if options.mmgg:
 
-    if options.heatmap:
+            log.info("ploting MMG count figure")
 
-        log.info("Creating heatmap of top 50 DEGs")
+            filtered_MMG['plot'].savefig(os.path.join(diffdir,"Filtered_MMG.png"),dpi=300, bbox_inches='tight')
 
-        heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
-
-        heatmap.savefig(os.path.join(plotdir,f"Heatmap_top50.png"), bbox_inches='tight')
-
-    genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
-
-    if options.mmgg:
-
-        genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_MMGs.xlsx"),combinations=combination, outDir=diffdir, mmg=True)
-
-    annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
-
-    if options.geneontology:
-
-        outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
-
-        gofiles = pu.make_directory(os.path.join(outgo,"GO_Files"))
-
-        goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
+        log.info("Writting DEGs summary to excel file")
         
-        if options.mmgg:
-
-            gofilesM = pu.make_directory(os.path.join(outgo,"GO_Files_MMG"))
-
-            goplotsM = pu.make_directory(os.path.join(outgo,"GO_Plots_MMG"))
-
-        go = GeneOntology(species=options.species, type=options.speciestype, keyType=options.source,  gff=options.feature_file)
-
-        for c in combination:
-
-            file_deg = f"{genesdir}/{c}.txt"
-
-            ontology_results = go.enrichGO(file=file_deg)
-
-            if ontology_results != "No Gene Ontology":
-
-                go_results = ge.add_names_annotation(ontology_results['result'])
-
-                go_results.to_excel(f"{gofiles}/{c}_gene_ontology.xlsx", index=False)
-
-                ontology_results['plot'].savefig(f"{goplots}/{c}_go_dotplot.png", bbox_inches='tight')
-                plt.close()
-            else:
-                log.info(f"No ontology found in {c}")
+        filtered_DEG['summary'].to_excel(os.path.join(diffdir,"Filtered_DEGs_summary.xlsx"), index=False)
 
         if options.mmgg:
-
-            for c in combination:
-
-                file_mmg = f"{genesdir}/{c}_mmg.txt"
-
-                ontology_results_mmg = go.enrichGO(file=file_mmg)
-
-                if ontology_results_mmg != "No Gene Ontology":
-
-                    go_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
-
-                    go_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=go_results_MMG, combination=c)
-
-                    go_results_MMG_go.to_excel(f"{gofilesM}/{c}_mmg_gene_ontology.xlsx", index=False)
-
-                    ontology_results_mmg['plot'].savefig(f"{goplotsM}/{c}_mmg_go_dotplot.png", bbox_inches='tight')
-
-                    plt.close()
-
-                else:
-                    
-                    log.info(f"No ontology found in {c}")
-    
-    if options.keggpathway:
-
-        outkegg = pu.make_directory(os.path.join(annodir,"KEGG_Pathway"))
-
-        keggfiles = pu.make_directory(os.path.join(outkegg,"KEGG_Files"))
-
-        keggplots = pu.make_directory(os.path.join(outkegg,"KEGG_Plots"))
-
-        if options.mmgg:
-
-            keggfilesM = pu.make_directory(os.path.join(outkegg,"KEGG_Files_MMG"))
-
-            keggplotsM = pu.make_directory(os.path.join(outkegg,"KEGG_Plots_MMG"))
-
-        pt = Pathway(species=options.species, keyType=options.source, gff= options.feature_file)
-
-        for c in combination:
-
-            file_deg = f"{genesdir}/{c}.txt"
-
-            kegg_results = pt.enrichKEGG(file_deg)
-
-            if kegg_results != "No Pathway":
-
-                k_result = ge.add_names_annotation(kegg_results['result'])
-
-                k_result.to_excel(os.path.join(keggfiles, f"{c}_kegg.xlsx"), index=False)
-
-                kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
-
-                plt.close()
-
-            else:
-                log.info(f"No pathway found in {c}")
-
-        if options.mmgg:
-
-            for c in combination:
-
-                file_mmgs = f"{genesdir}/{c}_mmg.txt"
-
-                kegg_results_mmg = pt.enrichKEGG(file=file_mmgs)
-
-                if kegg_results_mmg != "No Pathway":
-
-                    kegg_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
-
-                    kegg_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=kegg_results_MMG, combination=c)
-                    
-                    kegg_results_MMG_go.to_excel(f"{keggfilesM}/{c}_mmg_kegg.xlsx", index=False)
-
-                    kegg_results_mmg['plot'].savefig(f"{keggplotsM}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
-                    
-                    plt.close()
-                    
-                else:
-                    log.info(f"No ontology found in {c}")
-
-    if options.volcanoplot:
-
-        outvolcano = os.path.join(plotdir,"Volcano_Plots")
-
-        pu.make_directory(outvolcano)
-
-        for c in combination:
-
-            x = pp.plotVolcano(result,c,FOLD=options.fold)
-
-            if type(x) != str:
-
-                x.savefig(outvolcano+"/"+c+"_volcano.png")
-                plt.close()
-
-    if options.maplot:
-
-        count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
-
-        outma = pu.make_directory(os.path.join(plotdir,"MA_Plots"))
-
-        for m in combination:
-
-            x = pp.plotMA(degDF= result,countDF= count,comp=m,FOLD=options.fold, FDR=options.fdr)
-
-            if type(x) != str:
-
-                x.savefig(outma+"/"+m+"_MA.png")
-                plt.close()
-
-    if options.vennplot:
-
-        outvenn = pu.make_directory(os.path.join(plotdir,"Venn_Plots"))
+            log.info("Writting MMGs summary to excel file")
         
-        degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
+            filtered_MMG['summary'].to_excel(os.path.join(diffdir,"Filtered_MMGs_summary.xlsx"), index=False)
 
-        if options.venncombination != 'random':
+        genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_DEGs.xlsx"),combinations=combination, outDir=diffdir)
 
-            x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
+        if options.mmgg:
 
-            x.savefig(f"{outvenn}/Venn0.png")
+            genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_MMGs.xlsx"),combinations=combination, outDir=diffdir, mmg=True)
 
-            plt.close()
+    if  options.resume == 'functional' or options.resume == 'all':
+
+        if os.path.exists(os.path.join(outdir, "5_Visualization")):
+
+            plotdir = os.path.join(outdir, "5_Visualization")
 
         else:
-            if len(combination)<4:
+    
+            plotdir = pu.make_directory(os.path.join(outdir, "5_Visualization"))
 
-                vnum = len(combination)
+            
+        if options.heatmap:
+
+            log.info("Creating heatmap of top 50 DEGs")
+
+            heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
+
+            heatmap.savefig(os.path.join(plotdir,f"Heatmap_top50.png"), bbox_inches='tight')
+
+    
+    
+        if os.path.exists(os.path.join(outdir, "6_Functional_Annotation")):
+
+            annodir = os.path.join(outdir, "6_Functional_Annotation")
+
+        else:
+
+            annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
+
+        if options.geneontology:
+
+            if os.path.exists(os.path.join(annodir,"Gene_Ontology")):
+
+                shutil.rmtree(os.path.join(annodir,"Gene_Ontology"))
 
             else:
 
-                vnum = math.ceil(len(combination)/4)
-                
-            vlist = np.array_split(combination, vnum)
+                outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
+
+                gofiles = pu.make_directory(os.path.join(outgo,"GO_Files"))
+
+                goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
+            
+                if options.mmgg:
+
+                    gofilesM = pu.make_directory(os.path.join(outgo,"GO_Files_MMG"))
+
+                    goplotsM = pu.make_directory(os.path.join(outgo,"GO_Plots_MMG"))
+
+            go = GeneOntology(species=options.species, type=options.speciestype, keyType=options.source,  gff=options.feature_file)
+
+            for c in combination:
+
+                file_deg = f"{genesdir}/{c}.txt"
+
+                ontology_results = go.enrichGO(file=file_deg)
+
+                if ontology_results != "No Gene Ontology":
+
+                    go_results = ge.add_names_annotation(ontology_results['result'])
+
+                    go_results.to_excel(f"{gofiles}/{c}_gene_ontology.xlsx", index=False)
+
+                    ontology_results['plot'].savefig(f"{goplots}/{c}_go_dotplot.png", bbox_inches='tight')
+                    plt.close()
+                else:
+                    log.info(f"No ontology found in {c}")
+
+            if options.mmgg:
+
+                for c in combination:
+
+                    file_mmg = f"{genesdir}/{c}_mmg.txt"
+
+                    ontology_results_mmg = go.enrichGO(file=file_mmg)
+
+                    if ontology_results_mmg != "No Gene Ontology":
+
+                        go_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
+
+                        go_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=go_results_MMG, combination=c)
+
+                        go_results_MMG_go.to_excel(f"{gofilesM}/{c}_mmg_gene_ontology.xlsx", index=False)
+
+                        ontology_results_mmg['plot'].savefig(f"{goplotsM}/{c}_mmg_go_dotplot.png", bbox_inches='tight')
+
+                        plt.close()
+
+                    else:
+                        
+                        log.info(f"No ontology found in {c}")
         
-            for i in range(0, len(vlist)):
+        if options.keggpathway:
 
-                x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold, degLabel=None)
 
-                x.savefig(outvenn+"/Venn_"+str(i)+".png")
+            if os.path.exists(os.path.join(annodir,"KEGG_Pathway")):
+
+                shutil.rmtree(os.path.join(annodir,"KEGG_Pathway"))
+            
+            else:
+
+                outkegg = pu.make_directory(os.path.join(annodir,"KEGG_Pathway"))
+
+                keggfiles = pu.make_directory(os.path.join(outkegg,"KEGG_Files"))
+
+                keggplots = pu.make_directory(os.path.join(outkegg,"KEGG_Plots"))
+
+                if options.mmgg:
+
+                    keggfilesM = pu.make_directory(os.path.join(outkegg,"KEGG_Files_MMG"))
+
+                    keggplotsM = pu.make_directory(os.path.join(outkegg,"KEGG_Plots_MMG"))
+
+            pt = Pathway(species=options.species, keyType=options.source, gff= options.feature_file)
+
+            for c in combination:
+
+                file_deg = f"{genesdir}/{c}.txt"
+
+                kegg_results = pt.enrichKEGG(file_deg)
+
+                if kegg_results != "No Pathway":
+
+                    k_result = ge.add_names_annotation(kegg_results['result'])
+
+                    k_result.to_excel(os.path.join(keggfiles, f"{c}_kegg.xlsx"), index=False)
+
+                    kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
+
+                    plt.close()
+
+                else:
+                    log.info(f"No pathway found in {c}")
+
+            if options.mmgg:
+
+                for c in combination:
+
+                    file_mmgs = f"{genesdir}/{c}_mmg.txt"
+
+                    kegg_results_mmg = pt.enrichKEGG(file=file_mmgs)
+
+                    if kegg_results_mmg != "No Pathway":
+
+                        kegg_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
+
+                        kegg_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=kegg_results_MMG, combination=c)
+                        
+                        kegg_results_MMG_go.to_excel(f"{keggfilesM}/{c}_mmg_kegg.xlsx", index=False)
+
+                        kegg_results_mmg['plot'].savefig(f"{keggplotsM}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
+                        
+                        plt.close()
+                        
+                    else:
+                        log.info(f"No ontology found in {c}")
+
+        if options.volcanoplot:
+
+            outvolcano = os.path.join(plotdir,"Volcano_Plots")
+
+            pu.make_directory(outvolcano)
+
+            for c in combination:
+
+                x = pp.plotVolcano(result,c,FOLD=options.fold)
+
+                if type(x) != str:
+
+                    x.savefig(outvolcano+"/"+c+"_volcano.png")
+                    plt.close()
+
+        if options.maplot:
+
+            count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
+
+            outma = pu.make_directory(os.path.join(plotdir,"MA_Plots"))
+
+            for m in combination:
+
+                x = pp.plotMA(degDF= result,countDF= count,comp=m,FOLD=options.fold, FDR=options.fdr)
+
+                if type(x) != str:
+
+                    x.savefig(outma+"/"+m+"_MA.png")
+                    plt.close()
+
+        if options.vennplot:
+
+            outvenn = pu.make_directory(os.path.join(plotdir,"Venn_Plots"))
+            
+            degfile = os.path.join(diffdir,"Filtered_DEGs.xlsx")
+
+            if options.venncombination != 'random':
+
+                x = pp.plotVenn(DEGFile=degfile, comparisons=options.venncombination, FOLD=options.fold)
+
+                x.savefig(f"{outvenn}/Venn0.png")
 
                 plt.close()
+
+            else:
+                if len(combination)<4:
+
+                    vnum = len(combination)
+
+                else:
+
+                    vnum = math.ceil(len(combination)/4)
+                    
+                vlist = np.array_split(combination, vnum)
+            
+                for i in range(0, len(vlist)):
+
+                    x = pp.plotVenn(DEGFile=degfile, comparisons= vlist[i], FOLD=options.fold, degLabel=None)
+
+                    x.savefig(outvenn+"/Venn_"+str(i)+".png")
+
+                    plt.close()
     
     comb_report = ','.join(combination)
     report.generate_report(outdir, comb_report, options.input_file, options.fold, options.fdr)
