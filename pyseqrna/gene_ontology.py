@@ -303,7 +303,7 @@ class GeneOntology:
         cbar = plt.colorbar(scatter,shrink=.25, pad=.2, aspect=10)
         cbar.ax.set_title(title,pad=20, fontweight='bold')
         
-        ax.set_yticklabels([textwrap.fill(label, width=15) for label in df['GO Term']], fontsize=12)
+        ax.set_yticklabels([textwrap.fill(label, width=40) for label in df['GO Term']], fontsize=12)
 
         return fig
 
@@ -357,7 +357,7 @@ class GeneOntology:
         cbar.ax.set_title(title, pad=20, fontweight='bold')
         
         # Split long y-axis tick labels into two rows
-        ax.set_yticklabels([textwrap.fill(label, width=20) for label in terms], fontsize=12)
+        ax.set_yticklabels([textwrap.fill(label, width=40) for label in terms], fontsize=12)
 
         return fig
 

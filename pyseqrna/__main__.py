@@ -46,7 +46,7 @@ def main():
     # Get all the options from the user
     
     options = arg_parser.parse_args()  
-    print(options)
+    # print(options)
     if options.species is None:
         print("Please provide a species and organism type")
         sys.exit()
