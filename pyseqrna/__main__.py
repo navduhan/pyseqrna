@@ -182,7 +182,7 @@ def main():
 
     
     # Removal of ribosomal RNA
-    if options.resume == 'alignment' or  options.resume == 'differential':
+    if options.resume == 'alignment' or  options.resume == 'differential' or options.resume == 'functional':
         dryrun = True
         if options.ribosomal:
             outtrim = ribo.sortmernaRun(outtrim, qualitydir, rnaDatabases=options.rnadb, pairedEND= options.paired,cpu=options.threads, slurm=options.slurm, dryrun=dryrun)
@@ -209,9 +209,11 @@ def main():
     if options.resume == 'differential' or options.resume == 'functional':
         
         dryrun = True
-        
+
+        aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
+
         if options.aligner == 'STAR':
-            aligndir = pu.make_directory(os.path.join(outdir, "2_Alignment"), dryrun=dryrun)
+            
             aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
             jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
             outalign= aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
@@ -221,6 +223,7 @@ def main():
             aligner = al.hisat2_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm,  outDir=aligndir, dryrun=dryrun)
             jobida= aligner.build_index(mem=options.memory,cpu=options.threads)
             outalign = aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
+
 
         quantdir = pu.make_directory(os.path.join(outdir, "3_Quantification"), dryrun=dryrun)
 
@@ -371,15 +374,24 @@ def main():
 
     targets = input_data['targets']
 
-    if options.resume == 'differential' or options.resume == 'functional':
+    if options.resume == 'functional':
+
+        dryrun = True
+
+        diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"), dryrun= dryrun)
+    
+    else:
+
+        dryrun = False
 
         if os.path.exists(os.path.join(outdir, "4_Differential_Expression")):
 
-            diffdir = os.path.join(outdir, "4_Differential_Expression")
-
+            shutil.rmtree(os.path.join(outdir, "4_Differential_Expression"))
+        
         else:
 
-            diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"))
+            diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"), dryrun= dryrun)
+
 
         if options.noreplicate:
 
