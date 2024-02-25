@@ -7,57 +7,104 @@
 ##                                                        ##
 ############################################################
 
+
+# Check if script is executed using Bash
+if [ -n "$BASH_VERSION" ]; then
+    SHELL_TYPE="bash"
+elif [ -n "$ZSH_VERSION" ]; then
+    SHELL_TYPE="zsh"
+else
+    SHELL_TYPE="sh"
+fi
+
 # Function to check if a command is available
 command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+echo -e "\nPlease wait checking development environment..."
 # Check operating system
 OS=$(uname -s)
 
+if [ "$OS" = "Linux" ]; then
+      echo -e "\nLinux development environment found\n\nProceeding with Linux-based installation\n"
+elif [ "$OS" = "Darwin" ]; then
+      ARCH=$(uname -m)
+      if [[ "$ARCH" == "arm64" ]]; then
+          echo -e "\nARM64 Darwin development environment found\n\nProceeding with ARM64-based macOS installation\n"
+      else
+          echo -e "\nIntel Darwin development environment found\n\nProceeding with Intel-based macOS installation\n"
+      fi
+else
+      echo -e "\nUnsupported operating system: $OS\nPlease install using dockerfile\n"
+      exit 1
+fi
+
 # Check if Miniconda is already installed
 if [ ! -d "$HOME/miniconda3" ]; then
-  echo "Miniconda is not installed. Installing..."
+  echo -e "Miniconda3 is not installed. Installing..."
   
   # Download Miniconda installer based on OS and architecture
   if [ "$OS" = "Linux" ]; then
-      wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+      echo -e "\nDownloading Miniconda3 for Linux\n"
+      wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh || { echo -e "Error: Failed to download Miniconda for Linux."; exit 1; }
+
   elif [ "$OS" = "Darwin" ]; then
       ARCH=$(uname -m)
       if [[ "$ARCH" == "arm64" ]]; then
-          wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -O miniconda.sh
-          conda config --env --set subdir osx-arm64
+          echo -e "\nDownloading Miniconda3 for ARM-based macOS\n"
+          wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -O miniconda.sh || { echo -e "Error: Failed to download Miniconda for ARM-based macOS."; exit 1; }
+          echo -e "\nAll software does not compile on ARM-based macOS add osx-x64 subdir\n"
+          conda config --env --set subdir osx-x64
       else
-          wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+          echo -e "\nDownloading Miniconda3 for intel-based macOS\n"
+          wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh || { echo -e "Error: Failed to download Miniconda for intel-based macOS."; exit 1; }
       fi
   else
-      echo "Unsupported operating system: $OS"
+      echo -e "\nUnsupported operating system: $OS \nPlease install using dockerfile\n"
       exit 1
   fi
   
-  # Install Miniconda unattendedly
-  bash miniconda.sh -b -p ~/miniconda3
+  echo -e "\nInstalling miniconda3 environment...\n"
+
+  sh miniconda.sh -b -p ~/miniconda3 || { echo -e "Error: Miniconda installation failed."; exit 1; }
+  
 fi
 
 # Activate Miniconda
-source ~/miniconda3/bin/activate
+
+source ~/miniconda3/bin/activate || { echo -e "Error: Failed to activate Miniconda."; exit 1; }
 
 # Check if the conda environment already exists
 if conda env list | grep -q "pyseqrna-0.2"; then
-  echo "pySeqRNA environment already exists. Deleting and recreating..."
-  conda env remove -n pyseqrna-0.2 --yes
+  echo -e "pySeqRNA environment already exists. Deleting and recreating..."
+  conda env remove -n pyseqrna-0.2 --yes || { echo -e "Error: Failed to remove existing pySeqRNA environment."; exit 1; }
 fi
 
+echo -e "Creating pySeqRNA conda environment....\n"
 # Install dependencies via conda
-conda env create -f pyseqrna_environment.yml
+
+conda env create -f pyseqrna_environment.yml || { echo -e "Error: Failed to create pySeqRNA conda environment."; exit 1; }
 
 # Activate the environment
-conda activate pyseqrna-0.2
+conda activate pyseqrna-0.2 || { echo -e "Error: Failed to activate pySeqRNA environment."; exit 1; }
 
 # Install pySeqRNA
-pip install .
 
-echo -e "\n\nThank you for using pySeqRNA\n\nFor exceuting pyseqrna run \n\nsource ~/miniconda/bin/activate pyseqrna-0.2 \n\npyseqrna -h\n\n "
+echo -e "\nInstalling pySeqRNA package\n"
+pip install . || { echo -e "Error: Failed to install pySeqRNA package."; exit 1; }
+
+if [ "$SHELL_TYPE" = "bash" ]; then
+    conda init "$SHELL_TYPE" >/dev/null 2>&1
+    echo -e "source ~/miniconda3/bin/activate pyseqrna-0.2" >>~/.bashrc
+    source ~/.bashrc
+elif [ "$SHELL_TYPE" = "zsh" ]; then
+    conda init "$SHELL_TYPE" >/dev/null 2>&1
+    echo -e "source ~/miniconda3/bin/activate pyseqrna-0.2" >>~/.zshrc
+    source ~/.zshrc
+fi
+
+echo -e "\n\npySeqRNA installation successfull completed\nThank you for using pySeqRNA\n\nFor excecuting pyseqrna run \n\nsource ~/miniconda3/bin/activate pyseqrna-0.2 \n\npyseqrna -h\n\n"
 
 
 
