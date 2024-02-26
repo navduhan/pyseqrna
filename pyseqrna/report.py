@@ -29,10 +29,12 @@ def _read_file(infile):
     return df
 
 def _nsamples(infile):
-    if infile.endswith(".csv") or infile.endswith(".txt"):
-        df = pd.read_csv(infile, comment="#")
+    if infile.endswith(".txt"):
+        df = pd.read_csv(infile, sep="\s+", comment='#')
+    elif infile.endswith(".csv"):
+        df = pd.read_csv(infile, comment='#')
     elif infile.endswith(".xlsx"):
-        df = pd.read_excel(infile, comment="#")
+        df = pd.read_excel(infile, comment='#')
     else:
         raise ValueError("Unsupported file format:", infile)
     
@@ -52,7 +54,7 @@ def _process_infile(infile):
     try:
         # Determine file type and read using appropriate method
         if infile.endswith(".txt"):
-            df = pd.read_csv(infile, sep="\t", comment='#')
+            df = pd.read_csv(infile, sep="\s+", comment='#')
         elif infile.endswith(".csv"):
             df = pd.read_csv(infile, comment='#')
         elif infile.endswith(".xlsx"):
