@@ -764,7 +764,7 @@ def main():
                     plt.close()
     
     comb_report = ','.join(combination)
-    report.generate_report(outdir, comb_report, options.input_file, options.fold, options.fdr)
+    report.generate_report(outdir, comb_report, options.input_file, options.reference_genome, options.feature_file, options.fold, options.fdr)
             
     endTime = time.ctime()
     log.info("Analysis Complted at %s", endTime)
