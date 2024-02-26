@@ -100,7 +100,7 @@ def read_runconfig(config_file):
     options.volcanoplot = internal.getboolean('volcanoPlot', fallback=False)
     options.vennplot = internal.getboolean('vennPlot', fallback=False)
     venncombination_value = internal.get('vennCombinations', 'random')
-    options.venncombination = venncombination_value.split() if venncombination_value != 'all' else venncombination_value
+    options.venncombination = venncombination_value.split() if venncombination_value != 'random' else venncombination_value
     options.cluster = internal.getboolean('cluster', fallback=True)
 
     # FunctionalAnnotation section
