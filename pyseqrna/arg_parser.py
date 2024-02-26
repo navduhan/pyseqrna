@@ -38,13 +38,13 @@ def parse_args():
     # group.add_argument("feature_file", nargs="?", help="Path to the GTF/GFF file")
     if "-c" not in sys.argv and "--config" not in sys.argv:
         mandatory = parser.add_argument_group("Required arguments")
-        mandatory.add_argument("input-file", type=str, help="""Tab-delimited file containing sample information""")
+        mandatory.add_argument("input_file", type=str, help="""Tab-delimited file containing sample information""")
 
-        mandatory.add_argument("samples-path",  type=str, help="Directory for raw reads")
+        mandatory.add_argument("samples_path",  type=str, help="Directory for raw reads")
 
-        mandatory.add_argument("reference-genome", type=str, help="Path to the reference genome file.")
+        mandatory.add_argument("reference_genome", type=str, help="Path to the reference genome file.")
 
-        mandatory.add_argument("feature-file", type=str,
+        mandatory.add_argument("feature_file", type=str,
             help="Path to the GTF/GFF file ")
 
 
