@@ -97,6 +97,9 @@ def parse_args():
 
     internal.add_argument('--normalizeCount', dest='normalizecount',default='RPKM', choices=['RPKM', 'TPM', 'CPM', 'medianRatiocount'], 
         help="Convert raw read counts to normalized counts\n[default:RPKM]")
+    
+    internal.add_argument('--co-expression', dest='coexpression', action='store_true', default=False, 
+        help="Convert raw read counts to co-expression \n[default:False]")
 
     internal.add_argument('--heatmap', dest='heatmap',action='store_true', default=False, 
         help="Create heatmap\n[default:False]")

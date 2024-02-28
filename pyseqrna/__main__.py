@@ -27,6 +27,7 @@ from pyseqrna import multimapped_groups as mmg
 from pyseqrna.gene_ontology import GeneOntology
 from pyseqrna.pathway import Pathway
 from pyseqrna.normalize_counts import Normalization
+from pyseqrna.coexpression import run_Clusts
 from pyseqrna import report
 from pyseqrna.__organism__ import organism
 from tabulate import tabulate
@@ -412,6 +413,8 @@ def main():
 
     targets = input_data['targets']
 
+    
+
     if options.resume == 'functional':
 
         dryrun = True
@@ -580,6 +583,15 @@ def main():
         if options.mmgg:
 
             genesdir = pu.getGenes(os.path.join(diffdir,"Filtered_MMGs.xlsx"),combinations=combination, outDir=diffdir, mmg=True)
+
+        if options.coexpression:
+
+            coexpout = pu.make_directory(os.path.join(diffdir, 'co-expression'))
+
+            run_Clusts(countFile=os.path.join(quantdir,"Raw_Counts.xlsx"), targets=targets, outdir=coexpout)
+
+            
+
 
     if  options.resume == 'functional' or options.resume == 'all':
 
