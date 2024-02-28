@@ -19,6 +19,8 @@ import matplotlib.patches as patches
 from itertools import chain
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import seaborn as sns
 from adjustText import adjust_text
@@ -189,6 +191,7 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), extraCol
 
     # Need to add argument for all deg hetamp.
     if extraColumns:
+        
          degDF = degDF.drop(columns=['Name', 'Description'])
          degDF = degDF.set_index('Gene')
 
@@ -196,7 +199,6 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), extraCol
 
         degDF = degDF.set_index('Gene')
         
-    
 
     if type.lower() =='degs':
         degDF = degDF.fillna(0)
@@ -215,12 +217,16 @@ def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), extraCol
     elif type.lower() =='counts':
         
         degDF = degDF.replace(0,np.nan).dropna(axis=1,how="all")
+        
+        topGene=degDF.nlargest(int(num/2),degDF.columns)
+        botGene=degDF.nsmallest(int(num/2),degDF.columns)
+        final=pd.concat([topGene,botGene])
+        fin = final[degDF.columns]
 
-        fin=degDF.nlargest(int(num), degDF.columns)
         
     fig, ax = plt.subplots(figsize=figdim)
 
-    sns.heatmap(fin, cmap="seismic",ax=ax)
+    sns.heatmap(fin, cmap="seismic",ax=ax, cbar=True, cbar_kws={"shrink": .30})
 
     fig.tight_layout()
 
@@ -396,8 +402,17 @@ def plotVenn(DEGFile=None, FOLD=2, comparisons=None, degLabel="",  fontsize=14, 
 
 def pcaPlot(ncountdf=None ,legends=False, fontsize=14, figsize=(12,12),dpi=300):
 
-    """
+    """This function plots PCA plot based on normalized counts
+
+    :param ncountdf: Normalized counts File.
+
+    :param legenes: show legends.
+
+    :param fontsize: Font size. Defaults to 14.
     
+    :param figsize: Figure size. Defaults to (12,12).
+
+    :param dpi: Figure DPI resolution. Defaults to 300.
 
     """
 
@@ -405,13 +420,10 @@ def pcaPlot(ncountdf=None ,legends=False, fontsize=14, figsize=(12,12),dpi=300):
 
     ndf = ncountdf.T
 
-    scaler = StandardScaler()
-
-    data_scaled = scaler.fit_transform(ndf)
-
+    pca = make_pipeline(StandardScaler(), PCA())
     # Perform PCA
     pca = PCA(n_components=2)
-    pca_result = pca.fit_transform(data_scaled)
+    pca_result = pca.fit_transform(ndf)
 
     # Create a DataFrame with the principal components
     pca_df = pd.DataFrame(data=pca_result, columns=['PC1', 'PC2'], index=ndf.index)
@@ -420,7 +432,7 @@ def pcaPlot(ncountdf=None ,legends=False, fontsize=14, figsize=(12,12),dpi=300):
     colors = sns.color_palette("husl", n_colors=len(pca_df.index))
 
     # Plot the PCA results with sample labels and color
-    fig, ax = plt.subplots(figsize=figsize)
+    fig, ax = plt.subplots(figsize=figsize, dpi=dpi)
     legend_labels = []
 
     for i, sample in enumerate(pca_df.index):

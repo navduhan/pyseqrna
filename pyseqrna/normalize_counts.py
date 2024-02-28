@@ -113,7 +113,7 @@ class Normalization():
         
         """
 
-        gtf = pd.read_csv(self.featureFile, sep="\t", header=None, comment="#")
+        gtf = pd.read_csv(self.featureFile, sep="\t", header=None, comment="#", low_memory=False)
 
         gtf.columns = ['seqname', 'source', 'feature', 'start', 'end', 's1', 'strand', 's2', 'identifier']
 
@@ -243,7 +243,6 @@ class Normalization():
        
         return rpkmDF, fig
 
-
     def TPM(self, plot=True, figsize=(20,10)):
 
         """
@@ -292,6 +291,42 @@ class Normalization():
         tpmDF.insert(0, 'Gene', gene_names)
 
         return tpmDF, fig, ax
+    
+    def FPKM(self, plot=True, figsize=(20,10)):
+        """
+        This function converts counts to fragments per kilobase per million (FPKM)
+       
+        :param plot: True if to plot log raw counts and log FPKM counts on boxplot.
+        :param figsize: Figure size.
+        """
+
+        df = pd.read_excel(self.countFile)
+        countDF = df.set_index(self.geneColumn)
+        geneDF = self._getGeneLength()
+
+        match_index = pd.Index.intersection(countDF.index, geneDF.index)
+        counts = np.asarray(countDF.loc[match_index], dtype=int)
+        gene_lengths = np.asarray(geneDF.loc[match_index]['Length'], dtype=int)
+        gene_names = np.array(match_index)
+
+        total_fragment_per_sample = counts.sum(axis=0) / 2  # Since a fragment represents two reads
+        fpkm =  1e9 * counts / (total_fragment_per_sample[np.newaxis, :] * gene_lengths[:, np.newaxis])
+        fpkmDF = pd.DataFrame(data=fpkm, columns=countDF.columns)
+
+        if plot:
+            logCounts = np.log(counts.T + 1)
+            logNorm_counts = np.log(fpkm.T + 1)
+            fig, ax = plt.subplots(figsize=figsize)
+            ax.boxplot(logCounts.tolist() + logNorm_counts.tolist(), labels=list(countDF.columns) + list(fpkmDF.columns))
+            ax.set_xlabel('Sample Name')
+            plt.xticks(rotation=90)
+            ax.set_ylabel('log counts')
+
+        fpkmDF.insert(0, 'Gene', gene_names)
+        if plot:
+            return fpkmDF, fig
+        else:
+            return fpkmDF
 
 
     def meanRatioCount(self, plot=True, figsize=(20,10)):

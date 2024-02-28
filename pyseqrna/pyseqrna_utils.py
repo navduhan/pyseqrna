@@ -96,6 +96,8 @@ def read_runconfig(config_file):
     options.normalizecount = internal.get('normalizeCount', 'RPKM')
     options.heatmap = internal.getboolean('heatmap', fallback=False)
     options.heatmaptype = internal.get('heatmapType', 'counts')
+    options.pcaplot = internal.getboolean('pcaplot', fallback=False)
+    options.pcaplottype = internal.get('pcaplotType', 'RPKM')
     options.maplot = internal.getboolean('maPlot', fallback=False)
     options.volcanoplot = internal.getboolean('volcanoPlot', fallback=False)
     options.vennplot = internal.getboolean('vennPlot', fallback=False)

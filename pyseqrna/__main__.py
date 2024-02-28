@@ -342,6 +342,14 @@ def main():
             r[0].to_excel(os.path.join(quantdir,'RPKM_counts.xlsx'), index=False)
 
             r[1].savefig(os.path.join(quantdir,'RPKM_vs_Raw_counts.png'), bbox_inches='tight')
+            
+        if options.normalizecount == 'FPKM':
+            
+            r = norm.FPKM()
+
+            r[0].to_excel(os.path.join(quantdir,'FPKM_counts.xlsx'), index=False)
+
+            r[1].savefig(os.path.join(quantdir,'FPKM_vs_Raw_counts.png'), bbox_inches='tight')
 
         if options.normalizecount == 'CPM':
             
@@ -557,12 +565,65 @@ def main():
         if options.heatmap:
 
             log.info("Creating heatmap of top 50 DEGs")
+            
+            if options.heatmaptype == 'degs':
+                
+                degs = pd.read_excel(os.path.join(diffdir,"All_gene_expression.xlsx"))
 
-            heatmap, ax = pp.plotHeatmap(result,combination,num=50, type=options.heatmaptype)
+                heatmap, ax = pp.plotHeatmap(degs,combination,num=50, type=options.heatmaptype)
 
-            heatmap.savefig(os.path.join(plotdir,f"Heatmap_top50.png"), bbox_inches='tight')
+                heatmap.savefig(os.path.join(plotdir,f"Heatmap_top50.png"), bbox_inches='tight')
+                
+            if options.heatmaptype == 'counts':
+                
+                count = pd.read_excel(os.path.join(quantdir,"Raw_Counts.xlsx"))
 
-    
+                heatmap, ax = pp.plotHeatmap(count,combination,num=50, type=options.heatmaptype)
+
+                heatmap.savefig(os.path.join(plotdir,f"Heatmap_top50.png"), bbox_inches='tight')
+                
+        if options.pcaplot:
+            
+            log.info(f"creating PCA plot based on {options.pcaplottype} values")
+            
+        norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
+        
+        if options.pcaplottype == 'RPKM':
+            
+            r = norm.RPKM()
+
+            pcafig = pp.pcaPlot(ncountdf=r[0])
+            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+            
+        if options.pcaplottype == 'FPKM':
+            
+            r = norm.FPKM()
+
+            pcafig = pp.pcaPlot(ncountdf=r[0])
+            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+
+        if options.pcaplottype == 'CPM':
+            
+            r = norm.CPM()
+
+            pcafig = pp.pcaPlot(ncountdf=r[0])
+            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+            
+        if options.pcaplottype == 'TPM':
+            
+            r = norm.TPM()
+            
+            pcafig = pp.pcaPlot(ncountdf=r[0])
+            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+            
+        if options.pcaplottype == 'medianRatiocount':
+            
+            r = norm.meanRatioCount()
+
+            pcafig = pp.pcaPlot(ncountdf=r)
+            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+            
+        
     
         if os.path.exists(os.path.join(outdir, "6_Functional_Annotation")):
 

@@ -106,6 +106,12 @@ def parse_args():
 
     internal.add_argument('--heatmapType', required='--heatmap' in sys.argv, dest='heatmaptype', default='degs', choices=['counts', 'degs'],
         help="""Create heatmap based on selected choice \n[default: counts]""" )
+    
+    internal.add_argument('--pcaplot', dest='pcaplot',action='store_true', default=False, 
+        help="Create PCA plot\n[default:False]")
+
+    internal.add_argument('--pcaplotType', required='--pcaplot' in sys.argv, dest='pcaplottype', default='RPKM', choices=['Raw', 'RPKM', 'FPKM', 'CPM', 'TPM', 'medianRatiocount'],
+        help="""Create PCA plot based on selected choice \n[default: RPKM]""" )
 
     internal.add_argument('--maPlot', dest='maplot',action='store_true', default=False, 
         help="Create MA plot\n[default:False]")
