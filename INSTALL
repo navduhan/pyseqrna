@@ -84,11 +84,22 @@ fi
 echo -e "Creating pySeqRNA conda environment....\n"
 # Install dependencies via conda
 
-conda env create -f pyseqrna_environment.yml || { echo -e "Error: Failed to create pySeqRNA conda environment."; exit 1; }
-
+if [ "$OS" = "Linux" ]; then
+    conda env create -f pyseqrna_environment.yml || { echo -e "Error: Failed to create pySeqRNA conda environment."; exit 1; }
+elif [ "$OS" = "Darwin" ]; then
+      ARCH=$(uname -m)
+      if [[ "$ARCH" == "arm64" ]]; then
 # Activate the environment
-conda activate pyseqrna-0.2 || { echo -e "Error: Failed to activate pySeqRNA environment."; exit 1; }
+        CONDA_SUBDIR=osx-64 conda env create -f pyseqrna_environment.yml || { echo -e "Error: Failed to create pySeqRNA conda environment."; exit 1; }
+      else
+    conda env create -f pyseqrna_environment.yml || { echo -e "Error: Failed to create pySeqRNA conda environment."; exit 1; }
 
+    fi
+else
+  echo -e "\nUnsupported operating system: $OS \nPlease install using dockerfile\n"
+      exit 1
+  fi
+conda activate pyseqrna-0.2 || { echo -e "Error: Failed to activate pySeqRNA environment."; exit 1; }
 # Install pySeqRNA
 
 echo -e "\nInstalling pySeqRNA package\n"

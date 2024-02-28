@@ -32,11 +32,9 @@ def parse_args():
     # Add mutually exclusive group to handle config file and command line arguments
     # group = parser.add_mutually_exclusive_group()
     parser.add_argument("-c", "--config", metavar="CONFIG_FILE", help="Path to the configuration file")
-    # group.add_argument("input_file", nargs="?", help="Tab-delimited file containing sample information")
-    # group.add_argument("samples_path", nargs="?", help="Directory for raw reads")
-    # group.add_argument("reference_genome", nargs="?", help="Path to the reference genome file")
-    # group.add_argument("feature_file", nargs="?", help="Path to the GTF/GFF file")
+ 
     if "-c" not in sys.argv and "--config" not in sys.argv:
+        
         mandatory = parser.add_argument_group("Required arguments")
         mandatory.add_argument("input_file", type=str, help="""Tab-delimited file containing sample information""")
 
@@ -66,12 +64,6 @@ def parse_args():
 
     internal.add_argument( "--outdir",  default='pySeqRNA_results', 
         help="create output directory name to write results.\n[default: pySeqRNA_results] ")
-
-    internal.add_argument('--paired', dest='paired', action='store_true', default=False, help="Enable paired end functionality in pySeqRNA\n[default:False]")
-
-    internal.add_argument("--fastqc", action="store_true", default=False, dest="fastqc", help= "Enable initial quality check on raw reads with fastqc \n[default:True]")
-
-    internal.add_argument("--fastqcTrim", action="store_true", default=False, dest="fastqc2", help= "Enable quality check on trimmed reads with fastqc\n[default:False]")
 
     internal.add_argument('--ribosomal',  dest='ribosomal', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
 

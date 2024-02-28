@@ -632,6 +632,7 @@ class Gene_Description:
                 file.at[i, 'Gene_Name'] = res
 
         except Exception:
+            
             file = file
 
         return file
