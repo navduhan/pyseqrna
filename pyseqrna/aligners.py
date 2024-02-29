@@ -34,7 +34,7 @@ class STAR_Aligner:
     :param slurm: To run commands with slurm task-scheduler.
     """
 
-    def __init__(self, genome=None, configFile=None, outDir=".", slurm=False, dryrun=False):
+    def __init__(self, genome=None, configFile=None, outDir=".", slurm=False, memory=16, dryrun=False):
         """Default arguments for class STAR_Aligner
 
             :param genome: Reference genome file. 
@@ -50,6 +50,8 @@ class STAR_Aligner:
         self.outDir = outDir
 
         self.dryrun = dryrun
+        
+        self.memory = memory
 
         if configFile != None:
 
@@ -184,11 +186,11 @@ class STAR_Aligner:
 
             if gff != None:
 
-                star_command = f"{execPATH} --genomeDir {output} {arg}  --genomeFastaFiles {GenomeFasta} --sjdbGTFfile {gff}"
+                star_command = f"{execPATH} --genomeDir {output} {arg} --limitGenomeGenerateRAM {self.memory}  --genomeFastaFiles {GenomeFasta} --sjdbGTFfile {gff}"
 
             else:
 
-                star_command = f"{execPATH} --genomeDir {output} {arg}  --genomeFastaFiles {GenomeFasta} "
+                star_command = f"{execPATH} --genomeDir {output} {arg} --limitGenomeGenerateRAM {self.memory} --genomeFastaFiles {GenomeFasta} "
 
             if self.dryrun:
 
