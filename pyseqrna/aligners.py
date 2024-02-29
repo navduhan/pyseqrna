@@ -186,11 +186,11 @@ class STAR_Aligner:
 
             if gff != None:
 
-                star_command = f"{execPATH} --genomeDir {output} {arg} --limitGenomeGenerateRAM {self.memory}  --genomeFastaFiles {GenomeFasta} --sjdbGTFfile {gff}"
+                star_command = f"{execPATH} --genomeDir {output} {arg} --limitGenomeGenerateRAM {self.memory}000000000  --genomeFastaFiles {GenomeFasta} --sjdbGTFfile {gff}"
 
             else:
 
-                star_command = f"{execPATH} --genomeDir {output} {arg} --limitGenomeGenerateRAM {self.memory} --genomeFastaFiles {GenomeFasta} "
+                star_command = f"{execPATH} --genomeDir {output} {arg} --limitGenomeGenerateRAM {self.memory}000000000 --genomeFastaFiles {GenomeFasta} "
 
             if self.dryrun:
 

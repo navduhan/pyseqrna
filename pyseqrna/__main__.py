@@ -214,7 +214,7 @@ def main():
 
         if options.aligner == 'STAR':
             
-            aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm, memory=options.memory*1000000000,  outDir=aligndir, dryrun=dryrun)
+            aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm, memory=options.memory,  outDir=aligndir, dryrun=dryrun)
             jobida = aligner.build_index(mem=options.memory,cpu=options.threads)
             outalign= aligner.run_Alignment(outtrim, pairedEND=options.paired, mem=options.memory, cpu=options.threads)
         
@@ -237,7 +237,7 @@ def main():
 
         if options.aligner == 'STAR':
 
-            aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm, memory=options.memory*1000000000, outDir=aligndir, dryrun=dryrun)
+            aligner= al.STAR_Aligner(genome=options.reference_genome, configFile=options.param,  slurm=options.slurm, memory= options.memory, outDir=aligndir, dryrun=dryrun)
 
             log.info("Genome indexing started")
 
