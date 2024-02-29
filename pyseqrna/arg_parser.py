@@ -64,6 +64,9 @@ def parse_args():
 
     internal.add_argument( "--outdir",  default='pySeqRNA_results', 
         help="create output directory name to write results.\n[default: pySeqRNA_results] ")
+    
+    internal.add_argument( "--paired", dest='paired',  default='pySeqRNA_results', 
+        help="Enable paired end functionality in pySeqRNA")
 
     internal.add_argument('--ribosomal',  dest='ribosomal', action='store_true', default=False, help="Enable removal of ribosomal RNA from reads\n[default:False]")
 
