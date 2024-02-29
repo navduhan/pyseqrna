@@ -289,7 +289,7 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
     ## Generate Functional Annotation Navbar
     fa_header= """
                         <li class="accordion">
-                        <a href="#" data-toggle="collapse" data-target="#collapseFa" aria-expanded="false"
+                        <a href="#func" data-toggle="collapse" data-target="#collapseFa" aria-expanded="false"
                             aria-controls="collapseOne" class="collapsible">
                             <span class="fa fa-trello mr-3" aria-hidden="true"></span>Functional Annotation
                         </a>
@@ -305,8 +305,8 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
 
     """
 
-    go = '<li><a href="#">Gene Ontology</a></li>'
-    kegg = '<li><a href="#">KEGG Pathway</a></li>'
+    go = '<li><a href="#go">Gene Ontology</a></li>'
+    kegg = '<li><a href="#kegg">KEGG Pathway</a></li>'
 
     if os.path.exists(os.path.join(annotation, 'Gene_Ontology')):
         fa_header += go
@@ -354,10 +354,12 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
     quality1 = '''
     <div class="row justify-content-center px-5" id="fastqc">
     <h5 class="mb-3"> Raw Read Quality Check </h5>
-    <p class='text-justify'>For the initial quality check of input fastq reads, <code>fastQC</code> was used.
+    <p class='text-justify'>
+
+    For the initial quality check of input fastq reads, <code>fastQC</code> was used.
     fastQC (<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>)
     is a quality control analysis tool designed to spot potential problems in high throughput sequencing datasets.
-    All the results are stored in <a href="1_Quality/fastqc_results/" target="_blank"> fastqc_results</a> in the 1_Quality/ subfolder of your results directory</p>
+    All the results are stored in <a href="1_Quality/fastqc_results/" target="_blank"> fastqc_results</a> in the <code>1_Quality/</code> subfolder of your results directory</p>
     </div>
     '''
 
@@ -367,7 +369,7 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
     Trim Galore (<a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank">https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/</a>)
     is a wrapper script to automate quality and adapter trimming as well as quality control, with some added functionality to remove biased methylation
     positions for RRBS sequence files (for directional, non-directional (or paired-end) sequencing).
-    The trimmed fastq files are stored in <a href="1_Quality/trim_galore_results/" target="_blank">trim_galore_results</a> under the 1_Quality/ subdirectory. </p>
+    The trimmed fastq files are stored in <a href="1_Quality/trim_galore_results/" target="_blank">trim_galore_results</a> under the <code>1_Quality/</code> subdirectory. </p>
     </div>
     '''
     trim2 = '''<h5 class="mb-3">Raw Read Quality Trimming and Adapter Removal </h5>
@@ -375,20 +377,20 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
     Trim Galore (<a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank">https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/</a>)
     is a wrapper script to automate quality and adapter trimming as well as quality control, with some added functionality to remove biased methylation
     positions for RRBS sequence files (for directional, non-directional (or paired-end) sequencing).
-    The trimmed fastq files are stored in <a href="1_Quality/trim_galore_results/" target="_blank">trim_galore_results</a> under the 1_Quality/ subdirectory. </p>
+    The trimmed fastq files are stored in <a href="1_Quality/trim_galore_results/" target="_blank">trim_galore_results</a> under the <code>1_Quality/</code> subdirectory. </p>
     '''
     trim3 = '''<h5 class="mb-3">Raw Read Quality Trimming and Adapter Removal </h5>
     <p class="text-justify">Read trimming and adapter removal was performed using <code>Trim Galore</code>.
     Trim Galore (<a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank">https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/</a>)
     is a wrapper script to automate quality and adapter trimming as well as quality control, with some added functionality to remove biased methylation
     positions for RRBS sequence files (for directional, non-directional (or paired-end) sequencing).
-    The trimmed fastq files are stored in <a href="1_Quality/trim_galore_results/" target="_blank">trim_galore_results</a> under the 1_Quality/ subdirectory. </p>
+    The trimmed fastq files are stored in <a href="1_Quality/trim_galore_results/" target="_blank">trim_galore_results</a> under the <code>1_Quality/</code> subdirectory. </p>
     '''
     quality2 = ''' <div  class="row" id="trim_fastqc"><h5 class="mb-3" > Post Trimming Reads Quality Check </h5>
     <p class='text-justify'>For the quality check of trimmed fastq reads, <code>fastQC</code> was used.
     fastQC (<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>)
     is a quality control analysis tool designed to spot potential problems in high throughput sequencing datasets.
-    The results are stored in <a href="1_Quality/trim_fastqc_results/" target="_blank"> trim_fastqc_results</a> under the 1_Quality/ subdirectory.</p>
+    The results are stored in <a href="1_Quality/trim_fastqc_results/" target="_blank"> trim_fastqc_results</a> under the <code>1_Quality/</code> subdirectory.</p>
     </div>
     '''
 
@@ -452,7 +454,7 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
 
     if os.path.exists(os.path.join(alignment, "alignment_statistics.xlsx")):
         final_align_header += stats
-        final_align_header += '<div class="row justify-content-center"><div class="col-md-10" >'
+        final_align_header += '<div class="row justify-content-center"><div class="col-md-12" >'
         aligndf =pd.read_excel(f"{alignment}/alignment_statistics.xlsx")
         align_table = aligndf.to_html(index=False, classes='table', justify='center')
         final_align_header +=f'{align_table}'
@@ -490,7 +492,7 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
     """
 
     if os.path.exists(os.path.join(quantification, "Raw_Counts.xlsx")):
-        df = pd.read_excel(f"{quantification}/Raw_Counts.xlsx")
+        df = pd.read_excel(f"{quantification}/Raw_Counts.xlsx").head(50)
         final_quant_header += fcount
 
         final_quant_header += f'<div class="row justify-content-center"><div class="col-md-10">'
@@ -510,19 +512,24 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
     if os.path.exists(os.path.join(quantification, "RPKM_counts.xlsx")):
         final_quant_header += 'We have normalized the raw read count using Reads Per Kilobase of transcript, per Million mapped reads (RPKM). The file is available at <a href="3_Quantification/RPKM_counts.xlsx">RPKM normalized counts</a> </p>'
         final_quant_header += '<div class="row justify-content-center"><div class="col-md-10">'
-        final_quant_header +=f' {pd.read_excel(f"{quantification}/RPKM_counts.xlsx").to_html(index=False, classes="table", justify="center")}'
+        final_quant_header +=f' {pd.read_excel(f"{quantification}/RPKM_counts.xlsx").head(50).to_html(index=False, classes="table", justify="center")}'
+        final_quant_header += '</div></div>'
+    if os.path.exists(os.path.join(quantification, "FPKM_counts.xlsx")):
+        final_quant_header += 'We have normalized the raw read count using Reads Per Kilobase of transcript, per Million mapped reads (RPKM). The file is available at <a href="3_Quantification/RPKM_counts.xlsx">RPKM normalized counts</a> </p>'
+        final_quant_header += '<div class="row justify-content-center"><div class="col-md-10">'
+        final_quant_header +=f' {pd.read_excel(f"{quantification}/FPKM_counts.xlsx").head(50).to_html(index=False, classes="table", justify="center")}'
         final_quant_header += '</div></div>'
     if os.path.exists(os.path.join(quantification, "TPM_counts.xlsx")):
         final_quant_header += '<div class="row justify-content-center"><div class="col-md-10">'
-        final_quant_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{quantification}/TPM_counts.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
+        final_quant_header +=f' {pd.read_excel(f"{quantification}/TPM_counts.xlsx").head(50).to_html(index=False, classes="table", justify="center")}'
         final_quant_header += '</div></div>'
     if os.path.exists(os.path.join(quantification, "CPM_counts.xlsx")):
         final_quant_header += '<div class="row justify-content-center"><div class="col-md-10">'
-        final_quant_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{quantification}/CPM_counts.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
+        final_quant_header += f' {pd.read_excel(f"{quantification}/CPM_counts.xlsx").head(50).to_html(index=False, classes="table", justify="center")}'
         final_quant_header += '</div></div>'
     if os.path.exists(os.path.join(quantification, "Median_ratio_counts.xlsx")):
         final_quant_header += '<div class="row justify-content-center"><div class="col-md-10">'
-        final_quant_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(f"{quantification}/Median_ratio_counts.xlsx").head(50).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
+        final_quant_header += f' {pd.read_excel(f"{quantification}/Median_ratio_counts.xlsx").head(50).to_html(index=False, classes="table", justify="center")}'
         final_quant_header += '</div></div>'
     if os.path.exists(os.path.join(quantification, "Sample_cluster.png")):
         final_quant_header += corr
@@ -549,15 +556,15 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
     6. FDR: These are also called as the adjusted p-values (padj). By default, DESeq2 uses Benjamini-Hochberg method to adjust the p-values.<br> </code></div>'''
     if os.path.exists(os.path.join(differential,'All_gene_expression.xlsx')):
         final_deg_header +=f'''\n<p class="px-5 mt-3">Differential expression for all genes are presented in <a href="4_Differential_Expression/All_gene_expression.xlsx"> All gene expression</a></p>'''
-        final_deg_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
-        final_deg_header +=f'{pd.read_excel(f"{differential}/All_gene_expression.xlsx").to_html(index=False, classes="table table-responsive", justify="center")}'
+        final_deg_header += '<div class="row justify-content-center"><div class="col-md-12 my-4">'
+        final_deg_header +=f'{pd.read_excel(f"{differential}/All_gene_expression.xlsx").head(50).to_html(index=False, classes="table table-responsive", justify="center")}'
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs.xlsx')):
         fd = pd.ExcelFile(os.path.join(differential,'Filtered_DEGs.xlsx'))
         fd_sheet = fd.sheet_names
         final_deg_header +=f'''\n Differential expression was filtered on user provided FOLD >= {FOLD} and FDR <= {FDR}. For example only one comparison is shown below. For each comparison there are different sheets in  <a href="4_Differential_Expression/Filtered_DEGs.xlsx"> Filtered differentially expressed genes</a> file. '''
-        final_deg_header += '<div class="row justify-content-center px-5"><div class="col-md-10 my-4" id="fdeg">'
-        final_deg_header += f'{pd.read_excel(f"{differential}/Filtered_DEGs.xlsx",sheet_name=fd_sheet[1]).to_html(index=False, classes="table table-responsive", justify="center")}'
+        final_deg_header += '<div class="row justify-content-center px-5"><div class="col-md-9 my-4" id="fdeg">'
+        final_deg_header += f'{pd.read_excel(f"{differential}/Filtered_DEGs.xlsx",sheet_name=fd_sheet[1]).head(50).to_html(index=False, classes="table table-responsive", justify="center")}'
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs_summary.xlsx')):
         final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs_summary.xlsx"> summary of differentially expressed genes</a>'''
@@ -649,13 +656,17 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
 
 # Functional Annotation
 
-    final_func_header = f'''<div class="row justify-content-center">\n<div class="col-md-4">\n<h5 class="px-5">Functional Annotation</h5>\n<hr>\n</div>'''
+    final_func_header = '''<div id="func" class="row justify-content-center px-5">
+                <h2 class="mb-2">Functional Annotation</h2>
+
+            </div><hr>'''
+    
     if os.path.exists(os.path.join(annotation, 'Gene_Ontology')):
         gofiles = glob.glob(f"{annotation}/Gene_Ontology/GO_Files/*")
         goplots = glob.glob(f"{annotation}/Gene_Ontology/GO_Plots/*")
-        final_func_header += f'''<h5 id="go">Gene Ontology</h5> <br> Gene Ontology enrichment analysis provides information on the function of genes. It is divided in three categories Biological process (BP),
-        Molecular fucntion (MF), and Cellular component (CC). Gene Ontology results provides plots as well as files. GO enrichment results contains 10 columns. Gene Ontology files and plots can be found at can be found at <a href="./6_Functional_Annotation/Gene_Ontology/">Gene ontology </a> 
+        final_func_header += f'''<div class="row justify-content-center px-5"><h5 id="go">Gene Ontology</h5> <br> <p>Gene Ontology enrichment analysis provides information on the function of genes. It is divided in three categories Biological process (BP), Molecular fucntion (MF), and Cellular component (CC). Gene Ontology results provides plots as well as files. GO enrichment results contains 10 columns. Gene Ontology files and plots can be found at <a href="./6_Functional_Annotation/Gene_Ontology/">Gene ontology </a> </p>
         <br>
+        <code>
         1. GO ID : Gene Ontology ID <br>
         2. GO Term : Gene Ontology term description. <br>
         3. Ontology : Ontology type <br>
@@ -665,11 +676,11 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
         7. Counts : Number of DEGs <br>
         8. FDR : Flase discovery rate <br>
         9. Genes : DEGs IDs <br>
-        10. logPvalues : Enrichment score calulated by <code> log<sub>10</sub>(1-Pvalues)</code>
+        10. logPvalues : Enrichment score calulated by  log<sub>10</sub>(1-Pvalues)</code>
         </div>''' 
 
         final_func_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
-        final_func_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(gofiles[0]).head(20).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
+        final_func_header +=f'{pd.read_excel(gofiles[0]).head(20).to_html(index=False, classes="table table-responsive", justify="center")}'
         final_func_header +='</div></div>'
         final_func_header +=f'''<div class="row justify-content-center">
         
@@ -682,9 +693,10 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
         keggfiles = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Files/*")
         keggplots = glob.glob(f"{annotation}/KEGG_Pathway/KEGG_Plots/*")
         
-        final_func_header += f'''<h5 id="kegg">KEGG Pathway</h5> <br> KEGG pathway is a database resource for understanding high level functions of genes. KEGG pathway results provides plots as well as files. KEGG enrichment results contains 9 columns.
-        KEGG enrichment files and plots can be found at <a href="./6_Functional_Annotation/KEGG_Pathway/">KEGG results</a> 
+        final_func_header += f'''<div class="row justify-content-center px-5"><h5 id="kegg">KEGG Pathway</h5> <br> <p> KEGG pathway is a database resource for understanding high level functions of genes. KEGG pathway results provides plots as well as files. KEGG enrichment results contains 9 columns.
+        KEGG enrichment files and plots can be found at <a href="./6_Functional_Annotation/KEGG_Pathway/">KEGG results</a> </p>
         <br>
+        <code>
         1. Pathway ID : KEGG Pathway ID <br>
         2. Description : Pathway description. <br>
         3. Ontology : Ontology type <br>
@@ -694,13 +706,13 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
         7. Counts : Number of DEGs <br>
         8. FDR : Flase discovery rate <br>
         9. Genes : DEGs IDs <br>
-        10. logPvalues : Enrichment score calulated by <code> log<sub>10</sub>(1-Pvalues)</code>
+        10. logPvalues : Enrichment score calulated by  log<sub>10</sub>(1-Pvalues)</code>
    
-        ''' 
+        </div>''' 
 
         final_func_header += '<div class="row justify-content-center"><div class="col-md-10 my-4">'
-        final_func_header +=re.sub("class=\"dataframe ", "class=\"", pd.read_excel(keggfiles[0]).head(20).to_html(index=False, classes='table table-responsived table-borderless align-middle', justify='center'))
-        final_func_header +='</div></div></div>'
+        final_func_header += f'{pd.read_excel(keggfiles[0]).head(20).to_html(index=False, classes="table table-responsive", justify="center")}'
+        final_func_header +='</div></div>'
         final_func_header +=f'''<div class="row justify-content-center my-4">
     
         <div class="col-md-6 mt-2">
@@ -740,7 +752,7 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
                         </button>
                     </div>
             <div class="p-4">
-                        <h1><a href="index.html" class="logo">pySeqRNA <span>version 0.2</span></a></h1>
+                        <h1><a href="https://kaabil.net/pyseqrna" target="_blank" class="logo">pySeqRNA <span>version 0.2</span></a></h1>
                         <ul class="list-unstyled components mb-5">
                             <li class="active">
                                 <a href="#intro"><span class="fa fa-home mr-3"></span>Introduction</a>
@@ -783,9 +795,13 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
 {final_quant_header}
 {final_deg_header}
 {final_plots_header}
+{final_func_header}
+
+
 
         </div>
         </div>
+        
     <script src="https://cdn.jsdelivr.net/gh/navduhan/pyseqranhtml@main/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/navduhan/pyseqranhtml@main/popper.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/navduhan/pyseqranhtml@main/bootstrap.min.js"></script>
@@ -797,7 +813,12 @@ $(document).ready(function() {{
     $('.table').DataTable();
 }});
 </script>
+<footer>
+<div class="row justify-content-center">
+Copyright © 2024 pySeqRNA
+</div>
 
+</footer>
         </body>
 
         </html>
@@ -807,22 +828,10 @@ $(document).ready(function() {{
     with open(f"{outdir}/analysis_report.html", 'w') as fp:
 
         fp.write(html)
-        # fp.write(quality_header)
-        # fp.write(align_header)
-        # fp.write(quant_header)
-        # fp.write(de_header)
-        # fp.write(plot_header)
-        # fp.write(fa_header)
-        # fp.write(intro)
-        # fp.write(final_quality_header)
-        # fp.write(final_align_header)
-        # fp.write(final_quant_header)
-        # fp.write(final_deg_header)
-        # fp.write(final_plots_header)
-        # fp.write(final_func_header)
-       
+
         fp.close()
 
 
 
-#generate_report("/home/naveen/Documents/test_workspace/example/pySeqRNA_results.11", ['A1-M6'], "genome", "gff" ,"/home/naveen/Documents/test_workspace/example/new_test.xlsx", 2, 0.05)
+generate_report("/home/naveen/workspace/pySeqRNA_results.1", ['A1-M6'], "genome", "gff" ,"/home/naveen/workspace/input.txt", 2, 0.05)
+
