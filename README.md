@@ -83,20 +83,15 @@ The installation of pySeqRNA can be done in two ways:
 
     cd pySeqRNA-0.2
 
-    Create and activate a conda environment
+    chmod 755 INSTALL
 
-    conda env create -f environment.yml
-
-    conda activate pyseqrna-0.2
-
-    pip3 install .
+    ./INSTALL
   
-2. Intall using system Python3 and installed external tools
-   
-    Download and install prerequisite from above and install
+2. Create a docker image from docker file for cross-platform 
 
+      
     Download pySeqRNA 0.2 from:
-
+          
     [https://bioinfo.usu.edu/pyseqrna/download/pySeqRNA-0.2.tar.gz](https://bioinfo.usu.edu/pyseqrna/download/pySeqRNA-0.2.tar.gz)
 
     Extract the downloaded file:
@@ -105,8 +100,8 @@ The installation of pySeqRNA can be done in two ways:
 
     cd pySeqRNA-0.2
 
-    pip3 install .
-
+    docker build -t pyseqrna .
+    
     
 
 Run pyseqrna

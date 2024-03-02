@@ -28,6 +28,8 @@ from pyseqrna.gene_ontology import GeneOntology
 from pyseqrna.pathway import Pathway
 from pyseqrna.normalize_counts import Normalization
 from pyseqrna import report
+from pyseqrna.__organism__ import organism
+from tabulate import tabulate
 import shutil
 import math
 import pyseqrna.version
@@ -46,11 +48,23 @@ def main():
     # Get all the options from the user
     
     options = arg_parser.parse_args()  
-    # print(options)
+    
+    
+    if options.supported_organism:
+        table = [[v, k] for k, v in organism.items()]
+            
+        print(tabulate(table, headers=["Species Name", "Species code"], tablefmt="grid"))
+        
+        sys.exit(1)
+            
     if options.species is None:
-        print("Please provide a species and organism type")
+        log.error("Please provide a species and organism type")
         sys.exit()
-   
+    if options.species not in organism.keys():
+        
+        log.info("The provided species does not have functional annotations. Analysis will run up to functional annotation")
+        
+        
     if options.threads =='80% of available CPU' :
     
         options.threads = pu.get_cpu()
@@ -300,6 +314,22 @@ def main():
         except Exception:
 
             log.error("Unable to calculate read alignment")
+            
+        if not options.feature_file.endswith(('gff3', 'gff', 'gtf')):
+            
+            log.info(" A valid feature file was not provided.")
+            
+            comb_report = ','.join(combination)
+            
+            report.generate_report(outdir, comb_report,  options.reference_genome, options.feature_file, options.input_file, options.fold, options.fdr)
+                    
+            endTime = time.ctime()
+            
+            log.info("Analysis Complted at %s", endTime)
+            
+            log.info("Beer Time!")
+            
+            sys.exit(1)
         
         log.info("Feature Count from aligned reads started")
 
@@ -623,7 +653,18 @@ def main():
             pcafig = pp.pcaPlot(ncountdf=r)
             pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
             
+        if options.species not in organism.keys():
         
+            log.info("The provided species is nbot currently supported for functional annotations.")  
+        
+            comb_report = ','.join(combination)
+            report.generate_report(outdir, comb_report,  options.reference_genome, options.feature_file, options.input_file, options.fold, options.fdr)
+                    
+            endTime = time.ctime()
+            log.info("Analysis Complted at %s", endTime)
+            log.info("Beer Time!")
+
+            sys.exit(1)
     
         if os.path.exists(os.path.join(outdir, "6_Functional_Annotation")):
 

@@ -833,5 +833,5 @@ Copyright © 2024 pySeqRNA
 
 
 
-generate_report("/home/naveen/workspace/pySeqRNA_results.1", ['A1-M6'], "genome", "gff" ,"/home/naveen/workspace/input.txt", 2, 0.05)
+# generate_report("/home/naveen/workspace/pySeqRNA_results.1", ['A1-M6'], "genome", "gff" ,"/home/naveen/workspace/input.txt", 2, 0.05)
 

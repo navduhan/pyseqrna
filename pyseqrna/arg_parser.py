@@ -27,16 +27,13 @@ def parse_args():
     Kaundal Bioinformatics Lab, Utah State University,
     Released under the terms of GNU General Public Licence v3""",    
     formatter_class=argparse.RawTextHelpFormatter )
-
-   
     # Add mutually exclusive group to handle config file and command line arguments
     # group = parser.add_mutually_exclusive_group()
-    parser.add_argument("-c", "--config", metavar="CONFIG_FILE", help="Path to the configuration file")
-    # group.add_argument("input_file", nargs="?", help="Tab-delimited file containing sample information")
-    # group.add_argument("samples_path", nargs="?", help="Directory for raw reads")
-    # group.add_argument("reference_genome", nargs="?", help="Path to the reference genome file")
-    # group.add_argument("feature_file", nargs="?", help="Path to the GTF/GFF file")
-    if "-c" not in sys.argv and "--config" not in sys.argv:
+    parser.add_argument("-c", "--config", dest="config_file", help="Path to the configuration file")
+    
+    parser.add_argument("--organism", dest="supported_organism",action='store_true',  help="Print supported organism for fucntional annotation")
+    
+    if "-c" not in sys.argv and "--config" not in sys.argv and "--organism" not in sys.argv:
         mandatory = parser.add_argument_group("Required arguments")
         mandatory.add_argument("input_file", type=str, help="""Tab-delimited file containing sample information""")
 
@@ -165,10 +162,10 @@ def parse_args():
         # If config file is provided, read configuration from it
     args = parser.parse_args()
 
-    if args.config:
-        options = pu.read_runconfig(args.config)
+    if args.config_file:
+        options = pu.read_runconfig(args.config_file)
         return options
-
+ 
     return args
 
 

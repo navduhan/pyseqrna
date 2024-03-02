@@ -37,8 +37,7 @@ install_requires = ['certifi','cffi','charset-normalizer','cycler','dill','fontt
         'Topic :: Scientific/Engineering :: Bio-Informatics',
 
 
-        # Specify the Python versions you support here. In particular, ensure
-        # that you indicate whether you support Python 2, Python 3 or both.
+        # Specify the Python versions you support here.
         
         'Programming Language :: Python :: 3.8',
         
