@@ -94,6 +94,7 @@ def read_runconfig(config_file):
     options.fold = int(internal.get('fold', 2))
     options.noreplicate = internal.getboolean('noreplicate', fallback=False)
     options.normalizecount = internal.get('normalizeCount', 'RPKM')
+    options.coexpression = internal.get('coexpression', fallback=False)
     options.heatmap = internal.getboolean('heatmap', fallback=False)
     options.heatmaptype = internal.get('heatmapType', 'counts')
     options.pcaplot = internal.getboolean('pcaplot', fallback=False)
