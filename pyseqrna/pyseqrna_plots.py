@@ -171,8 +171,6 @@ def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','g
     return fig 
 
 
-
-
 def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), extraColumns=False, type='counts'):
 
     """
@@ -417,6 +415,8 @@ def pcaPlot(ncountdf=None ,legends=False, fontsize=14, figsize=(12,12),dpi=300):
     """
 
     # Transpose the normalize counts to make sample as rows and genes as columns
+
+    ncountdf = ncountdf.set_index(['Gene'])
 
     ndf = ncountdf.T
 
