@@ -628,42 +628,42 @@ def main():
             
             log.info(f"creating PCA plot based on {options.pcaplottype} values")
             
-        norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
-        
-        if options.pcaplottype == 'RPKM':
+            norm = Normalization(countFile= os.path.join(quantdir,"Raw_Counts.xlsx"), featureFile=options.feature_file, keyType=options.source)
             
-            r = norm.RPKM()
+            if options.pcaplottype == 'RPKM':
+                
+                r = norm.RPKM()
 
-            pcafig = pp.pcaPlot(ncountdf=r[0])
-            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
-            
-        if options.pcaplottype == 'FPKM':
-            
-            r = norm.FPKM()
+                pcafig = pp.pcaPlot(ncountdf=r[0])
+                pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+                
+            if options.pcaplottype == 'FPKM':
+                
+                r = norm.FPKM()
 
-            pcafig = pp.pcaPlot(ncountdf=r[0])
-            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+                pcafig = pp.pcaPlot(ncountdf=r[0])
+                pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
 
-        if options.pcaplottype == 'CPM':
-            
-            r = norm.CPM()
+            if options.pcaplottype == 'CPM':
+                
+                r = norm.CPM()
 
-            pcafig = pp.pcaPlot(ncountdf=r[0])
-            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
-            
-        if options.pcaplottype == 'TPM':
-            
-            r = norm.TPM()
-            
-            pcafig = pp.pcaPlot(ncountdf=r[0])
-            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
-            
-        if options.pcaplottype == 'medianRatiocount':
-            
-            r = norm.meanRatioCount()
+                pcafig = pp.pcaPlot(ncountdf=r[0])
+                pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+                
+            if options.pcaplottype == 'TPM':
+                
+                r = norm.TPM()
+                
+                pcafig = pp.pcaPlot(ncountdf=r[0])
+                pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+                
+            if options.pcaplottype == 'medianRatiocount':
+                
+                r = norm.meanRatioCount()
 
-            pcafig = pp.pcaPlot(ncountdf=r)
-            pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
+                pcafig = pp.pcaPlot(ncountdf=r)
+                pcafig.savefig(os.path.join(plotdir,f"PCA_plot.png"), bbox_inches='tight')
             
         if options.species not in organism.keys():
         
