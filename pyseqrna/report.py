@@ -564,7 +564,7 @@ def generate_report(outdir, combinations, genome, gff, infile, FOLD, FDR):
         fd_sheet = fd.sheet_names
         final_deg_header +=f'''\n Differential expression was filtered on user provided FOLD >= {FOLD} and FDR <= {FDR}. For example only one comparison is shown below. For each comparison there are different sheets in  <a href="4_Differential_Expression/Filtered_DEGs.xlsx"> Filtered differentially expressed genes</a> file. '''
         final_deg_header += '<div class="row justify-content-center px-5"><div class="col-md-9 my-4" id="fdeg">'
-        final_deg_header += f'{pd.read_excel(f"{differential}/Filtered_DEGs.xlsx",sheet_name=fd_sheet[1]).head(50).to_html(index=False, classes="table table-responsive", justify="center")}'
+        final_deg_header += f'{pd.read_excel(f"{differential}/Filtered_DEGs.xlsx",sheet_name=fd_sheet[0]).head(50).to_html(index=False, classes="table table-responsive", justify="center")}'
         final_deg_header +='</div></div>'
     if os.path.exists(os.path.join(differential,'Filtered_DEGs_summary.xlsx')):
         final_deg_header +=f'''\n Filtered DEGs summary is presented in <a href="4_Differential_Expression/Filtered_DEGs_summary.xlsx"> summary of differentially expressed genes</a>'''
