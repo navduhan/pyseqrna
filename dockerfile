@@ -1,58 +1,56 @@
-# Use the official Python image as base
-FROM ubuntu:22.04
-FROM python:3.8
+# Use the official Miniconda base image
+FROM ubuntu:24.04
+FROM python:3.10
+FROM continuumio/miniconda3:latest
 
 # Author: Naveen Duhan
 # Title: Dockerfile for pySeqRNA
 
-# Install dependencies
-RUN apt-get update && apt-get install -y wget git bzip2 bash curl
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y git bzip2 wget curl nano htop
 
+# Clone the pySeqRNA repository
+RUN git clone https://github.com/navduhan/pyseqrna.git /pyseqrna
 
-
-# Install Miniconda
-RUN apt-get update && apt-get install -y wget && \
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
-    bash miniconda.sh -b -p /usr/local/miniconda && \
-    rm miniconda.sh
-
-# Add Miniconda to PATH
-ENV PATH="/usr/local/miniconda/bin:${PATH}"
-
-# Initialize conda
-RUN conda init bash
-
-# Install Git
-RUN apt-get install -y git
-
-# Clone pySeqRNA repository
-RUN git clone https://github.com/navduhan/pyseqrna.git
-
-# Navigate to the pySeqRNA directory
+# Set the working directory
 WORKDIR /pyseqrna
 
-# Create and activate a Conda environment
-RUN conda env create -f pyseqrna_environment.yml && \
-    echo "conda activate pyseqrna-0.2" >> ~/.bashrc
+# Install dependencies from the YAML file
+RUN conda env create -f pyseqrna_environment.yml
 
-# Install pySeqRNA
-RUN bash -c "source /usr/local/miniconda/etc/profile.d/conda.sh && \
-             conda activate pyseqrna-0.2 && \
-             pip install ."
+# Activate the conda environment
+# Note: The activation command is generally not needed in RUN instructions, so we directly use conda.
+RUN echo "source activate pyseqrna-0.2" > ~/.bashrc
 
-# Expose port if needed
-# EXPOSE 80
+# Install pySeqRNA package
+RUN /opt/conda/bin/conda run -n pyseqrna-0.2 pip install .
 
-RUN cd ..
+WORKDIR /home
 
 # Create data and output directories
-RUN mkdir /data /output
+RUN mkdir -p /data /output
 
-# Command to run when the container starts
+# Create a startup script to check architecture and append the STAR script at runtime
+
+# Append the necessary logic to the STAR script
+RUN STAR_PATH="/opt/conda/envs/pyseqrna-0.2/bin/STAR" && \
+    if [ -f "$STAR_PATH" ]; then \
+        echo "Appending commands to the existing STAR script..." && \
+        echo 'if [ -x "${BASE}-plain" ]; then' >> "$STAR_PATH" && \
+        echo '    cmd="${BASE}-plain"' >> "$STAR_PATH" && \
+        echo '    "${cmd}" "$@"' >> "$STAR_PATH" && \
+        echo 'else' >> "$STAR_PATH" && \
+        echo '    echo "No suitable command found for this CPU. Exiting."' >> "$STAR_PATH" && \
+        echo '    exit 1' >> "$STAR_PATH" && \
+        echo 'fi' >> "$STAR_PATH" && \
+        chmod +x "$STAR_PATH"; \
+    else \
+        echo "STAR script not found at $STAR_PATH"; \
+        exit 1; \
+    fi
+# Set the default command to run the startup script, remove it, and then start bash
 CMD ["bash"]
-
-# docker build --platform=linux/amd64 -t pyseqrna .
-#docker run -it --rm pyseqrna
 
 ##################################################################
 ##                                                              ##

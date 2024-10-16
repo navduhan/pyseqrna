@@ -258,41 +258,42 @@ class GeneOntology:
         This function creates a dotplot for Gene Ontology enrichment.
 
         :param df: Gene Ontology enrichment file from enrichGO function.
-
         :param nrows: Number of rows to plot. Default to 20 rows.
-
         :param colorBy: Color dot on plots with logPvalues / FDR. Defaults to 'logPvalues'.
-        
         :returns: a dotplot
         """
-
-        if colorBy=='logPvalues':
-            df['logPvalues'] = round(-np.log10(df['Pvalues']),2)
-            title = '-log10(Pvalues)'
         
-        if colorBy=='FDR':
-            df = df
+        # Calculate logPvalues or retain FDR
+        if colorBy == 'logPvalues':
+            df['logPvalues'] = round(-np.log10(df['Pvalues']), 2)
+            title = '-log10(Pvalues)'
+        elif colorBy == 'FDR':
             title = 'FDR'
-
-        df =df.sort_values('Counts', ascending=False)
-        df = df.head(nrows)
-        df =df.sort_values('Counts', ascending=True)
-
-        max_count = df['Counts'].max()
-        if max_count < 20:
-            dot_multiplier = 2
         else:
-            dot_multiplier = 1
-            
+            raise ValueError("Invalid value for colorBy. Use 'logPvalues' or 'FDR'.")
+
+        # Sort and limit the number of rows
+        df = df.sort_values('Counts', ascending=False).head(nrows)
+        df = df.sort_values('Counts', ascending=True)
+
+        # Determine dot size multiplier based on maximum count
+        max_count = df['Counts'].max()
+        dot_multiplier = 2 if max_count < 20 else 1
+
+        # Determine figure size based on number of rows
         fsize = math.ceil(nrows / 2) if nrows > 20 else math.ceil(df.shape[0] / 2)
 
-        fig, ax = plt.subplots(figsize=(10,fsize), dpi=300)
+        # Create the plot
+        fig, ax = plt.subplots(figsize=(10, fsize), dpi=300)
         scatter = ax.scatter(x=df['Counts'], y=df['GO Term'], s=df['Counts'] * dot_multiplier, c=df[colorBy])
+        
+        # Set axis properties
         ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_bounds((0, nrows))
-        # add some space between the axis and the plot
+        
+        # Add space between the axis and the plot
         ax.spines['left'].set_position(('outward', 8))
         ax.spines['bottom'].set_position(('outward', 5))
         plt.xticks(fontsize=12)
@@ -300,14 +301,18 @@ class GeneOntology:
         plt.xlabel("Counts", fontsize=12, fontweight='bold')
         plt.ylabel("GO Description", fontsize=12, fontweight='bold')
 
-        cbar = plt.colorbar(scatter,shrink=.25, pad=.2, aspect=10)
-        cbar.ax.set_title(title,pad=20, fontweight='bold')
-        
+        # Add colorbar
+        cbar = plt.colorbar(scatter, shrink=.25, pad=.2, aspect=10)
+        cbar.ax.set_title(title, pad=20, fontweight='bold')
+
+        # Set y-tick labels only after y-ticks have been established
+        ax.set_yticks(np.arange(len(df)))  # Set y-ticks based on the number of rows
         ax.set_yticklabels([textwrap.fill(label, width=40) for label in df['GO Term']], fontsize=12)
 
         return fig
 
-    def barplotGO(self, df=None, nrows=20, colorBy='logPvalues' ):
+    
+    def barplotGO(self, df=None, nrows=20, colorBy='logPvalues'):
         """
         This function creates a barplot for Gene Ontology enrichment.
 
@@ -317,28 +322,35 @@ class GeneOntology:
         :returns: a barplot
         """
         
+        # Calculate logPvalues or retain FDR
         if colorBy == 'logPvalues':
             df['logPvalues'] = round(-np.log10(df['Pvalues']), 2)
             title = '-log10(Pvalues)'
-        
-        if colorBy == 'FDR':
+        elif colorBy == 'FDR':
             title = 'FDR'
+        else:
+            raise ValueError("Invalid value for colorBy. Use 'logPvalues' or 'FDR'.")
 
+        # Sort and limit the number of rows
         df = df.sort_values('Counts', ascending=False).head(nrows).sort_values('Counts', ascending=True)
         counts = df['Counts'].values.tolist()
         terms = df['GO Term'].values.tolist()
 
+        # Normalize colors for the bar plot
         data_color_normalized = [x / max(df[colorBy]) for x in df[colorBy]]
         fsize = math.ceil(nrows / 2) if nrows > 20 else math.ceil(df.shape[0] / 2)
         
+        # Create the plot
         fig, ax = plt.subplots(figsize=(10, fsize), dpi=300)
 
         my_cmap = plt.cm.get_cmap('RdYlBu')
         colors = my_cmap(data_color_normalized)
 
+        # Create horizontal bar plot
         ax.barh(terms, counts, color=colors)
         ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))  # Ensure x-axis ticks are integers
         
+        # Set axis properties
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_bounds((0, nrows))
@@ -349,14 +361,15 @@ class GeneOntology:
 
         plt.xlabel("Counts", fontsize=12, fontweight='bold')
         plt.ylabel("GO Description", fontsize=12, fontweight='bold')
+
+        # Create color bar
         sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0, max(df[colorBy])))
-
         sm.set_array([])
-
         cbar = plt.colorbar(sm, shrink=0.25, pad=0.02, aspect=10)
         cbar.ax.set_title(title, pad=20, fontweight='bold')
         
-        # Split long y-axis tick labels into two rows
+        # Set y-tick labels only after y-ticks have been established
+        ax.set_yticks(np.arange(len(terms)))  # Set y-ticks based on the number of terms
         ax.set_yticklabels([textwrap.fill(label, width=40) for label in terms], fontsize=12)
 
         return fig

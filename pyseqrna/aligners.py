@@ -208,7 +208,6 @@ class STAR_Aligner:
                         wait(lambda: pu.check_status(job_id), waiting_for="genome indexing to finish")
                         log.info("Genome index completed succesfully")
                         
-
                     except Exception:
 
                         log.error("Slurm job sumission failed")

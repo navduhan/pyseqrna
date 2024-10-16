@@ -30,146 +30,160 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
-def plotVolcano(degDF=None, comp=None, FOLD=2, pValue=0.05, color=('red', 'grey', 'green'), dim=(8, 5), font=14, dotsize=10, markerType='o', alpha=0.5):
+def plotVolcano(degDF=None, comp=None, FOLD=2, pValue=0.05, color=('red', 'grey', 'green'), 
+                dim=(8, 5), font=14, dotsize=10, markerType='o', alpha=0.5):
     """
     This function plots a Volcano plot.
 
-    :param degDF: All gene expression file.
-    :param comp: Sample comparison.
-    :param FOLD: FOLD change. Defaults to 2.
-    :param pValue: Pvalues. Defaults to 0.05.
-    :param color: Colors to be used in plot. Defaults to ('red', 'grey', 'green').
+    :param degDF: DataFrame containing differential expression results.
+    :param comp: Sample comparison (string).
+    :param FOLD: Fold change threshold. Defaults to 2.
+    :param pValue: P-values threshold. Defaults to 0.05.
+    :param color: Colors to be used in the plot. Defaults to ('red', 'grey', 'green').
     :param dim: Dimensions of the plot. Defaults to (8, 5).
-    :param dotsize: Dotsize on plot. Defaults to 8.
-    :param markeType: Shape to use. Defaults to 'o'.
-    :param alpha: Transparency of plot. Defaults to 0.5.
+    :param dotsize: Dot size on the plot. Defaults to 10.
+    :param markerType: Shape to use for markers. Defaults to 'o'.
+    :param alpha: Transparency of the plot. Defaults to 0.5.
+    :return: The figure object.
     """
-
+    
     PVAL = "pvalue(" + comp + ")"
     LFC = "logFC(" + comp + ")"
     _x = r'$ log_{2}(Fold Change)$'
     _y = r'$ -log_{10}(P-value)$'
-    color = color
-    dk = degDF.filter(like=comp, axis=1)  # Use `like` for regex-like filtering
+    
+    # Filter differential expression results based on comparison
+    dk = degDF.filter(like=comp, axis=1)
+
+    if dk.empty:
+        print("No data found for the specified comparison.")
+        return None
 
     try:
         final = dk[dk[PVAL] <= pValue].copy()
 
-        final.loc[final[LFC] >= np.log2(FOLD), 'colorADD'] = color[2]
-        final.loc[final[LFC] <= -np.log2(FOLD), 'colorADD'] = color[0]
-        final.fillna({'colorADD': color[1]}, inplace=True)  # Use `fillna` directly
+        final.loc[final[LFC] >= np.log2(FOLD), 'colorADD'] = color[2]  # Significant up
+        final.loc[final[LFC] <= -np.log2(FOLD), 'colorADD'] = color[0]  # Significant down
+        final.fillna({'colorADD': color[1]}, inplace=True)  # Not significant
 
         final['log(10)_pvalue'] = -(np.log10(final[PVAL]))
 
+        # Map colors to numerical values
         color_values = {col: i for i, col in enumerate(color)}
         color_num = [color_values[i] for i in final['colorADD']]
 
-        legendlabels = ['Significant down', 'Not significant', 'Significant up']
-
+        # Create the plot
         fig, ax = plt.subplots(figsize=dim)
-        a = ax.scatter(final[LFC], final['log(10)_pvalue'], c=color_num, cmap=ListedColormap(color), alpha=alpha,
-                      s=dotsize, marker=markerType)
-        ax.legend(handles=a.legend_elements()[0], labels=legendlabels,  bbox_to_anchor=(1.46, 1, 0, 0))
-        ax.set_xlabel(_x, fontsize = font, fontweight='bold')
-        ax.set_ylabel(_y, fontsize = font, fontweight='bold')
+        scatter = ax.scatter(final[LFC], final['log(10)_pvalue'], c=color_num, cmap=ListedColormap(color), 
+                             alpha=alpha, s=dotsize, marker=markerType)
+
+        # Create legend handles
+        handles, _ = scatter.legend_elements()
+        unique_colors = list(set(color_num))
+        legend_labels = [label for i, label in enumerate(['Significant down', 'Not significant', 'Significant up']) if i in unique_colors]
+
+        if len(handles) == len(legend_labels):
+            ax.legend(handles, legend_labels, bbox_to_anchor=(1.46, 1, 0, 0))
+        else:
+            print("Mismatch in handles and labels, adjusting legend.")
+
+        ax.set_xlabel(_x, fontsize=font, fontweight='bold')
+        ax.set_ylabel(_y, fontsize=font, fontweight='bold')
         fig.tight_layout()
 
         return fig
 
-    except Exception:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return 'No Volcano'
 
 
-def plotMA(degDF=None, countDF=None, comp=None,FOLD=2, FDR=0.05, color=('red','grey','green'), font=14, dim=(8,5), dotsize=8, markerType='o', alpha=0.5):
+def plotMA(degDF=None, countDF=None, comp=None, FOLD=2, FDR=0.05, 
+           color=('red', 'grey', 'green'), font=14, dim=(8, 5), 
+           dotsize=8, markerType='o', alpha=0.5):
     """
     This function plots a MA plot. 
 
-    :param degDF: All gene expression file.
-
-    :param comp: Sample comparison.
-
-    :param FOLD: FOLD change. Defaults to 2.
-
-    :param FDR: FDR value. Defaults to 0.05.
-
-    :param color: Colors to be used in plot. Defaults to ('red','grey','green').
-
-    :param dim: Dimensions of the plot. Defaults to (8,5).
-
-    :param dotsize: Dotsize on plot. Defaults to 8.
-
-    :param markeType: Shape to use. Defaults to 'o'.
-
+    :param degDF: DataFrame containing differential expression results.
+    :param countDF: DataFrame containing raw counts.
+    :param comp: Sample comparison (string).
+    :param FOLD: Fold change threshold. Defaults to 2.
+    :param FDR: False discovery rate threshold. Defaults to 0.05.
+    :param color: Colors to be used in plot. Defaults to ('red', 'grey', 'green').
+    :param dim: Dimensions of the plot. Defaults to (8, 5).
+    :param dotsize: Dot size on plot. Defaults to 8.
+    :param markerType: Shape to use for markers. Defaults to 'o'.
     :param alpha: Transparency of plot. Defaults to 0.5.
+    :return: The figure object.
     """
-
-    LFC = "logFC("+comp+")"
-    PVAL = "FDR("+comp+")"
-    # baseMean ="baseMean("+comp+")"
+    
+    LFC = "logFC(" + comp + ")"
+    PVAL = "FDR(" + comp + ")"
     _y = r'$ log_{2}(Fold Change)$'
     _x = r'$ log_{2}(Mean Count)$'
 
-    dk = degDF.filter(regex=comp, axis=1)
+    try:
+        # Filter the differential expression DataFrame
+        dk = degDF.filter(regex=comp, axis=1)
 
-    if dk.empty:
-        pass
-    else:
-    
+        if dk.empty:
+            print("No data found for the specified comparison.")
+            return None
 
         cdf1 = countDF.filter(regex=comp.split("-")[0], axis=1)
         cdf2 = countDF.filter(regex=comp.split("-")[1], axis=1)
 
-        cdf_mean1=cdf1.mean(axis=1)
-        cdf_mean2=cdf2.mean(axis=1)
+        cdf_mean1 = cdf1.mean(axis=1)
+        cdf_mean2 = cdf2.mean(axis=1)
 
-        counts = pd.concat([cdf_mean1,cdf_mean2], axis=1)
-
+        counts = pd.concat([cdf_mean1, cdf_mean2], axis=1)
         counts.columns = ['first', 'second']
 
-        final = pd.concat([dk,counts], axis=1)
-
+        final = pd.concat([dk, counts], axis=1)
         final = final.fillna(0)
 
-        final.loc[(final[LFC]>=np.log2(FOLD)) & (final[PVAL]<=FDR),'colorADD'] = color[2]
-
-        final.loc[(final[LFC]<=-np.log2(FOLD)) & (final[PVAL]<=FDR), 'colorADD'] = color[0]
-
-        # final['colorADD'].fillna(color[1], inplace=True)  
+        # Color assignment based on thresholds
+        final.loc[(final[LFC] >= np.log2(FOLD)) & (final[PVAL] <= FDR), 'colorADD'] = color[2]
+        final.loc[(final[LFC] <= -np.log2(FOLD)) & (final[PVAL] <= FDR), 'colorADD'] = color[0]
         final.fillna({'colorADD': color[1]}, inplace=True)
 
         final['mean'] = final[['first', 'second']].mean(axis=1)
+        finalDF = final.loc[final['mean'] > 0].copy()
 
-        finalDF = final.loc[final['mean']>0].copy()
+        np.seterr(divide='ignore')
 
-        np.seterr(divide = 'ignore') 
+        # Calculate log2 mean
+        finalDF['log(2)_Mean'] = (np.log2(finalDF['first']) + np.log2(finalDF['second'])) / 2
 
-        finalDF['log(2)_Mean'] = np.log2(finalDF['first']) + np.log2(finalDF['second']) / 2
-        
+        # Map colors to numerical values
         color_values = {col: i for i, col in enumerate(color)}
-
         color_num = [color_values[i] for i in finalDF['colorADD']]
-        
-        legendlabels=['Significant down', 'Not significant', 'Significant up']  
 
-        fig,ax = plt.subplots(figsize=dim)
-
+        # Create the plot
+        fig, ax = plt.subplots(figsize=dim)
         a = ax.scatter(finalDF['log(2)_Mean'], finalDF[LFC], c=color_num, cmap=ListedColormap(color),
-                            alpha=alpha, s=dotsize, marker=markerType)
-        try:
-            ax.legend(handles=a.legend_elements()[0], labels=legendlabels,  bbox_to_anchor=(1.46,1,0,0))
-        except ValueError:  #raised if `y` is empty.
-            pass
+                       alpha=alpha, s=dotsize, marker=markerType)
+
+        # Create legend handles
+        handles, _ = a.legend_elements()
+        unique_colors = list(set(color_num))
+        legend_labels = [label for i, label in enumerate(['Significant down', 'Not significant', 'Significant up']) if i in unique_colors]
+
+        if len(handles) == len(legend_labels):
+            ax.legend(handles, legend_labels, bbox_to_anchor=(1.46, 1, 0, 0))
+        else:
+            print("Mismatch in handles and labels, adjusting legend.")
 
         plt.axhline(y=0, color='#7d7d7d', linestyle='--')
-        
         ax.set_xlabel(_x, fontsize=font, fontweight='bold')
         ax.set_ylabel(_y, fontsize=font, fontweight='bold')
-
         fig.tight_layout()
- 
-   
-    return fig 
 
+        return fig
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
 
 def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), extraColumns=False, type='counts'):
 
