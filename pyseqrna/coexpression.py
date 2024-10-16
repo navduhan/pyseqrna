@@ -56,7 +56,7 @@ def run_Clusts(countFile=None, targets=None, outdir="."):
 
                     log.info("Job submition failed for gene co-expression ")
 
-    shutil.remove(f"{os.getcwd()}/raw_counts.txt")
-    shutil.remove(f"{os.getcwd()}/replicate_structure_file_clusts.txt")
+    os.remove(f"{os.getcwd()}/raw_counts.txt")
+    os.remove(f"{os.getcwd()}/replicate_structure_file_clusts.txt")
     
     return
