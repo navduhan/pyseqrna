@@ -39,3 +39,4 @@ zipp
 wheel
 openpyxl
 notebook
+tabulate

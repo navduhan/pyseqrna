@@ -49,8 +49,7 @@ def main():
     # Get all the options from the user
     
     options = arg_parser.parse_args()  
-    
-    
+        
     if options.supported_organism:
         table = [[v, k] for k, v in organism.items()]
             

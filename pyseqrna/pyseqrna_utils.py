@@ -68,6 +68,7 @@ def read_runconfig(config_file):
 
     # General section
     general = config['General']
+    options.supported_organim = general.get('organim', fallback=False)
     options.input_file = general.get('input_file', '')
     options.samples_path = general.get('samples_path', '')
     options.reference_genome = general.get('reference_genome', '')

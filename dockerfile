@@ -1,9 +1,14 @@
 # Use the official Python image as base
-FROM --platform=linux/amd64 ubuntu:20.04
+FROM ubuntu:22.04
 FROM python:3.8
 
 # Author: Naveen Duhan
 # Title: Dockerfile for pySeqRNA
+
+# Install dependencies
+RUN apt-get update && apt-get install -y wget git bzip2 bash curl
+
+
 
 # Install Miniconda
 RUN apt-get update && apt-get install -y wget && \
@@ -46,7 +51,7 @@ RUN mkdir /data /output
 # Command to run when the container starts
 CMD ["bash"]
 
-# docker build -t pyseqrna .
+# docker build --platform=linux/amd64 -t pyseqrna .
 #docker run -it --rm pyseqrna
 
 ##################################################################
