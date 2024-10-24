@@ -714,13 +714,15 @@ def main():
                 ontology_results = go.enrichGO(file=file_deg)
 
                 if ontology_results != "No Gene Ontology":
+                    try:
+                        go_results = ge.add_names_annotation(ontology_results['result'])
 
-                    go_results = ge.add_names_annotation(ontology_results['result'])
+                        go_results.to_excel(f"{gofiles}/{c}_gene_ontology.xlsx", index=False)
 
-                    go_results.to_excel(f"{gofiles}/{c}_gene_ontology.xlsx", index=False)
-
-                    ontology_results['plot'].savefig(f"{goplots}/{c}_go_dotplot.png", bbox_inches='tight')
-                    plt.close()
+                        ontology_results['plot'].savefig(f"{goplots}/{c}_go_dotplot.png", bbox_inches='tight')
+                        plt.close()
+                    except:
+                        continue
                 else:
                     log.info(f"No ontology found in {c}")
 
@@ -733,7 +735,7 @@ def main():
                     ontology_results_mmg = go.enrichGO(file=file_mmg)
 
                     if ontology_results_mmg != "No Gene Ontology":
-
+                        
                         go_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
 
                         go_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=go_results_MMG, combination=c)
@@ -778,14 +780,16 @@ def main():
                 kegg_results = pt.enrichKEGG(file_deg)
 
                 if kegg_results != "No Pathway":
+                    try:
+                        k_result = ge.add_names_annotation(kegg_results['result'])
 
-                    k_result = ge.add_names_annotation(kegg_results['result'])
+                        k_result.to_excel(os.path.join(keggfiles, f"{c}_kegg.xlsx"), index=False)
 
-                    k_result.to_excel(os.path.join(keggfiles, f"{c}_kegg.xlsx"), index=False)
+                        kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
 
-                    kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
-
-                    plt.close()
+                        plt.close()
+                    except:
+                        continue
 
                 else:
                     log.info(f"No pathway found in {c}")

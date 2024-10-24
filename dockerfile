@@ -29,7 +29,7 @@ RUN /opt/conda/bin/conda run -n pyseqrna-0.2 pip install .
 WORKDIR /home
 
 # Create data and output directories
-RUN mkdir -p /data /output
+RUN mkdir -p /home/data /home/output
 
 # Create a startup script to check architecture and append the STAR script at runtime
 
