@@ -22,7 +22,7 @@ import pandas as pd
 log = PyseqrnaLogger(mode="a", log="quant")
 
 
-def featureCount(configFile=None, bamDict=None, gff=None, slurm=False,  mem=8, cpu=8, tasks=1, outDir=".", dep=''):
+def featureCount(configFile=None, bamDict=None, gff=None, slurm=False,  mem=8, cpu=8, tasks=1, outDir=".", dep='', pairedEND=False):
     """
     This function counts feature in the aligned BAM files using featureCounts tool.
 
@@ -101,7 +101,10 @@ def featureCount(configFile=None, bamDict=None, gff=None, slurm=False,  mem=8, c
         sys.exit()
     else:
 
-        featureCountCmd = f"{execPATH}  -a {gff} -o {outFile} {arg} {inputFiles}"
+        if pairedEND:
+            featureCountCmd = f"{execPATH}  -a {gff} -o {outFile} {arg} -p {inputFiles}"
+        else:
+            featureCountCmd = f"{execPATH}  -a {gff} -o {outFile} {arg} {inputFiles}"
         # print(featureCountCmd)
         if slurm:
             try:

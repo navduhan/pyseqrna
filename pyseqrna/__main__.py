@@ -337,7 +337,7 @@ def main():
 
         if options.quantification == 'featureCounts':
 
-            fjob = quant.featureCount(gff=options.feature_file, configFile=options.param, bamDict=outalign, outDir=quantdir)
+            fjob = quant.featureCount(gff=options.feature_file, configFile=options.param, bamDict=outalign, outDir=quantdir, pairedEND=options.paired)
 
             log.info("feature counts completed and written in %s/Raw_Counts.xlsx",quantdir)
         
