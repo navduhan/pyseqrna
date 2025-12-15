@@ -295,19 +295,24 @@ def clusterRun(job_name='pyseqRNA',sout=" pyseqrna", serror="pyseqrna", partitio
     """
     try:
         if dep != '':
-            
             dep = '--dependency=afterok:{} --kill-on-invalid-dep=yes '.format(dep)
 
         sbatch_command = "sbatch -J {} -o {}.out -e {}.err -t {}:00:00 -p {} --mem={}000 --cpus-per-task={} --ntasks={} --wrap='{}' {}".format(
             job_name, sout, serror, time, partition, mem, cpu, tasks,  command, dep)
         
         sbatch_response = subprocess.getoutput(sbatch_command)
-
-        job_id = sbatch_response.split(' ')[-1].strip()
+        
+        # Use regex to extract job ID
+        match = re.search(r"Submitted batch job (\d+)", sbatch_response)
+        if match:
+            job_id = match.group(1)
+        else:
+            log.error(f"Could not parse job ID from sbatch output: {sbatch_response}")
+            job_id = None
 
     except Exception:
-
         log.error("Job submission failed")
+        job_id = None
 
     return job_id
 
@@ -316,19 +321,21 @@ def check_status(job_id):
     This function is check status of slurm job
 
     :param job_id: slurm job id
-
     :returns: True/False
 
     :rtype: If job completed return True. Default False.
     """
-    try:
-        d = subprocess.check_output('squeue -j '+str(job_id), shell=True, universal_newlines=True)
-        data = list(re.split("\s+ ",d))
-        if len(data)==6:
-            return True
-        return False
-    except subprocess.CalledProcessError:
+    if job_id is None:
         return True
+    try:
+        # Check status codes: R (Running), PD (Pending), CG (Completing)
+        # Using -h to remove header, -o %t to get only state
+        d = subprocess.check_output('squeue -h -o %t -j '+str(job_id), shell=True, universal_newlines=True).strip()
+        if d in ['R', 'PD', 'CG']:
+            return False
+        return True # Completed (CD) or Failed (F) or other
+    except subprocess.CalledProcessError:
+        return True # Job not found in queue (Completed)
 
 def get_cpu():
 
