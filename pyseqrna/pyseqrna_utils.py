@@ -321,15 +321,14 @@ def check_status(job_id):
 
     :rtype: If job completed return True. Default False.
     """
-    d = subprocess.check_output('squeue -j '+str(job_id), shell=True, universal_newlines=True)
-
-    data = list(re.split("\s+ ",d))
-
-    if len(data)==6:
-
+    try:
+        d = subprocess.check_output('squeue -j '+str(job_id), shell=True, universal_newlines=True)
+        data = list(re.split("\s+ ",d))
+        if len(data)==6:
+            return True
+        return False
+    except subprocess.CalledProcessError:
         return True
-
-    return False
 
 def get_cpu():
 
