@@ -419,6 +419,8 @@ def main():
         dryrun = True
 
         diffdir = pu.make_directory(os.path.join(outdir, "4_Differential_Expression"), dryrun= dryrun)
+
+        genesdir = os.path.join(diffdir, "diff_genes")
     
     else:
 
