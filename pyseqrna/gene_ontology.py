@@ -264,6 +264,7 @@ class GeneOntology:
         """
         
         # Calculate logPvalues or retain FDR
+        df['GO Term'] = df['GO Term'].astype(str)
         if colorBy == 'logPvalues':
             df['logPvalues'] = round(-np.log10(df['Pvalues']), 2)
             title = '-log10(Pvalues)'
@@ -324,6 +325,7 @@ class GeneOntology:
         
         # Calculate logPvalues or retain FDR
         if colorBy == 'logPvalues':
+            df['GO Term'] = df['GO Term'].astype(str)
             df['logPvalues'] = round(-np.log10(df['Pvalues']), 2)
             title = '-log10(Pvalues)'
         elif colorBy == 'FDR':

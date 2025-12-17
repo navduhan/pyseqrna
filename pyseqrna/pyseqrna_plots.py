@@ -13,6 +13,7 @@
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.lines as mlines
 from matplotlib.colors import ListedColormap
 import seaborn as sns
 import matplotlib.patches as patches
@@ -165,14 +166,23 @@ def plotMA(degDF=None, countDF=None, comp=None, FOLD=2, FDR=0.05,
                        alpha=alpha, s=dotsize, marker=markerType)
 
         # Create legend handles
-        handles, _ = a.legend_elements()
+        legend_elements = []
         unique_colors = list(set(color_num))
-        legend_labels = [label for i, label in enumerate(['Significant down', 'Not significant', 'Significant up']) if i in unique_colors]
 
-        if len(handles) == len(legend_labels):
-            ax.legend(handles, legend_labels, bbox_to_anchor=(1.46, 1, 0, 0))
-        else:
-            print("Mismatch in handles and labels, adjusting legend.")
+        if 0 in unique_colors:
+             legend_elements.append(mlines.Line2D([0], [0], marker=markerType, color='w', label='Significant down',
+                          markerfacecolor=color[0], markersize=dotsize))
+
+        if 1 in unique_colors:
+             legend_elements.append(mlines.Line2D([0], [0], marker=markerType, color='w', label='Not significant',
+                          markerfacecolor=color[1], markersize=dotsize))
+
+        if 2 in unique_colors:
+             legend_elements.append(mlines.Line2D([0], [0], marker=markerType, color='w', label='Significant up',
+                          markerfacecolor=color[2], markersize=dotsize))
+
+        if legend_elements:
+            ax.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1), loc='upper left')
 
         plt.axhline(y=0, color='#7d7d7d', linestyle='--')
         ax.set_xlabel(_x, fontsize=font, fontweight='bold')
@@ -185,64 +195,131 @@ def plotMA(degDF=None, countDF=None, comp=None, FOLD=2, FDR=0.05,
         print(f"An error occurred: {e}")
         return None
 
-def plotHeatmap(degDF= None, combinations=None, num=50, figdim=(12,10), extraColumns=False, type='counts'):
+def plotHeatmap(degDF=None, combinations=None, num=50, figdim=(15, 10), extraColumns=False, type='counts',
+                color_map='seismic', annot=False, scale=True, rowclus=True, colclus=True, zscore=None,
+                xlabel=True, ylabel=True, tickfont=(10, 10), theme=None):
 
     """
-    This function plots a heatmap based on FOLD change or counts.
-
-    :param degDF: All gene expression file or Counts file.
-
-    :param combinations: All sample combinations. 
-
-    :param num: Total number of genes to plot. Default is 50 (25 up and 25 down)
-
-    :param figdim: Figure dimensions.
-
-    :param type: Heatmap to create on counts/degs. 
+    This function plots a clustered heatmap of the top expressed and downregulated genes.
     """
 
-    # Need to add argument for all deg hetamp.
     if extraColumns:
-        
          degDF = degDF.drop(columns=['Name', 'Description'])
          degDF = degDF.set_index('Gene')
+    else:
+        if 'Gene' in degDF.columns:
+            degDF = degDF.set_index('Gene')
+
+    heatmap_data = pd.DataFrame()
+
+    if type.lower() == 'degs':
+        degDF = degDF.fillna(0)
+        
+        if theme == 'dark':
+            plt.style.use('dark_background')
+        else:
+            plt.style.use('default')
+
+        top_genes = set()
+        
+        for combination in combinations:
+            col_name = f'logFC({combination})'
+            if col_name in degDF.columns:
+                top_expressed = degDF.nlargest(int(num), col_name)
+                top_downregulated = degDF.nsmallest(int(num), col_name)
+                top_genes.update(top_expressed.index.tolist())
+                top_genes.update(top_downregulated.index.tolist())
+
+        if not top_genes:
+            return None, None
+
+        # Filter data
+        valid_combinations = []
+        for c in combinations:
+            col_name = f'logFC({c})'
+            if col_name in degDF.columns:
+                heatmap_data[c] = degDF.loc[list(top_genes), col_name]
+                valid_combinations.append(c) # keep original name for plot columns
+        
+        # Rename columns to just combination name (removing logFC wrapper) if desired, 
+        # but user code kept 'c' as key which presumably works if we assign straight to it.
+        # Actually user code: heatmap_data[c] = ... so column name is 'c'.
+        
+    elif type.lower() == 'counts':
+        
+        degDF = degDF.replace(0, np.nan).dropna(axis=1, how="all")
+        
+        # Logic from old code for counts
+        # It used degDF.columns because counts df only has sample columns (after index set)
+        
+        topGene = degDF.nlargest(int(num), degDF.columns) # Old code used num/2 for up/down but this is counts? 
+        # Old code: topGene=degDF.nlargest(int(num/2),degDF.columns)
+        #           botGene=degDF.nsmallest(int(num/2),degDF.columns)
+        #           final=pd.concat([topGene,botGene])
+        # Preserving that logic:
+        
+        topGene = degDF.nlargest(int(num/2), degDF.columns)
+        botGene = degDF.nsmallest(int(num/2), degDF.columns)
+        heatmap_data = pd.concat([topGene, botGene])
+        
+        # Should we remove duplicates if any?
+        heatmap_data = heatmap_data[~heatmap_data.index.duplicated(keep='first')]
+
+    if heatmap_data.empty:
+        return None, None
+
+    # Dynamic figure size (optional override or usage)
+    # The user snippet calculated figdim but we have a default/arg. 
+    # Let's use the arg figdim if provided, or dynamic?
+    # User's logic:
+    # fig_width = max(10, len(heatmap_data.columns) * 1.2)
+    # fig_height = max(10, len(heatmap_data) * 0.2)
+    # figdim = (fig_width, fig_height)
+    # But function signature has figdim arg. I will honor the arg if it matches old behavior, 
+    # but the user code snippet *ignored* the input figdim and recalculated it.
+    # To be safe and "according to this", I'll use the dynamic calc as default if it looks reasonable?
+    # Since existing calls expect a specific size, maybe I stick to figdim?
+    # The user passed figdim=(15,10) in their snippet but then recalculated it.
+    # I'll stick to dynamic calc as it's often better for heatmaps.
+
+    fig_width = max(10, len(heatmap_data.columns) * 1.2)
+    fig_height = max(10, len(heatmap_data) * 0.2)
+    figdim = (fig_width, fig_height)
+
+    # Plotting
+    if rowclus or colclus:
+        # zscore: 0 for rows, 1 for columns, None for no scaling. 
+        # sns.clustermap z_score param takes 0 or 1.
+        # The user snippet passed zscore=None.
+        
+        g = sns.clustermap(
+            heatmap_data,
+            row_cluster=rowclus,
+            col_cluster=colclus,
+            cmap=color_map,
+            annot=annot,
+            cbar=scale,
+            z_score=zscore,
+            xticklabels=xlabel,
+            yticklabels=ylabel,
+            figsize=figdim,
+            linewidths=0.5,
+            linecolor='black' # removed theme support as requested
+        )
+        return g, None
 
     else:
-
-        degDF = degDF.set_index('Gene')
-        
-
-    if type.lower() =='degs':
-        degDF = degDF.fillna(0)
-        com2=[]
-        labelsd = []
-        for i in combinations:
-            fc="logFC("+i+")"
-            com2.append(fc)
-            labelsd.append(i)
-        topGene=degDF.nlargest(int(num/2),com2)
-        botGene=degDF.nsmallest(int(num/2),com2)
-        final=pd.concat([topGene,botGene])
-        fin = final[com2]
-        fin.columns= labelsd
-
-    elif type.lower() =='counts':
-        
-        degDF = degDF.replace(0,np.nan).dropna(axis=1,how="all")
-        
-        topGene=degDF.nlargest(int(num/2),degDF.columns)
-        botGene=degDF.nsmallest(int(num/2),degDF.columns)
-        final=pd.concat([topGene,botGene])
-        fin = final[degDF.columns]
-
-        
-    fig, ax = plt.subplots(figsize=figdim)
-
-    sns.heatmap(fin, cmap="seismic",ax=ax, cbar=True, cbar_kws={"shrink": .30})
-
-    fig.tight_layout()
-
-    return fig,ax
+        fig, ax = plt.subplots(figsize=figdim, dpi=300)
+        sns.heatmap(
+            heatmap_data,
+            ax=ax,
+            cmap=color_map,
+            annot=annot,
+            cbar=scale,
+            linewidths=0.5,
+            linecolor='black'
+        )
+        return fig, ax
 
 
 defaultColors = [

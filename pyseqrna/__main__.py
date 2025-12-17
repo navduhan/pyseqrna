@@ -594,7 +594,7 @@ def main():
             
 
 
-    if  options.resume == 'functional' or options.resume == 'all':
+    if options.resume in ['functional', 'all', 'trimming', 'alignment', 'differential']:
 
         if os.path.exists(os.path.join(outdir, "5_Visualization")):
 
@@ -668,7 +668,7 @@ def main():
             
         if options.species not in organism.keys():
         
-            log.info("The provided species is nbot currently supported for functional annotations.")  
+            log.info("The provided species is not currently supported for functional annotations.")  
         
             comb_report = ','.join(combination)
             report.generate_report(outdir, comb_report,  options.reference_genome, options.feature_file, options.input_file, options.fold, options.fdr)
@@ -686,6 +686,8 @@ def main():
         else:
 
             annodir = pu.make_directory(os.path.join(outdir, "6_Functional_Annotation"))
+        
+        ge = de.Gene_Description(species=options.species, type=options.speciestype, filtered=False)
 
         if options.geneontology:
 
@@ -693,20 +695,18 @@ def main():
 
                 shutil.rmtree(os.path.join(annodir,"Gene_Ontology"))
 
-            else:
+            outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
 
-                outgo = pu.make_directory(os.path.join(annodir,"Gene_Ontology"))
+            gofiles = pu.make_directory(os.path.join(outgo,"GO_Files"))
 
-                gofiles = pu.make_directory(os.path.join(outgo,"GO_Files"))
+            goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
+        
+            if options.mmgg:
 
-                goplots = pu.make_directory(os.path.join(outgo,"GO_Plots"))
+                gofilesM = pu.make_directory(os.path.join(outgo,"GO_Files_MMG"))
+
+                goplotsM = pu.make_directory(os.path.join(outgo,"GO_Plots_MMG"))
             
-                if options.mmgg:
-
-                    gofilesM = pu.make_directory(os.path.join(outgo,"GO_Files_MMG"))
-
-                    goplotsM = pu.make_directory(os.path.join(outgo,"GO_Plots_MMG"))
-
             go = GeneOntology(species=options.species, type=options.speciestype, keyType=options.source,  gff=options.feature_file)
 
             for c in combination:
@@ -723,7 +723,8 @@ def main():
 
                         ontology_results['plot'].savefig(f"{goplots}/{c}_go_dotplot.png", bbox_inches='tight')
                         plt.close()
-                    except:
+                    except Exception as e:
+                        log.error(f"Failed to save GO results for {c}: {e}")
                         continue
                 else:
                     log.info(f"No ontology found in {c}")
@@ -738,15 +739,19 @@ def main():
 
                     if ontology_results_mmg != "No Gene Ontology":
                         
-                        go_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
+                        try:
+                            go_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
 
-                        go_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=go_results_MMG, combination=c)
+                            go_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=go_results_MMG, combination=c)
 
-                        go_results_MMG_go.to_excel(f"{gofilesM}/{c}_mmg_gene_ontology.xlsx", index=False)
+                            go_results_MMG_go.to_excel(f"{gofilesM}/{c}_mmg_gene_ontology.xlsx", index=False)
 
-                        ontology_results_mmg['plot'].savefig(f"{goplotsM}/{c}_mmg_go_dotplot.png", bbox_inches='tight')
+                            ontology_results_mmg['plot'].savefig(f"{goplotsM}/{c}_mmg_go_dotplot.png", bbox_inches='tight')
 
-                        plt.close()
+                            plt.close()
+                        except Exception as e:
+                            log.error(f"Failed to save MMG GO results for {c}: {e}")
+                            continue
 
                     else:
                         
@@ -759,19 +764,17 @@ def main():
 
                 shutil.rmtree(os.path.join(annodir,"KEGG_Pathway"))
             
-            else:
+            outkegg = pu.make_directory(os.path.join(annodir,"KEGG_Pathway"))
 
-                outkegg = pu.make_directory(os.path.join(annodir,"KEGG_Pathway"))
+            keggfiles = pu.make_directory(os.path.join(outkegg,"KEGG_Files"))
 
-                keggfiles = pu.make_directory(os.path.join(outkegg,"KEGG_Files"))
+            keggplots = pu.make_directory(os.path.join(outkegg,"KEGG_Plots"))
 
-                keggplots = pu.make_directory(os.path.join(outkegg,"KEGG_Plots"))
+            if options.mmgg:
 
-                if options.mmgg:
+                keggfilesM = pu.make_directory(os.path.join(outkegg,"KEGG_Files_MMG"))
 
-                    keggfilesM = pu.make_directory(os.path.join(outkegg,"KEGG_Files_MMG"))
-
-                    keggplotsM = pu.make_directory(os.path.join(outkegg,"KEGG_Plots_MMG"))
+                keggplotsM = pu.make_directory(os.path.join(outkegg,"KEGG_Plots_MMG"))
 
             pt = Pathway(species=options.species, keyType=options.source, gff= options.feature_file)
 
@@ -790,7 +793,8 @@ def main():
                         kegg_results['plot'].savefig( f"{keggplots}/{c}_kegg_dotplot.png", bbox_inches='tight')
 
                         plt.close()
-                    except:
+                    except Exception as e:
+                        log.error(f"Failed to save KEGG results for {c}: {e}")
                         continue
 
                 else:
@@ -805,16 +809,19 @@ def main():
                     kegg_results_mmg = pt.enrichKEGG(file=file_mmgs)
 
                     if kegg_results_mmg != "No Pathway":
+                        try:
+                            kegg_results_MMG = ge.add_names_annotation(kegg_results_mmg['result'])
 
-                        kegg_results_MMG = ge.add_names_annotation(ontology_results_mmg['result'])
+                            kegg_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=kegg_results_MMG, combination=c)
+                            
+                            kegg_results_MMG_go.to_excel(f"{keggfilesM}/{c}_mmg_kegg.xlsx", index=False)
 
-                        kegg_results_MMG_go = pu.add_MMG(degDF=os.path.join(diffdir,"Filtered_MMGs.xlsx"), anotDF=kegg_results_MMG, combination=c)
-                        
-                        kegg_results_MMG_go.to_excel(f"{keggfilesM}/{c}_mmg_kegg.xlsx", index=False)
-
-                        kegg_results_mmg['plot'].savefig(f"{keggplotsM}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
-                        
-                        plt.close()
+                            kegg_results_mmg['plot'].savefig(f"{keggplotsM}/{c}_mmg_kegg_dotplot.png", bbox_inches='tight')
+                            
+                            plt.close()
+                        except Exception as e:
+                            log.error(f"Failed to save MMG KEGG results for {c}: {e}")
+                            continue
                         
                     else:
                         log.info(f"No ontology found in {c}")

@@ -109,8 +109,8 @@ def read_runconfig(config_file):
 
     # FunctionalAnnotation section
     annotation = config['FunctionalAnnotation']
-    options.geneontology = annotation.getboolean('geneOntology', fallback=False)
-    options.keggpathway = annotation.getboolean('keggPathway', fallback=False)
+    options.geneontology = annotation.getboolean('geneOntology', fallback=True)
+    options.keggpathway = annotation.getboolean('keggPathway', fallback=True)
 
     # ExternalTools section
     tools = config['ExternalTools']

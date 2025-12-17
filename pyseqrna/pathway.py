@@ -158,41 +158,54 @@ class Pathway:
 
     def _get_pathways(self):
 
-        r = requests.get(f"https://bioinfo.usu.edu/api-pyseqrna/list/pathways/{self.species}", verify=False)
-        m = re.sub('<[^<]+?>', '', r.text)
-        df = pd.read_csv(io.StringIO(m), sep="\t", names =['Species', 'Gene', 'ID', 'Term'])
-        dd= df.values.tolist()
-        kk = {}
-        kd = {}
-        genes = []
+        try:
+            r = requests.get(f"https://bioinfo.usu.edu/api-pyseqrna/list/pathways/{self.species}", verify=False)
+            r.raise_for_status()
+            m = re.sub('<[^<]+?>', '', r.text)
+            df = pd.read_csv(io.StringIO(m), sep="\t", names =['Species', 'Gene', 'ID', 'Term'])
+            dd= df.values.tolist()
+            kk = {}
+            kd = {}
+            genes = []
 
-        for d in dd:
+            for d in dd:
+                
+                # Check if gene ID is valid (not NaN) and convert to string
+                if pd.isna(d[1]):
+                    continue
+                
+                gene_id = str(d[1]).upper()
 
-            if d[2] in kk:
+                if d[2] in kk:
 
-                kk[d[2]].append(d[1].upper())
-            
-            else:
+                    kk[d[2]].append(gene_id)
+                
+                else:
 
-                kk[d[2]]= [d[1].upper()]
+                    kk[d[2]]= [gene_id]
 
-                kd[d[2]] = d[3]
+                    kd[d[2]] = d[3]
 
-            genes.append(d[1])
+                genes.append(d[1])
 
-        pathways = []
+            pathways = []
 
-        for k in kk:
+            for k in kk:
 
-            pathways.append([k, kd[k],kk[k], len(kk[k])])
+                pathways.append([k, kd[k],kk[k], len(kk[k])])
 
-        dp = pd.DataFrame(pathways, columns=['ID', 'Term', 'Gene', 'Gene_length'])
+            dp = pd.DataFrame(pathways, columns=['ID', 'Term', 'Gene', 'Gene_length'])
 
-        x= np.array(genes)
+            x= np.array(genes)
 
-        bg_count = len(np.unique(x))
+            bg_count = len(np.unique(x))
 
-        return dp, bg_count
+            return dp, bg_count
+
+        except Exception as e:
+            log.error(f"Failed to fetch pathways from API: {e}")
+            # Return empty DataFrame with expected columns and 0 background count
+            return pd.DataFrame(columns=['ID', 'Term', 'Gene', 'Gene_length']), 0
 
     def _fdr_calc(self, x):
         """
