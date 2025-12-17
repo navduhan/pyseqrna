@@ -40,3 +40,6 @@ wheel
 openpyxl
 notebook
 tabulate
+fastcluster
+scikit-learn
+
