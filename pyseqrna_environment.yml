@@ -6,7 +6,7 @@ channels:
   - r
 
 dependencies:
-  - python
+  - python=3.12
   - r-base
   - r-essentials
   - flexbar
